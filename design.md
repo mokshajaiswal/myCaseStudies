@@ -102,6 +102,14 @@ The second-section project-details box uses the semantic `--detail-surface` and 
 
 The business-goals group reuses those same warm surface and border tokens. Its outer `.info-panel` establishes the group, while `.info-card` creates three equal goal items that collapse to one column below 768px. Internal padding and gaps only use the documented spacing scale.
 
+The technology-opportunity section uses the standard section heading and full-width reading column. Its concluding opportunity statement is bold, followed by a compact secondary heading and a two-column `.experience-grid`. Each `.experience-card` reuses `.detail-box`, with a small colored circular number badge as its only new visual element. The blue and pink badges distinguish the complementary manager and member experiences; the cards collapse to one column below 768px.
+
+The proposition-outcomes section uses an unmarked standard heading, supporting copy, and a three-column `.outcome-grid`. Each numbered outcome reuses `.detail-box` with the warm surface and shared medium radius. The cards use equal desktop sizing and collapse to one column below 768px. A separate `.measure-list` follows beneath the cards; it remains unboxed and uses semantic `dt`/`dd` pairs with spacing tokens to preserve the screenshot’s quieter measurement hierarchy.
+
+The contact-card action is intentionally understated against the pink surface: its label uses regular Helix, its softened white outline is one pixel, and its corners use a compact `0.5rem` radius rather than a pill. The checker texture uses a tighter responsive tile size so more checks remain visible across the card. This keeps the action legible without competing with the contact heading.
+
+The project-timeline card reuses `.detail-box` directly beneath the metadata strip. Its compact title-and-duration group is balanced by a lightweight `Open` button. The action launches a native modal dialog using the same warm surface, border, radius, and typography tokens. The modal presents the two-month process as a single vertical sequence, locks page scrolling while open, closes by button, Escape, or backdrop interaction, and restores focus to the trigger.
+
 ## Asset placeholders
 
 Decorative marks are intentionally blank until final artwork is supplied. Use the reusable `.asset-placeholder` component instead of drawing temporary flower, star, or logo shapes:

@@ -25,10 +25,14 @@ The page currently renders these areas in order:
 1. Blue rounded hero using `assets/bg.webp`.
 2. TL;DR copy.
 3. Three-phone media stage with replaceable screen content.
-4. “What exactly is Turbo Hub?” copy and centered project metadata.
+4. “What exactly is Turbo Hub?” copy, centered project metadata, and an interactive project-timeline box.
 5. Business-opportunity copy and the three business-goal cards.
-6. A standalone closing phone with a viewport-edge annotation graphic.
-7. Pink contact card.
+6. Technology-opportunity copy and two complementary experience cards.
+7. Proposition outcomes, three outcome cards, and success measures.
+8. A standalone closing phone with a viewport-edge annotation graphic.
+9. Pink contact card.
+
+The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 
 All page content is defined in the `caseStudy` object near the top of `script.js` and rendered by `renderCaseStudy()`.
 

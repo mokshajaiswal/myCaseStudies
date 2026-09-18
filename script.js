@@ -35,6 +35,32 @@ const caseStudy = {
       ["Team", "2 Designers, 2 Developers, 1 Product Manager"],
     ],
   },
+  timeline: {
+    title: "Project Timeline",
+    duration: "2 months",
+    phases: [
+      {
+        period: "Weeks 1–2",
+        title: "Research and alignment",
+        description: "Understanding the family-payments opportunity and aligning on the proposition.",
+      },
+      {
+        period: "Weeks 3–4",
+        title: "Experience definition",
+        description: "Defining manager and member roles, journeys, access, and spending boundaries.",
+      },
+      {
+        period: "Weeks 5–6",
+        title: "Design and prototyping",
+        description: "Designing the connected payment journeys and building prototypes for review.",
+      },
+      {
+        period: "Weeks 7–8",
+        title: "Validation and handoff",
+        description: "Refining the experience with the team and preparing the final implementation handoff.",
+      },
+    ],
+  },
   opportunity: {
     title: "What was the business opportunity?",
     paragraphs: [
@@ -61,6 +87,65 @@ const caseStudy = {
         title: "Expand how PayZapp gets used",
         description:
           "Shared family money could create more reasons to use PayZapp’s broader payment ecosystem—from transfers and bill payments to everyday spending.",
+      },
+    ],
+  },
+  technology: {
+    title: "What Zeta’s technology could unlock for HDFC Bank",
+    paragraphs: [
+      "Zeta was already working with HDFC Bank on PayZapp, using its cloud-native payments stack to create fast, responsive experiences like swipe-to-pay and support features like tap and pay, payments limits and advanced account controls. That same foundation made it possible to think beyond individual payments and explore how PayZapp’s existing prepaid capabilities could extend to families.",
+      "Family payments became a natural extension of what was already there - opening up more users, more recurring payment activity, and more ways for households to engage with PayZapp.",
+    ],
+    experienceTitle: "Turning the opportunity into a product experience",
+    experienceIntro: "The proposition centered around two complementary experiences:",
+    experiences: [
+      {
+        number: "1",
+        tone: "blue",
+        title: "Control for the manager",
+        description: "Give one person a way to fund the shared account, bring family members in, and set boundaries around how money could be used.",
+      },
+      {
+        number: "2",
+        tone: "pink",
+        title: "Independence for the member",
+        description: "Give family members their own simple way to access and spend that money within the boundaries set for them.",
+      },
+    ],
+  },
+  outcomes: {
+    title: "What we wanted the proposition to achieve",
+    intro: "We focused on three core outcomes with Turbo Hub:",
+    items: [
+      {
+        number: "01.",
+        title: "Bring more family members into PayZapp",
+        description: "One existing customer could introduce other members of their household to PayZapp.",
+      },
+      {
+        number: "02.",
+        title: "Create reasons to come back regularly",
+        description: "Allowances, household spending, and recurring family needs could create more frequent payment activity.",
+      },
+      {
+        number: "03.",
+        title: "Make prepaid part of everyday spending",
+        description: "Move prepaid beyond occasional use by connecting it to regular family expenses.",
+      },
+    ],
+    measuresTitle: "How we would measure success",
+    measures: [
+      {
+        title: "Family member activation rate",
+        description: "How many invited family members successfully joined PayZapp and became active users.",
+      },
+      {
+        title: "Recurring payment activity",
+        description: "Whether families returned to use the experience regularly, rather than treating prepaid as a one-off payment method.",
+      },
+      {
+        title: "Family member activation rate",
+        description: "How much payment activity each family relationship generated across everyday use cases.",
       },
     ],
   },
@@ -145,6 +230,125 @@ function createInfoPanel(title, items) {
   return panel;
 }
 
+function createExperienceGrid(items) {
+  const grid = createElement("div", "experience-grid");
+  items.forEach((item) => {
+    const card = createElement("article", "experience-card detail-box");
+    card.dataset.revealContainer = "";
+    card.append(
+      createElement("span", "experience-number experience-number--" + item.tone, item.number),
+      createElement("h4", "", item.title),
+      createElement("p", "", item.description),
+    );
+    grid.append(card);
+  });
+  return grid;
+}
+
+function createOutcomeGrid(items) {
+  const grid = createElement("div", "outcome-grid");
+  items.forEach((item) => {
+    const card = createElement("article", "outcome-card detail-box");
+    card.dataset.revealContainer = "";
+    card.append(
+      createElement("span", "outcome-number", item.number),
+      createElement("h3", "", item.title),
+      createElement("p", "", item.description),
+    );
+    grid.append(card);
+  });
+  return grid;
+}
+
+function createMeasureList(items) {
+  const list = createElement("dl", "measure-list");
+  items.forEach((item) => {
+    const group = createElement("div", "measure-item");
+    group.append(
+      createElement("dt", "", item.title),
+      createElement("dd", "", item.description),
+    );
+    list.append(group);
+  });
+  return list;
+}
+
+function createTimeline() {
+  const card = createElement("section", "timeline-card detail-box");
+  card.dataset.revealContainer = "";
+  card.setAttribute("aria-labelledby", "timeline-card-title");
+
+  const copy = createElement("div", "timeline-card-copy");
+  const title = createElement("h3", "timeline-card-title", caseStudy.timeline.title);
+  title.id = "timeline-card-title";
+  copy.append(title, createElement("p", "timeline-card-duration", caseStudy.timeline.duration));
+
+  const openButton = createElement("button", "timeline-open");
+  openButton.type = "button";
+  openButton.setAttribute("aria-haspopup", "dialog");
+  openButton.setAttribute("aria-controls", "project-timeline-dialog");
+  openButton.append(
+    document.createTextNode("Open"),
+    createElement("span", "timeline-open-arrow", "›"),
+  );
+  card.append(copy, openButton);
+
+  document.querySelector("#project-timeline-dialog")?.remove();
+  const dialog = document.createElement("dialog");
+  dialog.id = "project-timeline-dialog";
+  dialog.className = "timeline-dialog";
+  dialog.setAttribute("aria-labelledby", "timeline-dialog-title");
+
+  const dialogPanel = createElement("div", "timeline-dialog-panel");
+  const dialogHeader = createElement("header", "timeline-dialog-header");
+  const dialogHeadingGroup = createElement("div", "timeline-dialog-heading-group");
+  const dialogTitle = createElement("h2", "", caseStudy.timeline.title);
+  dialogTitle.id = "timeline-dialog-title";
+  dialogHeadingGroup.append(
+    dialogTitle,
+    createElement("p", "", caseStudy.timeline.duration),
+  );
+
+  const closeButton = createElement("button", "timeline-close", "Close");
+  closeButton.type = "button";
+  closeButton.setAttribute("aria-label", "Close project timeline");
+  dialogHeader.append(dialogHeadingGroup, closeButton);
+
+  const timelineList = createElement("ol", "timeline-list");
+  caseStudy.timeline.phases.forEach((phase) => {
+    const item = document.createElement("li");
+    item.append(
+      createElement("span", "timeline-period", phase.period),
+      createElement("h3", "", phase.title),
+      createElement("p", "", phase.description),
+    );
+    timelineList.append(item);
+  });
+  dialogPanel.append(dialogHeader, timelineList);
+  dialog.append(dialogPanel);
+  document.body.append(dialog);
+
+  openButton.addEventListener("click", () => {
+    dialog.showModal();
+    document.body.classList.add("has-open-dialog");
+  });
+  closeButton.addEventListener("click", () => dialog.close());
+  dialog.addEventListener("close", () => {
+    document.body.classList.remove("has-open-dialog");
+    openButton.focus();
+  });
+  dialog.addEventListener("click", (event) => {
+    const bounds = dialogPanel.getBoundingClientRect();
+    const isOutside = event.clientX < bounds.left
+      || event.clientX > bounds.right
+      || event.clientY < bounds.top
+      || event.clientY > bounds.bottom;
+    if (isOutside) dialog.close();
+  });
+
+  return card;
+}
+
 function createPhone({ id, label }) {
   const phone = createElement("article", "phone");
   phone.setAttribute("aria-label", label);
@@ -214,7 +418,7 @@ function renderCaseStudy() {
     item.append(createElement("dt", "", term), createElement("dd", "", description));
     meta.append(item);
   });
-  product.append(productColumn, meta);
+  product.append(productColumn, meta, createTimeline());
   shell.append(product);
 
   const opportunity = createElement("section", "case-section reveal");
@@ -237,6 +441,46 @@ function renderCaseStudy() {
   );
   opportunity.append(opportunityColumn);
   shell.append(opportunity);
+
+  const technology = createElement("section", "case-section reveal");
+  technology.id = "technology";
+  const technologyColumn = createElement("div", "reading-column");
+  technologyColumn.append(createSectionHeading(caseStudy.technology.title));
+
+  const technologyCopy = createElement("div", "body-copy technology-copy");
+  caseStudy.technology.paragraphs.forEach((paragraph, index) => {
+    technologyCopy.append(
+      createElement("p", index === 1 ? "technology-takeaway" : "", paragraph),
+    );
+  });
+
+  const experienceBlock = createElement("div", "experience-block");
+  experienceBlock.append(
+    createElement("h3", "experience-heading", caseStudy.technology.experienceTitle),
+    createElement("p", "experience-intro", caseStudy.technology.experienceIntro),
+    createExperienceGrid(caseStudy.technology.experiences),
+  );
+  technologyColumn.append(technologyCopy, experienceBlock);
+  technology.append(technologyColumn);
+  shell.append(technology);
+
+  const outcomes = createElement("section", "case-section reveal");
+  outcomes.id = "outcomes";
+  const outcomesColumn = createElement("div", "reading-column");
+  outcomesColumn.append(
+    createElement("h2", "outcomes-heading", caseStudy.outcomes.title),
+    createElement("p", "outcomes-intro", caseStudy.outcomes.intro),
+    createOutcomeGrid(caseStudy.outcomes.items),
+  );
+
+  const measures = createElement("div", "measures-block");
+  measures.append(
+    createElement("h3", "measures-heading", caseStudy.outcomes.measuresTitle),
+    createMeasureList(caseStudy.outcomes.measures),
+  );
+  outcomesColumn.append(measures);
+  outcomes.append(outcomesColumn);
+  shell.append(outcomes);
 
   const closing = createElement("section", "case-section reveal");
   closing.id = "closing";
@@ -440,6 +684,17 @@ function setupReveal() {
         ".info-panel-heading",
         ".info-card > .info-card-index",
         ".info-card > h4",
+        ".timeline-card-title",
+        ".experience-heading",
+        ".experience-card > .experience-number",
+        ".experience-card > h4",
+        ".outcomes-heading",
+        ".outcome-card > .outcome-number",
+        ".outcome-card > h3",
+        ".measures-heading",
+        ".measure-item > dt",
+        ".measure-item > dd",
+        ".timeline-open",
         ".contact-heading",
         ".contact-button",
       ].join(","),
