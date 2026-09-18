@@ -113,6 +113,18 @@ const caseStudy = {
       },
     ],
   },
+  artifacts: [
+    {
+      src: "assets/TB1.svg",
+      alt: "Early sketch showing a family of four with the father managing shared finances.",
+      caption: "Family structure",
+    },
+    {
+      src: "assets/TB2.svg",
+      alt: "Persona sketch showing the hub manager inviting family members into the shared hub.",
+      caption: "Manager and member roles",
+    },
+  ],
   outcomes: {
     title: "What we wanted the proposition to achieve",
     intro: "We focused on three core outcomes with Turbo Hub:",
@@ -146,6 +158,171 @@ const caseStudy = {
       {
         title: "Family member activation rate",
         description: "How much payment activity each family relationship generated across everyday use cases.",
+      },
+    ],
+  },
+  research: {
+    title: "Understanding who we were designing for",
+    overview:
+      "Existing PayZapp data gave us an initial picture of prepaid users. They were largely salaried adults between 20–40, with many already married and managing money within a family. Through interviews, we explored how money actually moved within these households from everyday spending and allowances to supporting children or parents.",
+    insightLead: "These conversations surfaced recurring needs around ",
+    insightEmphasis: "control, visibility, access, and independence",
+    insightConclusion: "We used these patterns to define the core personas for the proposition.",
+    personaEyebrow: "Research",
+    personaTitle: "Primary Personas",
+    personaIntro: "The key users shaping the shared family payments experience.",
+    personas: [
+      {
+        name: "Arun Sharma",
+        label: "Hub Manager",
+        meta: "35 · Salaried · Tech-Savvy",
+        type: "Primary",
+        role: "Primary earner managing the family’s finances and responsibilities.",
+        goal: "Give family members financial freedom while maintaining visibility and control.",
+        painPoints: [
+          "Worries about children misusing money",
+          "Struggles to track family spending",
+          "Lacks simple tools for teaching responsible money habits",
+        ],
+        needs: [
+          "Real-time spending visibility",
+          "Easy spending limits",
+          "Instant authorisation",
+          "Clear family dashboards",
+        ],
+        accent: "#536ee8",
+      },
+      {
+        name: "Neha Sharma",
+        label: "Teen Member",
+        meta: "16 · Student · Mobile-First",
+        type: "Primary",
+        role: "Teenager looking for more independence in everyday spending.",
+        goal: "Pay independently without repeatedly asking a parent for cash or a card.",
+        painPoints: [
+          "Feels awkward asking for money",
+          "Wants to split bills with friends",
+          "Doesn’t have her own card or bank account",
+        ],
+        needs: [
+          "Personal digital wallet",
+          "Easy top-up requests",
+          "Simple payments",
+          "Clear balance visibility",
+        ],
+        accent: "#7b6fd8",
+      },
+      {
+        name: "Rahul Sharma",
+        label: "Young Adult Member",
+        meta: "22 · College Student · Part-Time Worker",
+        type: "Primary",
+        role: "Young adult managing his own expenses while remaining connected to family support.",
+        goal: "Stay financially independent while being able to request help for larger expenses.",
+        painPoints: [
+          "Wants better visibility into spending",
+          "Needs support for specific expenses",
+          "Wants to develop stronger financial habits",
+        ],
+        needs: [
+          "Personal wallet",
+          "Flexible top-up requests",
+          "Spending insights",
+          "Savings goals",
+        ],
+        accent: "#408da3",
+      },
+      {
+        name: "Suman Sharma",
+        label: "Elderly Member",
+        meta: "68 · Retired · Low Tech Familiarity",
+        type: "Primary",
+        role: "Older family member who wants digital payments to feel safe and approachable.",
+        goal: "Pay for everyday essentials without relying on cash or frequent bank visits.",
+        painPoints: [
+          "Finds UPI confusing",
+          "Worries about scams",
+          "Relies on family for financial tasks",
+          "Has limited confidence with digital banking",
+        ],
+        needs: [
+          "Guided payment experience",
+          "Family assistance",
+          "Physical card option",
+          "Simple top-ups",
+        ],
+        accent: "#7788ba",
+      },
+      {
+        name: "Priya & Vikram",
+        label: "Co-Managers",
+        meta: "33 & 35 · Both Salaried",
+        type: "Secondary · Power User",
+        role: "Couple jointly managing household finances and shared responsibilities.",
+        goal: "Split expenses, understand shared spending, and maintain financial transparency.",
+        painPoints: [
+          "Manually track who paid for what",
+          "Awkward conversations around shared money",
+          "No unified view of household spending",
+        ],
+        needs: [
+          "Expense splitting",
+          "Multiple managers",
+          "Shared dashboards",
+          "Joint savings goals",
+        ],
+        accent: "#ba7a47",
+      },
+    ],
+    learningsTitle: "What We Learned from Users",
+    learnings:
+      "We interviewed PayZapp users across these personas (mostly adults) and heard consistent pain points:",
+    voices: [
+      { name: "Arun", role: "Manager", quote: "I want to give my children freedom, but I still need to know where their money is going.", accent: "#536ee8", background: "#f8f9ff" },
+      { name: "Neha", role: "Teen", quote: "I want to buy things myself without asking my mom for her card every time.", accent: "#7569c9", background: "#faf8ff" },
+      { name: "Rahul", role: "Young Adult", quote: "I manage my own money now, but sometimes I still need family support for bigger expenses.", accent: "#438e98", background: "#f5fafa" },
+      { name: "Suman", role: "Elderly Parent", quote: "I wish digital payments felt simple enough that I didn’t need my daughter to do everything for me.", accent: "#7684aa", background: "#f7f8fc" },
+      { name: "Priya", role: "Co-Manager", quote: "We need one place to see household spending instead of constantly figuring out who paid for what.", accent: "#b77a46", background: "#fcf8f3" },
+    ],
+  },
+  designQuestion: {
+    eyebrow: "The question that shaped the experience",
+    question: "How could families share access to money while keeping clear boundaries around its use?",
+  },
+  relationship: {
+    title: "Defining the relationship before designing the screens",
+    introduction:
+      "The interviews made one thing clear: families were not struggling to send money. The harder problem was deciding what happened after that money was shared.",
+    questions: [
+      "Who could use it?",
+      "Who could set the boundaries?",
+      "How much visibility was appropriate?",
+      "And when should the person providing the money need to step in?",
+    ],
+    conclusion:
+      "So before thinking about UI, we mapped the relationship around the money itself.",
+    roles: [
+      {
+        number: "1",
+        title: "Hub Manager",
+        label: "Responsibility",
+        description:
+          "Funds the Hub, defines boundaries, manages access and steps in when a decision is required.",
+      },
+      {
+        number: "2",
+        title: "Hub Member",
+        label: "Responsibility",
+        description:
+          "Joins the Hub, makes payments within the available permissions, and requests additional funds when needed.",
+      },
+      {
+        number: "3",
+        title: "The connection between them",
+        label: "Responsibility",
+        description:
+          "A decision on one side needed to be understandable on the other. A spending limit needed to be visible to the member; a request needed to give the manager enough context to respond.",
+        wide: true,
       },
     ],
   },
@@ -204,7 +381,17 @@ function createLinkedInIcon() {
 
 function createSectionHeading(title) {
   const heading = createElement("h2", "section-heading");
-  heading.append(createAssetPlaceholder(), document.createTextNode(title));
+  const [firstWord, ...remainingWords] = title.split(" ");
+  heading.append(
+    createAssetPlaceholder(),
+    createElement("span", "section-heading-lead", firstWord),
+  );
+  if (remainingWords.length) {
+    heading.append(
+      document.createTextNode(" "),
+      createElement("span", "section-heading-rest", remainingWords.join(" ")),
+    );
+  }
   return heading;
 }
 
@@ -245,6 +432,26 @@ function createExperienceGrid(items) {
   return grid;
 }
 
+function createArtifactGallery(items) {
+  const stage = createElement("div", "artifact-stage");
+  stage.dataset.revealContainer = "";
+  stage.setAttribute("aria-label", "Early product-thinking sketches");
+
+  items.forEach((item, index) => {
+    const figure = createElement("figure", `artifact-sheet artifact-sheet--${index + 1}`);
+    figure.dataset.revealContainer = "";
+    const image = document.createElement("img");
+    image.src = item.src;
+    image.alt = item.alt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    figure.append(image, createElement("figcaption", "", item.caption));
+    stage.append(figure);
+  });
+
+  return stage;
+}
+
 function createOutcomeGrid(items) {
   const grid = createElement("div", "outcome-grid");
   items.forEach((item) => {
@@ -271,6 +478,220 @@ function createMeasureList(items) {
     list.append(group);
   });
   return list;
+}
+
+function createPersonaExplorer(config) {
+  const explorer = createElement("div", "persona-explorer detail-box");
+  explorer.dataset.revealContainer = "";
+
+  const getInitials = (name) => name
+    .replace("&", "")
+    .split(" ")
+    .filter(Boolean)
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
+
+  const detailTabs = [
+    ["role", "Role"],
+    ["goal", "Goal"],
+    ["painPoints", "Pain Points"],
+    ["needs", "Needs"],
+  ];
+  let activePersonaIndex = 0;
+  let activeDetailKey = "role";
+
+  const header = createElement("div", "persona-explorer-header");
+  const heading = createElement("div", "persona-explorer-heading");
+  heading.append(
+    createElement("span", "persona-kicker", config.personaEyebrow),
+    createElement("strong", "", config.personaTitle),
+    createElement("p", "", config.personaIntro),
+  );
+  const counter = createElement("span", "persona-counter", `01 / ${String(config.personas.length).padStart(2, "0")}`);
+  header.append(heading, counter);
+
+  const tabs = createElement("div", "persona-tabs");
+  tabs.setAttribute("role", "tablist");
+  tabs.setAttribute("aria-label", "Primary personas");
+
+  const panel = createElement("article", "persona-panel");
+  panel.id = "persona-detail-panel";
+  panel.setAttribute("role", "tabpanel");
+  panel.setAttribute("tabindex", "0");
+
+  const identity = createElement("div", "persona-identity");
+  const avatar = createElement("span", "persona-avatar");
+  const identityCopy = createElement("div", "persona-identity-copy");
+  const nameRow = createElement("div", "persona-name-row");
+  const personaName = createElement("h3", "");
+  const personaType = createElement("span", "persona-type");
+  const personaMeta = createElement("p", "persona-meta");
+  nameRow.append(personaName, personaType);
+  identityCopy.append(nameRow, personaMeta);
+  identity.append(avatar, identityCopy);
+
+  const fields = createElement("div", "persona-fields");
+  fields.setAttribute("role", "tablist");
+  fields.setAttribute("aria-label", "Persona details");
+  const content = createElement("div", "persona-content");
+  const contentPanel = createElement("div", "persona-content-panel");
+  const contentLabel = createElement("span", "persona-content-label");
+  const contentBody = createElement("div", "persona-content-body");
+  contentPanel.append(contentLabel, contentBody);
+  content.append(contentPanel);
+  panel.append(identity, fields, content);
+
+  const tabButtons = config.personas.map((persona, index) => {
+    const button = createElement("button", "persona-tab");
+    button.type = "button";
+    button.id = `persona-tab-${index + 1}`;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", panel.id);
+    button.setAttribute("aria-selected", String(index === 0));
+    button.tabIndex = index === 0 ? 0 : -1;
+    button.append(
+      createElement("strong", "", persona.name),
+      createElement("span", "", persona.label),
+    );
+    tabs.append(button);
+    return button;
+  });
+
+  const detailButtons = detailTabs.map(([key, label]) => {
+    const button = createElement("button", "persona-field-tab", label);
+    button.type = "button";
+    button.setAttribute("role", "tab");
+    button.addEventListener("click", () => {
+      activeDetailKey = key;
+      renderActivePersona();
+    });
+    fields.append(button);
+    return button;
+  });
+
+  const renderActivePersona = () => {
+    const persona = config.personas[activePersonaIndex];
+    const detail = detailTabs.find(([key]) => key === activeDetailKey);
+    const value = persona[activeDetailKey];
+    const isList = Array.isArray(value);
+    const isSecondary = persona.type.toLowerCase().includes("secondary")
+      || persona.type.toLowerCase().includes("power");
+
+    panel.style.setProperty("--persona-accent", persona.accent);
+    avatar.textContent = getInitials(persona.name);
+    personaName.textContent = persona.name;
+    personaType.textContent = persona.type;
+    personaType.classList.toggle("persona-type--secondary", isSecondary);
+    personaMeta.textContent = `${persona.label} · ${persona.meta}`;
+    contentLabel.textContent = detail[1];
+    contentBody.replaceChildren();
+
+    if (isList) {
+      const list = createElement("ul", "persona-detail-list");
+      value.forEach((item) => list.append(createElement("li", "", item)));
+      contentBody.append(list);
+    } else {
+      contentBody.append(createElement("p", "", value));
+    }
+
+    detailButtons.forEach((button, index) => {
+      const isSelected = detailTabs[index][0] === activeDetailKey;
+      button.setAttribute("aria-selected", String(isSelected));
+    });
+  };
+
+  const selectPersona = (index, moveFocus = false) => {
+    activePersonaIndex = index;
+    activeDetailKey = "role";
+    tabButtons.forEach((button, buttonIndex) => {
+      const isSelected = buttonIndex === index;
+      button.setAttribute("aria-selected", String(isSelected));
+      button.tabIndex = isSelected ? 0 : -1;
+    });
+    panel.setAttribute("aria-labelledby", tabButtons[index].id);
+    counter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(config.personas.length).padStart(2, "0")}`;
+    renderActivePersona();
+    if (moveFocus) tabButtons[index].focus();
+  };
+
+  tabButtons.forEach((button, index) => {
+    button.addEventListener("click", () => selectPersona(index));
+    button.addEventListener("keydown", (event) => {
+      if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
+      event.preventDefault();
+      const direction = event.key === "ArrowRight" ? 1 : -1;
+      selectPersona((index + direction + tabButtons.length) % tabButtons.length, true);
+    });
+  });
+  selectPersona(0);
+
+  explorer.append(header, tabs, panel);
+  return explorer;
+}
+
+function createUserVoiceStack(voices) {
+  const stack = createElement("div", "user-voice-stack");
+  stack.dataset.revealContainer = "";
+  stack.setAttribute("aria-label", "User interview quotes");
+  let order = voices.map((_, index) => index);
+  const transforms = [[0, 0, 0, 1, 1], [-8, 12, -2.2, 0.985, 1], [10, 21, 2.6, 0.968, 0.96], [-4, 29, -3.4, 0.95, 0.9]];
+
+  const render = () => {
+    stack.replaceChildren();
+    const visibleOrder = order.slice(0, 4);
+    visibleOrder.slice().reverse().forEach((voiceIndex, reverseIndex) => {
+      const stackPosition = visibleOrder.length - 1 - reverseIndex;
+      const voice = voices[voiceIndex];
+      const isTop = stackPosition === 0;
+      const [x, y, rotation, scale, opacity] = transforms[stackPosition];
+      const card = createElement("button", "user-voice-card");
+      card.type = "button";
+      card.disabled = !isTop;
+      card.style.cssText = `--voice-accent:${voice.accent};--voice-background:${voice.background};--voice-x:${x}px;--voice-y:${y}px;--voice-rotation:${rotation}deg;--voice-scale:${scale};--voice-opacity:${opacity};z-index:${20 - stackPosition}`;
+      card.setAttribute("aria-label", isTop ? "Show next user quote" : `${voice.name} quote`);
+      const topRow = createElement("span", "user-voice-top-row");
+      topRow.append(createElement("span", "user-voice-label", "User voice"), createElement("span", "user-voice-dot"));
+      const footer = createElement("span", "user-voice-footer");
+      const person = createElement("span", "user-voice-person");
+      person.append(createElement("strong", "", voice.name), createElement("span", "", voice.role));
+      footer.append(person);
+      if (isTop) footer.append(createElement("span", "user-voice-hint", "Click ↗"));
+      card.append(topRow, createElement("span", "user-voice-quote", `“${voice.quote}”`), footer, createElement("span", "user-voice-accent"));
+      if (isTop) card.addEventListener("click", () => {
+        order = [...order.slice(1), order[0]];
+        render();
+        stack.querySelector(".user-voice-card:not(:disabled)")?.focus();
+      });
+      stack.append(card);
+    });
+  };
+  render();
+  return stack;
+}
+
+function createRelationshipGrid(items) {
+  const grid = createElement("div", "relationship-grid");
+  items.forEach((item) => {
+    const card = createElement(
+      "article",
+      `relationship-card${item.wide ? " relationship-card--wide" : ""}`,
+    );
+    card.dataset.revealContainer = "";
+    const copy = createElement("div", "relationship-card-copy");
+    copy.append(
+      createElement("span", "relationship-label", item.label),
+      createElement("p", "", item.description),
+    );
+    card.append(
+      createElement("span", "relationship-number", item.number),
+      createElement("h3", "", item.title),
+      copy,
+    );
+    grid.append(card);
+  });
+  return grid;
 }
 
 function createTimeline() {
@@ -418,7 +839,7 @@ function renderCaseStudy() {
     item.append(createElement("dt", "", term), createElement("dd", "", description));
     meta.append(item);
   });
-  product.append(productColumn, meta, createTimeline());
+  product.append(productColumn, meta);
   shell.append(product);
 
   const opportunity = createElement("section", "case-section reveal");
@@ -456,31 +877,127 @@ function renderCaseStudy() {
 
   const experienceBlock = createElement("div", "experience-block");
   experienceBlock.append(
-    createElement("h3", "experience-heading", caseStudy.technology.experienceTitle),
-    createElement("p", "experience-intro", caseStudy.technology.experienceIntro),
+    createElement(
+      "h3",
+      "subsection-heading experience-heading",
+      caseStudy.technology.experienceTitle,
+    ),
+    createElement(
+      "p",
+      "subsection-intro experience-intro",
+      caseStudy.technology.experienceIntro,
+    ),
     createExperienceGrid(caseStudy.technology.experiences),
   );
   technologyColumn.append(technologyCopy, experienceBlock);
   technology.append(technologyColumn);
   shell.append(technology);
 
+  const artifacts = createElement("section", "case-section reveal artifact-section");
+  artifacts.id = "artifacts";
+  artifacts.append(createArtifactGallery(caseStudy.artifacts));
+  shell.append(artifacts);
+
   const outcomes = createElement("section", "case-section reveal");
   outcomes.id = "outcomes";
   const outcomesColumn = createElement("div", "reading-column");
   outcomesColumn.append(
-    createElement("h2", "outcomes-heading", caseStudy.outcomes.title),
-    createElement("p", "outcomes-intro", caseStudy.outcomes.intro),
+    createElement(
+      "h2",
+      "subsection-heading outcomes-heading",
+      caseStudy.outcomes.title,
+    ),
+    createElement(
+      "p",
+      "subsection-intro outcomes-intro",
+      caseStudy.outcomes.intro,
+    ),
     createOutcomeGrid(caseStudy.outcomes.items),
   );
 
   const measures = createElement("div", "measures-block");
   measures.append(
-    createElement("h3", "measures-heading", caseStudy.outcomes.measuresTitle),
+    createElement(
+      "h3",
+      "subsection-heading measures-heading",
+      caseStudy.outcomes.measuresTitle,
+    ),
     createMeasureList(caseStudy.outcomes.measures),
   );
   outcomesColumn.append(measures);
   outcomes.append(outcomesColumn);
   shell.append(outcomes);
+
+  const research = createElement("section", "case-section reveal");
+  research.id = "research";
+  const researchColumn = createElement("div", "reading-column");
+  researchColumn.append(createSectionHeading(caseStudy.research.title));
+
+  const researchCopy = createElement("div", "body-copy research-copy");
+  researchCopy.append(createElement("p", "", caseStudy.research.overview));
+  const insight = document.createElement("p");
+  insight.append(
+    document.createTextNode(caseStudy.research.insightLead),
+    createElement("strong", "", caseStudy.research.insightEmphasis),
+    document.createTextNode(". "),
+    createElement("strong", "", caseStudy.research.insightConclusion),
+  );
+  researchCopy.append(insight);
+  researchColumn.append(
+    researchCopy,
+    createPersonaExplorer(caseStudy.research),
+  );
+
+  const learningRow = createElement("div", "learning-row");
+  const learningCopy = createElement("div", "learning-copy");
+  learningCopy.append(
+    createElement("h3", "learning-heading", caseStudy.research.learningsTitle),
+    createElement("p", "", caseStudy.research.learnings),
+  );
+  learningRow.append(learningCopy, createUserVoiceStack(caseStudy.research.voices));
+  researchColumn.append(learningRow);
+  research.append(researchColumn);
+  shell.append(research);
+
+  const designQuestion = createElement("section", "case-section reveal design-question");
+  designQuestion.id = "design-question";
+  designQuestion.setAttribute("aria-labelledby", "design-question-title");
+  designQuestion.dataset.revealContainer = "";
+  const designQuestionTitle = createElement(
+    "h2",
+    "design-question-title",
+    caseStudy.designQuestion.question,
+  );
+  designQuestionTitle.id = "design-question-title";
+  designQuestion.append(
+    createElement("p", "design-question-eyebrow", caseStudy.designQuestion.eyebrow),
+    designQuestionTitle,
+  );
+  shell.append(designQuestion);
+
+  const relationship = createElement("section", "case-section reveal relationship-section");
+  relationship.id = "relationship";
+  const relationshipColumn = createElement("div", "reading-column");
+  relationshipColumn.append(createSectionHeading(caseStudy.relationship.title));
+  const relationshipCopy = createElement("div", "body-copy relationship-copy");
+  relationshipCopy.append(createElement("p", "", caseStudy.relationship.introduction));
+  const relationshipQuestions = createElement("p", "relationship-questions");
+  caseStudy.relationship.questions.forEach((question, index) => {
+    relationshipQuestions.append(document.createTextNode(question));
+    if (index < caseStudy.relationship.questions.length - 1) {
+      relationshipQuestions.append(document.createElement("br"));
+    }
+  });
+  relationshipCopy.append(
+    relationshipQuestions,
+    createElement("p", "", caseStudy.relationship.conclusion),
+  );
+  relationshipColumn.append(
+    relationshipCopy,
+    createRelationshipGrid(caseStudy.relationship.roles),
+  );
+  relationship.append(relationshipColumn);
+  shell.append(relationship);
 
   const closing = createElement("section", "case-section reveal");
   closing.id = "closing";
@@ -510,6 +1027,22 @@ function renderCaseStudy() {
   contactCard.append(contactAction);
   contact.append(contactCard);
   shell.append(contact);
+
+  const timeline = createElement("section", "case-section reveal");
+  timeline.id = "timeline";
+  timeline.setAttribute("aria-label", caseStudy.timeline.title);
+  timeline.append(createTimeline());
+
+  // Move the deeper project-detail sections into the approved narrative order.
+  shell.append(
+    timeline,
+    technology,
+    artifacts,
+    outcomes,
+    research,
+    designQuestion,
+    relationship,
+  );
 
   contentRoot.replaceChildren(shell);
 }
@@ -694,6 +1227,13 @@ function setupReveal() {
         ".measures-heading",
         ".measure-item > dt",
         ".measure-item > dd",
+        ".persona-explorer-heading",
+        ".persona-tab",
+        ".learning-heading",
+        ".user-voice-label",
+        ".relationship-card > .relationship-number",
+        ".relationship-card > h3",
+        ".relationship-label",
         ".timeline-open",
         ".contact-heading",
         ".contact-button",

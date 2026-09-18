@@ -20,17 +20,24 @@ Do not introduce a framework or dependency for behavior that the existing HTML, 
 
 ## Current page structure
 
-The page currently renders these areas in order:
+After the blue rounded hero using `assets/bg.webp`, the page renders these areas in order:
 
-1. Blue rounded hero using `assets/bg.webp`.
-2. TL;DR copy.
-3. Three-phone media stage with replaceable screen content.
-4. “What exactly is Turbo Hub?” copy, centered project metadata, and an interactive project-timeline box.
-5. Business-opportunity copy and the three business-goal cards.
-6. Technology-opportunity copy and two complementary experience cards.
-7. Proposition outcomes, three outcome cards, and success measures.
-8. A standalone closing phone with a viewport-edge annotation graphic.
-9. Pink contact card.
+1. TL;DR copy.
+2. Three-phone media stage with replaceable screen content.
+3. “What exactly is Turbo Hub?” copy.
+4. Centered role and team metadata.
+5. Business-opportunity copy.
+6. Three business-goal cards.
+7. A standalone closing phone with a viewport-edge annotation graphic.
+8. Pink contact card.
+9. Interactive project-timeline box.
+10. Technology-opportunity copy and two complementary experience cards.
+11. Two early product-thinking sketches (`TB1.svg` and `TB2.svg`).
+12. Proposition outcomes and three outcome cards.
+13. Success measures.
+14. User-research context, persona explorer, learnings, and user voice.
+15. The centered design question that frames the next product chapter.
+16. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
 
 The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 
