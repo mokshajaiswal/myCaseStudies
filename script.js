@@ -165,18 +165,16 @@ const caseStudy = {
     title: "Understanding who we were designing for",
     overview:
       "Existing PayZapp data gave us an initial picture of prepaid users. They were largely salaried adults between 20–40, with many already married and managing money within a family. Through interviews, we explored how money actually moved within these households from everyday spending and allowances to supporting children or parents.",
-    insightLead: "These conversations surfaced recurring needs around ",
+    insightLead: "Taken together, these conversations pointed to four recurring needs: ",
     insightEmphasis: "control, visibility, access, and independence",
-    insightConclusion: "We used these patterns to define the core personas for the proposition.",
-    personaEyebrow: "Research",
-    personaTitle: "Primary Personas",
-    personaIntro: "The key users shaping the shared family payments experience.",
+    insightConclusion: "We turned those patterns into the core personas that shaped the proposition.",
+    hubLabel: "Turbo Hub",
     personas: [
       {
-        name: "Arun Sharma",
+        relation: "Father",
+        tier: "manager",
         label: "Hub Manager",
-        meta: "35 · Salaried · Tech-Savvy",
-        type: "Primary",
+        tags: ["35", "Salaried"],
         role: "Primary earner managing the family’s finances and responsibilities.",
         goal: "Give family members financial freedom while maintaining visibility and control.",
         painPoints: [
@@ -193,10 +191,30 @@ const caseStudy = {
         accent: "#536ee8",
       },
       {
-        name: "Neha Sharma",
-        label: "Teen Member",
-        meta: "16 · Student · Mobile-First",
-        type: "Primary",
+        relation: "Mother",
+        tier: "manager",
+        label: "Hub Manager",
+        tags: ["33", "Salaried"],
+        role: "Joint manager of household money, sharing day-to-day financial decisions.",
+        goal: "Split expenses, understand shared spending, and maintain financial transparency.",
+        painPoints: [
+          "Manually tracks who paid for what",
+          "Awkward conversations around shared money",
+          "No unified view of household spending",
+        ],
+        needs: [
+          "Expense splitting",
+          "A second manager role",
+          "Shared dashboards",
+          "Joint savings goals",
+        ],
+        accent: "#ba7a47",
+      },
+      {
+        relation: "Daughter",
+        tier: "member",
+        label: "Hub Member",
+        tags: ["16", "Student"],
         role: "Teenager looking for more independence in everyday spending.",
         goal: "Pay independently without repeatedly asking a parent for cash or a card.",
         painPoints: [
@@ -213,10 +231,10 @@ const caseStudy = {
         accent: "#7b6fd8",
       },
       {
-        name: "Rahul Sharma",
-        label: "Young Adult Member",
-        meta: "22 · College Student · Part-Time Worker",
-        type: "Primary",
+        relation: "Son",
+        tier: "member",
+        label: "Hub Member",
+        tags: ["22", "College Student"],
         role: "Young adult managing his own expenses while remaining connected to family support.",
         goal: "Stay financially independent while being able to request help for larger expenses.",
         painPoints: [
@@ -233,11 +251,11 @@ const caseStudy = {
         accent: "#408da3",
       },
       {
-        name: "Suman Sharma",
-        label: "Elderly Member",
-        meta: "68 · Retired · Low Tech Familiarity",
-        type: "Primary",
-        role: "Older family member who wants digital payments to feel safe and approachable.",
+        relation: "Grandmother",
+        tier: "member",
+        label: "Hub Member",
+        tags: ["68", "Retired"],
+        role: "Grandmother who wants digital payments to feel safe and approachable.",
         goal: "Pay for everyday essentials without relying on cash or frequent bank visits.",
         painPoints: [
           "Finds UPI confusing",
@@ -253,36 +271,16 @@ const caseStudy = {
         ],
         accent: "#7788ba",
       },
-      {
-        name: "Priya & Vikram",
-        label: "Co-Managers",
-        meta: "33 & 35 · Both Salaried",
-        type: "Secondary · Power User",
-        role: "Couple jointly managing household finances and shared responsibilities.",
-        goal: "Split expenses, understand shared spending, and maintain financial transparency.",
-        painPoints: [
-          "Manually track who paid for what",
-          "Awkward conversations around shared money",
-          "No unified view of household spending",
-        ],
-        needs: [
-          "Expense splitting",
-          "Multiple managers",
-          "Shared dashboards",
-          "Joint savings goals",
-        ],
-        accent: "#ba7a47",
-      },
     ],
-    learningsTitle: "What We Learned from Users",
+    learningsTitle: "What We Heard in the Interviews",
     learnings:
-      "We interviewed PayZapp users across these personas (mostly adults) and heard consistent pain points:",
+      "We spoke with PayZapp users across salaried households, from the parent managing the money to teenagers and older family members, and the same tensions came up in almost every conversation:",
     voices: [
-      { name: "Arun", role: "Manager", quote: "I want to give my children freedom, but I still need to know where their money is going.", accent: "#536ee8", background: "#f8f9ff" },
-      { name: "Neha", role: "Teen", quote: "I want to buy things myself without asking my mom for her card every time.", accent: "#7569c9", background: "#faf8ff" },
-      { name: "Rahul", role: "Young Adult", quote: "I manage my own money now, but sometimes I still need family support for bigger expenses.", accent: "#438e98", background: "#f5fafa" },
-      { name: "Suman", role: "Elderly Parent", quote: "I wish digital payments felt simple enough that I didn’t need my daughter to do everything for me.", accent: "#7684aa", background: "#f7f8fc" },
-      { name: "Priya", role: "Co-Manager", quote: "We need one place to see household spending instead of constantly figuring out who paid for what.", accent: "#b77a46", background: "#fcf8f3" },
+      { type: "Adult", quote: "I want to give my children freedom, but I still need to know where their money is going.", accent: "#536ee8", background: "#f8f9ff" },
+      { type: "Teen", quote: "I want to buy things myself without asking my mom for her card every time.", accent: "#7569c9", background: "#faf8ff" },
+      { type: "Young Adult", quote: "I manage my own money now, but sometimes I still need family support for bigger expenses.", accent: "#438e98", background: "#f5fafa" },
+      { type: "Elder", quote: "I wish digital payments felt simple enough that I didn’t need my daughter to do everything for me.", accent: "#7684aa", background: "#f7f8fc" },
+      { type: "Adult", quote: "We need one place to see household spending instead of constantly figuring out who paid for what.", accent: "#b77a46", background: "#fcf8f3" },
     ],
   },
   designQuestion: {
@@ -467,11 +465,24 @@ function createOutcomeGrid(items) {
   return grid;
 }
 
+function createMeasureBullet() {
+  const bullet = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  bullet.setAttribute("class", "measure-bullet");
+  bullet.setAttribute("viewBox", "0 0 20 20");
+  bullet.setAttribute("aria-hidden", "true");
+  bullet.setAttribute("focusable", "false");
+  bullet.innerHTML =
+    '<circle cx="10" cy="10" r="9" class="measure-bullet-ring" />' +
+    '<path d="M6 10.4 8.9 13.2 14.2 7.2" class="measure-bullet-check" />';
+  return bullet;
+}
+
 function createMeasureList(items) {
   const list = createElement("dl", "measure-list");
   items.forEach((item) => {
     const group = createElement("div", "measure-item");
     group.append(
+      createMeasureBullet(),
       createElement("dt", "", item.title),
       createElement("dd", "", item.description),
     );
@@ -480,154 +491,246 @@ function createMeasureList(items) {
   return list;
 }
 
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function createPersonaAvatar() {
+  const art = document.createElementNS(SVG_NS, "svg");
+  art.setAttribute("class", "persona-avatar-art");
+  art.setAttribute("viewBox", "0 0 48 48");
+  art.setAttribute("aria-hidden", "true");
+  art.setAttribute("focusable", "false");
+  art.innerHTML =
+    '<circle class="persona-avatar-field" cx="24" cy="24" r="23" />'
+    + '<circle class="persona-avatar-figure" cx="24" cy="19.5" r="7.2" />'
+    + '<path class="persona-avatar-figure" d="M11.4 41.8a13 13 0 0 1 25.2 0 22.6 22.6 0 0 1-25.2 0Z" />';
+  return art;
+}
+
+const PERSONA_DETAIL_FIELDS = [
+  ["role", "Role"],
+  ["goal", "Goal"],
+  ["painPoints", "Pain Points"],
+  ["needs", "Needs"],
+];
+
+function createPersonaConnector(nodeCount, direction) {
+  const connector = createElement("div", "persona-connector persona-connector--" + direction);
+  connector.style.setProperty("--nodes", String(nodeCount));
+  connector.setAttribute("aria-hidden", "true");
+
+  // the outer branches are single rounded elbows rather than a bar crossing a
+  // stem, so each corner turns cleanly and stops on the outer node centres
+  connector.append(
+    createElement("span", "persona-connector-elbow persona-connector-elbow--start"),
+    createElement("span", "persona-connector-elbow persona-connector-elbow--end"),
+    createElement("span", "persona-connector-trunk"),
+  );
+
+  // an even row has no node under the trunk, so the trunk only spans the hub side
+  if (nodeCount % 2 === 0) connector.classList.add("persona-connector--half-trunk");
+
+  // any node that is neither outermost nor centred needs its own straight stem
+  const centre = (nodeCount - 1) / 2;
+  for (let index = 1; index < nodeCount - 1; index += 1) {
+    if (index === centre) continue;
+    const stem = createElement("span", "persona-connector-stem");
+    stem.style.setProperty("--stem-position", String(index / (nodeCount - 1)));
+    connector.append(stem);
+  }
+
+  return connector;
+}
+
 function createPersonaExplorer(config) {
   const explorer = createElement("div", "persona-explorer detail-box");
   explorer.dataset.revealContainer = "";
 
-  const getInitials = (name) => name
-    .replace("&", "")
-    .split(" ")
-    .filter(Boolean)
-    .map((word) => word[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
+  const personas = config.personas;
+  const managers = personas.filter((persona) => persona.tier === "manager");
+  const members = personas.filter((persona) => persona.tier !== "manager");
+  let activeIndex = 0;
 
-  const detailTabs = [
-    ["role", "Role"],
-    ["goal", "Goal"],
-    ["painPoints", "Pain Points"],
-    ["needs", "Needs"],
-  ];
-  let activePersonaIndex = 0;
-  let activeDetailKey = "role";
+  const card = createElement("article", "persona-card");
+  card.id = "persona-detail-panel";
+  card.setAttribute("role", "tabpanel");
+  card.setAttribute("tabindex", "0");
 
-  const header = createElement("div", "persona-explorer-header");
-  const heading = createElement("div", "persona-explorer-heading");
-  heading.append(
-    createElement("span", "persona-kicker", config.personaEyebrow),
-    createElement("strong", "", config.personaTitle),
-    createElement("p", "", config.personaIntro),
-  );
-  const counter = createElement("span", "persona-counter", `01 / ${String(config.personas.length).padStart(2, "0")}`);
-  header.append(heading, counter);
+  const map = createElement("div", "persona-map");
+  map.setAttribute("role", "tablist");
+  map.setAttribute("aria-label", "Family personas");
 
-  const tabs = createElement("div", "persona-tabs");
-  tabs.setAttribute("role", "tablist");
-  tabs.setAttribute("aria-label", "Primary personas");
+  const nodeButtons = [];
 
-  const panel = createElement("article", "persona-panel");
-  panel.id = "persona-detail-panel";
-  panel.setAttribute("role", "tabpanel");
-  panel.setAttribute("tabindex", "0");
-
-  const identity = createElement("div", "persona-identity");
-  const avatar = createElement("span", "persona-avatar");
-  const identityCopy = createElement("div", "persona-identity-copy");
-  const nameRow = createElement("div", "persona-name-row");
-  const personaName = createElement("h3", "");
-  const personaType = createElement("span", "persona-type");
-  const personaMeta = createElement("p", "persona-meta");
-  nameRow.append(personaName, personaType);
-  identityCopy.append(nameRow, personaMeta);
-  identity.append(avatar, identityCopy);
-
-  const fields = createElement("div", "persona-fields");
-  fields.setAttribute("role", "tablist");
-  fields.setAttribute("aria-label", "Persona details");
-  const content = createElement("div", "persona-content");
-  const contentPanel = createElement("div", "persona-content-panel");
-  const contentLabel = createElement("span", "persona-content-label");
-  const contentBody = createElement("div", "persona-content-body");
-  contentPanel.append(contentLabel, contentBody);
-  content.append(contentPanel);
-  panel.append(identity, fields, content);
-
-  const tabButtons = config.personas.map((persona, index) => {
-    const button = createElement("button", "persona-tab");
-    button.type = "button";
-    button.id = `persona-tab-${index + 1}`;
-    button.setAttribute("role", "tab");
-    button.setAttribute("aria-controls", panel.id);
-    button.setAttribute("aria-selected", String(index === 0));
-    button.tabIndex = index === 0 ? 0 : -1;
-    button.append(
-      createElement("strong", "", persona.name),
-      createElement("span", "", persona.label),
-    );
-    tabs.append(button);
-    return button;
-  });
-
-  const detailButtons = detailTabs.map(([key, label]) => {
-    const button = createElement("button", "persona-field-tab", label);
-    button.type = "button";
-    button.setAttribute("role", "tab");
-    button.addEventListener("click", () => {
-      activeDetailKey = key;
-      renderActivePersona();
+  const createPersonaRow = (group, tier) => {
+    const row = createElement("div", "persona-row persona-row--" + tier);
+    row.style.setProperty("--nodes", String(group.length));
+    group.forEach((persona) => {
+      const index = personas.indexOf(persona);
+      const button = createElement("button", "persona-node");
+      button.type = "button";
+      button.id = "persona-node-" + (index + 1);
+      button.style.setProperty("--persona-accent", persona.accent);
+      button.setAttribute("role", "tab");
+      button.setAttribute("aria-controls", card.id);
+      button.setAttribute("aria-selected", String(index === activeIndex));
+      button.tabIndex = index === activeIndex ? 0 : -1;
+      const figure = createElement("span", "persona-node-figure");
+      figure.append(createPersonaAvatar());
+      const copy = createElement("span", "persona-node-copy");
+      copy.append(
+        createElement("strong", "", persona.relation),
+        createElement("span", "", persona.label),
+      );
+      button.append(figure, copy);
+      nodeButtons[index] = button;
+      row.append(button);
     });
-    fields.append(button);
-    return button;
-  });
-
-  const renderActivePersona = () => {
-    const persona = config.personas[activePersonaIndex];
-    const detail = detailTabs.find(([key]) => key === activeDetailKey);
-    const value = persona[activeDetailKey];
-    const isList = Array.isArray(value);
-    const isSecondary = persona.type.toLowerCase().includes("secondary")
-      || persona.type.toLowerCase().includes("power");
-
-    panel.style.setProperty("--persona-accent", persona.accent);
-    avatar.textContent = getInitials(persona.name);
-    personaName.textContent = persona.name;
-    personaType.textContent = persona.type;
-    personaType.classList.toggle("persona-type--secondary", isSecondary);
-    personaMeta.textContent = `${persona.label} · ${persona.meta}`;
-    contentLabel.textContent = detail[1];
-    contentBody.replaceChildren();
-
-    if (isList) {
-      const list = createElement("ul", "persona-detail-list");
-      value.forEach((item) => list.append(createElement("li", "", item)));
-      contentBody.append(list);
-    } else {
-      contentBody.append(createElement("p", "", value));
-    }
-
-    detailButtons.forEach((button, index) => {
-      const isSelected = detailTabs[index][0] === activeDetailKey;
-      button.setAttribute("aria-selected", String(isSelected));
-    });
+    return row;
   };
 
-  const selectPersona = (index, moveFocus = false) => {
-    activePersonaIndex = index;
-    activeDetailKey = "role";
-    tabButtons.forEach((button, buttonIndex) => {
-      const isSelected = buttonIndex === index;
+  const hub = createElement("div", "persona-hub");
+  hub.append(createElement("span", "persona-hub-label", config.hubLabel));
+
+  map.append(
+    createPersonaRow(managers, "manager"),
+    createPersonaConnector(managers.length, "merge"),
+    hub,
+    createPersonaConnector(members.length, "split"),
+    createPersonaRow(members, "member"),
+  );
+
+  const cardStack = createElement("div", "persona-card-stack");
+  const cardPanels = personas.map((persona) => {
+    const panel = createElement("div", "persona-card-panel");
+    panel.style.setProperty("--persona-accent", persona.accent);
+
+    const head = createElement("div", "persona-card-head");
+    const person = createElement("div", "persona-card-person");
+    const avatar = createElement("span", "persona-card-avatar");
+    avatar.append(createPersonaAvatar());
+    person.append(avatar, createElement("h3", "", persona.relation));
+    const tags = createElement("div", "persona-card-tags");
+    tags.append(
+      createElement("span", "persona-card-tag persona-card-tag--role", persona.label),
+      ...persona.tags.map((tag) => createElement("span", "persona-card-tag", tag)),
+    );
+    head.append(person, tags);
+
+    const body = createElement("div", "persona-card-body");
+    PERSONA_DETAIL_FIELDS.forEach(([key, label]) => {
+      const block = createElement("section", "persona-detail");
+      const content = createElement("div", "persona-detail-content");
+      const value = persona[key];
+      if (Array.isArray(value)) {
+        const list = createElement("ul", "persona-detail-list");
+        value.forEach((item) => list.append(createElement("li", "", item)));
+        content.append(list);
+      } else {
+        content.append(createElement("p", "", value));
+      }
+      block.append(createElement("span", "persona-detail-label", label), content);
+      body.append(block);
+    });
+
+    panel.append(head, body);
+    cardStack.append(panel);
+    return panel;
+  });
+  card.append(cardStack);
+
+  const renderActivePersona = () => {
+    cardPanels.forEach((panel, index) => {
+      panel.classList.toggle("is-active", index === activeIndex);
+    });
+    nodeButtons.forEach((button, index) => {
+      const isSelected = index === activeIndex;
       button.setAttribute("aria-selected", String(isSelected));
       button.tabIndex = isSelected ? 0 : -1;
     });
-    panel.setAttribute("aria-labelledby", tabButtons[index].id);
-    counter.textContent = `${String(index + 1).padStart(2, "0")} / ${String(config.personas.length).padStart(2, "0")}`;
-    renderActivePersona();
-    if (moveFocus) tabButtons[index].focus();
+    card.setAttribute("aria-labelledby", nodeButtons[activeIndex].id);
   };
 
-  tabButtons.forEach((button, index) => {
-    button.addEventListener("click", () => selectPersona(index));
+  const selectPersona = (index, moveFocus) => {
+    activeIndex = (index + personas.length) % personas.length;
+    renderActivePersona();
+    if (moveFocus) nodeButtons[activeIndex].focus();
+  };
+
+  const CYCLE_INTERVAL = 5200;
+  const allowsAutoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timer = null;
+  let isVisible = false;
+  let isPaused = false;
+  let isManual = false;
+
+  const stopCycling = () => {
+    if (timer === null) return;
+    window.clearInterval(timer);
+    timer = null;
+  };
+
+  const startCycling = () => {
+    if (timer !== null || isManual || isPaused || !isVisible || !allowsAutoplay) return;
+    timer = window.setInterval(() => selectPersona(activeIndex + 1), CYCLE_INTERVAL);
+  };
+
+  const takeManualControl = () => {
+    if (isManual) return;
+    isManual = true;
+    stopCycling();
+    explorer.classList.add("is-manual");
+  };
+
+  const pauseCycling = () => {
+    isPaused = true;
+    stopCycling();
+  };
+
+  const resumeCycling = () => {
+    isPaused = false;
+    startCycling();
+  };
+
+  nodeButtons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      takeManualControl();
+      selectPersona(index);
+    });
     button.addEventListener("keydown", (event) => {
       if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
       event.preventDefault();
-      const direction = event.key === "ArrowRight" ? 1 : -1;
-      selectPersona((index + direction + tabButtons.length) % tabButtons.length, true);
+      takeManualControl();
+      selectPersona(index + (event.key === "ArrowRight" ? 1 : -1), true);
     });
   });
+
+  explorer.addEventListener("pointerenter", pauseCycling);
+  explorer.addEventListener("pointerleave", resumeCycling);
+  explorer.addEventListener("focusin", pauseCycling);
+  explorer.addEventListener("focusout", (event) => {
+    if (explorer.contains(event.relatedTarget)) return;
+    resumeCycling();
+  });
+
+  if (allowsAutoplay && typeof IntersectionObserver === "function") {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) startCycling();
+        else stopCycling();
+      });
+    }, { threshold: 0.25 });
+    observer.observe(explorer);
+  } else if (allowsAutoplay) {
+    isVisible = true;
+    startCycling();
+  }
+
   selectPersona(0);
 
-  explorer.append(header, tabs, panel);
+  const layout = createElement("div", "persona-layout");
+  layout.append(map, card);
+  explorer.append(layout);
   return explorer;
 }
 
@@ -650,23 +753,83 @@ function createUserVoiceStack(voices) {
       card.type = "button";
       card.disabled = !isTop;
       card.style.cssText = `--voice-accent:${voice.accent};--voice-background:${voice.background};--voice-x:${x}px;--voice-y:${y}px;--voice-rotation:${rotation}deg;--voice-scale:${scale};--voice-opacity:${opacity};z-index:${20 - stackPosition}`;
-      card.setAttribute("aria-label", isTop ? "Show next user quote" : `${voice.name} quote`);
-      const topRow = createElement("span", "user-voice-top-row");
-      topRow.append(createElement("span", "user-voice-label", "User voice"), createElement("span", "user-voice-dot"));
-      const footer = createElement("span", "user-voice-footer");
-      const person = createElement("span", "user-voice-person");
-      person.append(createElement("strong", "", voice.name), createElement("span", "", voice.role));
-      footer.append(person);
-      if (isTop) footer.append(createElement("span", "user-voice-hint", "Click ↗"));
-      card.append(topRow, createElement("span", "user-voice-quote", `“${voice.quote}”`), footer, createElement("span", "user-voice-accent"));
+      card.setAttribute("aria-label", isTop ? "Show next user quote" : `${voice.type} user quote`);
+      card.append(
+        createElement("span", "user-voice-quote", `“${voice.quote}”`),
+        createElement("span", "user-voice-source", `User · ${voice.type}`),
+        createElement("span", "user-voice-accent"),
+      );
       if (isTop) card.addEventListener("click", () => {
-        order = [...order.slice(1), order[0]];
-        render();
+        advance();
         stack.querySelector(".user-voice-card:not(:disabled)")?.focus();
       });
       stack.append(card);
     });
   };
+
+  const advance = () => {
+    order = [...order.slice(1), order[0]];
+    render();
+    restartCycling();
+  };
+
+  const CYCLE_INTERVAL = 6000;
+  const allowsAutoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let timer = null;
+  let isVisible = false;
+  let isPaused = false;
+
+  const stopCycling = () => {
+    if (timer === null) return;
+    window.clearInterval(timer);
+    timer = null;
+  };
+
+  const startCycling = () => {
+    if (timer !== null || isPaused || !isVisible || !allowsAutoplay) return;
+    timer = window.setInterval(() => {
+      order = [...order.slice(1), order[0]];
+      render();
+    }, CYCLE_INTERVAL);
+  };
+
+  const restartCycling = () => {
+    stopCycling();
+    startCycling();
+  };
+
+  stack.addEventListener("pointerenter", () => {
+    isPaused = true;
+    stopCycling();
+  });
+  stack.addEventListener("pointerleave", () => {
+    isPaused = false;
+    startCycling();
+  });
+  stack.addEventListener("focusin", () => {
+    isPaused = true;
+    stopCycling();
+  });
+  stack.addEventListener("focusout", (event) => {
+    if (stack.contains(event.relatedTarget)) return;
+    isPaused = false;
+    startCycling();
+  });
+
+  if (allowsAutoplay && typeof IntersectionObserver === "function") {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) startCycling();
+        else stopCycling();
+      });
+    }, { threshold: 0.3 });
+    observer.observe(stack);
+  } else if (allowsAutoplay) {
+    isVisible = true;
+    startCycling();
+  }
+
   render();
   return stack;
 }
@@ -935,6 +1098,18 @@ function renderCaseStudy() {
 
   const researchCopy = createElement("div", "body-copy research-copy");
   researchCopy.append(createElement("p", "", caseStudy.research.overview));
+  researchColumn.append(researchCopy);
+
+  const learningRow = createElement("div", "learning-row");
+  const learningCopy = createElement("div", "learning-copy");
+  learningCopy.append(
+    createElement("h3", "subsection-heading learning-heading", caseStudy.research.learningsTitle),
+    createElement("p", "", caseStudy.research.learnings),
+  );
+  learningRow.append(learningCopy, createUserVoiceStack(caseStudy.research.voices));
+  researchColumn.append(learningRow);
+
+  const researchBridge = createElement("div", "body-copy research-copy research-bridge");
   const insight = document.createElement("p");
   insight.append(
     document.createTextNode(caseStudy.research.insightLead),
@@ -942,20 +1117,11 @@ function renderCaseStudy() {
     document.createTextNode(". "),
     createElement("strong", "", caseStudy.research.insightConclusion),
   );
-  researchCopy.append(insight);
+  researchBridge.append(insight);
   researchColumn.append(
-    researchCopy,
+    researchBridge,
     createPersonaExplorer(caseStudy.research),
   );
-
-  const learningRow = createElement("div", "learning-row");
-  const learningCopy = createElement("div", "learning-copy");
-  learningCopy.append(
-    createElement("h3", "learning-heading", caseStudy.research.learningsTitle),
-    createElement("p", "", caseStudy.research.learnings),
-  );
-  learningRow.append(learningCopy, createUserVoiceStack(caseStudy.research.voices));
-  researchColumn.append(learningRow);
   research.append(researchColumn);
   shell.append(research);
 
@@ -1225,12 +1391,12 @@ function setupReveal() {
         ".outcome-card > .outcome-number",
         ".outcome-card > h3",
         ".measures-heading",
+        ".measure-item > .measure-bullet",
         ".measure-item > dt",
         ".measure-item > dd",
-        ".persona-explorer-heading",
-        ".persona-tab",
+        ".persona-node",
         ".learning-heading",
-        ".user-voice-label",
+        ".user-voice-quote",
         ".relationship-card > .relationship-number",
         ".relationship-card > h3",
         ".relationship-label",

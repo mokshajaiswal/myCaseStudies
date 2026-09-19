@@ -1,0 +1,162 @@
+@font-face {
+  font-family: Helix;
+  src: url('assets/Hellix-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: Helix;
+  src: url('assets/Hellix-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: Helix;
+  src: url('assets/Hellix-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+}
+:root {
+  color-scheme: light;
+  --paper: #e7efff;
+  --ink: #3f4652;
+  --muted: #58677d;
+  --accent: #356cdf;
+  font-family: Helix, 'Segoe UI', sans-serif;
+  font-size: clamp(12px, 4.1vw, 16px);
+  color: var(--ink);
+  background: var(--paper);
+}
+* { box-sizing: border-box; }
+body { margin: 0; }
+button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+[hidden] { display: none !important; }
+button:focus-visible, .carousel:focus-visible, .complete:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  clip-path: inset(50%);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.onboarding {
+  width: 100%;
+  max-width: 480px;
+  height: 100svh;
+  min-height: 480px;
+  margin: auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--paper);
+}
+.app-header {
+  height: 6.5rem;
+  flex: none;
+  display: flex;
+  align-items: flex-end;
+}
+.pagination { display: flex; align-items: center; gap: 6px; }
+.pagination button {
+  width: auto;
+  height: 44px;
+  padding: 0;
+  border: 0;
+  display: grid;
+  place-items: center;
+  background: transparent;
+}
+.pagination span {
+  width: 8px;
+  height: 8px;
+  border-radius: 10px;
+  background: #a6b9dc;
+  transition: background-color 180ms;
+}
+.pagination [aria-current] span { width: 24px; background: var(--accent); }
+.carousel { flex: 1; min-height: 0; touch-action: pan-y; }
+.slide { height: 100%; display: flex; flex-direction: column; }
+.slide-copy { flex: none; padding-top: 1.5rem; }
+h1, h2 {
+  margin: 0;
+  font-size: 2.05rem;
+  font-weight: 600;
+  letter-spacing: -.035rem;
+  line-height: 1.2;
+}
+h1 strong, h2 strong { font: inherit; }
+.description {
+  max-width: 310px;
+  margin: 1rem 0 0;
+  color: var(--muted);
+  font-size: 1.04rem;
+  line-height: 1.55;
+}
+.illustration {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  margin-inline: .25rem;
+}
+.illustration img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding-block: .75rem;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none;
+}
+.app-footer { flex: none; padding: .5rem 0 1.75rem; }
+.primary {
+  width: 100%;
+  min-height: 3.5rem;
+  padding: 0 1.25rem;
+  border: 0;
+  border-radius: .9rem;
+  background: var(--accent);
+  color: #fff;
+  font-size: .94rem;
+  line-height: 1;
+  font-weight: 700;
+  letter-spacing: .035em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  transition: background-color 180ms, transform 180ms;
+}
+.primary span { transform: translateY(-1px); }
+.primary:hover { background: #2857c8; }
+.primary:active { transform: scale(.985); }
+.is-active .slide-copy { animation: copy-in 300ms both; }
+.is-active .illustration { animation: art-in 450ms both; }
+@keyframes copy-in {
+  from { opacity: 0; transform: translateY(7px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes art-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.complete { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 3rem; }
+.complete .primary { margin-top: 2rem; }
+.noscript-message { font-size: .8rem; }
+@media (max-height: 600px) {
+  .app-header { height: 5.5rem; }
+  .slide-copy { padding-top: .75rem; }
+  h1, h2 { font-size: 1.85rem; }
+  .description { margin-top: .85rem; font-size: 1rem; }
+  .app-footer { padding-bottom: 1.1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

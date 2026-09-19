@@ -151,7 +151,11 @@ node C:\Users\ishan\.codex\skills\impeccable\scripts\detect.mjs --json script.js
 
 Also inspect the affected interaction at desktop and mobile widths when a browser surface is available.
 
-## Intentionally unfinished items
+## Onboarding prototype
+
+`prototypes/onboarding/` contains a standalone, three-slide Turbo Hub onboarding carousel: family sharing, spending boundaries, and independent payments. Open `preview.html` for the existing phone-frame preview or embed `index.html` through `CaseStudy.setMedia()` using type `iframe`. The reference-led layout uses top-left dots, copy above simple generated illustrations, a soft blue background, and a centered bottom CTA. It includes local fonts, swipe/keyboard navigation, and a replayable completion state. See `prototypes/onboarding/README.md` for the embed snippet and completion event. Main-page media slots have not been automatically replaced.
+
+## Remaining case-study media
 
 - Phone screens remain placeholders until final images, video, or prototypes are supplied.
 - Heading icon/flower placeholders remain blank until final artwork is supplied.

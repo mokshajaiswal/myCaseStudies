@@ -1,0 +1,844 @@
+{
+  "version": "2.18",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 98,
+      "y": -380,
+      "name": "Family Hub Invite Screen",
+      "clip": true,
+      "width": 720,
+      "height": 1600,
+      "fill": "$white",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "P54yNI",
+          "x": 0,
+          "y": 0,
+          "name": "Top Gradient Bar",
+          "width": 720,
+          "height": 200,
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 270,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#1C73D9",
+                "position": 0
+              },
+              {
+                "color": "#7355E8",
+                "position": 1
+              }
+            ]
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "icon",
+              "id": "InuvT",
+              "x": 50,
+              "y": 48,
+              "name": "Back Arrow",
+              "width": 42,
+              "height": 42,
+              "icon": "arrow_back",
+              "library": "Material Symbols Rounded",
+              "weight": 500,
+              "fill": "#FFFFFF"
+            },
+            {
+              "type": "ellipse",
+              "id": "X3FNP",
+              "x": 636,
+              "y": 50,
+              "name": "Help Circle",
+              "fill": "#FFFFFF",
+              "width": 36,
+              "height": 36
+            },
+            {
+              "type": "text",
+              "id": "IdKXC",
+              "x": 647,
+              "y": 51,
+              "name": "Help Question",
+              "fill": "#6A64DF",
+              "content": "?",
+              "fontFamily": "$font",
+              "fontSize": 25,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "BZm79",
+          "x": 0,
+          "y": 152,
+          "name": "Main Content Sheet",
+          "clip": true,
+          "width": 720,
+          "height": 1448,
+          "fill": "$white",
+          "cornerRadius": [
+            36,
+            36,
+            0,
+            0
+          ],
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "I0Ac0R",
+              "x": 0,
+              "y": 0,
+              "name": "Profile Hero",
+              "width": 720,
+              "height": 440,
+              "fill": {
+                "type": "gradient",
+                "gradientType": "linear",
+                "enabled": true,
+                "rotation": 180,
+                "size": {
+                  "height": 1
+                },
+                "colors": [
+                  {
+                    "color": "#F4E9FF",
+                    "position": 0
+                  },
+                  {
+                    "color": "#FFF7FB",
+                    "position": 0.28
+                  },
+                  {
+                    "color": "#F3FAFF",
+                    "position": 0.66
+                  },
+                  {
+                    "color": "#FFFFFF",
+                    "position": 1
+                  }
+                ]
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "FOgIv",
+                  "x": 260,
+                  "y": 62,
+                  "name": "Home Avatar",
+                  "clip": true,
+                  "width": 200,
+                  "height": 200,
+                  "fill": "#BFDCDC",
+                  "cornerRadius": 47,
+                  "stroke": {
+                    "type": "gradient",
+                    "gradientType": "linear",
+                    "enabled": true,
+                    "rotation": 0,
+                    "size": {
+                      "height": 1
+                    },
+                    "colors": [
+                      {
+                        "color": "#ffffff",
+                        "position": 0
+                      },
+                      {
+                        "color": "#ffffff00",
+                        "position": 1
+                      }
+                    ]
+                  },
+                  "strokeWidth": 6,
+                  "strokeAlignment": "inner",
+                  "layout": "none",
+                  "children": [
+                    {
+                      "type": "path",
+                      "id": "N6Sywr",
+                      "x": 0,
+                      "y": -6.5,
+                      "geometry": "M193.75 200l-187.5 0c-3.4375 0-6.25-2.8125-6.25-6.25l0-187.5c0-3.4375 2.8125-6.25 6.25-6.25l187.5 0c3.4375 0 6.25 2.8125 6.25 6.25l0 187.5c0 3.4375-2.8125 6.25-6.25 6.25z",
+                      "fill": [
+                        "#BFDCDC",
+                        {
+                          "type": "image",
+                          "enabled": true,
+                          "url": "designs-assets/image-1.png",
+                          "mode": "fill"
+                        }
+                      ],
+                      "width": 200,
+                      "height": 213,
+                      "stroke": "#ffffffff",
+                      "strokeWidth": 1,
+                      "strokeAlignment": "inner"
+                    }
+                  ]
+                },
+                {
+                  "type": "icon",
+                  "id": "SPxpj",
+                  "x": 644,
+                  "y": 36,
+                  "name": "More Menu",
+                  "width": 40,
+                  "height": 40,
+                  "icon": "more_horiz",
+                  "library": "Material Symbols Rounded",
+                  "weight": 600,
+                  "fill": "#353942"
+                },
+                {
+                  "type": "text",
+                  "id": "OipkE",
+                  "x": 0,
+                  "y": 284,
+                  "name": "Workspace Name",
+                  "fill": "$ink",
+                  "textGrowth": "fixed-width",
+                  "width": 720,
+                  "content": "The Sharma’s",
+                  "textAlign": "center",
+                  "fontFamily": "$font",
+                  "fontSize": 40,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "C7v23",
+                  "x": 0,
+                  "y": 356,
+                  "name": "Workspace Type",
+                  "fill": "#353942",
+                  "textGrowth": "fixed-width",
+                  "width": 720,
+                  "content": "FAMILY HUB",
+                  "textAlign": "center",
+                  "fontFamily": "$font",
+                  "fontSize": 20,
+                  "fontWeight": "600",
+                  "letterSpacing": 2.4
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "KlbfC",
+              "x": 28,
+              "y": 452,
+              "name": "Helper Copy Area",
+              "width": 664,
+              "height": 128,
+              "layout": "vertical",
+              "padding": [
+                18,
+                0,
+                0,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "fCVEI",
+                  "name": "Helper Copy",
+                  "fill": "$muted",
+                  "content": "Let’s add members to the hub. You can also add\nPixel tags here to manage them seamlessly.",
+                  "lineHeight": 1.45,
+                  "textAlign": "center",
+                  "fontFamily": "$font",
+                  "fontSize": 24,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ce30v",
+              "x": 40,
+              "y": 584,
+              "name": "Action Panel",
+              "width": 640,
+              "height": 280,
+              "fill": "#FFFFFF",
+              "cornerRadius": 32,
+              "stroke": "$line",
+              "strokeWidth": 2,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#6E7F8E24",
+                "offset": {
+                  "x": 0,
+                  "y": 14
+                },
+                "blur": 32
+              },
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Eahxd",
+                  "name": "Invite Member Row",
+                  "width": "fill_container",
+                  "height": 139,
+                  "gap": 28,
+                  "padding": [
+                    0,
+                    38
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "HzKuY",
+                      "name": "Invite Icon Background",
+                      "width": 72,
+                      "height": 72,
+                      "fill": "$blue-soft",
+                      "cornerRadius": 20,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "gQmdt",
+                          "name": "Invite Member Asset",
+                          "geometry": "M10.78417 3.355c0 1.853-1.472 3.355-3.287 3.355-1.815 0-3.287-1.502-3.287-3.355 0-1.853 1.472-3.355 3.287-3.355 1.816 0 3.287 1.502 3.287 3.355m3.799 9.307q0.231 0.57 0.372 1.166c0.245 1.042-0.534 1.982-1.57 2.156-4.15 0.693-7.203 0.69-11.741-0.02-1.052-0.165-1.85-1.112-1.597-2.166q0.14-0.582 0.364-1.136c0.386-0.95 0.95-1.813 1.663-2.54 0.70955-0.72392 1.55505-1.30061 2.488-1.697 1.87611-0.79406 3.9939-0.79406 5.87 0 0.93331 0.39627 1.77916 0.97297 2.489 1.697 0.71499 0.72966 1.27968 1.59267 1.662 2.54",
+                          "fill": "$blue",
+                          "width": 33,
+                          "height": 36
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "N0dCo",
+                      "name": "Invite Member Label",
+                      "fill": "$blue",
+                      "content": "Invite Member",
+                      "fontFamily": "$font",
+                      "fontSize": 26,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZEXfI",
+                  "name": "Row Divider",
+                  "width": "fill_container",
+                  "height": 2,
+                  "fill": "$line"
+                },
+                {
+                  "type": "frame",
+                  "id": "UCFS5",
+                  "name": "Add Pixel Tag Row",
+                  "width": "fill_container",
+                  "height": 139,
+                  "gap": 28,
+                  "padding": [
+                    0,
+                    38
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "mnHaP",
+                      "name": "Tag Icon Background",
+                      "width": 72,
+                      "height": 72,
+                      "fill": "$blue-soft",
+                      "cornerRadius": 20,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "path",
+                          "id": "pr4aa",
+                          "name": "Pixel Tag Asset",
+                          "geometry": "M4 0c-2.20914 0-4 1.79086-4 4l0 8.444c0 1.96392 1.59208 3.556 3.556 3.556 6.873 0 12.444-5.572 12.444-12.444 0-1.96392-1.59207-3.556-3.556-3.556l-8.444 0z m-0.5 5c0.82843 0 1.5-0.67157 1.5-1.5 0-0.82843-0.67157-1.5-1.5-1.5-0.82843 0-1.5 0.67157-1.5 1.5 0 0.82843 0.67157 1.5 1.5 1.5",
+                          "fillRule": "evenodd",
+                          "fill": "$blue",
+                          "width": 36,
+                          "height": 36
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "mJIiv",
+                      "name": "Add Pixel Tag Label",
+                      "fill": "$blue",
+                      "content": "Add Pixel Tag",
+                      "fontFamily": "$font",
+                      "fontSize": 26,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "KQ1j6",
+      "x": 40,
+      "y": 124,
+      "name": "Frame",
+      "clip": true,
+      "width": 17,
+      "height": 89,
+      "layout": "none"
+    },
+    {
+      "type": "rectangle",
+      "id": "M8P0i",
+      "x": -788,
+      "y": -380,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "designs-assets/image-2.png",
+        "mode": "fill"
+      },
+      "width": 720,
+      "height": 1600
+    },
+    {
+      "type": "frame",
+      "id": "glMxr",
+      "x": 898,
+      "y": -380,
+      "name": "Family Hub Details Screen",
+      "clip": true,
+      "width": 720,
+      "height": 1600,
+      "fill": "$white",
+      "layout": "none",
+      "children": [
+        {
+          "type": "frame",
+          "id": "DcKdB",
+          "x": 0,
+          "y": 0,
+          "name": "Top Gradient Bar",
+          "width": 720,
+          "height": 448,
+          "fill": {
+            "type": "gradient",
+            "gradientType": "linear",
+            "enabled": true,
+            "rotation": 270,
+            "size": {
+              "height": 1
+            },
+            "colors": [
+              {
+                "color": "#1C73D9",
+                "position": 0
+              },
+              {
+                "color": "#7355E8",
+                "position": 1
+              }
+            ]
+          },
+          "layout": "none",
+          "children": [
+            {
+              "type": "icon",
+              "id": "RaRdJ",
+              "x": 50,
+              "y": 48,
+              "name": "Back Arrow",
+              "width": 42,
+              "height": 42,
+              "icon": "arrow_back",
+              "library": "Material Symbols Rounded",
+              "weight": 500,
+              "fill": "#FFFFFF"
+            },
+            {
+              "type": "ellipse",
+              "id": "QZUrw",
+              "x": 636,
+              "y": 50,
+              "name": "Help Circle",
+              "enabled": false,
+              "fill": "#FFFFFF",
+              "width": 36,
+              "height": 36
+            },
+            {
+              "type": "text",
+              "id": "BjAfK",
+              "x": 647,
+              "y": 51,
+              "name": "Help Question",
+              "enabled": false,
+              "fill": "#6A64DF",
+              "content": "?",
+              "fontFamily": "$font",
+              "fontSize": 25,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "RQCsK",
+              "x": 48,
+              "y": 158,
+              "name": "Details Screen Title",
+              "fill": "#FFFFFF",
+              "content": "Tell us more about the hub",
+              "fontFamily": "$font",
+              "fontSize": 36,
+              "fontWeight": "500"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "p0dSjx",
+          "x": 0,
+          "y": 256,
+          "name": "Main Content Sheet",
+          "clip": true,
+          "width": 720,
+          "height": 1344,
+          "fill": "$white",
+          "cornerRadius": [
+            24,
+            24,
+            0,
+            0
+          ],
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "hQBNJ",
+              "x": 286,
+              "y": 52,
+              "name": "Editable Home Avatar",
+              "clip": true,
+              "width": 148,
+              "height": 148,
+              "fill": "#BFDCDC",
+              "cornerRadius": 34,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "path",
+                  "id": "n7zF4",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Family House Artwork",
+                  "geometry": "M193.75 200l-187.5 0c-3.4375 0-6.25-2.8125-6.25-6.25l0-187.5c0-3.4375 2.8125-6.25 6.25-6.25l187.5 0c3.4375 0 6.25 2.8125 6.25 6.25l0 187.5c0 3.4375-2.8125 6.25-6.25 6.25z",
+                  "fill": [
+                    "#BFDCDC",
+                    {
+                      "type": "image",
+                      "enabled": true,
+                      "url": "designs-assets/image-1.png",
+                      "mode": "fill"
+                    }
+                  ],
+                  "width": 148,
+                  "height": 148,
+                  "stroke": "#ffffffff",
+                  "strokeWidth": 0.7,
+                  "strokeAlignment": "inner"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RY2SM",
+              "x": 374,
+              "y": 148,
+              "name": "Edit Avatar Badge",
+              "width": 60,
+              "height": 60,
+              "fill": "#FFFFFF",
+              "cornerRadius": 18,
+              "stroke": "#1677FF",
+              "strokeWidth": 3,
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "color": "#4A61742A",
+                "offset": {
+                  "x": 0,
+                  "y": 4
+                },
+                "blur": 10
+              },
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon",
+                  "id": "ZLqV0",
+                  "name": "Edit Avatar Icon",
+                  "width": 30,
+                  "height": 30,
+                  "icon": "edit",
+                  "library": "Material Symbols Rounded",
+                  "weight": 500,
+                  "fill": "#1677FF"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Ndbd6",
+              "x": 48,
+              "y": 240,
+              "name": "Hub Name Field",
+              "width": 624,
+              "height": 112,
+              "fill": "#FFFFFF",
+              "cornerRadius": 24,
+              "stroke": "#D8DCE2",
+              "strokeWidth": 2,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "CQkCS",
+                  "x": 24,
+                  "y": 24,
+                  "name": "Hub Name Label",
+                  "fill": "#8B8F97",
+                  "content": "Hub Name",
+                  "fontFamily": "$font",
+                  "fontSize": 18,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "cSJGc",
+                  "x": 24,
+                  "y": 57,
+                  "name": "Hub Name Value",
+                  "fill": "$ink",
+                  "content": "The Sharma’s",
+                  "fontFamily": "$font",
+                  "fontSize": 26,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "m05MT7",
+              "x": 48,
+              "y": 404,
+              "name": "Source Account Label",
+              "fill": "$ink",
+              "content": "Source Account",
+              "fontFamily": "$font",
+              "fontSize": 24,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "LqqYO",
+              "x": 48,
+              "y": 457,
+              "name": "Source Account Options",
+              "width": 624,
+              "height": 208,
+              "fill": "#FFFFFF",
+              "cornerRadius": 24,
+              "stroke": "$line",
+              "strokeWidth": 2,
+              "layout": "none",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "V4TxS",
+                  "x": 32,
+                  "y": 103,
+                  "name": "Account Divider",
+                  "width": 560,
+                  "height": 2,
+                  "fill": "#E4E7EB"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "JuxRj",
+                  "x": 28,
+                  "y": 28,
+                  "name": "Selected Radio",
+                  "fill": "#FFFFFF",
+                  "width": 44,
+                  "height": 44,
+                  "stroke": "#1677FF",
+                  "strokeWidth": 3
+                },
+                {
+                  "type": "ellipse",
+                  "id": "XQ2Y1",
+                  "x": 39,
+                  "y": 39,
+                  "name": "Selected Radio Dot",
+                  "fill": "#1677FF",
+                  "width": 22,
+                  "height": 22
+                },
+                {
+                  "type": "text",
+                  "id": "HvH9Y",
+                  "x": 92,
+                  "y": 34,
+                  "name": "Credit Account Option",
+                  "fill": "$ink",
+                  "content": "Credit Account  XXXX 9132",
+                  "fontFamily": "$font",
+                  "fontSize": 26,
+                  "fontWeight": "500"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "IOj7U",
+                  "x": 28,
+                  "y": 132,
+                  "name": "Unselected Radio",
+                  "fill": "#FFFFFF",
+                  "width": 44,
+                  "height": 44,
+                  "stroke": "#AEB5BE",
+                  "strokeWidth": 3
+                },
+                {
+                  "type": "text",
+                  "id": "szPoV",
+                  "x": 92,
+                  "y": 138,
+                  "name": "Prepaid Account Option",
+                  "fill": "$ink",
+                  "content": "Prepaid Account  XXXX 4281",
+                  "fontFamily": "$font",
+                  "fontSize": 26,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "J0cbKZ",
+              "x": 48,
+              "y": 1192,
+              "name": "Create Hub Button",
+              "width": 624,
+              "height": 104,
+              "fill": "#2387F5",
+              "cornerRadius": 24,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "xkh3r",
+                  "name": "Create Hub Button Label",
+                  "fill": "#FFFFFF",
+                  "content": "Create Hub",
+                  "fontFamily": "$font",
+                  "fontSize": 32,
+                  "fontWeight": "600"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "WyUR5",
+      "x": 2087,
+      "y": -62,
+      "name": "Frame 1",
+      "width": 337,
+      "layout": "vertical",
+      "gap": 72,
+      "children": [
+        {
+          "type": "rectangle",
+          "id": "h527Cw",
+          "fill": "#CCCCCC",
+          "width": "fill_container",
+          "height": 234
+        },
+        {
+          "type": "rectangle",
+          "id": "NohHF",
+          "fill": "#CCCCCC",
+          "width": "fill_container",
+          "height": 234
+        },
+        {
+          "type": "rectangle",
+          "id": "TOvf1",
+          "fill": "#CCCCCC",
+          "width": "fill_container",
+          "height": 234
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "blue": {
+      "type": "color",
+      "value": "#1976D2"
+    },
+    "blue-soft": {
+      "type": "color",
+      "value": "#EAF6FF"
+    },
+    "ink": {
+      "type": "color",
+      "value": "#20242B"
+    },
+    "muted": {
+      "type": "color",
+      "value": "#8B8F97"
+    },
+    "line": {
+      "type": "color",
+      "value": "#CFE7FB"
+    },
+    "white": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "font": {
+      "type": "string",
+      "value": "Inter"
+    }
+  },
+  "fileToken": "79005028-353b-4a44-812f-d69ef68f195f"
+}

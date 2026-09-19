@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e7efff">
+  <title>Welcome to Turbo Hub</title>
+  <link rel="stylesheet" href="onboarding.css">
+  <script src="onboarding.js" defer></script>
+</head>
+<body>
+  <main class="onboarding" aria-label="Welcome to Turbo Hub">
+    <header class="app-header">
+      <nav class="pagination" aria-label="Choose onboarding slide">
+        <button type="button" aria-label="Go to slide 1: Your family" aria-current="step" data-go="0"><span></span></button>
+        <button type="button" aria-label="Go to slide 2: Spending boundaries" data-go="1"><span></span></button>
+        <button type="button" aria-label="Go to slide 3: Everyday payments" data-go="2"><span></span></button>
+      </nav>
+    </header>
+
+    <section class="carousel" aria-roledescription="carousel" aria-label="Discover Turbo Hub" tabindex="0">
+      <article class="slide is-active" data-slide="0" role="group" aria-roledescription="slide" aria-label="1 of 3: A hub for your family">
+        <div class="slide-copy">
+          <h1>Your family.<br><strong>One shared hub.</strong></h1>
+          <p class="description">Bring your family into a shared money space, funded by you.</p>
+        </div>
+        <div class="illustration">
+          <img src="assets/family-home-blue.png" width="1024" height="1024" alt="A small blue home with three simple family figures" fetchpriority="high" draggable="false">
+        </div>
+      </article>
+
+      <article class="slide" data-slide="1" role="group" aria-roledescription="slide" aria-label="2 of 3: Set spending boundaries" hidden inert>
+        <div class="slide-copy">
+          <h2>A little freedom.<br><strong>On your terms.</strong></h2>
+          <p class="description">Set spending limits and choose where your family can use the money.</p>
+        </div>
+        <div class="illustration">
+          <img src="assets/shared-wallet-blue.png" width="1024" height="1024" alt="A simple blue coin purse with three gold coins" draggable="false">
+        </div>
+      </article>
+
+      <article class="slide" data-slide="2" role="group" aria-roledescription="slide" aria-label="3 of 3: Everyday payments made easier" hidden inert>
+        <div class="slide-copy">
+          <h2>Their everyday.<br><strong>Made easier.</strong></h2>
+          <p class="description">Pay independently, request a top-up, and split shared expenses.</p>
+        </div>
+        <div class="illustration">
+          <img src="assets/everyday-payments-blue.png" width="1024" height="1024" alt="A simple powder-blue shopping bag with two gold coins" draggable="false">
+        </div>
+      </article>
+    </section>
+
+    <footer class="app-footer">
+      <button class="primary" type="button"><span class="primary-label">Continue</span></button>
+    </footer>
+
+    <section class="complete" hidden aria-labelledby="complete-title" tabindex="-1">
+      <h2 id="complete-title">You’re ready to<br><strong>create your hub.</strong></h2>
+      <p class="description">Onboarding complete.</p>
+      <button class="primary replay" type="button"><span>Replay onboarding</span></button>
+    </section>
+    <p class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></p>
+    <noscript><p class="noscript-message">Enable JavaScript to explore all three onboarding screens.</p></noscript>
+  </main>
+</body>
+</html>
