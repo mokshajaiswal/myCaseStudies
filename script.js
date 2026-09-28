@@ -96,8 +96,6 @@ const caseStudy = {
       "Zeta was already working with HDFC Bank on PayZapp, using its cloud-native payments stack to create fast, responsive experiences like swipe-to-pay and support features like tap and pay, payments limits and advanced account controls. That same foundation made it possible to think beyond individual payments and explore how PayZapp’s existing prepaid capabilities could extend to families.",
       "Family payments became a natural extension of what was already there - opening up more users, more recurring payment activity, and more ways for households to engage with PayZapp.",
     ],
-    experienceTitle: "Turning the opportunity into a product experience",
-    experienceIntro: "The proposition centered around two complementary experiences:",
     experiences: [
       {
         number: "1",
@@ -126,8 +124,7 @@ const caseStudy = {
     },
   ],
   outcomes: {
-    title: "What we wanted the proposition to achieve",
-    intro: "We focused on three core outcomes with Turbo Hub:",
+    title: "We focused on three core outcomes with Turbo Hub:",
     items: [
       {
         number: "01.",
@@ -163,8 +160,8 @@ const caseStudy = {
   },
   research: {
     title: "Understanding who we were designing for",
-    overview:
-      "Existing PayZapp data gave us an initial picture of prepaid users. They were largely salaried adults between 20–40, with many already married and managing money within a family. Through interviews, we explored how money actually moved within these households from everyday spending and allowances to supporting children or parents.",
+    intro:
+      "We spoke with PayZapp users across salaried households, from the parent managing the money to teenagers and older family members.",
     insightLead: "Taken together, these conversations pointed to four recurring needs: ",
     insightEmphasis: "control, visibility, access, and independence",
     insightConclusion: "We turned those patterns into the core personas that shaped the proposition.",
@@ -272,9 +269,6 @@ const caseStudy = {
         accent: "#7788ba",
       },
     ],
-    learningsTitle: "What We Heard in the Interviews",
-    learnings:
-      "We spoke with PayZapp users across salaried households, from the parent managing the money to teenagers and older family members, and the same tensions came up in almost every conversation:",
     voices: [
       { type: "Adult", quote: "I want to give my children freedom, but I still need to know where their money is going.", accent: "#536ee8", background: "#f8f9ff" },
       { type: "Teen", quote: "I want to buy things myself without asking my mom for her card every time.", accent: "#7569c9", background: "#faf8ff" },
@@ -313,14 +307,6 @@ const caseStudy = {
         label: "Responsibility",
         description:
           "Joins the Hub, makes payments within the available permissions, and requests additional funds when needed.",
-      },
-      {
-        number: "3",
-        title: "The connection between them",
-        label: "Responsibility",
-        description:
-          "A decision on one side needed to be understandable on the other. A spending limit needed to be visible to the member; a request needed to give the manager enough context to respond.",
-        wide: true,
       },
     ],
   },
@@ -487,30 +473,18 @@ function createLinkedInIcon() {
 
 function createSectionHeading(title) {
   const heading = createElement("h2", "section-heading");
-  const [firstWord, ...remainingWords] = title.split(" ");
-  heading.append(
-    createAssetPlaceholder(),
-    createElement("span", "section-heading-lead", firstWord),
-  );
-  if (remainingWords.length) {
-    heading.append(
-      document.createTextNode(" "),
-      createElement("span", "section-heading-rest", remainingWords.join(" ")),
-    );
-  }
+  heading.append(createAssetPlaceholder(), document.createTextNode(title));
   return heading;
 }
 
 function createInfoPanel(title, items) {
   const panel = createElement("section", "info-panel detail-box");
-  panel.dataset.revealContainer = "";
   const heading = createElement("div", "info-panel-heading");
   heading.append(createAssetPlaceholder(), createElement("h3", "", title));
 
   const grid = createElement("div", "info-panel-grid");
   items.forEach((item) => {
     const card = createElement("article", "info-card");
-    card.dataset.revealContainer = "";
     card.append(
       createElement("span", "info-card-index", item.number),
       createElement("h4", "", item.title),
@@ -527,7 +501,6 @@ function createExperienceGrid(items) {
   const grid = createElement("div", "experience-grid");
   items.forEach((item) => {
     const card = createElement("article", "experience-card detail-box");
-    card.dataset.revealContainer = "";
     card.append(
       createElement("span", "experience-number experience-number--" + item.tone, item.number),
       createElement("h4", "", item.title),
@@ -540,12 +513,10 @@ function createExperienceGrid(items) {
 
 function createArtifactGallery(items) {
   const stage = createElement("div", "artifact-stage");
-  stage.dataset.revealContainer = "";
   stage.setAttribute("aria-label", "Early product-thinking sketches");
 
   items.forEach((item, index) => {
     const figure = createElement("figure", `artifact-sheet artifact-sheet--${index + 1}`);
-    figure.dataset.revealContainer = "";
     const image = document.createElement("img");
     image.src = item.src;
     image.alt = item.alt;
@@ -562,7 +533,6 @@ function createOutcomeGrid(items) {
   const grid = createElement("div", "outcome-grid");
   items.forEach((item) => {
     const card = createElement("article", "outcome-card detail-box");
-    card.dataset.revealContainer = "";
     card.append(
       createElement("span", "outcome-number", item.number),
       createElement("h3", "", item.title),
@@ -651,7 +621,6 @@ function createPersonaConnector(nodeCount, direction) {
 
 function createPersonaExplorer(config) {
   const explorer = createElement("div", "persona-explorer detail-box");
-  explorer.dataset.revealContainer = "";
 
   const personas = config.personas;
   const managers = personas.filter((persona) => persona.tier === "manager");
@@ -844,7 +813,6 @@ function createPersonaExplorer(config) {
 
 function createUserVoiceStack(voices) {
   const stack = createElement("div", "user-voice-stack");
-  stack.dataset.revealContainer = "";
   stack.setAttribute("aria-label", "User interview quotes");
   let order = voices.map((_, index) => index);
   const transforms = [[0, 0, 0, 1, 1], [-8, 12, -2.2, 0.985, 1], [10, 21, 2.6, 0.968, 0.96], [-4, 29, -3.4, 0.95, 0.9]];
@@ -942,42 +910,118 @@ function createUserVoiceStack(voices) {
   return stack;
 }
 
+function createRelationshipRoleArt(kind) {
+  const art = document.createElementNS(SVG_NS, "svg");
+  art.setAttribute("class", `relationship-role-art relationship-role-art--${kind}`);
+  art.setAttribute("viewBox", "0 0 120 120");
+  art.setAttribute("aria-hidden", "true");
+  art.setAttribute("focusable", "false");
+
+  if (kind === "manager") {
+    art.innerHTML =
+      '<circle class="relationship-art-field" cx="60" cy="60" r="51" />'
+      + '<circle class="relationship-art-orbit" cx="60" cy="60" r="33" />'
+      + '<path class="relationship-art-line" d="M60 27v19M31 76l16-9M89 76l-16-9" />'
+      + '<circle class="relationship-art-node" cx="60" cy="22" r="6" />'
+      + '<circle class="relationship-art-node" cx="27" cy="79" r="6" />'
+      + '<circle class="relationship-art-node" cx="93" cy="79" r="6" />'
+      + '<circle class="relationship-art-core" cx="60" cy="60" r="14" />'
+      + '<path class="relationship-art-core-mark" d="M54 60l4 4 9-10" />';
+  } else {
+    art.innerHTML =
+      '<circle class="relationship-art-field" cx="60" cy="60" r="51" />'
+      + '<rect class="relationship-art-card" x="28" y="36" width="64" height="48" rx="11" />'
+      + '<path class="relationship-art-line" d="M35 49h50" />'
+      + '<circle class="relationship-art-core" cx="72" cy="69" r="7" />'
+      + '<path class="relationship-art-access" d="M45 95c8 6 22 6 30 0M75 95l-5-5M75 95l-6 3" />';
+  }
+
+  return art;
+}
+
+function createRelationshipRole(item, kind) {
+  const role = createElement("article", `relationship-role relationship-role--${kind}`);
+  const figure = createElement("div", "relationship-role-figure");
+  figure.append(createRelationshipRoleArt(kind));
+
+  const copy = createElement("div", "relationship-role-copy");
+  copy.append(
+    createElement("span", "relationship-label", item.label),
+    createElement("p", "", item.description),
+  );
+
+  role.append(
+    figure,
+    createElement("h3", "", item.title),
+    copy,
+  );
+  return role;
+}
+
+function createRelationshipExchange() {
+  const exchange = createElement("div", "relationship-exchange");
+  exchange.setAttribute(
+    "aria-label",
+    "The manager sets boundaries and access through Turbo Hub. The member spends independently and sends requests when those boundaries need to change.",
+  );
+  exchange.setAttribute("role", "img");
+
+  const forward = createElement("div", "relationship-route relationship-route--forward");
+  forward.append(createElement("span", "", "Boundaries + access"));
+
+  const hub = createElement("div", "relationship-hub-mark");
+  hub.append(
+    createElement("span", "", "Turbo"),
+    createElement("strong", "", "Hub"),
+  );
+
+  const returning = createElement("div", "relationship-route relationship-route--return");
+  returning.append(createElement("span", "", "Spending + requests"));
+
+  exchange.append(forward, hub, returning);
+  return exchange;
+}
+
 function createRelationshipGrid(items) {
-  const grid = createElement("div", "relationship-grid");
-  items.forEach((item) => {
-    const card = createElement(
-      "article",
-      `relationship-card${item.wide ? " relationship-card--wide" : ""}`,
-    );
-    card.dataset.revealContainer = "";
-    const copy = createElement("div", "relationship-card-copy");
-    copy.append(
-      createElement("span", "relationship-label", item.label),
-      createElement("p", "", item.description),
-    );
-    card.append(
-      createElement("span", "relationship-number", item.number),
-      createElement("h3", "", item.title),
-      copy,
-    );
-    grid.append(card);
-  });
-  return grid;
+  const manager = items[0];
+  const member = items[1];
+  const map = createElement("div", "relationship-map");
+
+  const roles = createElement("div", "relationship-map-roles");
+  roles.append(
+    createRelationshipRole(manager, "manager"),
+    createRelationshipExchange(),
+    createRelationshipRole(member, "member"),
+  );
+
+  map.append(roles);
+  return map;
 }
 
 function createCompetitiveResearchBoard(config) {
   const component = createElement("div", "competitive-board-component");
-  component.dataset.revealContainer = "";
   const board = createElement("div", "competitive-board");
   board.setAttribute("aria-label", "Interactive competitive research board");
   let topLayer = 10;
 
+  const boardOverhang = 0.6;
+
   const makeDraggable = (item) => {
+    const getBounds = () => {
+      const overhangX = item.offsetWidth * boardOverhang;
+      const overhangY = item.offsetHeight * boardOverhang;
+      return {
+        minLeft: -overhangX,
+        maxLeft: board.clientWidth - item.offsetWidth + overhangX,
+        minTop: -overhangY,
+        maxTop: board.clientHeight - item.offsetHeight + overhangY,
+      };
+    };
+
     const moveBy = (deltaX, deltaY) => {
-      const maxLeft = Math.max(0, board.clientWidth - item.offsetWidth);
-      const maxTop = Math.max(0, board.clientHeight - item.offsetHeight);
-      item.style.left = `${Math.min(maxLeft, Math.max(0, item.offsetLeft + deltaX))}px`;
-      item.style.top = `${Math.min(maxTop, Math.max(0, item.offsetTop + deltaY))}px`;
+      const { minLeft, maxLeft, minTop, maxTop } = getBounds();
+      item.style.left = `${Math.min(maxLeft, Math.max(minLeft, item.offsetLeft + deltaX))}px`;
+      item.style.top = `${Math.min(maxTop, Math.max(minTop, item.offsetTop + deltaY))}px`;
       item.style.zIndex = String(++topLayer);
     };
 
@@ -995,10 +1039,9 @@ function createCompetitiveResearchBoard(config) {
       item.setAttribute("aria-grabbed", "true");
 
       const onMove = (moveEvent) => {
-        const maxLeft = Math.max(0, board.clientWidth - item.offsetWidth);
-        const maxTop = Math.max(0, board.clientHeight - item.offsetHeight);
-        item.style.left = `${Math.min(maxLeft, Math.max(0, startLeft + moveEvent.clientX - startX))}px`;
-        item.style.top = `${Math.min(maxTop, Math.max(0, startTop + moveEvent.clientY - startY))}px`;
+        const { minLeft, maxLeft, minTop, maxTop } = getBounds();
+        item.style.left = `${Math.min(maxLeft, Math.max(minLeft, startLeft + moveEvent.clientX - startX))}px`;
+        item.style.top = `${Math.min(maxTop, Math.max(minTop, startTop + moveEvent.clientY - startY))}px`;
       };
 
       const onEnd = (endEvent) => {
@@ -1055,9 +1098,9 @@ function createCompetitiveResearchBoard(config) {
   const boardTitle = createElement("p", "competitive-board-title", config.collageTitle);
   board.append(boardTitle);
 
-  const insights = createElement("ol", "competitive-insights");
+  const insights = createElement("div", "competitive-insights");
   config.insights.forEach((insight) => {
-    const item = document.createElement("li");
+    const item = document.createElement("article");
     item.append(
       createElement("h3", "", insight.title),
       createElement("p", "", insight.description),
@@ -1072,7 +1115,6 @@ function createCompetitiveResearchBoard(config) {
 function createProductRulePath(config) {
   const component = createElement("div", "product-rule-component");
   const path = createElement("ol", "product-rule-path");
-  path.dataset.revealContainer = "";
 
   config.rules.forEach((rule) => {
     const step = document.createElement("li");
@@ -1103,7 +1145,6 @@ function createFlowJourney(flow) {
   );
 
   const highlight = createElement("figure", "flow-highlight");
-  highlight.dataset.revealContainer = "";
   highlight.setAttribute("aria-label", flow.highlight.label);
   const highlightSlot = createElement("div", "media-slot");
   highlightSlot.dataset.mediaId = flow.highlight.id;
@@ -1121,7 +1162,6 @@ function createFlowJourney(flow) {
   const track = createElement("ol", "flow-track");
   flow.screens.forEach((screen, index) => {
     const step = createElement("li", "flow-step");
-    step.dataset.revealContainer = "";
     const phoneWrap = createElement("div", "flow-phone");
     phoneWrap.append(createPhone(screen));
 
@@ -1143,7 +1183,6 @@ function createFlowJourney(flow) {
 
 function createTimeline() {
   const card = createElement("section", "timeline-card detail-box");
-  card.dataset.revealContainer = "";
   card.setAttribute("aria-labelledby", "timeline-card-title");
 
   const copy = createElement("div", "timeline-card-copy");
@@ -1220,7 +1259,6 @@ function createTimeline() {
 function createPhone({ id, label }) {
   const phone = createElement("article", "phone");
   phone.setAttribute("aria-label", label);
-  phone.dataset.revealContainer = "";
 
   const screen = createElement("div", "phone-screen");
   const slot = createElement("div", "media-slot");
@@ -1245,14 +1283,13 @@ function renderCaseStudy() {
 
   const shell = createElement("div", "content-shell");
 
-  const overview = createElement("section", "case-section reveal");
+  const overview = createElement("section", "case-section");
   overview.id = "overview";
   const overviewColumn = createElement("div", "reading-column");
   overviewColumn.append(createElement("h2", "section-kicker", caseStudy.overview.kicker));
   const overviewCopy = createElement("div", "body-copy");
-  caseStudy.overview.paragraphs.forEach((paragraph, index) => {
-    const item = createElement("p", index === 0 ? "overview-lead" : "", paragraph);
-    overviewCopy.append(item);
+  caseStudy.overview.paragraphs.forEach((paragraph) => {
+    overviewCopy.append(createElement("p", "", paragraph));
   });
   overviewColumn.append(overviewCopy);
   overview.append(overviewColumn);
@@ -1263,24 +1300,20 @@ function renderCaseStudy() {
   overview.append(phoneStage);
   shell.append(overview);
 
-  const product = createElement("section", "case-section reveal");
+  const product = createElement("section", "case-section");
   product.id = "product";
   const productColumn = createElement("div", "reading-column");
   productColumn.append(createSectionHeading(caseStudy.product.title));
   const productCopy = createElement("div", "body-copy product-copy");
-  const productIntro = createElement("p", "product-intro");
-  productIntro.append(
-    createElement("strong", "", caseStudy.product.lead),
-    document.createTextNode(` ${caseStudy.product.intro}`),
+  productCopy.append(
+    createElement("p", "", `${caseStudy.product.lead} ${caseStudy.product.intro}`),
   );
-  productCopy.append(productIntro);
   caseStudy.product.paragraphs.forEach((paragraph) => {
     productCopy.append(createElement("p", "", paragraph));
   });
   productColumn.append(productCopy);
 
   const meta = createElement("dl", "meta-strip detail-box");
-  meta.dataset.revealContainer = "";
   caseStudy.product.meta.forEach(([term, description]) => {
     const item = createElement("div", "meta-item");
     item.append(createElement("dt", "", term), createElement("dd", "", description));
@@ -1289,19 +1322,13 @@ function renderCaseStudy() {
   product.append(productColumn, meta);
   shell.append(product);
 
-  const opportunity = createElement("section", "case-section reveal");
+  const opportunity = createElement("section", "case-section");
   opportunity.id = "opportunity";
   const opportunityColumn = createElement("div", "reading-column");
   opportunityColumn.append(createSectionHeading(caseStudy.opportunity.title));
   const opportunityCopy = createElement("div", "body-copy opportunity-copy");
-  caseStudy.opportunity.paragraphs.forEach((paragraph, index, paragraphs) => {
-    opportunityCopy.append(
-      createElement(
-        "p",
-        index === paragraphs.length - 1 ? "opportunity-conclusion" : "",
-        paragraph,
-      ),
-    );
+  caseStudy.opportunity.paragraphs.forEach((paragraph) => {
+    opportunityCopy.append(createElement("p", "", paragraph));
   });
   opportunityColumn.append(
     opportunityCopy,
@@ -1310,42 +1337,29 @@ function renderCaseStudy() {
   opportunity.append(opportunityColumn);
   shell.append(opportunity);
 
-  const technology = createElement("section", "case-section reveal");
+  const technology = createElement("section", "case-section");
   technology.id = "technology";
   const technologyColumn = createElement("div", "reading-column");
   technologyColumn.append(createSectionHeading(caseStudy.technology.title));
 
   const technologyCopy = createElement("div", "body-copy technology-copy");
-  caseStudy.technology.paragraphs.forEach((paragraph, index) => {
-    technologyCopy.append(
-      createElement("p", index === 1 ? "technology-takeaway" : "", paragraph),
-    );
+  caseStudy.technology.paragraphs.forEach((paragraph) => {
+    technologyCopy.append(createElement("p", "", paragraph));
   });
 
-  const experienceBlock = createElement("div", "experience-block");
-  experienceBlock.append(
-    createElement(
-      "h3",
-      "subsection-heading experience-heading",
-      caseStudy.technology.experienceTitle,
-    ),
-    createElement(
-      "p",
-      "subsection-intro experience-intro",
-      caseStudy.technology.experienceIntro,
-    ),
+  technologyColumn.append(
+    technologyCopy,
     createExperienceGrid(caseStudy.technology.experiences),
   );
-  technologyColumn.append(technologyCopy, experienceBlock);
   technology.append(technologyColumn);
   shell.append(technology);
 
-  const artifacts = createElement("section", "case-section reveal artifact-section");
+  const artifacts = createElement("section", "case-section artifact-section");
   artifacts.id = "artifacts";
   artifacts.append(createArtifactGallery(caseStudy.artifacts));
   shell.append(artifacts);
 
-  const outcomes = createElement("section", "case-section reveal");
+  const outcomes = createElement("section", "case-section");
   outcomes.id = "outcomes";
   const outcomesColumn = createElement("div", "reading-column");
   outcomesColumn.append(
@@ -1353,11 +1367,6 @@ function renderCaseStudy() {
       "h2",
       "subsection-heading outcomes-heading",
       caseStudy.outcomes.title,
-    ),
-    createElement(
-      "p",
-      "subsection-intro outcomes-intro",
-      caseStudy.outcomes.intro,
     ),
     createOutcomeGrid(caseStudy.outcomes.items),
   );
@@ -1375,32 +1384,25 @@ function renderCaseStudy() {
   outcomes.append(outcomesColumn);
   shell.append(outcomes);
 
-  const research = createElement("section", "case-section reveal");
+  const research = createElement("section", "case-section");
   research.id = "research";
   const researchColumn = createElement("div", "reading-column");
-  researchColumn.append(createSectionHeading(caseStudy.research.title));
-
-  const researchCopy = createElement("div", "body-copy research-copy");
-  researchCopy.append(createElement("p", "", caseStudy.research.overview));
-  researchColumn.append(researchCopy);
-
-  const learningRow = createElement("div", "learning-row");
-  const learningCopy = createElement("div", "learning-copy");
-  learningCopy.append(
-    createElement("h3", "subsection-heading learning-heading", caseStudy.research.learningsTitle),
-    createElement("p", "", caseStudy.research.learnings),
+  const researchHeading = createSectionHeading(caseStudy.research.title);
+  const researchInterviews = createElement("div", "research-interviews");
+  researchInterviews.append(createUserVoiceStack(caseStudy.research.voices));
+  researchColumn.append(
+    researchHeading,
+    createElement("p", "section-intro", caseStudy.research.intro),
+    researchInterviews,
   );
-  learningRow.append(learningCopy, createUserVoiceStack(caseStudy.research.voices));
-  researchColumn.append(learningRow);
 
   const researchBridge = createElement("div", "body-copy research-copy research-bridge");
   const insight = document.createElement("p");
-  insight.append(
-    document.createTextNode(caseStudy.research.insightLead),
-    createElement("strong", "", caseStudy.research.insightEmphasis),
-    document.createTextNode(". "),
-    createElement("strong", "", caseStudy.research.insightConclusion),
-  );
+  insight.textContent =
+    caseStudy.research.insightLead +
+    caseStudy.research.insightEmphasis +
+    ". " +
+    caseStudy.research.insightConclusion;
   researchBridge.append(insight);
   researchColumn.append(
     researchBridge,
@@ -1409,10 +1411,9 @@ function renderCaseStudy() {
   research.append(researchColumn);
   shell.append(research);
 
-  const designQuestion = createElement("section", "case-section reveal design-question");
+  const designQuestion = createElement("section", "case-section design-question");
   designQuestion.id = "design-question";
   designQuestion.setAttribute("aria-labelledby", "design-question-title");
-  designQuestion.dataset.revealContainer = "";
   const designQuestionTitle = createElement(
     "h2",
     "design-question-title",
@@ -1425,7 +1426,7 @@ function renderCaseStudy() {
   );
   shell.append(designQuestion);
 
-  const relationship = createElement("section", "case-section reveal relationship-section");
+  const relationship = createElement("section", "case-section relationship-section");
   relationship.id = "relationship";
   const relationshipColumn = createElement("div", "reading-column");
   relationshipColumn.append(createSectionHeading(caseStudy.relationship.title));
@@ -1451,13 +1452,13 @@ function renderCaseStudy() {
 
   const competitiveResearch = createElement(
     "section",
-    "case-section reveal competitive-research-section",
+    "case-section competitive-research-section",
   );
   competitiveResearch.id = "competitive-research";
   const competitiveResearchColumn = createElement("div", "reading-column");
   competitiveResearchColumn.append(
     createSectionHeading(caseStudy.competitiveResearch.title),
-    createElement("p", "subsection-intro competitive-research-intro", caseStudy.competitiveResearch.intro),
+    createElement("p", "section-intro competitive-research-intro", caseStudy.competitiveResearch.intro),
     createCompetitiveResearchBoard(caseStudy.competitiveResearch),
   );
   competitiveResearch.append(competitiveResearchColumn);
@@ -1465,30 +1466,30 @@ function renderCaseStudy() {
 
   const productRules = createElement(
     "section",
-    "case-section reveal product-rules-section",
+    "case-section product-rules-section",
   );
   productRules.id = "product-rules";
   const productRulesColumn = createElement("div", "reading-column");
   productRulesColumn.append(
     createSectionHeading(caseStudy.productRules.title),
-    createElement("p", "subsection-intro product-rules-intro", caseStudy.productRules.intro),
+    createElement("p", "section-intro product-rules-intro", caseStudy.productRules.intro),
     createProductRulePath(caseStudy.productRules),
   );
   productRules.append(productRulesColumn);
   shell.append(productRules);
 
-  const flows = createElement("section", "case-section reveal flows-section");
+  const flows = createElement("section", "case-section flows-section");
   flows.id = "flows";
   const flowsColumn = createElement("div", "reading-column");
   flowsColumn.append(
     createSectionHeading(caseStudy.flows.title),
-    createElement("p", "subsection-intro flows-intro", caseStudy.flows.intro),
+    createElement("p", "section-intro flows-intro", caseStudy.flows.intro),
   );
   caseStudy.flows.items.forEach((flow) => flowsColumn.append(createFlowJourney(flow)));
   flows.append(flowsColumn);
   shell.append(flows);
 
-  const closing = createElement("section", "case-section reveal");
+  const closing = createElement("section", "case-section");
   closing.id = "closing";
   const closingStage = createElement("div", "closing-stage");
   closingStage.setAttribute("aria-label", "Closing media");
@@ -1496,11 +1497,10 @@ function renderCaseStudy() {
   closing.append(createAnnotationBand(closingStage, caseStudy.closing.annotation));
   shell.append(closing);
 
-  const contact = createElement("section", "case-section reveal");
+  const contact = createElement("section", "case-section");
   contact.id = "contact";
   contact.setAttribute("aria-label", "Contact");
   const contactCard = createElement("div", "contact-card");
-  contactCard.dataset.revealContainer = "";
   contactCard.append(
     createElement("h3", "contact-heading", caseStudy.contact.eyebrow),
     createElement("p", "contact-message", caseStudy.contact.message),
@@ -1517,7 +1517,7 @@ function renderCaseStudy() {
   contact.append(contactCard);
   shell.append(contact);
 
-  const timeline = createElement("section", "case-section reveal");
+  const timeline = createElement("section", "case-section");
   timeline.id = "timeline";
   timeline.setAttribute("aria-label", caseStudy.timeline.title);
   timeline.append(createTimeline());
@@ -1644,303 +1644,20 @@ function setMedia(id, media = {}) {
   slot.append(node);
 }
 
-function splitParagraphIntoWords(paragraph) {
-  const walker = document.createTreeWalker(paragraph, NodeFilter.SHOW_TEXT);
-  const textNodes = [];
-
-  while (walker.nextNode()) {
-    if (walker.currentNode.nodeValue.trim()) textNodes.push(walker.currentNode);
-  }
-
-  textNodes.forEach((textNode) => {
-    const fragment = document.createDocumentFragment();
-    textNode.nodeValue.split(/(\s+)/).forEach((token) => {
-      if (!token) return;
-      if (/^\s+$/.test(token)) {
-        fragment.append(document.createTextNode(token));
-        return;
-      }
-
-      const word = createElement("span", "reveal-word", token);
-      fragment.append(word);
-    });
-    textNode.replaceWith(fragment);
-  });
-
-  paragraph.classList.add("line-reveal");
-}
-
-function collectParagraphLineGroups(paragraphs) {
-  const lineGroups = [];
-
-  paragraphs.forEach((paragraph) => {
-    const words = Array.from(paragraph.querySelectorAll(".reveal-word"));
-    let currentTop = null;
-    let currentLine = null;
-
-    words.forEach((word) => {
-      const wordTop = Math.round(word.offsetTop);
-      if (currentTop === null || Math.abs(wordTop - currentTop) > 2) {
-        currentTop = wordTop;
-        currentLine = [];
-        lineGroups.push(currentLine);
-      }
-      currentLine.push(word);
-    });
-  });
-
-  return lineGroups;
-}
-
-function setupReveal() {
-  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-  const paragraphs = Array.from(document.querySelectorAll(".reveal p:not(.annotation-copy)"));
-  paragraphs.forEach(splitParagraphIntoWords);
-
-  const pieces = Array.from(
-    document.querySelectorAll(
-      [
-        ".hero-copy > .asset-placeholder",
-        ".hero-copy > h1",
-        ".section-kicker",
-        ".section-heading",
-        ".phone .media-slot",
-        ".meta-strip > .meta-item",
-        ".info-panel-heading",
-        ".info-card > .info-card-index",
-        ".info-card > h4",
-        ".timeline-card-title",
-        ".experience-heading",
-        ".experience-card > .experience-number",
-        ".experience-card > h4",
-        ".outcomes-heading",
-        ".outcome-card > .outcome-number",
-        ".outcome-card > h3",
-        ".measures-heading",
-        ".measure-item > .measure-bullet",
-        ".measure-item > dt",
-        ".measure-item > dd",
-        ".persona-node",
-        ".learning-heading",
-        ".user-voice-quote",
-        ".relationship-card > .relationship-number",
-        ".relationship-card > h3",
-        ".relationship-label",
-        ".product-rule-node",
-        ".product-rule-copy > h3",
-        ".product-rule-copy > p",
-        ".product-rule-summary",
-        ".flow-eyebrow",
-        ".flow-title",
-        ".flow-highlight-label",
-        ".flow-note-number",
-        ".flow-note > h4",
-        ".timeline-open",
-        ".contact-heading",
-        ".contact-button",
-      ].join(","),
-    ),
-  );
-
-  const containers = Array.from(document.querySelectorAll("[data-reveal-container]"));
-  pieces.forEach((piece) => piece.classList.add("reveal-piece"));
-  containers.forEach((container) => container.classList.add("reveal-surface"));
-
-  const pendingReveals = new Set();
-  const revealStep = 55;
-  const containerLead = 150;
-  const verticalBandTolerance = 12;
-  let records = [];
-  let recordByTarget = new Map();
-  let nextRevealAt = 0;
-
-  const revealRecord = (record) => {
-    if (record.words) {
-      record.words.forEach((word) => word.classList.add("is-revealed"));
-      return;
-    }
-    record.target.classList.add("is-revealed");
-  };
-
-  const getParentContainer = (target, isContainer) => {
-    if (isContainer) return target.parentElement?.closest("[data-reveal-container]") || null;
-    return target.closest("[data-reveal-container]");
-  };
-
-  const scheduleEligibleRecords = () => {
-    const now = performance.now();
-    const visualTops = new Map();
-    const getVisualTop = (record) => {
-      if (!visualTops.has(record)) {
-        visualTops.set(record, Math.round(record.target.getBoundingClientRect().top));
-      }
-      return visualTops.get(record);
-    };
-
-    while (true) {
-      const eligible = records
-        .filter((record) => {
-          if (!record.isVisible || record.isScheduled) return false;
-          const parentRecord = record.parentTarget
-            ? recordByTarget.get(record.parentTarget)
-            : null;
-          return !record.parentTarget
-            || record.parentTarget.classList.contains("is-revealed")
-            || parentRecord?.isScheduled;
-        })
-        .sort((a, b) => {
-          const verticalDifference = getVisualTop(a) - getVisualTop(b);
-          if (verticalDifference !== 0) return verticalDifference;
-          return a.target.getBoundingClientRect().left - b.target.getBoundingClientRect().left;
-        });
-
-      if (!eligible.length) break;
-
-      const bandTop = getVisualTop(eligible[0]);
-      const band = eligible.filter(
-        (record) => Math.abs(getVisualTop(record) - bandTop) <= verticalBandTolerance,
-      );
-      let scheduledAt = Math.max(now, nextRevealAt);
-
-      band.forEach((record) => {
-        const parentRecord = record.parentTarget
-          ? recordByTarget.get(record.parentTarget)
-          : null;
-        if (parentRecord?.isScheduled) {
-          scheduledAt = Math.max(scheduledAt, parentRecord.scheduledAt + containerLead);
-        }
-      });
-
-      band.forEach((record) => {
-        record.isScheduled = true;
-        record.scheduledAt = scheduledAt;
-
-        const timeoutId = window.setTimeout(() => {
-          revealRecord(record);
-          pendingReveals.delete(timeoutId);
-        }, Math.max(0, scheduledAt - now));
-        pendingReveals.add(timeoutId);
-      });
-
-      nextRevealAt = scheduledAt + revealStep;
-    }
-  };
-
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        const record = recordByTarget.get(entry.target);
-        if (!record) return;
-        record.isVisible = true;
-        observer.unobserve(entry.target);
-      });
-      scheduleEligibleRecords();
-    },
-    { threshold: 0.01, rootMargin: "0px 0px -12% 0px" },
-  );
-
-  const observeCurrentLayout = () => {
-    observer.disconnect();
-    pendingReveals.forEach((timeoutId) => window.clearTimeout(timeoutId));
-    pendingReveals.clear();
-    records = [];
-    recordByTarget = new Map();
-    nextRevealAt = performance.now();
-
-    collectParagraphLineGroups(paragraphs).forEach((words) => {
-      const hasRevealedWord = words.some((word) => word.classList.contains("is-revealed"));
-      if (hasRevealedWord) {
-        words.forEach((word) => word.classList.add("is-revealed"));
-        return;
-      }
-
-      const trigger = words[0];
-      if (!trigger) return;
-      records.push({
-        target: trigger,
-        words,
-        parentTarget: getParentContainer(trigger, false),
-        isVisible: false,
-        isScheduled: false,
-        scheduledAt: 0,
-      });
-    });
-
-    pieces
-      .filter((piece) => !piece.classList.contains("is-revealed"))
-      .forEach((piece) => {
-        records.push({
-          target: piece,
-          words: null,
-          parentTarget: getParentContainer(piece, false),
-          isVisible: false,
-          isScheduled: false,
-          scheduledAt: 0,
-        });
-      });
-
-    containers
-      .filter((container) => !container.classList.contains("is-revealed"))
-      .forEach((container) => {
-        records.push({
-          target: container,
-          words: null,
-          parentTarget: getParentContainer(container, true),
-          isVisible: false,
-          isScheduled: false,
-          scheduledAt: 0,
-        });
-      });
-
-    records.sort((a, b) => {
-      if (a.target === b.target) return 0;
-      const position = a.target.compareDocumentPosition(b.target);
-      return position & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1;
-    });
-    records.forEach((record) => recordByTarget.set(record.target, record));
-    records.forEach((record) => observer.observe(record.target));
-  };
-
-  observeCurrentLayout();
-
-  let resizeFrame = null;
-  const refreshLineObservers = () => {
-    window.cancelAnimationFrame(resizeFrame);
-    resizeFrame = window.requestAnimationFrame(observeCurrentLayout);
-  };
-
-  window.addEventListener("resize", refreshLineObservers);
-  document.fonts?.ready.then(refreshLineObservers);
-}
 
 function setupScrollProgress() {
   const progressBar = document.querySelector(".scroll-progress");
   const progressValue = progressBar?.querySelector(".scroll-progress-value");
   if (!progressBar || !progressValue) return;
 
-  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const smoothingStrength = 0.12;
-  let displayedProgress = 0;
-  let targetProgress = 0;
-  let animationFrame = null;
-  let previousFrameTime = null;
-  let labelHeight = progressValue.offsetHeight;
-
-  const readProgress = () => {
+  const updateProgress = () => {
     const documentHeight = document.documentElement.scrollHeight;
     const scrollRange = Math.max(0, documentHeight - window.innerHeight);
-    const progress = scrollRange === 0 ? 1 : window.scrollY / scrollRange;
-    return Math.min(1, Math.max(0, progress));
-  };
-
-  const renderProgress = (progress) => {
-    displayedProgress = progress;
+    const progress = scrollRange === 0 ? 1 : Math.min(1, Math.max(0, window.scrollY / scrollRange));
     const percentage = Math.round(progress * 100);
     const labelTop = Math.min(
-      Math.max(0, window.innerHeight - labelHeight),
-      Math.max(0, progress * window.innerHeight - labelHeight / 2),
+      Math.max(0, window.innerHeight - progressValue.offsetHeight),
+      Math.max(0, progress * window.innerHeight - progressValue.offsetHeight / 2),
     );
 
     progressBar.style.setProperty("--scroll-progress", progress);
@@ -1949,53 +1666,16 @@ function setupScrollProgress() {
     progressValue.textContent = `${percentage}%`;
   };
 
-  const followTarget = (currentTime) => {
-    const frameDuration = previousFrameTime === null
-      ? 1000 / 60
-      : Math.min(64, currentTime - previousFrameTime);
-    previousFrameTime = currentTime;
-    const frameAdjustedStrength = 1 - (1 - smoothingStrength) ** (frameDuration / (1000 / 60));
-    const difference = targetProgress - displayedProgress;
-
-    if (Math.abs(difference) < 0.0004) {
-      renderProgress(targetProgress);
-      animationFrame = null;
-      previousFrameTime = null;
-      return;
-    }
-
-    renderProgress(displayedProgress + difference * frameAdjustedStrength);
-    animationFrame = window.requestAnimationFrame(followTarget);
-  };
-
-  const updateTarget = () => {
-    targetProgress = readProgress();
-    if (reducedMotion) {
-      renderProgress(targetProgress);
-      return;
-    }
-    if (animationFrame === null) {
-      animationFrame = window.requestAnimationFrame(followTarget);
-    }
-  };
-
-  const handleResize = () => {
-    labelHeight = progressValue.offsetHeight;
-    updateTarget();
-  };
-
-  window.addEventListener("scroll", updateTarget, { passive: true });
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  window.addEventListener("resize", updateProgress);
   if ("ResizeObserver" in window) {
-    const contentObserver = new ResizeObserver(updateTarget);
+    const contentObserver = new ResizeObserver(updateProgress);
     contentObserver.observe(document.body);
   }
-  targetProgress = readProgress();
-  renderProgress(targetProgress);
+  updateProgress();
 }
 
 renderCaseStudy();
-setupReveal();
 setupScrollProgress();
 
 /*

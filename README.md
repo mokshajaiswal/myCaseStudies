@@ -35,10 +35,10 @@ After the blue rounded hero using `assets/bg.webp`, the page renders these areas
 11. Two early product-thinking sketches (`TB1.svg` and `TB2.svg`).
 12. Proposition outcomes and three outcome cards.
 13. Success measures.
-14. User-research context, persona explorer, learnings, and user voice.
+14. A left-aligned interview-context heading and audience line, a centered interview quote carousel, a research bridge, and a persona explorer.
 15. The centered design question that frames the next product chapter.
 16. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
-17. A taped competitive-research collage with draggable images and numbered findings.
+17. A taped competitive-research collage with draggable images and unnumbered findings.
 18. A three-step product-rule path connecting the research to the core flows.
 19. A vertically scrollable core-flow reel with reusable phone screens and per-screen notes.
 
@@ -96,27 +96,20 @@ CaseStudy.setMedia("phone-overview", {
 
 Supported types are `image`, `video`, `iframe`, `html`, and `placeholder`. Keep the placeholder when final media has not been supplied.
 
-Every phone is a `data-reveal-container`: the casing reveals first, followed by its media slot. This is defined inside `createPhone()`, so phones added to any future stage inherit the behavior automatically.
+Every phone is created through `createPhone()`, which keeps the transparent casing above the clipped media slot. Phone screens and all other page content render immediately in their final positions.
 
-## Reveal and motion rules
+## Motion behavior
 
-The reveal system is centralized in `setupReveal()`:
+Sections appear in their final state without scroll-triggered reveal effects or paragraph line splitting. The scroll progress indicator updates directly from the current scroll position. Other motion belongs to interactions:
 
-- The invisible viewport threshold sits 12% above the bottom edge.
-- A target becomes eligible when 1% of it crosses that threshold.
-- Paragraphs inside `.reveal` regions are measured into real visual lines and revealed line-by-line.
-- Eligible targets within the same 12px vertical band share one timestamp. Adjacent desktop cards therefore reveal matching rows together; stacked mobile cards naturally reveal sequentially.
-- Moving to the next vertical band adds 55ms.
-- `data-reveal-container` creates a reusable hierarchy: the surface reveals first, then its children enter after a 150ms lead.
-- Nested reveal containers inherit the same parent-before-child behavior.
-- Reveal motion runs once and is disabled by `prefers-reduced-motion: reduce`.
-- Do not add clipping wrappers around reveal elements. A phone screen is the intentional exception because media must stay inside the device viewport.
-
-To add a new boxed component that should reveal before its contents, add `data-reveal-container` to its outer surface and use existing semantic child patterns. Do not add component-specific timers.
+- The timeline dialog opens and closes accessibly.
+- Competitive-research images can be dragged or moved by keyboard.
+- Interview quotes and personas cycle while visible, pause on hover or focus, and respect reduced-motion preferences.
+- Component feedback transitions respect `prefers-reduced-motion: reduce`.
 
 ## Scroll progress
 
-The left-edge scroll indicator has no empty rail. Its filled bar interpolates toward current scroll position instead of snapping. The percentage follows the fill tip and uses bold Helix with tabular numerals. Its width, label size, and tracking are tokenized in `styles.css`.
+The left-edge scroll indicator has no empty rail. Its filled bar and percentage update directly from current scroll position without interpolation. The percentage follows the fill tip and uses bold Helix with tabular numerals. Its width, label size, and tracking are tokenized in `styles.css`.
 
 ## Extending the case study
 
@@ -124,12 +117,11 @@ When adding a section:
 
 1. Add factual content to the `caseStudy` object.
 2. Render it in `renderCaseStudy()` using semantic HTML.
-3. Add `.case-section.reveal` to a standard section.
+3. Add `.case-section` to a standard section.
 4. Use existing components and spacing tokens.
-5. Use `data-reveal-container` for any new surface that must precede its contents.
-6. Let normal paragraphs use the automatic line-reveal system; exclude only layouts that would break when words become inline spans.
-7. Add media through `createPhone()` and the media-slot API rather than hardcoding screen content.
-8. Verify desktop and mobile behavior, reduced motion, and JavaScript syntax.
+5. Keep content visible in its final position; do not add scroll-triggered reveal classes or line splitting.
+6. Add media through `createPhone()` and the media-slot API rather than hardcoding screen content.
+7. Verify desktop and mobile behavior, reduced motion, and JavaScript syntax.
 
 ## Documentation maintenance contract
 
