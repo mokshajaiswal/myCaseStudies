@@ -38,6 +38,9 @@ After the blue rounded hero using `assets/bg.webp`, the page renders these areas
 14. User-research context, persona explorer, learnings, and user voice.
 15. The centered design question that frames the next product chapter.
 16. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
+17. A taped competitive-research collage with draggable images and numbered findings.
+18. A three-step product-rule path connecting the research to the core flows.
+19. A vertically scrollable core-flow reel with reusable phone screens and per-screen notes.
 
 The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 

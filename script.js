@@ -324,6 +324,114 @@ const caseStudy = {
       },
     ],
   },
+  competitiveResearch: {
+    title: "What I learned from other products",
+    intro:
+      "I looked beyond direct payment competitors to understand how other products communicate shared access, control, and independence.",
+    collageTitle: "Glimpse of some competitive research",
+    images: [
+      {
+        src: "assets/TB1.svg",
+        alt: "Early competitive research notes",
+        x: 5,
+        y: 8,
+        width: 29,
+        rotation: -5,
+      },
+      {
+        src: "assets/TB2.svg",
+        alt: "Research notes exploring family money relationships",
+        x: 67,
+        y: 7,
+        width: 25,
+        rotation: 4,
+      },
+      {
+        src: "pen files/designs-assets/image-2.png",
+        alt: "Early Turbo Hub product screen",
+        x: 39,
+        y: 51,
+        width: 22,
+        rotation: -2,
+      },
+    ],
+    insights: [
+      {
+        title: "Separate experiences around one relationship",
+        description:
+          "Shared-money products showed that managers and members need different experiences built around the same relationship. One side needs visibility and control; the other needs clear access without unnecessary friction.",
+      },
+      {
+        title: "Make boundaries visible before they interrupt spending",
+        description:
+          "The strongest products explain limits and permissions before a payment fails. People should understand what they can spend, what requires approval, and what happens next.",
+      },
+      {
+        title: "Give requests enough context to support a decision",
+        description:
+          "A request should help the manager respond quickly without turning everyday spending into surveillance. Context matters more than adding another approval screen.",
+      },
+    ],
+  },
+  productRules: {
+    title: "Turning decisions into product rules",
+    intro: "The research resolved into one simple operating model for the first release.",
+    rules: [
+      {
+        number: "01",
+        title: "Set the boundary",
+        description: "The manager decides how much money is available.",
+      },
+      {
+        number: "02",
+        title: "Spend independently",
+        description: "The member pays within that boundary without asking each time.",
+      },
+      {
+        number: "03",
+        title: "Step in by exception",
+        description: "Requests appear only when the boundary needs to change.",
+      },
+    ],
+    summary: "This became the backbone of the flows.",
+  },
+  flows: {
+    title: "Designing the core flows",
+    intro:
+      "With the relationship and product rules established, I translated the model into connected manager and member journeys.",
+    items: [
+      {
+        eyebrow: "Flow 01",
+        title: "Creating a family Hub",
+        description:
+          "The manager creates the shared space, decides how it will be used, and brings the first family member in.",
+        highlight: {
+          id: "flow-create-hub-highlight",
+          label: "Creating a family Hub interaction highlight",
+        },
+        screens: [
+          {
+            id: "flow-create-hub",
+            label: "Create a family Hub screen",
+            noteTitle: "Start with the shared purpose",
+            note: "The opening step explains what the Hub enables before asking the manager to configure it.",
+          },
+          {
+            id: "flow-set-boundary",
+            label: "Set a spending boundary screen",
+            noteTitle: "Make the boundary explicit",
+            note: "The manager sets the available amount as part of setup, rather than discovering controls later.",
+          },
+          {
+            id: "flow-invite-member",
+            label: "Invite a family member screen",
+            noteTitle: "Connect the other side",
+            note: "The final step brings a member into the Hub and makes their access clear.",
+          },
+        ],
+      },
+    ],
+  },
   closing: {
     media: { id: "phone-closing", label: "Closing media" },
     annotation: {
@@ -857,6 +965,182 @@ function createRelationshipGrid(items) {
   return grid;
 }
 
+function createCompetitiveResearchBoard(config) {
+  const component = createElement("div", "competitive-board-component");
+  component.dataset.revealContainer = "";
+  const board = createElement("div", "competitive-board");
+  board.setAttribute("aria-label", "Interactive competitive research board");
+  let topLayer = 10;
+
+  const makeDraggable = (item) => {
+    const moveBy = (deltaX, deltaY) => {
+      const maxLeft = Math.max(0, board.clientWidth - item.offsetWidth);
+      const maxTop = Math.max(0, board.clientHeight - item.offsetHeight);
+      item.style.left = `${Math.min(maxLeft, Math.max(0, item.offsetLeft + deltaX))}px`;
+      item.style.top = `${Math.min(maxTop, Math.max(0, item.offsetTop + deltaY))}px`;
+      item.style.zIndex = String(++topLayer);
+    };
+
+    item.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      event.preventDefault();
+      item.focus({ preventScroll: true });
+      const startX = event.clientX;
+      const startY = event.clientY;
+      const startLeft = item.offsetLeft;
+      const startTop = item.offsetTop;
+      item.setPointerCapture(event.pointerId);
+      item.classList.add("is-dragging");
+      item.style.zIndex = String(++topLayer);
+      item.setAttribute("aria-grabbed", "true");
+
+      const onMove = (moveEvent) => {
+        const maxLeft = Math.max(0, board.clientWidth - item.offsetWidth);
+        const maxTop = Math.max(0, board.clientHeight - item.offsetHeight);
+        item.style.left = `${Math.min(maxLeft, Math.max(0, startLeft + moveEvent.clientX - startX))}px`;
+        item.style.top = `${Math.min(maxTop, Math.max(0, startTop + moveEvent.clientY - startY))}px`;
+      };
+
+      const onEnd = (endEvent) => {
+        item.releasePointerCapture(endEvent.pointerId);
+        item.classList.remove("is-dragging");
+        item.setAttribute("aria-grabbed", "false");
+        item.removeEventListener("pointermove", onMove);
+        item.removeEventListener("pointerup", onEnd);
+        item.removeEventListener("pointercancel", onEnd);
+      };
+
+      item.addEventListener("pointermove", onMove);
+      item.addEventListener("pointerup", onEnd);
+      item.addEventListener("pointercancel", onEnd);
+    });
+
+    item.addEventListener("keydown", (event) => {
+      const moves = {
+        ArrowLeft: [-8, 0],
+        ArrowRight: [8, 0],
+        ArrowUp: [0, -8],
+        ArrowDown: [0, 8],
+      };
+      if (!moves[event.key]) return;
+      event.preventDefault();
+      moveBy(...moves[event.key]);
+    });
+  };
+
+  config.images.forEach((imageConfig, index) => {
+    const item = createElement("figure", "competitive-board-item competitive-image");
+    const image = document.createElement("img");
+    const tape = createElement("span", "competitive-image-tape");
+    tape.setAttribute("aria-hidden", "true");
+    image.src = imageConfig.src;
+    image.alt = imageConfig.alt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    image.draggable = false;
+    item.style.left = `${imageConfig.x}%`;
+    item.style.top = `${imageConfig.y}%`;
+    item.style.width = `${imageConfig.width}%`;
+    item.style.setProperty("--collage-rotation", `${imageConfig.rotation}deg`);
+    item.style.zIndex = String(++topLayer);
+    item.tabIndex = 0;
+    item.setAttribute("role", "button");
+    item.setAttribute("aria-label", `Move research image ${index + 1}. Use arrow keys for precise movement.`);
+    item.setAttribute("aria-grabbed", "false");
+    item.append(tape, image);
+    board.append(item);
+    makeDraggable(item);
+  });
+
+  const boardTitle = createElement("p", "competitive-board-title", config.collageTitle);
+  board.append(boardTitle);
+
+  const insights = createElement("ol", "competitive-insights");
+  config.insights.forEach((insight) => {
+    const item = document.createElement("li");
+    item.append(
+      createElement("h3", "", insight.title),
+      createElement("p", "", insight.description),
+    );
+    insights.append(item);
+  });
+
+  component.append(board, insights);
+  return component;
+}
+
+function createProductRulePath(config) {
+  const component = createElement("div", "product-rule-component");
+  const path = createElement("ol", "product-rule-path");
+  path.dataset.revealContainer = "";
+
+  config.rules.forEach((rule) => {
+    const step = document.createElement("li");
+    step.className = "product-rule-step";
+    const node = createElement("span", "product-rule-node", rule.number);
+    node.setAttribute("aria-hidden", "true");
+    const copy = createElement("div", "product-rule-copy");
+    copy.append(
+      createElement("h3", "", rule.title),
+      createElement("p", "", rule.description),
+    );
+    step.append(node, copy);
+    path.append(step);
+  });
+
+  component.append(path, createElement("p", "product-rule-summary", config.summary));
+  return component;
+}
+
+function createFlowJourney(flow) {
+  const component = createElement("article", "flow-journey");
+  const header = createElement("header", "flow-journey-header");
+  const headerCopy = createElement("div", "flow-journey-copy");
+  headerCopy.append(
+    createElement("span", "flow-eyebrow", flow.eyebrow),
+    createElement("h3", "flow-title", flow.title),
+    createElement("p", "flow-description", flow.description),
+  );
+
+  const highlight = createElement("figure", "flow-highlight");
+  highlight.dataset.revealContainer = "";
+  highlight.setAttribute("aria-label", flow.highlight.label);
+  const highlightSlot = createElement("div", "media-slot");
+  highlightSlot.dataset.mediaId = flow.highlight.id;
+  highlightSlot.append(placeholderTemplate.content.cloneNode(true));
+  highlight.append(
+    highlightSlot,
+    createElement("figcaption", "flow-highlight-label", "Key interaction"),
+  );
+  header.append(headerCopy, highlight);
+
+  const viewport = createElement("div", "flow-scroll");
+  viewport.tabIndex = 0;
+  viewport.setAttribute("aria-label", flow.title + " screens. Scroll vertically to explore.");
+
+  const track = createElement("ol", "flow-track");
+  flow.screens.forEach((screen, index) => {
+    const step = createElement("li", "flow-step");
+    step.dataset.revealContainer = "";
+    const phoneWrap = createElement("div", "flow-phone");
+    phoneWrap.append(createPhone(screen));
+
+    const note = createElement("div", "flow-note");
+    note.append(
+      createElement("span", "flow-note-number", String(index + 1).padStart(2, "0")),
+      createElement("h4", "", screen.noteTitle),
+      createElement("p", "", screen.note),
+    );
+
+    step.append(phoneWrap, note);
+    track.append(step);
+  });
+
+  viewport.append(track);
+  component.append(header, viewport);
+  return component;
+}
+
 function createTimeline() {
   const card = createElement("section", "timeline-card detail-box");
   card.dataset.revealContainer = "";
@@ -1165,6 +1449,45 @@ function renderCaseStudy() {
   relationship.append(relationshipColumn);
   shell.append(relationship);
 
+  const competitiveResearch = createElement(
+    "section",
+    "case-section reveal competitive-research-section",
+  );
+  competitiveResearch.id = "competitive-research";
+  const competitiveResearchColumn = createElement("div", "reading-column");
+  competitiveResearchColumn.append(
+    createSectionHeading(caseStudy.competitiveResearch.title),
+    createElement("p", "subsection-intro competitive-research-intro", caseStudy.competitiveResearch.intro),
+    createCompetitiveResearchBoard(caseStudy.competitiveResearch),
+  );
+  competitiveResearch.append(competitiveResearchColumn);
+  shell.append(competitiveResearch);
+
+  const productRules = createElement(
+    "section",
+    "case-section reveal product-rules-section",
+  );
+  productRules.id = "product-rules";
+  const productRulesColumn = createElement("div", "reading-column");
+  productRulesColumn.append(
+    createSectionHeading(caseStudy.productRules.title),
+    createElement("p", "subsection-intro product-rules-intro", caseStudy.productRules.intro),
+    createProductRulePath(caseStudy.productRules),
+  );
+  productRules.append(productRulesColumn);
+  shell.append(productRules);
+
+  const flows = createElement("section", "case-section reveal flows-section");
+  flows.id = "flows";
+  const flowsColumn = createElement("div", "reading-column");
+  flowsColumn.append(
+    createSectionHeading(caseStudy.flows.title),
+    createElement("p", "subsection-intro flows-intro", caseStudy.flows.intro),
+  );
+  caseStudy.flows.items.forEach((flow) => flowsColumn.append(createFlowJourney(flow)));
+  flows.append(flowsColumn);
+  shell.append(flows);
+
   const closing = createElement("section", "case-section reveal");
   closing.id = "closing";
   const closingStage = createElement("div", "closing-stage");
@@ -1208,6 +1531,9 @@ function renderCaseStudy() {
     research,
     designQuestion,
     relationship,
+    competitiveResearch,
+    productRules,
+    flows,
   );
 
   contentRoot.replaceChildren(shell);
@@ -1269,6 +1595,7 @@ function setMedia(id, media = {}) {
     node.controls = media.controls !== false;
     node.muted = media.muted !== false;
     node.loop = Boolean(media.loop);
+    node.autoplay = Boolean(media.autoplay);
     node.playsInline = true;
     if (media.poster) node.poster = media.poster;
     loadEvent = "loadeddata";
@@ -1400,6 +1727,15 @@ function setupReveal() {
         ".relationship-card > .relationship-number",
         ".relationship-card > h3",
         ".relationship-label",
+        ".product-rule-node",
+        ".product-rule-copy > h3",
+        ".product-rule-copy > p",
+        ".product-rule-summary",
+        ".flow-eyebrow",
+        ".flow-title",
+        ".flow-highlight-label",
+        ".flow-note-number",
+        ".flow-note > h4",
         ".timeline-open",
         ".contact-heading",
         ".contact-button",

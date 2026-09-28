@@ -128,6 +128,13 @@ The design-question section follows the research findings as an editorial pause 
 
 The relationship-definition section resumes the standard narrative layout after the centered question. It reuses the split-weight section heading and body-copy rhythm, then introduces a `.relationship-grid`: two equal responsibility cards followed by one full-width connection card. Each card uses a light dashed outline, a matching numbered marker, and bottom-aligned responsibility copy. The grid collapses to a single column on mobile, while all titles and descriptions remain editable through `caseStudy.relationship`.
 
+The competitive-research section follows the relationship definition. Its heading, introduction, and numbered findings stay aligned to the shared reading width, while `.competitive-board` breaks out of that column to span the full viewport width. The canvas keeps a responsive height of roughly two thirds of the viewport. A subtle `--space-5` dot grid sits over the warm surface so the canvas reads like notebook paper without competing with the collage. It contains only presentation content: a central Larken title and taped research images sourced from `caseStudy.competitiveResearch.images`; no visitor-facing upload or editing controls are rendered. The entire image-and-tape object can be repositioned by pointer dragging or arrow keys, while the tape remains decorative and moves with its image. A numbered `.competitive-insights` list follows the collage as standard narrative content. Image paths, starting positions, widths, rotations, title, and findings are maintained in the source data rather than through public controls.
+
+The product-rules section bridges research and the future flow chapters without repeating abstract values. A cardless `.product-rule-path` reduces the operating model to three concrete steps: the manager sets a boundary, the member spends within it, and requests appear only when that boundary needs to change. A fine connector and numbered circular nodes make the sequence readable as a handoff; the middle node uses the case-study accent as the pivotal independent-spending moment. A short Larken summary closes the section. On mobile the same path becomes vertical, with each rule aligned beside its node. All labels and supporting copy are driven by `caseStudy.productRules`.
+
+The flows section follows the product rules and is driven by the caseStudy.flows data. Each flow has an eyebrow, title, short context paragraph, compact key-interaction media slot, and an ordered list of screens. On desktop the wider 16:9 highlight sits beside the flow copy; on mobile it moves below the copy before the reel. The highlight has no fill, border, radius, or shadow, allowing transparent motion assets to sit directly on the page. The slot can show an image, muted looping video, iframe, or trusted HTML prototype through the shared media API. The flow-scroll component forms a keyboard-focusable, internally scrollable vertical reel with proximity scroll snapping; the surrounding page remains in its normal document flow. Every flow-step places a reusable createPhone screen above a numbered note, while a quiet accent spine communicates sequence without adding navigation controls. The warm dotted surface connects visually to the research canvas, but the narrower shared content width distinguishes execution from exploration. On mobile the reel height, phone width, padding, and note spacing tighten while preserving the same vertical order. New flows and screens require data only; each screen ID remains compatible with CaseStudy.setMedia().
+
+
 The contact card uses a semibold heading rather than bold. Its action remains understated against the pink surface: the label uses regular Helix, the softened white outline is one pixel, and its corners use `--radius-small` rather than a pill. The checker texture uses a medium responsive tile size that sits between the original broad pattern and the later dense version. This keeps the action legible without competing with the contact heading.
 
 The project-timeline card reuses `.detail-box` as a standalone section after the contact card. The two sections are intentionally grouped with a reduced `--space-12` transition instead of the standard section gap. The timeline surface uses 28px token-derived padding on desktop, `--space-5` on mobile, and a 1.75rem radius for a friendly rounded shape without becoming a pill. Its title-and-duration group is balanced by a lightweight `Open` button. The action launches a native modal dialog using the same warm surface, border, radius, and typography tokens. The modal presents the two-month process as a single vertical sequence, locks page scrolling while open, closes by button, Escape, or backdrop interaction, and restores focus to the trigger.
@@ -160,14 +167,14 @@ CaseStudy.setMedia("phone-overview", {
 Supported types:
 
 - `image`: requires `src`, optional `alt`.
-- `video`: requires `src`, optional `poster`, `loop`, `muted`, and `controls`.
+- `video`: requires `src`, optional `poster`, `loop`, `muted`, `autoplay`, and `controls`. Autoplay previews should remain muted.
 - `iframe`: requires `src`, optional `title` and `allow`.
 - `html`: accepts an `html` string for trusted local prototype markup.
 - `placeholder`: restores the blank state.
 
 Images, videos, and iframes show a loading state while their source is prepared. Images and videos fall back to an inline error state if the source cannot load.
 
-Available slot IDs are `phone-overview`, `phone-manager`, `phone-member`, and `phone-closing`.
+Available slot IDs are phone-overview, phone-manager, phone-member, phone-closing, flow-create-hub-highlight, flow-create-hub, flow-set-boundary, and flow-invite-member.
 
 Standalone phone stages render larger than the grouped trio: `.closing-stage` uses `min(100%, 18rem)` so a single phone reads as the focus of its section.
 
