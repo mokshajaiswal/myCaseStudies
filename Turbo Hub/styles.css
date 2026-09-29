@@ -1108,7 +1108,7 @@ h4 {
 .persona-node-figure {
   position: relative;
   display: grid;
-  width: clamp(2.75rem, 6vw, 4rem);
+  width: clamp(2.5rem, 4.8vw, 3.25rem);
   aspect-ratio: 1;
   place-items: center;
   transition: transform 220ms ease;
@@ -1116,8 +1116,8 @@ h4 {
 
 .persona-node-figure::after {
   position: absolute;
-  inset: -0.3125rem;
-  border: 2px solid var(--persona-accent);
+  inset: -0.1875rem;
+  border: 1.5px solid var(--persona-accent);
   border-radius: 50%;
   content: "";
   opacity: 0;
@@ -1132,16 +1132,9 @@ h4 {
   display: block;
   width: 100%;
   height: 100%;
-}
-
-.persona-avatar-field {
-  fill: color-mix(in srgb, var(--persona-accent) 12%, #fff);
-  stroke: color-mix(in srgb, var(--persona-accent) 38%, transparent);
-  stroke-width: 1.5;
-}
-
-.persona-avatar-figure {
-  fill: color-mix(in srgb, var(--persona-accent) 58%, #fff);
+  object-fit: contain;
+  border-radius: 50%;
+  user-select: none;
 }
 
 .persona-node-copy {

@@ -169,6 +169,7 @@ const caseStudy = {
     personas: [
       {
         relation: "Father",
+        image: "assets/Father.png",
         tier: "manager",
         label: "Hub Manager",
         tags: ["35", "Salaried"],
@@ -189,6 +190,7 @@ const caseStudy = {
       },
       {
         relation: "Mother",
+        image: "assets/Mother.png",
         tier: "manager",
         label: "Hub Manager",
         tags: ["33", "Salaried"],
@@ -209,6 +211,7 @@ const caseStudy = {
       },
       {
         relation: "Daughter",
+        image: "assets/Daughter.png",
         tier: "member",
         label: "Hub Member",
         tags: ["16", "Student"],
@@ -229,6 +232,7 @@ const caseStudy = {
       },
       {
         relation: "Son",
+        image: "assets/Son.png",
         tier: "member",
         label: "Hub Member",
         tags: ["22", "College Student"],
@@ -249,6 +253,7 @@ const caseStudy = {
       },
       {
         relation: "Grandmother",
+        image: "assets/grandmother.png",
         tier: "member",
         label: "Hub Member",
         tags: ["68", "Retired"],
@@ -571,17 +576,16 @@ function createMeasureList(items) {
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-function createPersonaAvatar() {
-  const art = document.createElementNS(SVG_NS, "svg");
-  art.setAttribute("class", "persona-avatar-art");
-  art.setAttribute("viewBox", "0 0 48 48");
-  art.setAttribute("aria-hidden", "true");
-  art.setAttribute("focusable", "false");
-  art.innerHTML =
-    '<circle class="persona-avatar-field" cx="24" cy="24" r="23" />'
-    + '<circle class="persona-avatar-figure" cx="24" cy="19.5" r="7.2" />'
-    + '<path class="persona-avatar-figure" d="M11.4 41.8a13 13 0 0 1 25.2 0 22.6 22.6 0 0 1-25.2 0Z" />';
-  return art;
+function createPersonaAvatar(persona) {
+  const portrait = document.createElement("img");
+  portrait.className = "persona-avatar-art";
+  portrait.src = persona.image;
+  portrait.alt = "";
+  portrait.decoding = "async";
+  portrait.loading = "lazy";
+  portrait.draggable = false;
+  portrait.setAttribute("aria-hidden", "true");
+  return portrait;
 }
 
 const PERSONA_DETAIL_FIELDS = [
@@ -652,7 +656,7 @@ function createPersonaExplorer(config) {
       button.setAttribute("aria-selected", String(index === activeIndex));
       button.tabIndex = index === activeIndex ? 0 : -1;
       const figure = createElement("span", "persona-node-figure");
-      figure.append(createPersonaAvatar());
+      figure.append(createPersonaAvatar(persona));
       const copy = createElement("span", "persona-node-copy");
       copy.append(
         createElement("strong", "", persona.relation),
@@ -684,7 +688,7 @@ function createPersonaExplorer(config) {
     const head = createElement("div", "persona-card-head");
     const person = createElement("div", "persona-card-person");
     const avatar = createElement("span", "persona-card-avatar");
-    avatar.append(createPersonaAvatar());
+    avatar.append(createPersonaAvatar(persona));
     person.append(avatar, createElement("h3", "", persona.relation));
     const tags = createElement("div", "persona-card-tags");
     tags.append(
