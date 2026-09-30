@@ -46,35 +46,29 @@ a { color: inherit; }
 .nav-link:focus-visible { color: var(--accent); }
 .nav-signature { justify-self: end; }
 .brand-mark {
-  display: grid;
-  width: 2.5rem;
-  height: 2.5rem;
-  padding: 0.55rem;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.12rem;
-  border: 1px solid rgba(77, 110, 232, 0.28);
-  border-radius: 50%;
-  background: rgba(255, 254, 250, 0.72);
+  display: block;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.125rem;
   text-decoration: none;
-  transition: border-color 180ms ease, transform 180ms ease;
+  transition: transform 180ms ease;
 }
 .brand-mark:hover,
 .brand-mark:focus-visible {
-  border-color: var(--accent);
   outline: none;
   transform: rotate(8deg);
 }
-.brand-petal {
+.brand-mark svg {
   display: block;
-  border-radius: 70% 35% 70% 35%;
-  background: var(--accent);
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: var(--accent);
 }
-.brand-petal:nth-child(2) { transform: rotate(90deg); }
-.brand-petal:nth-child(3) { transform: rotate(-90deg); }
-.brand-petal:nth-child(4) { transform: rotate(180deg); }
+.brand-mark .brand-center { fill: var(--paper); }
 .library-header {
-  max-width: 58rem;
-  padding: clamp(5rem, 12vw, 9rem) var(--gutter) clamp(3rem, 7vw, 5rem);
+  max-width: 78rem;
+  padding: clamp(4.5rem, 9vw, 7.5rem) var(--gutter) clamp(3.5rem, 7vw, 5.5rem);
 }
 .eyebrow {
   margin: 0 0 1rem;
@@ -85,21 +79,26 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 h1 {
-  max-width: 14ch;
+  max-width: none;
   margin: 0;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3rem, 9vw, 7rem);
+  font-size: clamp(3.5rem, 6vw, 5.25rem);
   font-style: italic;
   font-weight: 700;
-  letter-spacing: -0.055em;
-  line-height: 0.95;
+  letter-spacing: -0.045em;
+  line-height: 0.98;
+}
+h1 span {
+  display: block;
+  width: fit-content;
+  white-space: nowrap;
 }
 .intro {
-  max-width: 48ch;
-  margin: 2rem 0 0;
+  max-width: 54ch;
+  margin: 1.75rem 0 0;
   color: var(--muted);
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  line-height: 1.55;
+  font-size: clamp(1rem, 1.5vw, 1.125rem);
+  line-height: 1.6;
 }
 main { padding-inline: var(--gutter); }
 .library-list {
@@ -252,7 +251,9 @@ footer {
   .top-nav { min-height: 4.25rem; }
   .nav-link,
   .nav-signature { font-size: 0.6rem; letter-spacing: 0.06em; }
-  .brand-mark { width: 2.2rem; height: 2.2rem; }
+  .brand-mark { width: 2.35rem; height: 2.35rem; }
+  .library-header { padding-top: 4rem; }
+  h1 { font-size: clamp(2.05rem, 9vw, 3.25rem); }
   .library-link {
     padding-block: 1.6rem;
     grid-template-columns: 2rem minmax(0, 1fr);
