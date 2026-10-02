@@ -4,6 +4,8 @@ This repository contains a single-page product-design case study for Turbo Hub, 
 
 Open `index.html` directly or serve this folder with any static server.
 
+Open [tokens.html](tokens.html) for the visual token reference: six live typography samples, the spacing scale, semantic gap diagrams (including subgroup spacing, section breaks, and the editorial pause), and a searchable inventory of every shared root token. It loads the same `styles.css` as the case study and updates measurements when the viewport changes.
+
 ## AI/LLM handoff: start here
 
 Treat this README as the project briefing and `design.md` as the detailed design specification. A new chat should not scan the entire codebase before making a focused change.
@@ -52,6 +54,7 @@ All page content is defined in the `caseStudy` object near the top of `script.js
 | --- | --- |
 | `index.html` | Static document shell, accessibility landmarks, templates, preload hints, and script/style entry points. |
 | `styles.css` | Design tokens, typography, responsive layout, components, progress indicator, and reveal states. |
+| `tokens.html` / `tokens.js` | Standalone visual token reference and live computed measurements; no build step. |
 | `script.js` | Case-study data, DOM rendering, media-slot API, reveal scheduler, and scroll progress behavior. |
 | `design.md` | Canonical detailed design-system and behavior specification. |
 | `README.md` | Fast project handoff and current-state summary for humans and new LLM chats. |
@@ -63,9 +66,10 @@ All page content is defined in the `caseStudy` object near the top of `script.js
 
 - The site is intentionally light-only.
 - The hero and body share the same `--content-width: 58rem` alignment.
-- Spacing is controlled by the master `--space-unit` and its derived scale. Adjust tokens instead of correcting repeated gaps individually.
-- The hero heading is the only Larken headline. All other headings and body copy use Helix.
-- Primary sizes are 48px hero, 32px section headings, 22px hero subtext, and 20px body copy.
+- Business goals, experience/outcome card groups, and the persona explorer use `--wide-content-width: 70rem`, centered beyond the narrative column and capped by viewport gutters. The Category / My Role / Team metadata box matches the body-copy container.
+- Spacing uses the 4px `--space-unit` scale and semantic aliases for paragraphs, heading-to-copy gaps, component padding/gaps, narrative-to-media gaps, related subgroups, and distinct sections. Paragraph gaps are 12px, smaller than heading-to-copy gaps of 20px desktop / 16px mobile. Compact title-to-copy gaps are 8px; copy-to-media gaps are 56px / 52px; related groups are 64px / 48px; section breaks are 144px / 112px. Adjust tokens instead of correcting repeated gaps individually.
+- Hero and section headings use Larken; small headings and all supporting text use Helix.
+- Six shared content roles define font family, size, weight, leading, and tracking: 48px hero heading, 22px hero subheading, 32px section heading, 20px body, 22px small heading, and 18px small body. Mobile sizes are defined once at the 768px breakpoint; captions and controls use a separate 14px utility token.
 - Heading and emphasized copy use an off-black, never pitch black.
 - Decorative heading marks remain `.asset-placeholder` elements until final assets are supplied.
 - Similar content must reuse the existing metadata, detail-panel, info-card, phone, and annotation patterns instead of creating one-off styling.

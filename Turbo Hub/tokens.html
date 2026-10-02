@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Case study · Token reference</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .reference { width: min(calc(100% - var(--layout-gutter) * 2), var(--content-width)); margin: auto; padding-block: var(--space-10) var(--space-20); }
+    .reference a { color: var(--accent-strong); text-underline-offset: .2em; }
+    .reference-header { padding-bottom: var(--space-10); border-bottom: 1px solid var(--line); }
+    .reference-header h1 { margin: var(--space-6) 0 var(--space-4); font: var(--font-heading); letter-spacing: var(--tracking-heading); color: var(--heading-ink); }
+    .reference-header p { margin: 0; max-width: 58ch; font: var(--font-small-body); }
+    .reference-nav { display: flex; flex-wrap: wrap; gap: var(--space-6); margin-top: var(--space-6); font: var(--font-utility); }
+    .reference-section { padding-top: var(--space-16); scroll-margin-top: var(--space-6); }
+    .reference-section > h2 { margin: 0 0 var(--space-3); font: var(--font-small-heading); }
+    .section-note { margin: 0 0 var(--space-8); color: var(--ink-soft); font: var(--font-small-body); }
+    .current-mode { display: inline-block; margin-top: var(--space-4); color: var(--accent-strong); font: var(--font-utility); }
+    .type-row { display: grid; grid-template-columns: 11rem minmax(0, 1fr); gap: var(--space-6); padding-block: var(--space-8); border-top: 1px solid var(--line); }
+    .type-label { display: grid; gap: var(--space-2); align-content: start; font: var(--font-utility); color: var(--ink-soft); }
+    .type-label strong { color: var(--heading-ink); font-weight: 600; }
+    .type-label code, .inventory code, .scale code, .rhythm code { font: inherit; overflow-wrap: anywhere; }
+    .type-sample { margin: 0; color: var(--heading-ink); overflow-wrap: break-word; }
+    .type-spec { margin: var(--space-4) 0 0; font: var(--font-utility); color: var(--ink-soft); }
+    [data-role="hero"] { font: var(--font-hero); letter-spacing: var(--tracking-heading); }
+    [data-role="hero-subheading"] { font: var(--font-hero-subheading); }
+    [data-role="heading"] { font: var(--font-heading); letter-spacing: var(--tracking-heading); }
+    [data-role="body-copy"] { font: var(--font-body-copy); color: var(--ink-soft); }
+    [data-role="small-heading"] { font: var(--font-small-heading); letter-spacing: var(--tracking-heading); }
+    [data-role="small-body"] { font: var(--font-small-body); color: var(--ink-soft); }
+    [data-role="utility"] { font: var(--font-utility); }
+    [data-role="media-status"] { font: var(--font-media-status); }
+    .utility-row { background: var(--accent-soft); padding: var(--space-6); border-radius: var(--radius-small); }
+    .scale-row { display: grid; grid-template-columns: minmax(10rem, 1fr) 4rem 10rem; gap: var(--space-4); align-items: center; padding-block: var(--space-3); border-bottom: 1px solid var(--line); font: var(--font-utility); }
+    .scale-bar { display: block; height: var(--space-3); width: var(--token-length); background: var(--accent); border-radius: 2px; }
+    .rhythm { display: grid; gap: var(--space-8); margin-top: var(--space-12); }
+    .rhythm-row { display: grid; grid-template-columns: 16rem minmax(0, 1fr); gap: var(--space-6); }
+    .rhythm-label { font: var(--font-utility); color: var(--ink-soft); }
+    .rhythm-label strong { display: block; color: var(--heading-ink); margin-bottom: var(--space-2); }
+    .rhythm-demo { font: var(--font-small-body); }
+    .rhythm-demo p { margin: 0; }
+    .rhythm-gap { height: var(--token-length); background: var(--accent-soft); border-left: 2px solid var(--accent); margin-block: 0; }
+    [data-role-preview="heading"] { font: var(--font-heading); }
+    [data-role-preview="small-heading"] { font: var(--font-small-heading); }
+    .padding-demo { padding: var(--component-padding); border: 1px dashed var(--accent); background: var(--accent-soft); }
+    .padding-demo p { background: var(--page); padding: var(--space-2); }
+    .token-search-label { display: block; margin-bottom: var(--space-2); font: var(--font-utility); }
+    .token-search { width: min(100%, 28rem); padding: var(--space-3) var(--space-4); border: 1px solid var(--line); border-radius: var(--radius-small); background: var(--page); font: var(--font-small-body); color: var(--ink); }
+    .inventory { width: 100%; margin-top: var(--space-6); border-collapse: collapse; text-align: left; font: var(--font-utility); table-layout: fixed; }
+    .inventory th { color: var(--heading-ink); font-weight: 600; }
+    .inventory th, .inventory td { padding: var(--space-4) var(--space-3) var(--space-4) 0; border-bottom: 1px solid var(--line); vertical-align: top; overflow-wrap: anywhere; }
+    .inventory th:first-child { width: 36%; }
+    .inventory td { color: var(--ink-soft); }
+    .swatch { display: inline-block; width: var(--space-4); height: var(--space-4); border: 1px solid var(--line); border-radius: 50%; margin-right: var(--space-2); vertical-align: middle; }
+    .inventory-count { font: var(--font-utility); color: var(--ink-soft); }
+    .measurement { position: absolute; visibility: hidden; pointer-events: none; height: 0; padding: 0; border: 0; }
+    .reference-footer { margin-top: var(--space-16); border-top: 1px solid var(--line); padding-top: var(--space-6); font: var(--font-utility); color: var(--ink-soft); }
+    @media (max-width: 48rem) {
+      .type-row, .rhythm-row { grid-template-columns: 1fr; gap: var(--space-4); }
+      .reference-section { padding-top: var(--space-12); }
+      .scale-row { grid-template-columns: 1fr 4rem; }
+      .scale-bar { grid-column: 1 / -1; }
+      .inventory th:first-child { width: 46%; }
+    }
+  </style>
+  <script src="tokens.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#typography">Skip to typography</a>
+  <main class="reference">
+    <header class="reference-header">
+      <a href="index.html">← Turbo Hub case study</a>
+      <h1>Case study tokens</h1>
+      <p>One place to see the text hierarchy, spacing, and shared foundations. These samples use the case study’s actual stylesheet.</p>
+      <nav class="reference-nav" aria-label="Token sections">
+        <a href="#typography">Typography</a><a href="#spacing">Spacing &amp; rhythm</a><a href="#all-tokens">All tokens</a>
+      </nav>
+      <span class="current-mode" id="current-mode" aria-live="polite"></span>
+    </header>
+    <section class="reference-section" id="typography" aria-labelledby="typography-title">
+      <h2 id="typography-title">01 / Typography hierarchy</h2>
+      <p class="section-note">Six content roles. Larken carries the editorial headings; Helix carries smaller headings and supporting text. Measurements below are live.</p>
+      <article class="type-row">
+        <div class="type-label"><strong>Hero heading</strong><code>--font-hero</code><span>The title in the opening blue box.</span></div>
+        <div><p class="type-sample" data-role="hero">One shared place for family money.</p><p class="type-spec" data-spec="hero"></p></div>
+      </article>
+      <article class="type-row">
+        <div class="type-label"><strong>Hero subheading</strong><code>--font-hero-subheading</code><span>Supporting text in the opening blue box.</span></div>
+        <div><p class="type-sample" data-role="hero-subheading">A family payments experience built around everyday independence.</p><p class="type-spec" data-spec="hero-subheading"></p></div>
+      </article>
+      <article class="type-row">
+        <div class="type-label"><strong>Section heading</strong><code>--font-heading</code><span>Introduces a new chapter.</span></div>
+        <div><p class="type-sample" data-role="heading">What exactly is Turbo Hub?</p><p class="type-spec" data-spec="heading"></p></div>
+      </article>
+      <article class="type-row">
+        <div class="type-label"><strong>Body</strong><code>--font-body-copy</code><span>The main narrative and research quotes.</span></div>
+        <div><p class="type-sample" data-role="body-copy">Turbo Hub brings family spending into one shared space. A clear, comfortable body style keeps the story easy to follow.</p><p class="type-spec" data-spec="body-copy"></p></div>
+      </article>
+      <article class="type-row">
+        <div class="type-label"><strong>Small heading</strong><code>--font-small-heading</code><span>Card titles, subsections, and profile names.</span></div>
+        <div><p class="type-sample" data-role="small-heading">Freedom within clear boundaries</p><p class="type-spec" data-spec="small-heading"></p></div>
+      </article>
+      <article class="type-row">
+        <div class="type-label"><strong>Small body</strong><code>--font-small-body</code><span>Card descriptions, flow notes, and persona details.</span></div>
+        <div><p class="type-sample" data-role="small-body">Set spending limits once, then let family members pay independently within them.</p><p class="type-spec" data-spec="small-body"></p></div>
+      </article>
+      <aside class="utility-row">
+        <p class="type-sample" data-role="utility">Utility · Captions, labels, tags, and controls</p>
+        <p class="type-spec" data-spec="utility"></p>
+        <p class="type-sample" data-role="media-status">Media status · Compact loading and error messages inside a phone</p>
+        <p class="type-spec" data-spec="media-status"></p>
+      </aside>
+    </section>
+    <section class="reference-section" id="spacing" aria-labelledby="spacing-title">
+      <h2 id="spacing-title">02 / Spacing &amp; rhythm</h2>
+      <p class="section-note">A 4px base scale. Blue bars show the actual token length; pale blue bands show the gaps used in layouts.</p>
+      <div class="scale" id="spacing-scale"></div>
+      <div class="rhythm" id="spacing-rhythm"></div>
+    </section>
+    <section class="reference-section" id="all-tokens" aria-labelledby="all-tokens-title">
+      <h2 id="all-tokens-title">03 / All tokens</h2>
+      <p class="section-note">Fonts, sizes, spacing, colors, corners, and layout measurements defined in the shared root. Values come directly from the stylesheet.</p>
+      <label class="token-search-label" for="token-search">Find a token</label>
+      <input class="token-search" id="token-search" type="search" placeholder="Try “heading”, “space”, or “accent”">
+      <p class="inventory-count" id="inventory-count" aria-live="polite"></p>
+      <table class="inventory"><thead><tr><th scope="col">Token</th><th scope="col">Current value</th></tr></thead><tbody id="token-inventory"></tbody></table>
+      <noscript><p>Enable JavaScript to see live measurements and the token inventory. Typography samples remain visible above.</p></noscript>
+    </section>
+    <footer class="reference-footer">Edit shared tokens in <a href="styles.css">styles.css</a>. Resize below 768px to inspect the mobile hierarchy.</footer>
+  </main>
+</body>
+</html>
