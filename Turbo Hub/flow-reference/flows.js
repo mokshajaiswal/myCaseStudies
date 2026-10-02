@@ -52,7 +52,7 @@ const screenAssets={
 };
 const el=(tag,cls,text)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(text)node.textContent=text;return node};
 const root=document.getElementById('flows');
-const prototypes={'New-user entry':'invitation?audience=new','Geofence setup':'geofence-setup','Spending limit':'spending-limit','Declined / expired':'payment-unapproved?state=declined','Invitation':'invitation','Tag added':'tag-added','Scan tag QR':'tag-scanner','Link or buy':'pixel-tag','Accounts & Cards':'accounts-cards','Introduction':'hub-introduction','Scan QR':'scan-qr','Notification':'payment-notification','Other Hubs':'hubs','Hub type':'create-hub?step=type','Name & source':'create-hub?step=details','Hub created':'create-hub?step=created','Profile · pending action':'member-profile','Delivery details':'delivery-details','Address saved':'member-profile?saved=true','Request pending':'request-pending','Processing':'payment-processing','Payment receipt':'payment-receipt','Review & authorize':'payment-authorize','Authorization confirmed':'authorization-confirmed','Review payment':'payment-review','Member details':'add-member','Payment methods':'add-member?step=payments','Spending':'hub-dashboard?tab=Spends','Analytics':'hub-dashboard?tab=Analytics','Invitation status':'hub-dashboard?tab=Members'};
+const prototypes={'New-user entry':'invitation?audience=new','Geofence setup':'geofence-setup','Spending limit':'spending-limit','Declined / expired':'payment-unapproved?state=declined','Invitation':'invitation','Tag added':'tag-added','Scan tag QR':'tag-scanner','Link or buy':'pixel-tag','Accounts & Cards':'accounts-cards','Introduction':'onboarding','Scan QR':'scan-qr','Notification':'payment-notification','Other Hubs':'hubs','Hub type':'create-hub?step=type','Name & source':'create-hub?step=details','Hub created':'create-hub?step=created','Profile · pending action':'member-profile','Delivery details':'delivery-details','Address saved':'member-profile?saved=true','Request pending':'request-pending','Processing':'payment-processing','Payment receipt':'payment-receipt','Review & authorize':'payment-authorize','Authorization confirmed':'authorization-confirmed','Review payment':'payment-review','Member details':'add-member','Payment methods':'add-member?step=payments','Spending':'hub-dashboard?tab=Spends','Analytics':'hub-dashboard?tab=Analytics','Invitation status':'hub-dashboard?tab=Members'};
 const allScreens=chapters.flatMap(chapter=>chapter.groups.flatMap(group=>group.screens));
 const done=allScreens.filter(([name])=>prototypes[name]).length;
 const checklist=el('details','flow-checklist');
@@ -90,6 +90,5 @@ chapters.forEach((chapter,index)=>{
  const details=el('details');details.append(el('summary','','References'));if(chapter.note)details.append(el('p','',chapter.note));
  const links=el('p','reference-links');chapter.refs.forEach(([name,id])=>{const a=el('a','',name);a.href=`source/${id}.png`;a.target='_blank';a.rel='noopener';links.append(a)});details.append(links);section.append(details);root.append(section);
 });
-
 
 

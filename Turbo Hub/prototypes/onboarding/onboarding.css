@@ -14,7 +14,7 @@
 body { margin: 0; }
 button { font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
 [hidden] { display: none !important; }
-button:focus-visible, .carousel:focus-visible, .complete:focus-visible {
+button:focus-visible, a:focus-visible, .carousel:focus-visible, .complete:focus-visible {
   outline: 3px solid var(--accent);
   outline-offset: 4px;
 }
@@ -115,6 +115,7 @@ h1 strong, h2 strong { font: inherit; }
   align-items: center;
   justify-content: center;
   text-align: center;
+  text-decoration: none;
   transition: background-color 180ms, transform 180ms;
 }
 .primary span { transform: translateY(-1px); }
@@ -132,6 +133,7 @@ h1 strong, h2 strong { font: inherit; }
 }
 .complete { flex: 1; display: flex; flex-direction: column; justify-content: center; padding-bottom: 3rem; }
 .complete .primary { margin-top: 2rem; }
+.complete .replay { align-self: center; margin-top: 1rem; padding: .75rem; border: 0; background: none; color: var(--accent); font-weight: 600; }
 .noscript-message { font-size: .8rem; }
 @media (max-height: 600px) {
   .app-header { height: 5.5rem; }

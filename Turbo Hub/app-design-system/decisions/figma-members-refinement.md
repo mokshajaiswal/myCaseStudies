@@ -27,3 +27,5 @@ Keyboard focus exposed a shell bug: overflow:hidden allowed the decorative phone
 The browser backend did not apply the narrow viewport override in the preceding pass; this pass verifies the fixed logical phone and narrow component specimens without claiming a native mobile-browser run. Exhaustive inspector traversal is not claimed.
 
 Overview registration: Members has its own hub-members screen entry pointing to the existing Hub page with ?tab=Members. The hub-dashboard entry opens Spends explicitly. Sharing a route does not hide a completed screen state from the overview; no duplicated page implementation is needed.
+
+The Members panel now includes the source’s decorative “Manage spends together” artwork after the member list. Three centered pale-gray text lines and a small yellow lock are page-owned decoration, hidden from assistive technology. The shared Member control and fixed phone geometry are unchanged; the artwork scrolls with the list. JS syntax and whitespace checks pass; visual positioning has not been browser-verified in this pass.

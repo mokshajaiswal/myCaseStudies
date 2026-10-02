@@ -30,7 +30,7 @@ The prototype does not automatically replace a case-study media slot. All applic
 
 - Continue, top-left pagination dots, horizontal swipe, and left/right arrow keys. No back button or visible slide counter.
 - Every slide has a short headline and copy above one simple illustration, with the centered CTA at the bottom. Soft blue surfaces and blue buttons match the case-study palette; headline lines share the same size and weight, and indicator shapes have equal 6px gaps. No simulated UI widgets or interaction instructions.
-- The final CTA opens a completion state with replay. No real account is created. The top logo, skip action, and numbered section labels are omitted; top spacing is retained for the device cutout.
+- The final CTA opens a completion state with a link to the Create Hub prototype and a replay action. No real account is created. The top logo, skip action, and numbered section labels are omitted; top spacing is retained for the device cutout.
 - Completion dispatches `turbo:onboarding-complete` on the iframe window, with `detail.reason` of `completed`. When served over HTTP, it also posts `{ type: 'turbo:onboarding-complete', reason }` to a same-origin parent. Validate `event.origin` and `event.source` before consuming it.
 - No autoplay. Reduced motion disables all entrance and control animations. Inactive slides are hidden and inert; slide changes are announced politely.
 
