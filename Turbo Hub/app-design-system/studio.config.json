@@ -4,7 +4,7 @@
   "name": "moshie case studies",
   "appRoot": "..",
   "content": ".",
-  "studioRoot": "../.tmp-ds-starter",
+  "studioRoot": "../../.tmp-ds-starter",
   "defaultProfile": "project",
   "port": 8020
 }
