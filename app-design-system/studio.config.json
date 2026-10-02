@@ -1,0 +1,10 @@
+{
+  "configVersion": 1,
+  "contractVersion": 1,
+  "name": "moshie case studies",
+  "appRoot": "..",
+  "content": ".",
+  "studioRoot": "../.tmp-ds-starter",
+  "defaultProfile": "project",
+  "port": 8020
+}

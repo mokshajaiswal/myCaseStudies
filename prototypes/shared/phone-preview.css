@@ -1,0 +1,95 @@
+body {
+  margin: 0;
+  height: 100svh;
+  padding: 24px 16px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #202124;
+  color: var(--color-text);
+  font: var(--type-body-weight) var(--type-body-size)/var(--type-body-leading) var(--font-body);
+}
+
+/* Preview geometry belongs to the page, independent of product components. */
+.phone {
+  position: relative;
+  width: min(433.333px, calc(100vw - 32px), calc((100svh - 48px) * 1006 / 2050));
+  aspect-ratio: 1006 / 2050;
+  filter: drop-shadow(0 20px 36px #0006);
+}
+.phone-viewport {
+  position: absolute;
+  inset: 2.1% 5% 2.32%;
+  overflow: clip;
+  border-radius: 13% / 6%;
+  background: var(--th-canvas);
+}
+.phone-screen {
+  width: 390px;
+  height: 844px;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  transform: scale(var(--screen-scale, 1));
+  transform-origin: top left;
+}
+.phone-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+#statusbar { flex: none; }
+#nav { flex:none; }
+.phone-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  overscroll-behavior-y: contain;
+  scrollbar-width: none;
+  outline-offset: -3px;
+}
+.phone-content::-webkit-scrollbar { display: none; }
+.phone-content > #tabs { position: sticky; top: 0; z-index: 1; }
+.home-indicator {
+  flex: none;
+  height: 24px;
+  display: grid;
+  place-items: end center;
+  padding-bottom: 8px;
+  background: var(--th-canvas);
+}
+.home-indicator::after { content: ""; width: 134px; height: 5px; border-radius: 3px; background: var(--th-ink); }
+
+
+
+
+
+
+
+.phone-chrome { flex:none; background:transparent; }
+.phone-chrome .flow-heading { background:transparent; }
+.phone-content { background:var(--th-canvas); }
+
+/* Blue header over a rounded product content surface: shared screen layout. */
+.phone-content { border-radius:var(--th-space-6) var(--th-space-6) 0 0; }
+
+/* Comparison UI is preview tooling, outside the product screen. */
+.preview-comparison { display:flex; align-items:center; justify-content:center; gap:48px; width:100%; }
+.preview-reference { width:min(390px, calc((100svh - 100px) * 390 / 844)); flex:none; margin:0; color:#e8eaed; }
+.preview-reference figcaption { display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:12px; font:400 14px/20px var(--th-font); }
+.preview-reference a { color:#bdc5d4; text-decoration:underline; text-underline-offset:3px; font-size:12px; }
+.preview-flow-navigation { margin-top:12px; }
+.preview-reference__image { height:min(844px,calc(100svh - 100px)); overflow:auto; background:white; border-radius:4px; scrollbar-width:thin; }
+.preview-reference__crop { overflow:hidden; }
+.preview-reference img { display:block; width:100%; height:auto; }
+.preview-reference img.is-composite { width:389.50617284%; max-width:none; position:relative; left:var(--reference-offset); }
+@media(max-width:760px) {
+ body:has(.preview-comparison) { height:auto; min-height:100svh; overflow:auto; }
+ .preview-comparison { flex-direction:column; gap:32px; }
+ .preview-reference { width:min(390px,calc(100vw - 48px)); }
+ .preview-reference__image { height: min(844px,80svh); }
+}

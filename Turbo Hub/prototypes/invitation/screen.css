@@ -1,0 +1,9 @@
+.invitation-heading{flex:none}
+.invitation-content{padding:var(--th-space-6);display:flex;flex-direction:column;gap:var(--th-space-6);background:var(--color-surface)}
+.invitation-preview{padding:var(--th-space-4);border:1px solid var(--color-reference-border);border-radius:var(--th-radius);background:var(--hub-identity-background);display:grid;gap:var(--th-space-4)}
+.invitation-people{display:flex;justify-content:center;gap:var(--th-space-2)}
+.invitation-copy{display:grid;gap:var(--th-space-2)}
+.invitation-copy h2{margin:0;font:var(--type-section-heading-weight) var(--type-section-heading-size)/var(--type-section-heading-leading) var(--font-heading)}
+.invitation-copy p{margin:0;font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body)}
+.invitation-actions{display:grid;gap:var(--th-space-2)}
+.invitation-caption{margin:0;text-align:center;color:var(--color-text-secondary);font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body)}

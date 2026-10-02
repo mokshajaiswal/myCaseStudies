@@ -1,0 +1,3012 @@
+{
+  "contractVersion": 1,
+  "name": "Turbo Hub design system",
+  "version": "0.1.0",
+  "description": "App-owned design language, extracted from existing screens in place.",
+  "components": [
+    {
+      "id": "turbo-button",
+      "name": "Action",
+      "class": "th-button",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=button",
+      "category": "Controls",
+      "states": [
+        "hover",
+        "active",
+        "focus-visible",
+        "disabled"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "primary",
+          "name": "primary",
+          "selector": "#primary"
+        },
+        {
+          "id": "compact",
+          "name": "compact",
+          "selector": "#compact"
+        },
+        {
+          "id": "compact-end",
+          "name": "Compact / trailing icon",
+          "selector": "#compact-end"
+        },
+        {
+          "id": "trailing",
+          "name": "Trailing icon",
+          "selector": "#trailing"
+        },
+        {
+          "id": "quiet",
+          "name": "quiet",
+          "selector": "#quiet"
+        },
+        {
+          "id": "icon",
+          "name": "icon",
+          "selector": "#icon"
+        },
+        {
+          "id": "disabled",
+          "name": "disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-button"
+          },
+          {
+            "name": "Icon",
+            "selector": ".th-button > .th-icon"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-left",
+            "selector": ".th-button:not(.th-button--compact):not(.th-button--icon)",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "column-gap",
+            "selector": ".th-button",
+            "property": "column-gap",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Compact vertical padding",
+            "selector": ".th-button--compact",
+            "property": "padding-top",
+            "token": "--button-compact-inset-y"
+          },
+          {
+            "label": "Compact horizontal inset",
+            "selector": ".th-button--compact",
+            "property": "padding-left",
+            "token": "--th-space-3"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Native button/link activation. Caller supplies disabled and action/href; icon-only actions require a label. Decorative icon wrappers use inline-flex with block SVG to remove baseline offset; 20px glyphs center inside 44px icon targets. Accepts native type (button by default, submit for form actions). size=compact uses a 32px minimum height, 6px vertical/12px horizontal padding and 12px Medium type; default remains 44px.",
+        "interactionOwnership": "Own control semantics and input handling; caller owns action/selected value."
+      },
+      "usage": "Use TurboUI.button(); source and specimen use the same renderer. iconPosition=start (default) or end positions the decorative icon before/after the label.",
+      "interactions": {
+        "preview": "specimens/component.html?component=button",
+        "targets": [
+          {
+            "id": "primary",
+            "name": "primary",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "quiet",
+            "name": "quiet",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "icon",
+            "name": "icon",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "disabled",
+            "name": "disabled",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "disabled"
+            ]
+          },
+          {
+            "id": "compact",
+            "name": "compact",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "compact-end",
+            "name": "compact-end",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "trailing",
+            "name": "trailing",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "turbo-avatar",
+      "name": "Avatar",
+      "class": "th-avatar",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=avatar",
+      "category": "Hub content",
+      "states": [
+        "initials",
+        "large",
+        "hub",
+        "merchant",
+        "profile"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "profile",
+          "name": "Member profile",
+          "selector": "#profile"
+        },
+        {
+          "id": "hub",
+          "name": "hub",
+          "selector": "#hub"
+        },
+        {
+          "id": "merchant",
+          "name": "merchant",
+          "selector": "#merchant"
+        },
+        {
+          "id": "initials",
+          "name": "initials",
+          "selector": "#initials"
+        },
+        {
+          "id": "large",
+          "name": "large",
+          "selector": "#large"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-avatar"
+          }
+        ],
+        "spacing": [],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Presentational data supplied by caller. No independently interactive children.",
+        "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
+      },
+      "usage": "TurboUI.avatar({name,large,graphic,size}); default 44px, large 64px, merchant 40px and hub 100px. Hub graphic uses the replaceable Phosphor house. profile size is 56px with a 12px radius."
+    },
+    {
+      "id": "turbo-badge",
+      "name": "Badge",
+      "class": "th-badge",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=badge",
+      "category": "Hub content",
+      "states": [
+        "default",
+        "role",
+        "relationship"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "role",
+          "name": "Role",
+          "selector": "#role"
+        },
+        {
+          "id": "relationship",
+          "name": "Relationship",
+          "selector": "#relationship"
+        },
+        {
+          "id": "relationship-long",
+          "name": "Long relationship",
+          "selector": "#relationship-long"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-badge"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-left",
+            "selector": ".th-badge",
+            "property": "padding-left",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Compact tag vertical inset",
+            "selector": ".th-badge--role,.th-badge--relationship",
+            "property": "padding-top",
+            "token": "--th-space-1"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Presentational data supplied by caller. No independently interactive children.",
+        "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
+      },
+      "usage": "TurboUI.badge(text,{variant}); default badge or compact role/relationship tag. Label is caller-supplied and noninteractive."
+    },
+    {
+      "id": "turbo-limit",
+      "name": "Spending limit summary",
+      "class": "th-limit",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=limit",
+      "category": "Hub content",
+      "states": [
+        "partial",
+        "unused",
+        "at limit",
+        "circular",
+        "circular-empty",
+        "circular-full",
+        "circular-over",
+        "circular-zero",
+        "member"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "member",
+          "name": "Member / unused",
+          "selector": "#member"
+        },
+        {
+          "id": "member-partial",
+          "name": "Member / partial",
+          "selector": "#member-partial"
+        },
+        {
+          "id": "member-full",
+          "name": "Member / at limit",
+          "selector": "#member-full"
+        },
+        {
+          "id": "circular",
+          "name": "circular",
+          "selector": "#circular"
+        },
+        {
+          "id": "circular-empty",
+          "name": "circular empty",
+          "selector": "#circular-empty"
+        },
+        {
+          "id": "circular-full",
+          "name": "circular full",
+          "selector": "#circular-full"
+        },
+        {
+          "id": "circular-over",
+          "name": "circular over",
+          "selector": "#circular-over"
+        },
+        {
+          "id": "circular-zero",
+          "name": "circular zero",
+          "selector": "#circular-zero"
+        },
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "empty",
+          "name": "empty",
+          "selector": "#empty"
+        },
+        {
+          "id": "full",
+          "name": "full",
+          "selector": "#full"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-limit"
+          },
+          {
+            "name": "Label",
+            "selector": ".th-limit__label"
+          },
+          {
+            "name": "Amount",
+            "selector": ".th-limit__amount"
+          },
+          {
+            "name": "Circular progress",
+            "selector": ".th-limit__ring"
+          },
+          {
+            "name": "Member values",
+            "selector": ".th-limit__values"
+          },
+          {
+            "name": "Limit value",
+            "selector": ".th-limit__value"
+          },
+          {
+            "name": "Value caption",
+            "selector": ".th-limit__caption"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-left",
+            "selector": ".th-limit:not(.th-limit--circular):not(.th-limit--member)",
+            "property": "padding-left",
+            "token": "--component-inset"
+          },
+          {
+            "label": "margin-top",
+            "selector": ".th-limit:not(.th-limit--member) > .th-progress",
+            "property": "margin-top",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Circular inset",
+            "token": "--th-space-4",
+            "selector": ".th-limit--circular",
+            "property": "padding-left"
+          },
+          {
+            "label": "Heading gap",
+            "token": "--th-space-3",
+            "selector": ".th-limit__heading",
+            "property": "column-gap"
+          },
+          {
+            "label": "Member limit inset",
+            "selector": ".th-limit--member",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Bar to values",
+            "selector": ".th-limit--member .th-progress",
+            "property": "margin-bottom",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Value column gap",
+            "selector": ".th-limit__values",
+            "property": "column-gap",
+            "token": "--th-space-2"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Presentational data supplied by caller. No independently interactive children.",
+        "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
+      },
+      "usage": "TurboUI.limit({spent,limit,label,variant}); default horizontal or circular 45px progress. Accessible progress and clamped geometry; non-positive limits render an empty track. member variant displays a horizontal bar above spent/monthly-limit value columns."
+    },
+    {
+      "id": "turbo-tabs",
+      "name": "Tabs",
+      "class": "th-tabs",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=tabs",
+      "category": "Controls",
+      "states": [
+        "spends",
+        "members",
+        "analytics"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-tabs"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-left",
+            "selector": ".th-tabs",
+            "property": "padding-left",
+            "token": "--th-space-6"
+          },
+          {
+            "label": "column-gap",
+            "selector": ".th-tabs",
+            "property": "column-gap",
+            "token": "--th-space-5"
+          },
+          {
+            "label": "Tab inset",
+            "token": "--th-space-2",
+            "selector": ".th-tabs button",
+            "property": "padding-top"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Caller supplies selected; tabs emit onChange(label). Arrow/Home/End navigate and focus selected tabs.",
+        "interactionOwnership": "Own control semantics and input handling; caller owns action/selected value."
+      },
+      "usage": "Use TurboUI.tabs(); source and specimen use the same renderer.",
+      "interactions": {
+        "preview": "specimens/component.html?component=tabs",
+        "targets": [
+          {
+            "id": "default",
+            "name": "Sections",
+            "owner": "turbo-tabs",
+            "states": [
+              "live",
+              "spends",
+              "members",
+              "analytics"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "turbo-row",
+      "name": "Transaction row",
+      "class": "th-row",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=row",
+      "category": "Hub content",
+      "states": [
+        "default",
+        "without detail",
+        "long title",
+        "compact",
+        "compact-long",
+        "compact-minimal"
+      ],
+      "dependencies": [
+        "turbo-avatar"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "compact",
+          "name": "compact",
+          "selector": "#compact"
+        },
+        {
+          "id": "compact-long",
+          "name": "compact long",
+          "selector": "#compact-long"
+        },
+        {
+          "id": "compact-minimal",
+          "name": "compact minimal",
+          "selector": "#compact-minimal"
+        },
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "long",
+          "name": "long",
+          "selector": "#long"
+        },
+        {
+          "id": "minimal",
+          "name": "minimal",
+          "selector": "#minimal"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-row"
+          },
+          {
+            "name": "Title",
+            "selector": ".th-row__title"
+          },
+          {
+            "name": "Detail",
+            "selector": ".th-row__detail"
+          },
+          {
+            "name": "Amount",
+            "selector": ".th-row__amount"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-top",
+            "selector": ".th-row:not(.th-row--compact)",
+            "property": "padding-top",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "column-gap",
+            "selector": ".th-row:not(.th-row--compact)",
+            "property": "column-gap",
+            "token": "--component-gap"
+          },
+          {
+            "label": "Compact icon gap",
+            "token": "--th-space-2",
+            "selector": ".th-row--compact",
+            "property": "column-gap"
+          },
+          {
+            "label": "Compact detail gap",
+            "token": "--transaction-detail-gap",
+            "selector": ".th-row--compact .th-row__detail",
+            "property": "margin-top"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Presentational data supplied by caller. No independently interactive children.",
+        "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
+      },
+      "usage": "TurboUI.row({name,detail,amount,graphic,variant}); default inset or compact transaction row. Parent owns list gaps, separators and surface."
+    },
+    {
+      "id": "turbo-member",
+      "name": "Member card",
+      "class": "th-member",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=member",
+      "category": "Hub content",
+      "states": [
+        "joined",
+        "pending"
+      ],
+      "dependencies": [
+        "turbo-avatar",
+        "turbo-badge",
+        "turbo-limit"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "profile-joined",
+          "name": "Profile / joined",
+          "selector": "#profile-joined"
+        },
+        {
+          "id": "profile-pending",
+          "name": "Profile / pending",
+          "selector": "#profile-pending"
+        },
+        {
+          "id": "profile-no-tags",
+          "name": "Profile / without tags",
+          "selector": "#profile-no-tags"
+        },
+        {
+          "id": "profile-long",
+          "name": "Profile / long content",
+          "selector": "#profile-long"
+        },
+        {
+          "id": "joined",
+          "name": "joined",
+          "selector": "#joined"
+        },
+        {
+          "id": "pending",
+          "name": "pending",
+          "selector": "#pending"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-member"
+          },
+          {
+            "name": "Identity",
+            "selector": ".th-member__identity"
+          },
+          {
+            "name": "Name",
+            "selector": ".th-member__name"
+          },
+          {
+            "name": "Tags",
+            "selector": ".th-member__meta"
+          },
+          {
+            "name": "Pending status",
+            "selector": ".th-member__status"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-left",
+            "selector": ".th-member:not(.th-member--profile)",
+            "property": "padding-left",
+            "token": "--component-inset"
+          },
+          {
+            "label": "column-gap",
+            "selector": ".th-member:not(.th-member--profile) .th-member__identity",
+            "property": "column-gap",
+            "token": "--component-gap"
+          },
+          {
+            "label": "Profile identity inset",
+            "selector": ".th-member--profile .th-member__identity",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Profile avatar gap",
+            "selector": ".th-member--profile .th-member__identity",
+            "property": "column-gap",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Name to tags",
+            "selector": ".th-member--profile .th-member__name",
+            "property": "margin-bottom",
+            "token": "--th-space-1"
+          },
+          {
+            "label": "Tag gap",
+            "selector": ".th-member--profile .th-member__meta",
+            "property": "column-gap",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Pending inset",
+            "selector": ".th-member--profile .th-member__status",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Status icon gap",
+            "selector": ".th-member--profile .th-member__status",
+            "property": "column-gap",
+            "token": "--th-space-1"
+          }
+        ],
+        "ownership": "Member owns its identity and pending-message insets and divider. Nested Avatar, Badge and Limit own their geometry. Parent owns external list gap and placement.",
+        "behavior": "Presentational data supplied by caller. No independently interactive children.",
+        "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
+      },
+      "usage": "TurboUI.member({name,role,relation,pending,spent,limit,variant,statusText}); default card or profile card. Profile composes 56px Avatar, compact role/relationship Badges and member Limit, or a named pending message. No card-click behavior."
+    },
+    {
+      "id": "turbo-chart",
+      "name": "Spending trend",
+      "class": "th-chart",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=chart",
+      "category": "Hub content",
+      "states": [
+        "default"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-chart"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-left",
+            "selector": ".th-chart",
+            "property": "padding-left",
+            "token": "--th-space-5"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Presentational data supplied by caller. No independently interactive children.",
+        "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
+      },
+      "usage": "Use TurboUI.chart(); source and specimen use the same renderer."
+    },
+    {
+      "id": "turbo-summary",
+      "name": "Hub identity",
+      "class": "th-hub-summary",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=summary",
+      "category": "Hub content",
+      "states": [
+        "default",
+        "centered",
+        "centered-long",
+        "centered with action"
+      ],
+      "dependencies": [
+        "turbo-avatar",
+        "turbo-button"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "default-action",
+          "name": "Horizontal / options",
+          "selector": "#default-action"
+        },
+        {
+          "id": "centered",
+          "name": "centered",
+          "selector": "#centered"
+        },
+        {
+          "id": "centered-action",
+          "name": "Centered / options",
+          "selector": "#centered-action"
+        },
+        {
+          "id": "centered-long",
+          "name": "centered long",
+          "selector": "#centered-long"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-hub-summary"
+          },
+          {
+            "name": "Optional action slot",
+            "selector": ".th-hub-summary__action"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-top",
+            "selector": ".th-hub-summary:not(.th-hub-summary--centered)",
+            "property": "padding-top",
+            "token": "--th-space-6"
+          },
+          {
+            "label": "column-gap",
+            "selector": ".th-hub-summary:not(.th-hub-summary--centered)",
+            "property": "column-gap",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Centered identity gap",
+            "token": "--th-space-3",
+            "selector": ".th-hub-summary--centered",
+            "property": "row-gap"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "Presentational data supplied by caller. No independently interactive children.",
+        "interactionOwnership": "Presentational identity; optional registered Action owns its native interaction states. Caller supplies action callback/href. Centered action preserves a 44px target."
+      },
+      "usage": "TurboUI.summary({name,type,variant}); default horizontal or centered identity. Caller owns content and placement. Optional action accepts registered button props; centered options action sits to the right of the hub graphic."
+    },
+    {
+      "id": "turbo-statusbar",
+      "name": "Phone status bar",
+      "class": "th-statusbar",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=statusbar",
+      "category": "Phone chrome",
+      "states": [
+        "default"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-statusbar"
+          },
+          {
+            "name": "Time",
+            "selector": ".th-statusbar__time"
+          },
+          {
+            "name": "Indicators",
+            "selector": ".th-statusbar__signals"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "padding-top",
+            "selector": ".th-statusbar",
+            "property": "padding-top",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "padding-left",
+            "selector": ".th-statusbar",
+            "property": "padding-left",
+            "token": "--th-space-6"
+          },
+          {
+            "label": "Icon gap",
+            "selector": ".th-statusbar__signals",
+            "property": "column-gap",
+            "token": "--statusbar-icon-gap"
+          }
+        ],
+        "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
+        "behavior": "56px high. Fixed 76px side slots leave camera clearance; centered Phosphor indicators share a visual centerline. Decorative mock status, not live device data. Caller supplies time (default 9:41).",
+        "interactionOwnership": "No interactions; time and indicators are presentational internal parts."
+      },
+      "usage": "Use TurboUI.statusbar({time: \"9:41\"}). The page owns the phone shell and viewport scaling."
+    },
+    {
+      "id": "turbo-field",
+      "name": "Text field",
+      "class": "th-field",
+      "css": "components/forms.css",
+      "module": "components/forms.js",
+      "preview": "specimens/form.html?component=field",
+      "category": "Controls",
+      "states": [
+        "default",
+        "optional",
+        "error",
+        "disabled",
+        "prominent amount"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "amount",
+          "name": "amount",
+          "selector": "#amount"
+        },
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "optional",
+          "name": "optional",
+          "selector": "#optional"
+        },
+        {
+          "id": "error",
+          "name": "error",
+          "selector": "#error"
+        },
+        {
+          "id": "disabled",
+          "name": "disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-field"
+          },
+          {
+            "name": "Control",
+            "selector": ".th-field__input"
+          },
+          {
+            "name": "Field surface",
+            "selector": ".th-field__surface"
+          },
+          {
+            "name": "Error below surface",
+            "selector": ".th-field > .th-form-error"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Field inset",
+            "selector": ".th-field__surface",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Label gap",
+            "selector": ".th-field__surface",
+            "property": "row-gap",
+            "token": "--th-space-1"
+          }
+        ],
+        "ownership": "Component owns label, control, internal spacing and error feedback. Page owns grouping and external gaps.",
+        "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked. Validation message sits below the bordered field surface. prominent=true uses the shared 16px Medium field value and prefix with a 2px label gap; semantics and validation stay unchanged.",
+        "interactionOwnership": "Owns control semantics; caller owns application state and validation."
+      },
+      "usage": "Use TurboUI.field({id, label, ...}). IDs must be unique. See Add Member for composed form usage."
+    },
+    {
+      "id": "turbo-select",
+      "name": "Select",
+      "class": "th-select",
+      "css": "components/forms.css",
+      "module": "components/forms.js",
+      "preview": "specimens/form.html?component=select",
+      "category": "Controls",
+      "states": [
+        "default",
+        "error",
+        "disabled"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "error",
+          "name": "error",
+          "selector": "#error"
+        },
+        {
+          "id": "disabled",
+          "name": "disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-select"
+          },
+          {
+            "name": "Control",
+            "selector": ".th-field__input"
+          },
+          {
+            "name": "Field surface",
+            "selector": ".th-field__surface"
+          },
+          {
+            "name": "Error below surface",
+            "selector": ".th-field > .th-form-error"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Field inset",
+            "selector": ".th-field__surface",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Label gap",
+            "selector": ".th-field__surface",
+            "property": "row-gap",
+            "token": "--th-space-1"
+          }
+        ],
+        "ownership": "Component owns label, control, internal spacing and error feedback. Page owns grouping and external gaps.",
+        "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked. Validation message sits below the bordered field surface.",
+        "interactionOwnership": "Owns control semantics; caller owns application state and validation."
+      },
+      "usage": "Use TurboUI.select({id, label, ...}). IDs must be unique. See Add Member for composed form usage."
+    },
+    {
+      "id": "turbo-switch",
+      "name": "Switch",
+      "class": "th-switch",
+      "css": "components/forms.css",
+      "module": "components/forms.js",
+      "preview": "specimens/form.html?component=switch",
+      "category": "Controls",
+      "states": [
+        "off",
+        "on",
+        "disabled"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "off",
+          "name": "off",
+          "selector": "#off"
+        },
+        {
+          "id": "on",
+          "name": "on",
+          "selector": "#on"
+        },
+        {
+          "id": "disabled",
+          "name": "disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-switch"
+          },
+          {
+            "name": "Control",
+            "selector": ".th-switch__control"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Copy to switch",
+            "selector": ".th-switch",
+            "property": "column-gap",
+            "token": "--th-space-4"
+          }
+        ],
+        "ownership": "Component owns label, control, internal spacing and error feedback. Page owns grouping and external gaps.",
+        "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked.",
+        "interactionOwnership": "Owns control semantics; caller owns application state and validation."
+      },
+      "usage": "Use TurboUI.toggle({id, label, ...}). IDs must be unique. See Add Member for composed form usage."
+    },
+    {
+      "id": "turbo-check",
+      "name": "Checkbox choice",
+      "class": "th-check",
+      "css": "components/forms.css",
+      "module": "components/forms.js",
+      "preview": "specimens/form.html?component=check",
+      "category": "Controls",
+      "states": [
+        "confirmation",
+        "card",
+        "selected",
+        "error",
+        "disabled"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "confirmation",
+          "name": "confirmation",
+          "selector": "#confirmation"
+        },
+        {
+          "id": "card",
+          "name": "card",
+          "selector": "#card"
+        },
+        {
+          "id": "selected",
+          "name": "selected",
+          "selector": "#selected"
+        },
+        {
+          "id": "error",
+          "name": "error",
+          "selector": "#error"
+        },
+        {
+          "id": "disabled",
+          "name": "disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-check"
+          },
+          {
+            "name": "Control",
+            "selector": ".th-check__input"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Choice gap",
+            "selector": ".th-check__label",
+            "property": "column-gap",
+            "token": "--component-gap"
+          },
+          {
+            "label": "Card inset",
+            "selector": ".th-check--card",
+            "property": "padding-left",
+            "token": "--component-inset"
+          }
+        ],
+        "ownership": "Component owns label, control, internal spacing and error feedback. Page owns grouping and external gaps.",
+        "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked.",
+        "interactionOwnership": "Owns control semantics; caller owns application state and validation."
+      },
+      "usage": "Use TurboUI.check({id, label, ...}). IDs must be unique. See Add Member for composed form usage."
+    },
+    {
+      "id": "turbo-payment-account",
+      "name": "Payment account",
+      "class": "th-payment-account",
+      "css": "components/payment.css",
+      "module": "components/payment.js",
+      "preview": "specimens/payment.html?component=payment-account",
+      "category": "Payments",
+      "dependencies": [
+        "turbo-avatar",
+        "turbo-button"
+      ],
+      "states": [
+        "default",
+        "unavailable",
+        "long"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "unavailable",
+          "name": "unavailable",
+          "selector": "#unavailable"
+        },
+        {
+          "id": "long",
+          "name": "long",
+          "selector": "#long"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-payment-account"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Inset",
+            "selector": ".th-payment-account",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Identity gap",
+            "selector": ".th-payment-account",
+            "property": "column-gap",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Copy stack gap",
+            "selector": ".th-payment-account__copy",
+            "property": "row-gap",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Identity text gap",
+            "selector": ".th-payment-account__identity",
+            "property": "row-gap",
+            "token": "--th-space-1"
+          }
+        ],
+        "behavior": "Presentational account identity composes registered Avatar and Action. Caller supplies name/account and action callback; disabled prevents account change. No private child interaction states. Compact density uses 16px inset, 8px identity gap, 4px copy gaps and 16px account name.",
+        "ownership": "Component owns internal geometry; screen owns external layout.",
+        "interactionOwnership": "Action belongs to turbo-button; Avatar is presentational."
+      },
+      "usage": "TurboUI.paymentAccount({name,account,onChange,disabled})"
+    },
+    {
+      "id": "turbo-swipe-action",
+      "name": "Swipe action",
+      "class": "th-swipe",
+      "css": "components/payment.css",
+      "module": "components/payment.js",
+      "preview": "specimens/payment.html?component=swipe-action",
+      "category": "Payments",
+      "dependencies": [],
+      "states": [
+        "default",
+        "disabled"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "default",
+          "selector": "#default"
+        },
+        {
+          "id": "disabled",
+          "name": "disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-swipe"
+          }
+        ],
+        "spacing": [],
+        "behavior": "Native range control, 0–100. Release at 95 or higher emits onComplete once and disables the control. Incomplete gestures reset. Keyboard Arrow/End keys are supported. Caller validates and owns the resulting flow. No real payment operation.",
+        "ownership": "Component owns internal geometry; screen owns external layout.",
+        "interactionOwnership": "Owns range semantics and completion threshold; caller owns effect."
+      },
+      "usage": "TurboUI.swipeAction({id,label,disabled,onComplete})"
+    },
+    {
+      "id": "turbo-chrome-backdrop",
+      "name": "Chrome backdrop",
+      "class": "th-chrome-backdrop",
+      "css": "components/chrome-backdrop.css",
+      "module": "components/chrome-backdrop.js",
+      "preview": "specimens/backdrop.html",
+      "category": "Phone chrome",
+      "states": [
+        "default"
+      ],
+      "dependencies": [],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Backdrop root",
+            "selector": ".th-chrome-backdrop"
+          }
+        ],
+        "spacing": [],
+        "behavior": "One decorative backdrop. Follows the dimensions of its host; the parent owns size and layout. No variants, content or product controls. Optional motion is controlled globally by tokens and respects reduced motion.",
+        "ownership": "Decorative background and optional ambient motion only. Never sets foreground color, internal padding, child typography, hit areas or layout. Caller owns dimensions, clipping and placement.",
+        "interactionOwnership": "No product controls or transition outputs. Supplied motion setting belongs to caller/global tokens. Registered child states remain with their owners."
+      },
+      "usage": "TurboUI.chromeBackdrop() creates an empty background element. TurboUI.chromeBackdrop({host:element}) paints an existing host without adding content. Parent owns dimensions; tokens own appearance and optional motion.",
+      "props": {
+        "host": "Optional existing element to paint; otherwise returns an empty div."
+      }
+    },
+    {
+      "id": "turbo-navigation",
+      "name": "Navigation bar",
+      "class": "th-navigation",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=navigation",
+      "category": "Phone chrome",
+      "states": [
+        "title only",
+        "back and title",
+        "both actions",
+        "long title"
+      ],
+      "dependencies": [
+        "turbo-button",
+        "turbo-chrome-backdrop"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "title",
+          "name": "title",
+          "selector": "#title"
+        },
+        {
+          "id": "back",
+          "name": "back",
+          "selector": "#back"
+        },
+        {
+          "id": "both",
+          "name": "both",
+          "selector": "#both"
+        },
+        {
+          "id": "long",
+          "name": "long",
+          "selector": "#long"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-navigation"
+          },
+          {
+            "name": "Title",
+            "selector": ".th-navigation__title"
+          },
+          {
+            "name": "Action slot",
+            "selector": ".th-navigation__slot"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Horizontal inset",
+            "selector": ".th-navigation",
+            "property": "padding-left",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Top inset",
+            "selector": ".th-navigation",
+            "property": "padding-top",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Bottom inset",
+            "selector": ".th-navigation",
+            "property": "padding-bottom",
+            "token": "--th-space-4"
+          },
+          {
+            "label": "Slot gap",
+            "selector": ".th-navigation",
+            "property": "column-gap",
+            "token": "--th-space-3"
+          }
+        ],
+        "behavior": "Equal 44px side slots keep title centered with absent or unequal action content. Long titles wrap. Caller supplies title and optional left/right Action options; Navigation forces icon-only quiet actions with accessible labels. Header title is 18px via --header-title-size; white icon actions have transparent backgrounds while retaining 44px hit areas. Its root is transparent so the shared Chrome backdrop remains continuous.",
+        "ownership": "Owns chrome geometry and title placement; Chrome backdrop owns the visual background; page owns surrounding header, status bar and screen layout.",
+        "interactionOwnership": "No private interactions. Registered turbo-button children own activation, focus and disabled state; screen owns callbacks or href."
+      },
+      "usage": "TurboUI.navigation({title,left:{label,icon,href/onClick,disabled},right:{...}}). Omit either side as needed. Place inside turbo-chrome-backdrop for continuous phone chrome."
+    },
+    {
+      "id": "turbo-page-header",
+      "name": "Page header",
+      "class": "th-page-header",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=page-header",
+      "category": "Phone chrome",
+      "states": [
+        "heading only",
+        "with subtext and visual",
+        "verified",
+        "long text"
+      ],
+      "dependencies": [
+        "turbo-chrome-backdrop"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "full",
+          "name": "full",
+          "selector": "#full"
+        },
+        {
+          "id": "heading",
+          "name": "heading",
+          "selector": "#heading"
+        },
+        {
+          "id": "long",
+          "name": "long",
+          "selector": "#long"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Root",
+            "selector": ".th-page-header"
+          },
+          {
+            "name": "Heading",
+            "selector": ".th-page-header__title"
+          },
+          {
+            "name": "Subtext",
+            "selector": ".th-page-header__subtext"
+          },
+          {
+            "name": "Visual",
+            "selector": ".th-page-header__visual"
+          },
+          {
+            "name": "Verification",
+            "selector": ".th-page-header__verified"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Horizontal inset",
+            "selector": ".th-page-header",
+            "property": "padding-left",
+            "token": "--th-space-6"
+          },
+          {
+            "label": "Top inset",
+            "selector": ".th-page-header",
+            "property": "padding-top",
+            "token": "--th-space-3"
+          },
+          {
+            "label": "Bottom inset",
+            "selector": ".th-page-header",
+            "property": "padding-bottom",
+            "token": "--page-header-bottom-inset"
+          },
+          {
+            "label": "Heading to subtext",
+            "selector": ".th-page-header__subtext",
+            "property": "margin-top",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Visual gap",
+            "selector": ".th-page-header",
+            "property": "column-gap",
+            "token": "--th-space-4"
+          }
+        ],
+        "behavior": "20px Medium semantic screen heading with optional subtext, verified badge and decorative trailing icon or caller-provided visual. Long text wraps. Uses existing semantic icons; no actions.",
+        "ownership": "Owns title/subtext alignment, visual slot and internal spacing; Chrome backdrop owns the visual background; page owns placement within shared chrome.",
+        "interactionOwnership": "Presentational only; no private controls."
+      },
+      "usage": "TurboUI.pageHeader({heading,subtext,verified,icon,visual}). Supply only icon or visual and place inside turbo-chrome-backdrop. Trailing visual is decorative; meaningful information belongs in heading/subtext."
+    },
+    {
+      "id": "turbo-countdown",
+      "name": "Request expiry countdown",
+      "class": "th-countdown",
+      "category": "Feedback",
+      "css": "components/countdown.css",
+      "module": "components/countdown.js",
+      "preview": "specimens/countdown.html",
+      "states": [
+        "running",
+        "expired"
+      ],
+      "props": {
+        "remaining": "Seconds remaining, clamped to 0–total; default 900.",
+        "total": "Positive duration in seconds; default 900.",
+        "label": "Caption; default Request will expire after this time."
+      },
+      "usage": "White countdown for blue chrome surfaces. Caller owns the clock and expiry outcome; the renderer never starts a timer or submits a request.",
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Time",
+            "selector": ".th-countdown__time"
+          },
+          {
+            "name": "Track",
+            "selector": ".th-countdown__track"
+          },
+          {
+            "name": "Caption",
+            "selector": ".th-countdown__caption"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Vertical gaps",
+            "token": "--countdown-gap",
+            "selector": ".th-countdown",
+            "property": "row-gap"
+          }
+        ],
+        "ownership": "Countdown owns 8px internal gaps, 8px track height and 10px radius. Parent owns outer padding and available width.",
+        "behavior": "Fluid width; caption wraps. setRemaining(seconds) updates timer text and accessible progress semantics. No hit area or transition callback.",
+        "interactionOwnership": "Supplied remaining value belongs to the caller. Countdown owns timer/progressbar semantics; no interactive children."
+      },
+      "dependencies": [],
+      "interactions": {
+        "preview": "specimens/countdown.html",
+        "targets": [
+          {
+            "id": "countdown",
+            "name": "Countdown",
+            "owner": "turbo-countdown",
+            "states": [
+              "live",
+              "running",
+              "expired"
+            ]
+          }
+        ]
+      },
+      "previewConfigurations": [
+        {
+          "id": "running",
+          "name": "Running",
+          "selector": "#running",
+          "interactionTarget": "countdown"
+        },
+        {
+          "id": "ending",
+          "name": "Nearly expired",
+          "selector": "#ending",
+          "interactionTarget": "countdown"
+        },
+        {
+          "id": "expired",
+          "name": "Expired",
+          "selector": "#expired",
+          "interactionTarget": "countdown"
+        }
+      ]
+    },
+    {
+      "id": "turbo-success-indicator",
+      "name": "Success indicator",
+      "class": "th-success-indicator",
+      "category": "Feedback",
+      "css": "components/success-indicator.css",
+      "module": "components/success-indicator.js",
+      "preview": "specimens/success-indicator.html",
+      "states": [
+        "default"
+      ],
+      "usage": "Decorative success check; caller supplies the visible result heading. No text, children, variants, callbacks or animation.",
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Check",
+            "selector": ".th-success-indicator svg"
+          }
+        ],
+        "spacing": [],
+        "ownership": "Indicator owns its 81px circular surface and centered 32px check. Parent owns placement and gaps.",
+        "behavior": "Fixed dimensions, no interaction; aria-hidden because adjacent visible text describes the outcome.",
+        "interactionOwnership": "No interactive children or state changes."
+      },
+      "dependencies": []
+    },
+    {
+      "id": "turbo-notice",
+      "name": "Success notice",
+      "class": "th-notice",
+      "category": "Feedback",
+      "css": "components/notice.css",
+      "module": "components/notice.js",
+      "preview": "specimens/notice.html",
+      "states": [
+        "visible"
+      ],
+      "props": {
+        "message": "Plain confirmation text.",
+        "onDismiss": "Optional callback. Caller owns removal; omitted callback omits the close action."
+      },
+      "usage": "Success feedback. No timer or automatic focus. Parent owns placement and lifetime.",
+      "dependencies": [
+        "turbo-button"
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Icon",
+            "selector": ".th-notice__icon"
+          },
+          {
+            "name": "Message",
+            "selector": ".th-notice__message"
+          },
+          {
+            "name": "Dismiss Action",
+            "selector": ".th-notice .th-button"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Inset",
+            "token": "--th-space-4",
+            "selector": ".th-notice",
+            "property": "padding-left"
+          },
+          {
+            "label": "Vertical inset",
+            "token": "--th-space-2",
+            "selector": ".th-notice",
+            "property": "padding-top"
+          },
+          {
+            "label": "Content gap",
+            "token": "--th-space-2",
+            "selector": ".th-notice",
+            "property": "column-gap"
+          }
+        ],
+        "ownership": "Notice owns 16px horizontal/8px vertical insets, 8px gaps and message typography. Action owns its hit area. Parent owns outer placement.",
+        "behavior": "Fluid width; message wraps. role=status announces feedback. Optional Action invokes caller dismissal; no automatic timer.",
+        "interactionOwnership": "Dismiss belongs to registered Action; caller owns notice removal."
+      }
+    },
+    {
+      "id": "turbo-radio-choice",
+      "name": "Radio choice",
+      "class": "th-radio-choice",
+      "category": "Inputs",
+      "css": "components/radio-choice.css",
+      "module": "components/radio-choice.js",
+      "preview": "specimens/radio-choice.html",
+      "states": [
+        "checked",
+        "unselected",
+        "disabled"
+      ],
+      "props": {
+        "id": "Required unique input ID.",
+        "name": "Native exclusive radio group name.",
+        "value": "Value emitted on selection.",
+        "label": "Accessible visible title.",
+        "description": "Optional wrapping supporting text.",
+        "checked": "Initial supplied boolean, false by default. Native group owns subsequent exclusive selection.",
+        "disabled": "Supplied boolean; false by default.",
+        "onChange": "Called with selected value on native change; caller persists application state."
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Control",
+            "selector": ".th-radio-choice__input"
+          },
+          {
+            "name": "Title",
+            "selector": ".th-radio-choice__title"
+          },
+          {
+            "name": "Description",
+            "selector": ".th-radio-choice__description"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Inset",
+            "token": "--th-space-4",
+            "selector": ".th-radio-choice",
+            "property": "padding-left"
+          },
+          {
+            "label": "Content gap",
+            "token": "--th-space-2",
+            "selector": ".th-radio-choice",
+            "property": "column-gap"
+          },
+          {
+            "label": "Description gap",
+            "token": "--th-space-2",
+            "selector": ".th-radio-choice",
+            "property": "row-gap"
+          }
+        ],
+        "ownership": "Owns 16px inset, 8px gaps and 24px native control. Parent owns group, legend and external spacing.",
+        "behavior": "Fluid width with wrapping text; native keyboard, focus and disabled semantics. Label activates input.",
+        "interactionOwnership": "Radio choice owns native activation and focus; caller supplies initial state and handles selected-value output."
+      },
+      "usage": "Use within a fieldset with a legend. Reuse one group name for mutually exclusive choices.",
+      "previewConfigurations": [
+        {
+          "id": "descriptive",
+          "name": "With description",
+          "selector": "#descriptive"
+        },
+        {
+          "id": "plain",
+          "name": "Title only",
+          "selector": "#plain"
+        }
+      ],
+      "dependencies": []
+    },
+    {
+      "id": "turbo-hub-entry",
+      "name": "Hub entry",
+      "class": "th-hub-entry",
+      "category": "Navigation",
+      "css": "components/hub-entry.css",
+      "module": "components/hub-entry.js",
+      "preview": "specimens/hub-entry.html",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active"
+      ],
+      "dependencies": [
+        "turbo-avatar"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "members",
+          "name": "With members",
+          "selector": "#members"
+        },
+        {
+          "id": "plain",
+          "name": "Without members",
+          "selector": "#plain"
+        }
+      ],
+      "props": {
+        "name": "Hub name, wrapping plain text.",
+        "type": "Hub category; defaults to Family Hub.",
+        "members": "Optional member names; first three render as decorative initials. Accessible name announces total supplied count.",
+        "href": "Required navigation destination."
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Name",
+            "selector": ".th-hub-entry__name"
+          },
+          {
+            "name": "Type",
+            "selector": ".th-hub-entry__type"
+          },
+          {
+            "name": "Members",
+            "selector": ".th-hub-entry__members"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Inset",
+            "token": "--th-space-4",
+            "selector": ".th-hub-entry",
+            "property": "padding-left"
+          },
+          {
+            "label": "Identity gap",
+            "token": "--th-space-4",
+            "selector": ".th-hub-entry",
+            "property": "column-gap"
+          },
+          {
+            "label": "Copy gap",
+            "token": "--th-space-2",
+            "selector": ".th-hub-entry__copy",
+            "property": "row-gap"
+          },
+          {
+            "label": "Member gap",
+            "token": "--th-space-1",
+            "selector": ".th-hub-entry__members",
+            "property": "column-gap"
+          }
+        ],
+        "ownership": "Entry owns inset, identity gap, copy and member spacing. Avatar owns all child geometry. Parent owns list gaps.",
+        "behavior": "Fluid native link, keyboard Enter navigation, wrapping name and member row. Optional members omitted.",
+        "interactionOwnership": "Entry owns navigation semantics and hover/focus/active. Caller supplies destination. Nested Avatars are decorative."
+      }
+    },
+    {
+      "id": "turbo-payment-notification",
+      "name": "Payment request notification",
+      "class": "th-payment-notification",
+      "category": "Navigation",
+      "css": "components/payment-notification.css",
+      "module": "components/payment-notification.js",
+      "preview": "specimens/payment-notification.html",
+      "states": [
+        "default",
+        "hover",
+        "focus",
+        "active"
+      ],
+      "dependencies": [],
+      "props": {
+        "message": "Plain wrapping request text; caller owns member/merchant/amount content.",
+        "href": "Required destination for opening the request.",
+        "app": "App name, defaults to PayZapp.",
+        "time": "Timestamp label, defaults to now."
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Header",
+            "selector": ".th-payment-notification__header"
+          },
+          {
+            "name": "Timestamp",
+            "selector": ".th-payment-notification__time"
+          },
+          {
+            "name": "Message",
+            "selector": ".th-payment-notification__message"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Inset",
+            "token": "--th-space-3",
+            "selector": ".th-payment-notification",
+            "property": "padding-left"
+          },
+          {
+            "label": "Header and message",
+            "token": "--th-space-1",
+            "selector": ".th-payment-notification",
+            "property": "row-gap"
+          },
+          {
+            "label": "Brand gap",
+            "token": "--th-space-2",
+            "selector": ".th-payment-notification__header",
+            "property": "column-gap"
+          }
+        ],
+        "ownership": "Owns 12px inset, 4px message gap, 8px header gap, brand mark and native link treatment. Parent owns lock-screen placement and wallpaper.",
+        "behavior": "Fluid link with wrapping plain text. Enter opens caller-supplied request. No live notification permission or delivery behavior.",
+        "interactionOwnership": "Owns link hover/focus/active and native activation. Caller owns request data and destination."
+      },
+      "usage": "Use on a dark lock-screen preview; all text belongs to the consuming screen."
+    }
+  ],
+  "compositions": [],
+  "patterns": [
+    {
+      "id": "rounded-screen-surface",
+      "name": "Blue header + rounded content surface",
+      "category": "Screen layout",
+      "preview": "../app/prototypes/hub-dashboard/index.html",
+      "summary": "Default Turbo Hub screen layout: continuous blue chrome above a light content surface with 24px top corners.",
+      "structure": [
+        "The .phone-screen adopts .th-chrome-backdrop so fixed status, navigation and optional page heading share one visual treatment.",
+        "The .phone-content surface fills remaining space with 24px top-left and top-right corners.",
+        "Content scrolls inside the surface. Optional footer and home safe area remain fixed."
+      ],
+      "requirements": [
+        "Reuse prototypes/shared/phone-preview.css and phone-preview.js, and apply .th-chrome-backdrop to .phone-screen.",
+        "Every new Turbo Hub screen follows the rounded transition by default.",
+        "Keep product surfaces light and the preview backdrop dark gray outside the phone.",
+        "Page owns its content insets; preserve registered component internals."
+      ],
+      "route": "Screen route owns navigation.",
+      "behavior": "Native registered controls own keyboard behavior; scroll remains inside .phone-content. Preview scales a fixed 390 × 844 viewport.",
+      "examples": [
+        "Hub Details",
+        "Add Member details and payment methods"
+      ]
+    }
+  ],
+  "visualizations": [],
+  "themes": [],
+  "screens": [
+    {
+      "id": "hub-dashboard",
+      "name": "Hub Details · Spends",
+      "preview": "../app/prototypes/hub-dashboard/index.html?tab=Spends",
+      "description": "Figma-refined Spends view with centered hub identity, circular limit and transaction list. Fixed 390 × 844 phone viewport; internal scroll and Hub tabs remain available."
+    },
+    {
+      "id": "hub-members",
+      "name": "Hub Details · Members",
+      "preview": "../app/prototypes/hub-dashboard/index.html?tab=Members",
+      "description": "Figma-refined Members view with joined/pending profile cards, role and relationship tags, member limits and the Add Member route. Reuses the shared Hub page with its Members tab selected."
+    },
+    {
+      "id": "add-member",
+      "name": "Add Member · Details and payment methods",
+      "preview": "../app/prototypes/add-member/index.html",
+      "description": "Two defined source steps. Validates details, preserves back-navigation values, and adds a pending invitation to the demo session. No invitation is sent externally."
+    },
+    {
+      "id": "member-payment-methods",
+      "name": "Add Member · Payment methods",
+      "preview": "../app/prototypes/add-member/index.html?step=payments",
+      "description": "Direct view of the existing payment-choice step. Reuses Checkbox choice and Action. Selections persist when returning to details; Send Invite requires valid member details and remains a local demo."
+    },
+    {
+      "id": "payment-review",
+      "name": "Member · Review payment",
+      "preview": "../app/prototypes/payment-review/index.html",
+      "description": "Nykaa payment review with amount, optional message and Hub account. Swipe demonstrates a local approval request; no money or message is sent."
+    },
+    {
+      "id": "request-pending",
+      "name": "Member · Request pending",
+      "preview": "../app/prototypes/request-pending/index.html"
+    },
+    {
+      "id": "authorization-confirmed",
+      "name": "Manager · Authorization confirmed",
+      "preview": "../app/prototypes/authorization-confirmed/index.html",
+      "description": "Manager-side success outcome from Figma 436:65736. Close returns to Hub Spends. A local preview, separate from payment completion."
+    },
+    {
+      "id": "payment-authorize",
+      "name": "Manager · Review and authorize",
+      "preview": "../app/prototypes/payment-authorize/index.html",
+      "description": "Member, merchant and requested amount with local Decline feedback and Swipe to Authorize navigation."
+    },
+    {
+      "id": "payment-processing",
+      "name": "Member · Payment processing",
+      "preview": "../app/prototypes/payment-processing/index.html"
+    },
+    {
+      "id": "payment-receipt",
+      "name": "Member · Payment receipt",
+      "preview": "../app/prototypes/payment-receipt/index.html"
+    },
+    {
+      "id": "member-profile",
+      "name": "Member · Profile pending action",
+      "preview": "../app/prototypes/member-profile/index.html"
+    },
+    {
+      "id": "delivery-details",
+      "name": "Member · Delivery details",
+      "preview": "../app/prototypes/delivery-details/index.html"
+    },
+    {
+      "id": "address-saved",
+      "name": "Member · Address saved",
+      "preview": "../app/prototypes/member-profile/index.html?saved=true"
+    },
+    {
+      "id": "hub-type",
+      "name": "Create Hub · Type",
+      "preview": "../app/prototypes/create-hub/index.html?step=type"
+    },
+    {
+      "id": "hub-setup",
+      "name": "Create Hub · Name & source",
+      "preview": "../app/prototypes/create-hub/index.html?step=details"
+    },
+    {
+      "id": "hub-created",
+      "name": "Create Hub · Created",
+      "preview": "../app/prototypes/create-hub/index.html?step=created"
+    },
+    {
+      "id": "hubs",
+      "name": "Hubs · Managed by me",
+      "preview": "../app/prototypes/hubs/index.html"
+    },
+    {
+      "id": "scan-qr",
+      "name": "Member · Scan QR",
+      "preview": "../app/prototypes/scan-qr/index.html"
+    },
+    {
+      "id": "payment-notification",
+      "name": "Manager · Payment notification",
+      "preview": "../app/prototypes/payment-notification/index.html"
+    },
+    {
+      "id": "accounts-cards",
+      "name": "Discovery · Accounts & Cards",
+      "preview": "../app/prototypes/accounts-cards/index.html"
+    },
+    {
+      "id": "hub-introduction",
+      "name": "Discovery · Turbo Hub introduction",
+      "preview": "../app/prototypes/hub-introduction/index.html"
+    },
+    {
+      "id": "pixel-tag",
+      "name": "Pixel Tag · Link or buy",
+      "preview": "../app/prototypes/pixel-tag/index.html",
+      "description": "Defined Figma choice screen, shared Navigation, Page header and Action. Generic artwork and no-op purchase/link actions pending subsequent flows."
+    },
+    {
+      "id": "tag-scanner",
+      "name": "Pixel Tag · Scan QR",
+      "preview": "../app/prototypes/tag-scanner/index.html",
+      "description": "Static Figma tag-camera scene and QR overlay, registered Navigation close action. No camera permission or decoding."
+    },
+    {
+      "id": "tag-added",
+      "name": "Pixel Tag · Added to Hub",
+      "preview": "../app/prototypes/tag-added/index.html",
+      "description": "Figma Members snapshot with Card Keys Pixel+ Tag and its unfinished geofence prompt; scanner advance is external preview navigation."
+    },
+    {
+      "id": "invitation",
+      "name": "Member · Invitation entry",
+      "preview": "../app/prototypes/invitation/index.html",
+      "description": "DS adaptation of Figma WhatsApp invitation content. Existing-user action opens the local member profile; no invitation is sent and no live deep link is used."
+    },
+    {
+      "id": "request-declined",
+      "name": "Member · Request declined",
+      "preview": "../app/prototypes/payment-unapproved/index.html?state=declined",
+      "description": "Proposed recovery outcome using Figma pending request as a related reference and unchanged DS controls. Local demonstration only."
+    },
+    {
+      "id": "request-expired",
+      "name": "Member · Request expired",
+      "preview": "../app/prototypes/payment-unapproved/index.html?state=expired",
+      "description": "Proposed recovery outcome using Figma pending request as a related reference and unchanged DS controls. Local demonstration only."
+    },
+    {
+      "id": "spending-limit",
+      "name": "Hub · Spending limit editor",
+      "preview": "../app/prototypes/spending-limit/index.html",
+      "description": "Proposed monthly Hub/member editor with shared fields, select, Action and Notice. Saves in the local demo session."
+    },
+    {
+      "id": "geofence-setup",
+      "name": "Pixel+ Tag · Geofence setup",
+      "preview": "../app/prototypes/geofence-setup/index.html",
+      "description": "Proposed location/radius form, illustrative boundary and simulated permission. Local save updates Card Keys; no geocoding or device permission."
+    },
+    {
+      "id": "new-user-entry",
+      "name": "Member · New-user entry",
+      "preview": "../app/prototypes/invitation/index.html?audience=new",
+      "description": "Single proposed invitation landing for new users; no onboarding carousel. Account creation is outside the prototype, with explicit after-setup preview navigation."
+    }
+  ],
+  "icons": [
+    {
+      "name": "Turbo Hub icons",
+      "id": "turbo-icons",
+      "module": "icons/turbo-icons.js",
+      "preview": "specimens/icons.html",
+      "usage": "Starter-style searchable Phosphor and Turbo Hub icon library. Inspect Regular/Bold/Fill weights and click to copy TurboIcons.render(name, {size:24}). Replace semantic glyphs centrally using TurboIcons.replace(name, svgBody, viewBox)."
+    }
+  ],
+  "tokenFiles": [
+    "tokens/primitives.css",
+    "tokens/semantics.css"
+  ],
+  "knownGaps": [],
+  "decisions": [
+    "decisions/icon-foundation.md",
+    "decisions/dashboard-extraction.md",
+    "decisions/phone-preview.md",
+    "decisions/add-member-extraction.md",
+    "decisions/screen-layout.md",
+    "decisions/payment-review.md",
+    "decisions/navigation-bar.md",
+    "decisions/page-header.md",
+    "decisions/chrome-backdrop.md"
+  ],
+  "foundationPresentation": {
+    "tokens": {
+      "--font-family-inter": {
+        "label": "Inter",
+        "kind": "family",
+        "layer": "primitive"
+      },
+      "--font-weight-regular": {
+        "label": "Regular",
+        "kind": "weight",
+        "layer": "primitive"
+      },
+      "--font-weight-medium": {
+        "label": "Medium",
+        "kind": "weight",
+        "layer": "primitive"
+      },
+      "--font-weight-semibold": {
+        "label": "Semibold",
+        "kind": "weight",
+        "layer": "primitive"
+      },
+      "--font-weight-bold": {
+        "label": "Bold",
+        "kind": "weight",
+        "layer": "primitive"
+      },
+      "--font-size-12": {
+        "label": "12px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-13": {
+        "label": "13px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-14": {
+        "label": "14px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-16": {
+        "label": "16px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-18": {
+        "label": "18px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-20": {
+        "label": "20px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-22": {
+        "label": "22px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-24": {
+        "label": "24px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-26": {
+        "label": "26px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-28": {
+        "label": "28px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-size-32": {
+        "label": "32px",
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--font-body": {
+        "kind": "family",
+        "layer": "semantic"
+      },
+      "--font-heading": {
+        "kind": "family",
+        "layer": "semantic"
+      },
+      "--font-label": {
+        "kind": "family",
+        "layer": "semantic"
+      },
+      "--th-font": {
+        "kind": "family",
+        "layer": "semantic"
+      },
+      "--weight-body": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--weight-heading": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--weight-action": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--th-type-body": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--th-type-small": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--th-type-title": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--header-title-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--font-leading-normal": {
+        "kind": "leading",
+        "layer": "primitive"
+      },
+      "--font-leading-tight": {
+        "kind": "leading",
+        "layer": "primitive"
+      },
+      "--font-leading-20": {
+        "kind": "leading",
+        "layer": "primitive"
+      },
+      "--leading-body": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--leading-heading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--leading-action-compact": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-action-compact": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--font-size-10": {
+        "kind": "size",
+        "layer": "primitive"
+      },
+      "--type-body-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-body-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-body-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-screen-heading-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-screen-heading-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-screen-heading-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-navigation-title-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-navigation-title-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-navigation-title-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-identity-heading-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-identity-heading-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-identity-heading-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-section-heading-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-section-heading-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-section-heading-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-item-title-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-item-title-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-item-title-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-caption-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-caption-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-caption-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-supporting-text-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-supporting-text-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-supporting-text-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-field-label-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-field-label-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-field-label-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-field-value-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-field-value-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-field-value-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-amount-summary-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-amount-summary-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-amount-summary-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-action-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-action-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-action-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-action-compact-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-action-compact-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-action-compact-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-choice-title-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-choice-title-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-choice-title-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-choice-price-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-choice-price-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-choice-price-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-tab-label-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-tab-label-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-tab-label-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-tab-active-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-tab-active-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-tab-active-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-status-heading-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-status-heading-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-status-heading-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-section-heading-small-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-section-heading-small-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-section-heading-small-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-chart-value-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-chart-value-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-chart-value-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-chart-axis-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-chart-axis-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-chart-axis-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-tag-label-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-tag-label-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-tag-label-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-limit-value-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-limit-value-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-limit-value-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-metadata-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-metadata-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-metadata-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      },
+      "--type-payment-amount-size": {
+        "kind": "size",
+        "layer": "semantic"
+      },
+      "--type-payment-amount-weight": {
+        "kind": "weight",
+        "layer": "semantic"
+      },
+      "--type-payment-amount-leading": {
+        "kind": "leading",
+        "layer": "semantic"
+      }
+    },
+    "textStyles": [
+      {
+        "id": "body",
+        "name": "Body",
+        "sample": "Body",
+        "family": "--font-family-inter",
+        "size": "--font-size-16",
+        "weight": "--font-weight-regular",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-body-size",
+          "weight": "--type-body-weight",
+          "leading": "--type-body-leading"
+        }
+      },
+      {
+        "id": "screen-heading",
+        "name": "Screen heading",
+        "sample": "Provide member details",
+        "family": "--font-family-inter",
+        "size": "--font-size-20",
+        "weight": "--font-weight-medium",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-screen-heading-size",
+          "weight": "--type-screen-heading-weight",
+          "leading": "--type-screen-heading-leading"
+        }
+      },
+      {
+        "id": "navigation-title",
+        "name": "Navigation title",
+        "sample": "Navigation title",
+        "family": "--font-family-inter",
+        "size": "--font-size-18",
+        "weight": "--font-weight-semibold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-navigation-title-size",
+          "weight": "--type-navigation-title-weight",
+          "leading": "--type-navigation-title-leading"
+        }
+      },
+      {
+        "id": "identity-heading",
+        "name": "Hub identity",
+        "sample": "Hub identity",
+        "family": "--font-family-inter",
+        "size": "--font-size-20",
+        "weight": "--font-weight-semibold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-identity-heading-size",
+          "weight": "--type-identity-heading-weight",
+          "leading": "--type-identity-heading-leading"
+        }
+      },
+      {
+        "id": "section-heading",
+        "name": "Section heading",
+        "sample": "Section heading",
+        "family": "--font-family-inter",
+        "size": "--font-size-16",
+        "weight": "--font-weight-semibold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-section-heading-size",
+          "weight": "--type-section-heading-weight",
+          "leading": "--type-section-heading-leading"
+        }
+      },
+      {
+        "id": "item-title",
+        "name": "Item title",
+        "sample": "Item title",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-semibold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-item-title-size",
+          "weight": "--type-item-title-weight",
+          "leading": "--type-item-title-leading"
+        }
+      },
+      {
+        "id": "caption",
+        "name": "Caption",
+        "sample": "Caption",
+        "family": "--font-family-inter",
+        "size": "--font-size-12",
+        "weight": "--font-weight-regular",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-caption-size",
+          "weight": "--type-caption-weight",
+          "leading": "--type-caption-leading"
+        }
+      },
+      {
+        "id": "supporting-text",
+        "name": "Supporting text",
+        "sample": "Supporting text",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-regular",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-supporting-text-size",
+          "weight": "--type-supporting-text-weight",
+          "leading": "--type-supporting-text-leading"
+        }
+      },
+      {
+        "id": "field-label",
+        "name": "Field label",
+        "sample": "Field label",
+        "family": "--font-family-inter",
+        "size": "--font-size-10",
+        "weight": "--font-weight-regular",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-field-label-size",
+          "weight": "--type-field-label-weight",
+          "leading": "--type-field-label-leading"
+        }
+      },
+      {
+        "id": "field-value",
+        "name": "Field value",
+        "sample": "₹2,500",
+        "family": "--font-family-inter",
+        "size": "--font-size-16",
+        "weight": "--font-weight-medium",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-field-value-size",
+          "weight": "--type-field-value-weight",
+          "leading": "--type-field-value-leading"
+        }
+      },
+      {
+        "id": "amount-summary",
+        "name": "Spending amount",
+        "sample": "₹14,500",
+        "family": "--font-family-inter",
+        "size": "--font-size-20",
+        "weight": "--font-weight-bold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-amount-summary-size",
+          "weight": "--type-amount-summary-weight",
+          "leading": "--type-amount-summary-leading"
+        }
+      },
+      {
+        "id": "action",
+        "name": "Primary action",
+        "sample": "Primary action",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-bold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-action-size",
+          "weight": "--type-action-weight",
+          "leading": "--type-action-leading"
+        }
+      },
+      {
+        "id": "action-compact",
+        "name": "Compact action",
+        "sample": "Change bank account",
+        "family": "--font-family-inter",
+        "size": "--font-size-12",
+        "weight": "--font-weight-medium",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-action-compact-size",
+          "weight": "--type-action-compact-weight",
+          "leading": "--type-action-compact-leading"
+        }
+      },
+      {
+        "id": "choice-title",
+        "name": "Payment choice",
+        "sample": "Payment choice",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-bold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-choice-title-size",
+          "weight": "--type-choice-title-weight",
+          "leading": "--type-choice-title-leading"
+        }
+      },
+      {
+        "id": "choice-price",
+        "name": "Choice price",
+        "sample": "Choice price",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-medium",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-choice-price-size",
+          "weight": "--type-choice-price-weight",
+          "leading": "--type-choice-price-leading"
+        }
+      },
+      {
+        "id": "tab-label",
+        "name": "Tab label",
+        "sample": "Tab label",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-regular",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-tab-label-size",
+          "weight": "--type-tab-label-weight",
+          "leading": "--type-tab-label-leading"
+        }
+      },
+      {
+        "id": "tab-active",
+        "name": "Active tab",
+        "sample": "Active tab",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-bold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-tab-active-size",
+          "weight": "--type-tab-active-weight",
+          "leading": "--type-tab-active-leading"
+        }
+      },
+      {
+        "id": "status-heading",
+        "name": "Status heading",
+        "sample": "Status heading",
+        "family": "--font-family-inter",
+        "size": "--font-size-18",
+        "weight": "--font-weight-semibold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-status-heading-size",
+          "weight": "--type-status-heading-weight",
+          "leading": "--type-status-heading-leading"
+        }
+      },
+      {
+        "id": "section-heading-small",
+        "name": "Small section heading",
+        "sample": "Small section heading",
+        "family": "--font-family-inter",
+        "size": "--font-size-14",
+        "weight": "--font-weight-semibold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-section-heading-small-size",
+          "weight": "--type-section-heading-small-weight",
+          "leading": "--type-section-heading-small-leading"
+        }
+      },
+      {
+        "id": "chart-value",
+        "name": "Chart value",
+        "sample": "Chart value",
+        "family": "--font-family-inter",
+        "size": "--font-size-12",
+        "weight": "--font-weight-medium",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-chart-value-size",
+          "weight": "--type-chart-value-weight",
+          "leading": "--type-chart-value-leading"
+        }
+      },
+      {
+        "id": "chart-axis",
+        "name": "Chart axis",
+        "sample": "Chart axis",
+        "family": "--font-family-inter",
+        "size": "--font-size-10",
+        "weight": "--font-weight-medium",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-chart-axis-size",
+          "weight": "--type-chart-axis-weight",
+          "leading": "--type-chart-axis-leading"
+        }
+      },
+      {
+        "id": "tag-label",
+        "name": "Tag label",
+        "sample": "Manager",
+        "family": "--font-family-inter",
+        "size": "--font-size-10",
+        "weight": "--font-weight-medium",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-label",
+          "size": "--type-tag-label-size",
+          "weight": "--type-tag-label-weight",
+          "leading": "--type-tag-label-leading"
+        }
+      },
+      {
+        "id": "limit-value",
+        "name": "Member limit value",
+        "sample": "₹45,000",
+        "family": "--font-family-inter",
+        "size": "--font-size-12",
+        "weight": "--font-weight-semibold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-limit-value-size",
+          "weight": "--type-limit-value-weight",
+          "leading": "--type-limit-value-leading"
+        }
+      },
+      {
+        "id": "metadata",
+        "name": "Small metadata",
+        "sample": "Monthly Limit",
+        "family": "--font-family-inter",
+        "size": "--font-size-10",
+        "weight": "--font-weight-regular",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-body",
+          "size": "--type-metadata-size",
+          "weight": "--type-metadata-weight",
+          "leading": "--type-metadata-leading"
+        }
+      },
+      {
+        "id": "payment-amount",
+        "name": "Payment amount",
+        "sample": "₹2,500",
+        "family": "--font-family-inter",
+        "size": "--font-size-32",
+        "weight": "--font-weight-bold",
+        "leading": "--font-leading-normal",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-payment-amount-size",
+          "weight": "--type-payment-amount-weight",
+          "leading": "--type-payment-amount-leading"
+        }
+      },
+      {
+        "id": "lock-time",
+        "name": "Lock-screen time",
+        "sample": "12:04",
+        "family": "--font-family-inter",
+        "size": "--font-size-78",
+        "weight": "--font-weight-light",
+        "leading": "--font-leading-tight",
+        "semanticTokens": {
+          "family": "--font-heading",
+          "size": "--type-lock-time-size",
+          "weight": "--type-lock-time-weight",
+          "leading": "--type-lock-time-leading"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+.th-chrome-backdrop {
+ position:relative;
+ isolation:isolate;
+ background:var(--chrome-backdrop);
+ background-repeat:no-repeat;
+ background-size:100% 100%;
+}
+.th-chrome-backdrop::before {
+ content:"";
+ position:absolute;
+ inset:0;
+ z-index:-1;
+ border-radius:inherit;
+ pointer-events:none;
+ background:var(--chrome-backdrop-patch);
+ opacity:0;
+ animation:th-chrome-ambient var(--chrome-backdrop-motion-duration) ease-in-out infinite;
+ animation-play-state:var(--chrome-backdrop-motion-state);
+}
+.th-chrome-backdrop .th-statusbar { background:transparent; }
+@keyframes th-chrome-ambient { 0%,100% { opacity:0; } 50% { opacity:var(--chrome-backdrop-motion-intensity); } }
+@media(prefers-reduced-motion:reduce) { .th-chrome-backdrop::before { animation:none; opacity:0; } }

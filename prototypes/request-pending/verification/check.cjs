@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+let now=0,timer,remaining,cleared=false,intervalCount=0;const events={};
+const nodes=new Map();
+for(const id of ['statusbar','toolbar','countdown','request-heading','outcome','recovery'])nodes.set(id,{children:[],append(...items){this.children.push(...items)},textContent:''});
+const context={URLSearchParams,location:{search:'?amount=3500'},Date:{now:()=>now},Number,Math,TurboUI:{statusbar:()=>({}),button:props=>props,countdown:()=>({setRemaining:value=>remaining=value})},document:{getElementById:id=>nodes.get(id),addEventListener(){}},window:{addEventListener:(name,handler)=>events[name]=handler},setInterval:callback=>(timer=callback,++intervalCount),clearInterval:()=>cleared=true};
+vm.runInNewContext(fs.readFileSync(__dirname+'/../screen.js','utf8'),context);
+now=450000;timer();assert.equal(remaining,450);
+events.pagehide();now=600000;events.pageshow({persisted:true});assert.equal(remaining,300);assert.equal(intervalCount,2);
+now=900000;timer();assert.equal(remaining,0);assert.equal(nodes.get('request-heading').textContent,'Approval request expired');assert.equal(cleared,true);assert.equal(nodes.get('recovery').children[0].href,'../payment-review/index.html?amount=3500');
+now=901000;timer();assert.equal(nodes.get('recovery').children.length,1);
+console.log('PASS: elapsed-time countdown, expiry, single recovery action, preserved amount.');

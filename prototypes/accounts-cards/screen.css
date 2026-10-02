@@ -1,0 +1,5 @@
+.accounts-content { padding:var(--th-space-6); background:var(--th-white); display:flex; flex-direction:column; gap:var(--th-space-6); }
+.account-group { padding:0 var(--th-space-4); border:1px solid var(--color-border); border-radius:var(--th-radius); background:var(--color-surface); }
+.account-group__action { border-top:1px solid var(--color-border); padding:var(--th-space-3) 0; display:grid; }
+.account-cards { display:flex; gap:var(--th-space-2); overflow:auto; padding:var(--th-space-3) 0; border-top:1px solid var(--color-border); }
+.accounts-content > .th-button { min-height:96px; }

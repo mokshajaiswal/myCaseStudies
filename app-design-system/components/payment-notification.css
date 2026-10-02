@@ -1,0 +1,8 @@
+.th-payment-notification { display:grid; gap:var(--th-space-1); padding:var(--th-space-3); background:rgba(13,18,29,.82); color:var(--th-white); border-radius:12px; text-decoration:none; }
+.th-payment-notification__header { display:flex; align-items:center; gap:var(--th-space-2); color:#c2c8d4; font:var(--type-item-title-weight) var(--type-item-title-size)/var(--type-item-title-leading) var(--font-body); }
+.th-payment-notification__time { margin-left:auto; font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
+.th-payment-notification__mark { display:inline-flex; align-items:center; justify-content:center; width:20px; height:20px; border-radius:4px; color:var(--color-action); background:var(--th-white); }
+.th-payment-notification__message { margin:0; overflow-wrap:anywhere; font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.th-payment-notification:hover { background:rgba(13,18,29,.92); }
+.th-payment-notification:focus-visible { outline:3px solid var(--th-white); outline-offset:3px; }
+.th-payment-notification:active { opacity:.9; }

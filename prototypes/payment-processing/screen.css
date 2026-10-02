@@ -1,0 +1,8 @@
+.processing-screen,.phone-viewport:has(.processing-screen) { --chrome-backdrop-base:radial-gradient(ellipse 115% 67% at 50% 0%,#ffbf14 0%,#c78a11 75%); --chrome-backdrop-patch:linear-gradient(transparent,transparent); --chrome-backdrop:var(--chrome-backdrop-base); background:var(--chrome-backdrop); }
+.processing-screen { color:var(--th-white); }
+.processing-result { position:absolute; top:23.25%; left:var(--th-space-6); right:var(--th-space-6); display:flex; flex-direction:column; align-items:center; text-align:center; }
+.transfer-illustration { position:relative; width:229px; height:94px; overflow:hidden; margin-bottom:54px; }
+.transfer-illustration img { position:absolute; width:177.38%; height:764.52%; left:-38.8%; top:-91.94%; max-width:none; }
+.processing-result h1 { margin:var(--th-space-1) 0 0; font:var(--type-status-heading-weight) var(--type-status-heading-size)/var(--type-status-heading-leading) var(--font-heading); }
+.processing-screen .home-indicator { margin-top:auto; background:transparent; }
+.processing-screen .home-indicator::after { background:var(--th-white); }

@@ -1,0 +1,6 @@
+.authorization-screen { color:var(--th-white); }
+.authorization-toolbar { --color-action-soft:transparent; --color-action:var(--th-white); display:flex; justify-content:flex-end; padding:0 var(--th-space-6); flex:none; }
+.authorization-result { position:absolute; top:40.375%; left:var(--th-space-6); right:var(--th-space-6); display:flex; flex-direction:column; align-items:center; gap:var(--th-space-4); text-align:center; }
+.authorization-result h1 { margin:0; font:var(--type-amount-summary-weight) var(--type-screen-heading-size)/var(--type-screen-heading-leading) var(--font-heading); }
+.authorization-screen .home-indicator { margin-top:auto; background:transparent; }
+.authorization-screen .home-indicator::after { background:var(--th-white); }

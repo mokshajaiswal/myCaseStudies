@@ -1482,16 +1482,7 @@ function renderCaseStudy() {
   productRules.append(productRulesColumn);
   shell.append(productRules);
 
-  const flows = createElement("section", "case-section flows-section");
-  flows.id = "flows";
-  const flowsColumn = createElement("div", "reading-column");
-  flowsColumn.append(
-    createSectionHeading(caseStudy.flows.title),
-    createElement("p", "section-intro flows-intro", caseStudy.flows.intro),
-  );
-  caseStudy.flows.items.forEach((flow) => flowsColumn.append(createFlowJourney(flow)));
-  flows.append(flowsColumn);
-  shell.append(flows);
+  // Flow data and renderers are retained while this section is temporarily omitted.
 
   const closing = createElement("section", "case-section");
   closing.id = "closing";
@@ -1537,7 +1528,6 @@ function renderCaseStudy() {
     relationship,
     competitiveResearch,
     productRules,
-    flows,
   );
 
   contentRoot.replaceChildren(shell);

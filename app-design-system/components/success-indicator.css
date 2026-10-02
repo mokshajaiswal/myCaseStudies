@@ -1,0 +1,2 @@
+.th-success-indicator { display:inline-grid; place-items:center; width:var(--success-indicator-size); height:var(--success-indicator-size); flex:none; border-radius:50%; background:var(--th-white); color:var(--color-success); }
+.th-success-indicator svg { display:block; }

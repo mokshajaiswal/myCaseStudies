@@ -1,0 +1,6 @@
+.request-outcome-heading{flex:none}
+.request-outcome-content{padding:var(--th-space-6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--th-space-6);background:var(--color-surface);text-align:center}
+.request-outcome-icon{color:var(--color-text-secondary);display:grid;place-items:center}
+.request-outcome-copy{display:grid;gap:var(--th-space-2)}
+.request-outcome-copy h2{margin:0;font:var(--type-status-heading-weight) var(--type-status-heading-size)/var(--type-status-heading-leading) var(--font-heading)}
+.request-outcome-copy p{margin:0;font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body)}

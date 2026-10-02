@@ -1,0 +1,28 @@
+@import url('../shared/phone-preview.css');
+.overview { display:grid; gap:var(--th-space-4); padding:var(--th-space-6) var(--th-space-6) var(--th-space-4); background:var(--hub-identity-background); }
+#hub-panel { padding: 24px; outline-offset: -4px; }
+.section-heading {margin: 0 0 12px;font:var(--type-section-heading-weight) var(--type-section-heading-size)/var(--type-section-heading-leading) var(--font-heading);}
+.section-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.section-top h2 { margin: 0; }
+.row-list { background: white; border: 1px solid var(--color-border); border-radius: 16px; padding: 0 16px; }
+.row-list .th-row + .th-row { border-top: 1px solid var(--color-border); }
+.transaction-list { display:grid; gap:var(--th-space-8); }
+body[data-reference=spends] #hub-panel { padding-top:var(--th-space-4); background:var(--color-surface); }
+body[data-reference=spends] .home-indicator { background:var(--color-surface); }
+.member-list { display: grid; gap: 16px; }
+body[data-reference=members] #hub-panel { padding-top:var(--th-space-4); background:var(--color-surface); }
+body[data-reference=members] .home-indicator { background:var(--color-surface); }
+body[data-reference=members] .section-top { min-height:32px; margin-bottom:var(--th-space-4); }
+body[data-reference=members] .section-top h2 { color:var(--color-text-secondary); font:var(--type-section-heading-small-weight) var(--type-section-heading-small-size)/var(--type-section-heading-small-leading) var(--font-heading); }
+body[data-reference=members] .member-list { gap:var(--th-space-4); }
+.panel-section + .panel-section { margin-top: 24px; }
+.full-action { display: flex; margin-top: 20px; }
+.full-action .th-button { width: 100%; }
+.spenders { display: flex; justify-content: space-around; padding: 20px 12px; background: white; border: 1px solid var(--color-border); border-radius: 16px; gap: 12px; }
+.spender {display: grid;justify-items: center;gap: 8px;font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body);}
+.spender strong {font:var(--type-item-title-weight) var(--type-item-title-size)/var(--type-item-title-leading) var(--font-body);}
+@media (prefers-reduced-motion: no-preference) {
+  .th-button, .th-tabs button { transition: background .15s, color .15s; }
+}
+
+.panel-section .section-heading{font:var(--type-section-heading-small-weight) var(--type-section-heading-small-size)/var(--type-section-heading-small-leading) var(--font-heading);}

@@ -159,3 +159,33 @@ Also inspect the affected interaction at desktop and mobile widths when a browse
 - Phone screens remain placeholders until final images, video, or prototypes are supplied.
 - Heading icon/flower placeholders remain blank until final artwork is supplied.
 - The LinkedIn URL in the contact action is still a placeholder and must be replaced before publishing.
+
+## Flow companion page
+
+flow-reference/index.html is a separate placement guide reorganized from the original Framer case study. Five chapters connect manager setup, member access, member onboarding, payment authorization, and the optional Pixel Tag branch. Gray placeholders identify inspected screens or labeled source-caption/prototype references; amber placeholders identify suggested additions. Each slot includes placement instructions and UX rationale. Local source images are linked in expandable notes. Run node flow-reference/preview.cjs to preview on port 8123. The main page is unchanged.
+
+The companion now groups related screens into task sequences, with one UX decision per group. Repeated per-screen annotations and overview guidance are removed; provenance remains in References disclosures.
+
+Available source screens are now visible inline in the companion, with each screen opening its original image. Composite reference images are framed with CSS without changing the originals. Missing and suggested screens retain their placeholders.
+
+The standalone flow companion uses a dark background to distinguish source-screen edges; the main case study retains its light theme.
+
+Each screen now has an aligned information header above an equal-aspect media stage. Long source screens scroll within the stage; missing and suggested screens reserve the same space.
+
+Flow introductions and grouped UX rationale now use case-study prose grounded in the original content and inspected screens. Proposed entry, limit, exception, and geofence states remain explicitly described as proposals.
+
+## Turbo Hub design-system foundation
+
+app-design-system/ is the app-owned DS attachment, with a registered Phosphor icon provider and semantic TurboIcons wrapper. Start the studio with node .tmp-ds-starter/studio.js start --config app-design-system/studio.config.json (port 8020). Custom SVG replacements go through TurboIcons.replace(). Hub Details is the first rebuilt screen.
+
+## First rebuilt product screen
+
+prototypes/hub-dashboard/index.html reconstructs Hub Details using ten registered TurboUI components. Spends, Members and Analytics work; Show all transactions expands the list. Add opens the two-step Add Member flow; undefined settings remain disabled. Open http://localhost:8020/app/prototypes/hub-dashboard/index.html through the DS studio. app-design-system/specimens/component.html provides shared-renderer examples and registry metadata for reuse.
+
+The existing phone-shell asset frames a fixed 390 × 844 screen. Smaller browser windows scale the complete preview; content scrolls inside the screen. Native-style Phosphor status icons and centered navigation icons share the design-system renderers. Status/navigation and the bottom home indicator stay fixed.
+
+## Add Member flow
+
+prototypes/add-member/index.html implements the source details and payment-method screens. Existing DS controls are reused; four new form components are registered with shared-renderer specimens. Validation and back navigation work. Send Invite creates a pending member in this browser session only; nothing is sent externally. Shared phone-preview files retain the same 390 × 844 viewport across both screens.
+
+Member payment review lives at prototypes/payment-review/index.html. Payment account and Swipe action are registered with shared-renderer examples. The amount configuration extends the existing Text field. Only local demo request feedback is implemented; no external payment occurs.

@@ -1,0 +1,65 @@
+:root{--color-action:var(--th-blue);--color-action-soft:var(--th-blue-light);--color-text:var(--th-ink);--color-text-secondary:var(--th-muted);--color-surface:var(--th-white);--color-border:var(--th-line);--control-height:44px;--button-height:48px;--component-inset:var(--th-space-5);--component-gap:var(--th-space-3)}
+:root { --color-success:#28af61; --success-indicator-size:81px; --type-payment-amount-size:var(--font-size-32); --type-payment-amount-weight:var(--font-weight-bold); --type-payment-amount-leading:var(--font-leading-normal); }
+:root { --color-success:#28af61; --success-indicator-size:81px; --type-payment-amount-size:var(--font-size-32); --type-payment-amount-weight:var(--font-weight-bold); --type-payment-amount-leading:var(--font-leading-normal); }
+
+:root{--color-relationship-soft:#fff4dd;--color-relationship-text:#8d620b;--color-member-progress-track:#ededed;--type-tag-label-size:var(--font-size-10);--type-tag-label-weight:var(--font-weight-medium);--type-tag-label-leading:var(--font-leading-normal);--type-limit-value-size:var(--font-size-12);--type-limit-value-weight:var(--font-weight-semibold);--type-limit-value-leading:var(--font-leading-normal);--type-metadata-size:var(--font-size-10);--type-metadata-weight:var(--font-weight-regular);--type-metadata-leading:var(--font-leading-normal);}
+
+:root{--color-relationship-soft:#fff4dd;--color-relationship-text:#8d620b;--color-member-progress-track:#ededed;--type-tag-label-size:var(--font-size-10);--type-tag-label-weight:var(--font-weight-medium);--type-tag-label-leading:var(--font-leading-normal);--type-limit-value-size:var(--font-size-12);--type-limit-value-weight:var(--font-weight-semibold);--type-limit-value-leading:var(--font-leading-normal);--type-metadata-size:var(--font-size-10);--type-metadata-weight:var(--font-weight-regular);--type-metadata-leading:var(--font-leading-normal);}
+
+:root {
+ --chrome-backdrop-base:linear-gradient(115deg,#1676e8 0%,#4b59df 55%,#6656d9 100%);
+ --chrome-backdrop-patch:radial-gradient(ellipse at 78% 18%,rgba(184,164,255,.48) 0%,rgba(139,122,244,.22) 34%,rgba(102,86,217,0) 68%);
+ --chrome-backdrop:var(--chrome-backdrop-patch),var(--chrome-backdrop-base);
+ --header-background:var(--chrome-backdrop);
+ --chrome-backdrop-motion-state:paused;
+ --chrome-backdrop-motion-duration:20s;
+ --chrome-backdrop-motion-intensity:.18;
+ --header-title-size:var(--font-size-18);
+}
+
+:root {
+ --font-body:var(--font-family-inter);
+ --font-heading:var(--font-family-inter);
+ --font-label:var(--font-family-inter);
+ --weight-body:var(--font-weight-regular);
+ --weight-heading:var(--font-weight-semibold);
+ --weight-action:var(--font-weight-bold);
+ --th-font:var(--font-body);
+ --th-type-body:var(--font-size-16);
+ --th-type-small:var(--font-size-14);
+ --th-type-title:var(--font-size-20);
+}
+
+:root{--leading-body:var(--font-leading-normal);--leading-heading:var(--font-leading-normal);--leading-action-compact:var(--font-leading-normal);--type-action-compact:var(--font-size-12)}
+
+/* Measured Turbo Hub typography: distinct roles preserve independent control. */
+:root{
+--type-body-size:var(--font-size-16);--type-body-weight:var(--font-weight-regular);--type-body-leading:var(--font-leading-normal);
+--type-screen-heading-size:var(--font-size-20);--type-screen-heading-weight:var(--font-weight-medium);--type-screen-heading-leading:var(--font-leading-normal);
+--type-navigation-title-size:var(--font-size-18);--type-navigation-title-weight:var(--font-weight-semibold);--type-navigation-title-leading:var(--font-leading-normal);
+--type-identity-heading-size:var(--font-size-20);--type-identity-heading-weight:var(--font-weight-semibold);--type-identity-heading-leading:var(--font-leading-normal);
+--type-section-heading-size:var(--font-size-16);--type-section-heading-weight:var(--font-weight-semibold);--type-section-heading-leading:var(--font-leading-normal);
+--type-item-title-size:var(--font-size-14);--type-item-title-weight:var(--font-weight-semibold);--type-item-title-leading:var(--font-leading-normal);
+--type-caption-size:var(--font-size-12);--type-caption-weight:var(--font-weight-regular);--type-caption-leading:var(--font-leading-normal);
+--type-supporting-text-size:var(--font-size-14);--type-supporting-text-weight:var(--font-weight-regular);--type-supporting-text-leading:var(--font-leading-normal);
+--type-field-label-size:var(--font-size-10);--type-field-label-weight:var(--font-weight-regular);--type-field-label-leading:var(--font-leading-normal);
+--type-field-value-size:var(--font-size-16);--type-field-value-weight:var(--font-weight-medium);--type-field-value-leading:var(--font-leading-normal);
+--type-amount-summary-size:var(--font-size-20);--type-amount-summary-weight:var(--font-weight-bold);--type-amount-summary-leading:var(--font-leading-normal);
+--type-action-size:var(--font-size-14);--type-action-weight:var(--font-weight-bold);--type-action-leading:var(--font-leading-normal);
+--type-action-compact-size:var(--font-size-12);--type-action-compact-weight:var(--font-weight-medium);--type-action-compact-leading:var(--font-leading-normal);
+--type-choice-title-size:var(--font-size-14);--type-choice-title-weight:var(--font-weight-bold);--type-choice-title-leading:var(--font-leading-normal);
+--type-choice-price-size:var(--font-size-14);--type-choice-price-weight:var(--font-weight-medium);--type-choice-price-leading:var(--font-leading-normal);
+--type-tab-label-size:var(--font-size-14);--type-tab-label-weight:var(--font-weight-regular);--type-tab-label-leading:var(--font-leading-normal);
+--type-tab-active-size:var(--font-size-14);--type-tab-active-weight:var(--font-weight-bold);--type-tab-active-leading:var(--font-leading-normal);
+--type-status-heading-size:var(--font-size-18);--type-status-heading-weight:var(--font-weight-semibold);--type-status-heading-leading:var(--font-leading-normal);
+}
+
+:root{--type-section-heading-small-size:var(--font-size-14);--type-section-heading-small-weight:var(--font-weight-semibold);--type-section-heading-small-leading:var(--font-leading-normal);--type-chart-value-size:var(--font-size-12);--type-chart-value-weight:var(--font-weight-medium);--type-chart-value-leading:var(--font-leading-normal);--type-chart-axis-size:var(--font-size-10);--type-chart-axis-weight:var(--font-weight-medium);--type-chart-axis-leading:var(--font-leading-normal);}
+
+/* Prototype_v1 list and identity surfaces, independent of action colors. */
+:root{--color-list-title:#0066b4;--color-list-detail:#444;--color-icon-soft:#e7f4ff;--color-progress-track:#b8e0ff;--color-reference-border:#d2e7ff;--transaction-detail-gap:2px;--hub-identity-background:radial-gradient(ellipse at 22% 18%,#f6dff0 0%,transparent 48%),radial-gradient(ellipse at 75% 24%,#ddf3fb 0%,transparent 48%),linear-gradient(#fff8ff,#fff 95%);}
+
+/* Prototype_v1 list and identity surfaces, independent of action colors. */
+:root{--color-list-title:#0066b4;--color-list-detail:#444;--color-icon-soft:#e7f4ff;--color-progress-track:#b8e0ff;--color-reference-border:#d2e7ff;--transaction-detail-gap:2px;--hub-identity-background:radial-gradient(ellipse at 22% 18%,#f6dff0 0%,transparent 48%),radial-gradient(ellipse at 75% 24%,#ddf3fb 0%,transparent 48%),linear-gradient(#fff8ff,#fff 95%);}
+
+:root{--type-lock-time-size:var(--font-size-78);--type-lock-time-weight:var(--font-weight-light);--type-lock-time-leading:var(--font-leading-tight);}

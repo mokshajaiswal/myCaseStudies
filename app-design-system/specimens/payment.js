@@ -1,0 +1,5 @@
+const params=new URLSearchParams(location.search),kind=params.get('component'),H=TurboUI,main=document.getElementById('preview');document.body.dataset.gallery=params.get('gallery')==='1';
+const result=document.createElement('p');result.setAttribute('role','status');
+function add(id,label,options){const box=document.createElement('section');box.className='example';box.id=id;const caption=document.createElement('p');caption.className='label';caption.textContent=label;box.append(caption,kind==='payment-account'?H.paymentAccount({...options,onChange:()=>result.textContent='Change account action activated'}):H.swipeAction({id:'swipe-'+id,...options,onComplete:()=>result.textContent='Swipe completed'}));main.append(box)}
+if(kind==='payment-account'){add('default','Available action',{});add('unavailable','Account picker deferred',{disabled:true});add('long','Long Hub name',{name:'The Sharma extended family’s shared household Hub',account:'XX 4390'})}
+else {add('default','Swipe or use End',{});add('disabled','Unavailable',{disabled:true})}main.append(result);

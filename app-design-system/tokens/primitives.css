@@ -1,0 +1,9 @@
+@font-face{font-family:Inter;src:url("../../app/fonts/Inter/InterVariable.woff2") format("woff2");font-weight:100 900;font-style:normal;font-display:swap}
+:root{--th-blue:#1d86ff;--th-blue-light:#eaf2ff;--th-ink:#1b2940;--th-muted:#64738b;--th-white:#fff;--th-line:#e1e8f2;--th-canvas:#f5f8fd;--th-space-1:4px;--th-space-2:8px;--th-space-3:12px;--th-space-4:16px;--th-space-5:20px;--th-space-6:24px;--th-radius:16px;--font-family-inter:Inter,Arial,sans-serif;--font-weight-regular:400;--font-weight-medium:500;--font-weight-semibold:600;--font-weight-bold:700;--font-size-12:12px;--font-size-13:13px;--font-size-14:14px;--font-size-16:16px;--font-size-18:18px;--font-size-20:20px;--font-size-22:22px;--font-size-24:24px;--font-size-26:26px;--font-size-28:28px;--font-size-32:32px}
+
+:root{--font-leading-normal:1.4;--font-leading-tight:1.2;--font-leading-20:20px}
+
+:root{--font-size-10:10px}
+:root{--th-space-8:32px}
+
+:root{--font-size-78:78px;--font-weight-light:300;}

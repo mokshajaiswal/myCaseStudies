@@ -1,0 +1,9 @@
+# Declined and expired request recovery
+
+Proposed Flow References outcomes implemented using Figma pending-request frame 436:65448 as a related visual and semantic reference. Design context and screenshot were inspected; the exact declined/expired designs are not present in that reference. The comparison panel explicitly labels this distinction. The proposed views adopt the app's required Chrome backdrop, Navigation, Page header and rounded light content rather than claim exact Figma fidelity.
+
+`payment-unapproved/index.html?state=declined|expired&amount=...` uses unchanged registered Navigation, Page header, Phone status bar and Action. Generic Close/Clock icons are decorative; status copy and result layout belong to the screen. Unknown state defaults to declined. Amount uses the established finite 1–1,000,000 prototype range, falling back to ₹2,500. Back to payment review and Close preserve the amount. No debit, retry, authorization or cancellation is performed.
+
+The manager's existing Decline interaction still displays its local feedback and disables authorization. It additionally exposes external case-study navigation to the member's declined outcome. Outcome preview links outside the phone let reviewers inspect declined and expired states without waiting 15 minutes. The existing pending countdown retains its in-place expired message and recovery control; it does not automatically navigate to this proposed view.
+
+Registered both outcomes in Overview; Flow References' combined Declined / expired card links to declined, with expired available in the full-page preview navigation. Browser verification exercised both headings and copy, ₹3,100 amount preservation, and keyboard recovery to payment-review/index.html?amount=3100. Screenshots captured both views. Catalog validation passed with no errors, 25 components and 27 screens. Flow References now has 27 available previews and three unfinished cards. Carousel onboarding remains excluded.

@@ -1,0 +1,6 @@
+const H=TurboUI,labels=['Managed by Me','Managed by Others'];let active=new URLSearchParams(location.search).get('tab')==='others'?labels[1]:labels[0];
+document.getElementById('statusbar').append(H.statusbar());
+document.getElementById('nav').append(H.navigation({title:'Hubs',left:{label:'Back to flow references',icon:'navigation-back',href:'../../flow-reference/index.html'},right:{label:'Help',icon:'help',onClick:()=>{}}}));
+document.getElementById('footer').append(H.button({label:'Create Hub',icon:'plus',quiet:true,href:'../create-hub/index.html'}));
+function render(){document.getElementById('tabs').replaceChildren(H.tabs({id:'hubs',items:labels,selected:active,onChange:value=>{active=value;history.replaceState(null,'','?tab='+(active===labels[0]?'me':'others'));render();}}));const panel=document.getElementById('hubs-panel');panel.setAttribute('aria-labelledby','hubs-tab-'+labels.indexOf(active));panel.replaceChildren();if(active===labels[0])panel.append(H.hubEntry({name:'The Sharma’s',members:['Arun Sharma','Kavya Sharma','Neha Sharma'],href:'../hub-dashboard/index.html'}));else{const empty=document.createElement('p');empty.className='hubs-empty';empty.textContent='No Hubs managed by others in this demo.';panel.append(empty);}}
+render();

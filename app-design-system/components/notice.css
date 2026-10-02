@@ -1,0 +1,4 @@
+.th-notice { --color-action:var(--th-white); --color-action-soft:transparent; display:flex; align-items:center; gap:var(--th-space-2); padding:var(--th-space-2) var(--th-space-4); border-radius:10px; background:var(--color-success); color:var(--th-white); }
+.th-notice__icon { display:inline-flex; flex:none; }
+.th-notice[hidden] { display:none; }
+.th-notice__message { flex:1; min-width:0; overflow-wrap:anywhere; font:var(--type-field-value-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }

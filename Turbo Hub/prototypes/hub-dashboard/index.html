@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Turbo Hub · Hub Details</title>
+  <link rel="stylesheet" href="/design-system/tokens.css">
+  <link rel="stylesheet" href="/design-system/components.css">
+  <link rel="stylesheet" href="screen.css">
+  <script src="/design-system/icons/phosphor.js" defer></script>
+  <script src="/design-system/icons/turbo-icons.js" defer></script>
+  <script src="/design-system/components/hub.js" defer></script><script src="/design-system/components/chrome-backdrop.js" defer></script>
+  <script src="screen.js" defer></script>
+  <script src="../shared/phone-preview.js" defer></script>
+  <script src="/framework/spacing-inspector.js" defer></script>
+</head>
+<body>
+  <main class="phone" aria-label="Turbo Hub phone preview">
+    <div class="phone-viewport">
+      <div class="phone-screen th-chrome-backdrop">
+        <div class="phone-chrome"><div id="statusbar"></div>
+        <header id="nav"></header></div>
+        <div class="phone-content" role="region" aria-label="Hub Details content" tabindex="0">
+          <section class="overview" id="overview"></section>
+          <div id="tabs"></div>
+          <section id="hub-panel" role="tabpanel" tabindex="0"></section>
+        </div>
+        <div class="home-indicator" aria-hidden="true"></div>
+      </div>
+    </div>
+    <img class="phone-frame" src="../../assets/phone%20case%20clean.png" width="1006" height="2050" alt="" aria-hidden="true">
+  </main>
+</body>
+</html>

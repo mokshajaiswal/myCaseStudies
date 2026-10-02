@@ -243,3 +243,33 @@ The page has no scroll-triggered reveal system. Sections, cards, and paragraphs 
 ## Rule ownership and verification
 
 `styles.css` is the authority for token values and responsive overrides. This document defines where each role applies. `tokens.html` is the visual reference and reads live computed values through `tokens.js`; the inventory lists all root token names. All three must be updated together when the system changes. Content spacing uses semantic aliases; raw scale tokens are reserved for component geometry, decorative offsets, and interaction targets. The standalone onboarding prototype describes product UI and keeps its own documented typography rather than inheriting case-study editorial roles.
+## Standalone flow placement guide
+
+The separate flow-reference page uses local Helix, a white surface, off-black text, and cardless chapter headers. Screen placeholders are neutral gray; suggested additions use pale amber with dashed borders and explicit text labels. Desktop uses three columns, tablet two, and small mobile one. Source notes use native details elements. No entrance or scroll animations are added. The companion does not change main-page tokens or components.
+
+Flow companion revision: task groups associate each screen sequence with one shared decision. Group headings use a 220px desktop label column; mobile stacks the heading and rationale. Placeholder copy is left-aligned and concise. No per-screen caption blocks or guiding closing section remain.
+
+Inline flow references use full-height 9:20 screen windows, with composite panels cropped by CSS positioning. Existing-screen descriptions sit beneath images on the white surface; unavailable screens keep gray or amber placeholders.
+
+Flow companion dark surface: background #171a20, headings #edf0f5, secondary copy #b9c1cd, gray placeholders #292f39, and warm amber suggested-screen placeholders #352d22. Source images remain unchanged.
+
+Companion screen containers align their metadata, titles, and descriptions in 180px desktop headers. Media stages share a 9:20 aspect ratio; long images scroll inside them. Empty stages preserve space for future screens. Mobile headers use their natural height.
+
+Flow chapter introductions use 18px secondary text with a 760px maximum width and 1.65 line height; mobile uses 17px. Group rationale aligns at the top with its heading to accommodate short narrative paragraphs.
+
+Turbo Hub icon foundation uses 24px currentColor Phosphor glyphs behind semantic names. Callers own labels and spacing; icons are decorative unless given a title. Custom SVG can replace a semantic icon centrally. Illustrations remain generic and undefined product states are deferred.
+
+## Turbo Hub prototype foundation
+
+The mobile product prototype is separate from the dark reference guide. It uses Helix, blue #1766dc, white surfaces, ink #1b2940, and 16px radii. Primitive and semantic tokens live under app-design-system/tokens/. Fourteen component renderers share hub.js/hub.css and forms.js/forms.css. The screen owns 24px content insets, section spacing, tab state and transaction expansion. Generic icons and initials replace imagery.
+
+Hub Details uses the existing phone-shell asset around a fixed 390 × 844 logical viewport. The entire screen scales to available preview space without reflowing its content. Status/navigation and a 24px bottom safe area remain fixed while content scrolls internally. The registered 56px status bar uses Phosphor signal, Wi-Fi and battery glyphs with cropped viewBoxes and one shared centerline. Navigation has equal 44px side columns and a centered title; shared flex icon wrappers remove baseline offsets. See decisions/phone-preview.md for dimensions and ownership.
+
+Add Member reuses existing chrome, actions, avatars and member cards. Text field, Select, Switch and Checkbox choice supply the missing form controls. Payment cards configure the same Checkbox choice renderer. Parent forms own validation, values, sequence and section spacing; controls own labels, accessibility, internal layout and feedback.
+
+Shared phone-preview canvas behind the phone shell uses black #000 across product screens.
+
+
+Typography update: Inter replaces Hellix as the shared default. The local Inter variable font supports weights 100–900; existing regular, medium, semibold and bold assignments remain.
+
+Typography foundations now distinguish Inter family, size and weight primitives from semantic body/heading/action roles. Foundation metadata identifies family and weight samples correctly; registered text styles document role combinations. Verified actual compact Action resolves Inter, weight 600 and size 13px.

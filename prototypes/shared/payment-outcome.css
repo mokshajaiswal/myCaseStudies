@@ -1,0 +1,8 @@
+/* Source-defined success surface, owned by payment screen layout. */
+.success-screen,.phone-viewport:has(.success-screen) {
+ --chrome-backdrop-base:radial-gradient(ellipse 80% 125% at 50% -25%,#44cc7d 1.2%,#48eb8d 19%,#38cd77 34%,#28af61 49%,#148e47 81.5%,#0c823e 100%);
+ --chrome-backdrop-patch:linear-gradient(#40db81,transparent 48px);
+ --chrome-backdrop:var(--chrome-backdrop-patch),var(--chrome-backdrop-base);
+ background:var(--chrome-backdrop);
+}
+.payment-amount { margin:0; font:var(--type-payment-amount-weight) var(--type-payment-amount-size)/var(--type-payment-amount-leading) var(--font-heading); }
