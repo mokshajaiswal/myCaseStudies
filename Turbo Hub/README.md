@@ -29,20 +29,20 @@ After the blue rounded hero using `assets/bg.webp`, the page renders these areas
 3. “What exactly is Turbo Hub?” copy.
 4. Centered role and team metadata.
 5. Business-opportunity copy.
-6. Three business-goal cards.
+6. Three open business-goal rows with aligned numbers, titles, descriptions, and subtle horizontal dividers.
 7. A standalone closing phone with a viewport-edge annotation graphic.
 8. Pink contact card.
 9. Interactive project-timeline box.
-10. Technology-opportunity copy and two complementary experience cards.
-11. Two early product-thinking sketches (`TB1.svg` and `TB2.svg`).
-12. Proposition outcomes and three outcome cards.
-13. Success measures.
-14. A left-aligned interview-context heading and audience line, a centered interview quote carousel, a research bridge, and a persona explorer.
+10. Technology-opportunity copy and three success measures using compact stacked rounded cards aligned to the narrative width. The former proposition-outcome heading and cards are no longer rendered. Four research-need cards reuse the manager/member card style after the persona text.
+11. Four early product-thinking sketches (`TB1.svg` through `TB4.svg`) follow the relationship section.
+12. The former proposition-outcome section is removed.
+13. Success measures now appear within the technology-opportunity section.
+14. A left-aligned interview-context heading and audience line, a side-by-side interview introduction and overlapping colored quote-card carousel, a research bridge, and a persona explorer with the family diagram and selected profile.
 15. The centered design question that frames the next product chapter.
-16. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
-17. A taped competitive-research collage with draggable images and unnumbered findings.
-18. A three-step product-rule path connecting the research to the core flows.
-19. A vertically scrollable core-flow reel with reusable phone screens and per-screen notes.
+16. “What we learned from other products”: a taped competitive-research collage with draggable images and unboxed product-to-Turbo-Hub comparisons.
+17. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
+18. The former product-rule path is removed.
+19. A “Designing the core flows” introduction follows the four sketches. The detailed phone-screen flow reel is reserved for later work.
 
 The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 
@@ -66,12 +66,12 @@ All page content is defined in the `caseStudy` object near the top of `script.js
 
 - The site is intentionally light-only.
 - The hero and body share the same `--content-width: 58rem` alignment.
-- Business goals, experience/outcome card groups, and the persona explorer use `--wide-content-width: 70rem`, centered beyond the narrative column and capped by viewport gutters. The Category / My Role / Team metadata box matches the body-copy container.
+- Experience/outcome card groups use `--wide-content-width: 70rem`, centered beyond the narrative column and capped by viewport gutters. The persona explorer, business-goals group, and Category / My Role / Team metadata box match the body-copy container.
 - Spacing uses the 4px `--space-unit` scale and semantic aliases for paragraphs, heading-to-copy gaps, component padding/gaps, narrative-to-media gaps, related subgroups, and distinct sections. Paragraph gaps are 12px, smaller than heading-to-copy gaps of 20px desktop / 16px mobile. Compact title-to-copy gaps are 8px; copy-to-media gaps are 56px / 52px; related groups are 64px / 48px; section breaks are 144px / 112px. Adjust tokens instead of correcting repeated gaps individually.
 - Hero and section headings use Larken; small headings and all supporting text use Helix.
 - Six shared content roles define font family, size, weight, leading, and tracking: 48px hero heading, 22px hero subheading, 32px section heading, 20px body, 22px small heading, and 18px small body. Mobile sizes are defined once at the 768px breakpoint; captions and controls use a separate 14px utility token.
 - Heading and emphasized copy use an off-black, never pitch black.
-- Decorative heading marks remain `.asset-placeholder` elements until final assets are supplied.
+- Decorative main section heading marks use `assets/heading_flower.svg` through the shared `.asset-placeholder--icon` style.
 - Similar content must reuse the existing metadata, detail-panel, info-card, phone, and annotation patterns instead of creating one-off styling.
 - Body content spans the shared content width; do not restore the former editorial indentation.
 
@@ -104,12 +104,13 @@ Every phone is created through `createPhone()`, which keeps the transparent casi
 
 ## Motion behavior
 
-Sections appear in their final state without scroll-triggered reveal effects or paragraph line splitting. The scroll progress indicator updates directly from the current scroll position. Other motion belongs to interactions:
+Sections appear in their final state without scroll-triggered reveal effects or paragraph line splitting. The scroll progress indicator updates directly from the current scroll position. The hero alone has a scroll-linked depth effect: it tilts back and shrinks during normal scrolling, with a small background parallax and no extra scroll space. Scrolling upward reverses it; reduced motion disables the effect. Other motion belongs to interactions:
 
 - The timeline dialog opens and closes accessibly.
 - Competitive-research images can be dragged or moved by keyboard.
 - Interview quotes and personas cycle while visible, pause on hover or focus, and respect reduced-motion preferences.
 - Component feedback transitions respect `prefers-reduced-motion: reduce`.
+- Heading flowers play a quick, smooth 650ms full spin and subtle size pulse on heading hover, with the effect disabled for reduced motion.
 
 ## Scroll progress
 
@@ -157,7 +158,7 @@ Also inspect the affected interaction at desktop and mobile widths when a browse
 ## Remaining case-study media
 
 - Phone screens remain placeholders until final images, video, or prototypes are supplied.
-- Heading icon/flower placeholders remain blank until final artwork is supplied.
+- The hero logo placeholder remains blank until final artwork is supplied.
 - The LinkedIn URL in the contact action is still a placeholder and must be replaced before publishing.
 
 ## Flow companion page

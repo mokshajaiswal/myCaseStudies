@@ -4,14 +4,14 @@ const caseStudy = {
   hero: {
     title: "Shaping a new family payments experience",
     summary:
-      "Giving families a shared way to manage money, with clear roles and independent access.",
+      "Defining how PayZapp could extend from individual payments into shared family money.",
   },
   overview: {
-    kicker: "TL;DR",
+    kicker: "TLDR",
     paragraphs: [
       "One family. Different responsibilities around money.",
-      "We designed a new prepaid payments proposition for PayZapp that allowed one person to manage shared funds and set spending boundaries, while other family members could access the money through their own payment experience.",
-      "As a UX Designer at Zeta, I worked across the manager and member journeys, helping define how people would join, manage access, and make payments within the shared experience.",
+      "Turbo Hub was a new prepaid proposition for PayZapp that let one person manage shared family money while giving members their own way to spend it.",
+      "I worked across the manager and member experience, defining how people joined, accessed money, understood their limits and handled exceptions.",
     ],
   },
   media: [
@@ -20,14 +20,11 @@ const caseStudy = {
     { id: "phone-member", label: "Member screen" },
   ],
   product: {
-    title: "What exactly is Turbo Hub?",
+    title: "What exactly was Turbo Hub?",
     lead:
-      "Turbo Hub was the internal codename for a prepaid payments proposition we were developing within PayZapp.",
-    intro:
-      "At its core was a simple idea: one person could manage money, while other family members could use it independently.",
+      "Turbo Hub was the internal codename for a prepaid family-payments proposition being developed within PayZapp.",
     paragraphs: [
-      "A Hub Manager could create a family Hub, fund it, and define how money could be used. Family members could then join the Hub and access that money through their own payment experience.",
-      "What made Turbo Hub different from a regular wallet was the relationship between the people using it. It wasn’t just about moving money from one account to another. It was about creating a shared financial space where access, control, and responsibility could be distributed across a family.",
+      "A Hub Manager could create and fund a family Hub, invite members and define how the money could be used. Hub Members could then access those funds through their own payment experience.",
     ],
     meta: [
       ["Category", "B2C · Fintech · Family\nPayments · Prepaid"],
@@ -64,29 +61,28 @@ const caseStudy = {
   opportunity: {
     title: "What was the business opportunity?",
     paragraphs: [
-      "For HDFC Bank, the family payments proposition was more than a new feature within PayZapp. It was an opportunity to deepen relationships with existing customers while bringing more of their everyday financial activity into the product.",
-      "The idea was simple: an existing customer could bring family members into PayZapp, creating more recurring payment activity and giving prepaid a larger role in how the household managed and spent money.",
-      "In simple terms, the proposition had the potential to turn one customer relationship into several connected financial relationships.",
+      "PayZapp primarily served the individual customer. A family proposition created an opportunity to extend that relationship across the household.",
+      "An existing customer could introduce family members to PayZapp, while everyday needs such as allowances, household spending and recurring expenses could create more frequent reasons to use the product.",
     ],
     goalsTitle: "The Business Goals",
     goals: [
       {
         number: "01",
-        title: "Drive recurring payment activity",
+        title: "Bring more members into PayZapp",
         description:
-          "Families have recurring financial needs from allowances and bills to everyday household expenses. A shared prepaid experience could make PayZapp part of more of these regular payment moments.",
+          "Use an existing customer relationship as an entry point into the wider household.",
       },
       {
         number: "02",
-        title: "Create a new acquisition path",
+        title: "Create recurring payment activity",
         description:
-          "Every manager could bring more family members into PayZapp, creating a natural acquisition loop within the household.",
+          "Connect PayZapp to repeated family needs rather than occasional transactions.",
       },
       {
         number: "03",
-        title: "Expand how PayZapp gets used",
+        title: "Expand everyday prepaid usage",
         description:
-          "Shared family money could create more reasons to use PayZapp’s broader payment ecosystem—from transfers and bill payments to everyday spending.",
+          "Make prepaid useful across more routine spending moments.",
       },
     ],
   },
@@ -96,20 +92,7 @@ const caseStudy = {
       "Zeta was already working with HDFC Bank on PayZapp, using its cloud-native payments stack to create fast, responsive experiences like swipe-to-pay and support features like tap and pay, payments limits and advanced account controls. That same foundation made it possible to think beyond individual payments and explore how PayZapp’s existing prepaid capabilities could extend to families.",
       "Family payments became a natural extension of what was already there - opening up more users, more recurring payment activity, and more ways for households to engage with PayZapp.",
     ],
-    experiences: [
-      {
-        number: "1",
-        tone: "blue",
-        title: "Control for the manager",
-        description: "Give one person a way to fund the shared account, bring family members in, and set boundaries around how money could be used.",
-      },
-      {
-        number: "2",
-        tone: "pink",
-        title: "Independence for the member",
-        description: "Give family members their own simple way to access and spend that money within the boundaries set for them.",
-      },
-    ],
+
   },
   artifacts: [
     {
@@ -121,6 +104,16 @@ const caseStudy = {
       src: "assets/TB2.svg",
       alt: "Persona sketch showing the hub manager inviting family members into the shared hub.",
       caption: "Manager and member roles",
+    },
+    {
+      src: "assets/TB3.svg",
+      alt: "Turbo Hub early product-thinking sketch, TB3.",
+      caption: "Early product thinking",
+    },
+    {
+      src: "assets/TB4.svg",
+      alt: "Turbo Hub early product-thinking sketch, TB4.",
+      caption: "Early product thinking",
     },
   ],
   outcomes: {
@@ -145,26 +138,32 @@ const caseStudy = {
     measuresTitle: "How we would measure success",
     measures: [
       {
-        title: "Family member activation rate",
-        description: "How many invited family members successfully joined PayZapp and became active users.",
+        title: "Member activation",
+        description: "How many invited family members successfully joined and became active PayZapp users.",
       },
       {
-        title: "Recurring payment activity",
-        description: "Whether families returned to use the experience regularly, rather than treating prepaid as a one-off payment method.",
+        title: "Repeat family usage",
+        description: "Whether households returned to use the Hub for ongoing needs rather than treating it as a one-off payment method.",
       },
       {
-        title: "Family member activation rate",
-        description: "How much payment activity each family relationship generated across everyday use cases.",
+        title: "Household payment activity",
+        description: "How much everyday payment activity the Hub generated across its members.",
       },
     ],
   },
   research: {
     title: "Understanding who we were designing for",
+    interviewsIntro: "We interviewed PayZapp users across these personas(mostly adults) and heard consistent pain points:",
     intro:
-      "We spoke with PayZapp users across salaried households, from the parent managing the money to teenagers and older family members.",
-    insightLead: "Taken together, these conversations pointed to four recurring needs: ",
-    insightEmphasis: "control, visibility, access, and independence",
-    insightConclusion: "We turned those patterns into the core personas that shaped the proposition.",
+      "Existing PayZapp data gave us an initial picture of prepaid users. They were largely salaried adults between 20–55, with many already married and managing money within a family. Through interviews, we explored how money actually moved within these households from everyday spending and allowances to supporting children or parents.",
+    personaIntro: "The interviews gave us a view into how people currently managed money within the family, while the personas helped us think through the needs of the wider household.",
+    personaConclusion: "Using the interview findings and the family roles the proposition needed to support, we developed a set of personas to help us think through different levels of responsibility, confidence and independence.",
+    needs: [
+      { number: "1", tone: "blue", title: "Control", description: "Managers needed to define how shared money could be used, including who had access and where limits should apply." },
+      { number: "2", tone: "pink", title: "Visibility", description: "They needed enough awareness of spending to feel responsible for the money, without having to supervise every transaction." },
+      { number: "3", tone: "blue", title: "Access", description: "Members needed a simple way to reach and use the money available to them, regardless of their confidence with digital payments." },
+      { number: "4", tone: "pink", title: "Independence", description: "Members should be able to handle everyday spending themselves within the boundaries already set for them." },
+    ],
     hubLabel: "Turbo Hub",
     personas: [
       {
@@ -252,12 +251,12 @@ const caseStudy = {
         accent: "#408da3",
       },
       {
-        relation: "Grandmother",
+        relation: "Elderly member",
         image: "assets/grandmother.png",
         tier: "member",
         label: "Hub Member",
         tags: ["68", "Retired"],
-        role: "Grandmother who wants digital payments to feel safe and approachable.",
+        role: "Elderly family member who wants digital payments to feel safe and approachable.",
         goal: "Pay for everyday essentials without relying on cash or frequent bank visits.",
         painPoints: [
           "Finds UPI confusing",
@@ -275,11 +274,10 @@ const caseStudy = {
       },
     ],
     voices: [
-      { type: "Adult", quote: "I want to give my children freedom, but I still need to know where their money is going.", accent: "#536ee8", background: "#f8f9ff" },
-      { type: "Teen", quote: "I want to buy things myself without asking my mom for her card every time.", accent: "#7569c9", background: "#faf8ff" },
-      { type: "Young Adult", quote: "I manage my own money now, but sometimes I still need family support for bigger expenses.", accent: "#438e98", background: "#f5fafa" },
-      { type: "Elder", quote: "I wish digital payments felt simple enough that I didn’t need my daughter to do everything for me.", accent: "#7684aa", background: "#f7f8fc" },
-      { type: "Adult", quote: "We need one place to see household spending instead of constantly figuring out who paid for what.", accent: "#b77a46", background: "#fcf8f3" },
+      { type: "user1", quote: "I want to give my children freedom, but I still need to know where their money is going.", accent: "#536ee8", background: "#f8f9ff" },
+      { type: "user2", quote: "I want to buy things myself without asking my mom for her card every time.", accent: "#7569c9", background: "#faf8ff" },
+      { type: "user3", quote: "I manage my own money now, but sometimes I still need family support for bigger expenses.", accent: "#438e98", background: "#f5fafa" },
+      { type: "user4", quote: "I wish digital payments felt simple enough that I didn’t need my daughter to do everything for me.", accent: "#7684aa", background: "#f7f8fc" },
     ],
   },
   designQuestion: {
@@ -287,7 +285,7 @@ const caseStudy = {
     question: "How could families share access to money while keeping clear boundaries around its use?",
   },
   relationship: {
-    title: "Defining the relationship before designing the screens",
+    title: "Defining the roles before designing the screens",
     introduction:
       "The interviews made one thing clear: families were not struggling to send money. The harder problem was deciding what happened after that money was shared.",
     questions: [
@@ -302,6 +300,7 @@ const caseStudy = {
       {
         number: "1",
         title: "Hub Manager",
+        portraits: [{ src: "assets/Father.png", alt: "Father" }],
         label: "Responsibility",
         description:
           "Funds the Hub, defines boundaries, manages access and steps in when a decision is required.",
@@ -309,6 +308,12 @@ const caseStudy = {
       {
         number: "2",
         title: "Hub Member",
+        portraits: [
+          { src: "assets/Mother.png", alt: "Mother" },
+          { src: "assets/Daughter.png", alt: "Daughter" },
+          { src: "assets/Son.png", alt: "Son" },
+          { src: "assets/grandmother.png", alt: "Elderly member" },
+        ],
         label: "Responsibility",
         description:
           "Joins the Hub, makes payments within the available permissions, and requests additional funds when needed.",
@@ -316,9 +321,9 @@ const caseStudy = {
     ],
   },
   competitiveResearch: {
-    title: "What I learned from other products",
+    title: "What we learned from other products",
     intro:
-      "I looked beyond direct payment competitors to understand how other products communicate shared access, control, and independence.",
+      "We compared Revolut, Greenlight, Monzo, and many others to understand how they handle the split between the person managing the money and the person spending it.",
     collageTitle: "Glimpse of some competitive research",
     images: [
       {
@@ -348,21 +353,24 @@ const caseStudy = {
     ],
     insights: [
       {
-        title: "Separate experiences around one relationship",
-        description:
-          "Shared-money products showed that managers and members need different experiences built around the same relationship. One side needs visibility and control; the other needs clear access without unnecessary friction.",
+            "product": "Revolut",
+            "title": "Separate the member experience from the parent account",
+            "description": "Revolut gives the younger user their own card, balance and spending experience instead of making them operate entirely through the parent’s account.",
+            "takeaway": "Turbo Hub members needed their own clear experience: what money is available, what they can do with it, and what happens when they reach a limit. The manager should not be the interface for every action."
       },
       {
-        title: "Make boundaries visible before they interrupt spending",
-        description:
-          "The strongest products explain limits and permissions before a payment fails. People should understand what they can spend, what requires approval, and what happens next.",
+            "product": "Greenlight",
+            "title": "Make the rules specific to spending",
+            "description": "Greenlight lets parents control where and how money can be spent, rather than relying only on a single overall balance.",
+            "takeaway": "For Turbo Hub, a boundary needed to explain more than “you have ₹X left.” Members should be able to understand the rule attached to their spending – for example, the available amount, relevant permissions, and whether they could request a change."
       },
       {
-        title: "Give requests enough context to support a decision",
-        description:
-          "A request should help the manager respond quickly without turning everyday spending into surveillance. Context matters more than adding another approval screen.",
-      },
-    ],
+            "product": "Monzo",
+            "title": "Keep everyday actions with the member, account controls with the adult",
+            "description": "Monzo separates everyday account use from higher-level controls. The child can view and use their money, while the adult retains control over limits and certain payment permissions.",
+            "takeaway": "We separated actions by responsibility. Members should be able to check their balance, make payments and understand their own activity. Funding, changing limits and managing permissions should remain with the Hub Manager."
+      }
+],
   },
   productRules: {
     title: "Turning decisions into product rules",
@@ -389,7 +397,9 @@ const caseStudy = {
   flows: {
     title: "Designing the core flows",
     intro:
-      "With the relationship and product rules established, I translated the model into connected manager and member journeys.",
+      "I started with low-fidelity wireframes to work through the structure of the manager and member journeys before moving into high-fidelity design.",
+    continuation:
+      "As the flows became clearer, I translated them into PayZapp’s existing design language, reusing familiar patterns and components so Turbo Hub felt like a natural extension of the product rather than a separate experience.",
     items: [
       {
         eyebrow: "Flow 01",
@@ -483,9 +493,9 @@ function createSectionHeading(title) {
 }
 
 function createInfoPanel(title, items) {
-  const panel = createElement("section", "info-panel detail-box");
+  const panel = createElement("section", "info-panel");
   const heading = createElement("div", "info-panel-heading");
-  heading.append(createAssetPlaceholder(), createElement("h3", "", title));
+  heading.append(createElement("h3", "", title));
 
   const grid = createElement("div", "info-panel-grid");
   items.forEach((item) => {
@@ -527,7 +537,13 @@ function createArtifactGallery(items) {
     image.alt = item.alt;
     image.loading = "lazy";
     image.decoding = "async";
-    figure.append(image, createElement("figcaption", "", item.caption));
+    const imageLink = createElement("a", "artifact-image-link");
+    imageLink.href = item.src;
+    imageLink.target = "_blank";
+    imageLink.rel = "noopener";
+    imageLink.setAttribute("aria-label", `Open ${item.caption} full size in a new tab`);
+    imageLink.append(image);
+    figure.append(imageLink, createElement("figcaption", "", item.caption));
     stage.append(figure);
   });
 
@@ -671,7 +687,6 @@ function createPersonaExplorer(config) {
 
   const hub = createElement("div", "persona-hub");
   hub.append(createElement("span", "persona-hub-label", config.hubLabel));
-
   map.append(
     createPersonaRow(managers, "manager"),
     createPersonaConnector(managers.length, "merge"),
@@ -836,7 +851,7 @@ function createUserVoiceStack(voices) {
       card.setAttribute("aria-label", isTop ? "Show next user quote" : `${voice.type} user quote`);
       card.append(
         createElement("span", "user-voice-quote", `“${voice.quote}”`),
-        createElement("span", "user-voice-source", `User · ${voice.type}`),
+        createElement("span", "user-voice-source", voice.type),
         createElement("span", "user-voice-accent"),
       );
       if (isTop) card.addEventListener("click", () => {
@@ -946,7 +961,21 @@ function createRelationshipRoleArt(kind) {
 function createRelationshipRole(item, kind) {
   const role = createElement("article", `relationship-role relationship-role--${kind}`);
   const figure = createElement("div", "relationship-role-figure");
-  figure.append(createRelationshipRoleArt(kind));
+  figure.classList.add("relationship-role-figure--portraits");
+  item.portraits.forEach((portrait) => {
+    const image = document.createElement("img");
+    image.src = portrait.src;
+    image.alt = portrait.alt;
+    image.loading = "lazy";
+    if (kind === "member") {
+      const frame = createElement("div", "relationship-portrait");
+      frame.append(image);
+      figure.append(frame);
+    } else {
+      image.className = "relationship-portrait";
+      figure.append(image);
+    }
+  });
 
   const copy = createElement("div", "relationship-role-copy");
   copy.append(
@@ -1103,12 +1132,35 @@ function createCompetitiveResearchBoard(config) {
   board.append(boardTitle);
 
   const insights = createElement("div", "competitive-insights");
-  config.insights.forEach((insight) => {
-    const item = document.createElement("article");
-    item.append(
-      createElement("h3", "", insight.title),
+  config.insights.forEach((insight, index) => {
+    const item = document.createElement("details");
+    item.className = "competitive-lesson-disclosure";
+    item.name = "competitive-lessons";
+    item.open = index === 0;
+    const summary = createElement("summary", "competitive-lesson-summary");
+    summary.addEventListener("click", (event) => {
+      event.preventDefault();
+      if (item.open) return;
+      insights.querySelectorAll("details").forEach((other) => {
+        other.open = other === item;
+      });
+    });
+    summary.append(
+      createElement("span", "competitive-product", insight.product),
+      createElement("span", "competitive-lesson-title", insight.title),
+    );
+    const observation = createElement("div", "competitive-observation");
+    observation.append(
       createElement("p", "", insight.description),
     );
+    const takeaway = createElement("div", "competitive-takeaway");
+    takeaway.append(
+      createElement("h4", "competitive-takeaway-label", "What I took from this"),
+      createElement("p", "", insight.takeaway),
+    );
+    const content = createElement("div", "competitive-lesson");
+    content.append(observation, takeaway);
+    item.append(summary, content);
     insights.append(item);
   });
 
@@ -1310,7 +1362,7 @@ function renderCaseStudy() {
   productColumn.append(createSectionHeading(caseStudy.product.title));
   const productCopy = createElement("div", "body-copy product-copy");
   productCopy.append(
-    createElement("p", "", `${caseStudy.product.lead} ${caseStudy.product.intro}`),
+    createElement("p", "", caseStudy.product.lead),
   );
   caseStudy.product.paragraphs.forEach((paragraph) => {
     productCopy.append(createElement("p", "", paragraph));
@@ -1351,9 +1403,19 @@ function renderCaseStudy() {
     technologyCopy.append(createElement("p", "", paragraph));
   });
 
+  const successMeasures = createElement("div", "measures-block");
+  successMeasures.append(
+    createElement("h3", "subsection-heading measures-heading", caseStudy.outcomes.measuresTitle),
+    createOutcomeGrid(
+      caseStudy.outcomes.measures.map((measure, index) => ({
+        ...measure,
+        number: String(index + 1).padStart(2, "0") + ".",
+      })),
+    ),
+  );
   technologyColumn.append(
     technologyCopy,
-    createExperienceGrid(caseStudy.technology.experiences),
+    successMeasures,
   );
   technology.append(technologyColumn);
   shell.append(technology);
@@ -1363,37 +1425,26 @@ function renderCaseStudy() {
   artifacts.append(createArtifactGallery(caseStudy.artifacts));
   shell.append(artifacts);
 
-  const outcomes = createElement("section", "case-section");
-  outcomes.id = "outcomes";
-  const outcomesColumn = createElement("div", "reading-column");
-  outcomesColumn.append(
-    createElement(
-      "h2",
-      "subsection-heading outcomes-heading",
-      caseStudy.outcomes.title,
-    ),
-    createOutcomeGrid(caseStudy.outcomes.items),
+  const flows = createElement("section", "case-section");
+  flows.id = "flows";
+  const flowsColumn = createElement("div", "reading-column");
+  const flowsCopy = createElement("div", "body-copy");
+  flowsCopy.append(
+    createElement("p", "", caseStudy.flows.intro),
+    createElement("p", "", caseStudy.flows.continuation),
   );
-
-  const measures = createElement("div", "measures-block");
-  measures.append(
-    createElement(
-      "h3",
-      "subsection-heading measures-heading",
-      caseStudy.outcomes.measuresTitle,
-    ),
-    createMeasureList(caseStudy.outcomes.measures),
-  );
-  outcomesColumn.append(measures);
-  outcomes.append(outcomesColumn);
-  shell.append(outcomes);
+  flowsColumn.append(createSectionHeading(caseStudy.flows.title), flowsCopy);
+  flows.append(flowsColumn);
 
   const research = createElement("section", "case-section");
   research.id = "research";
   const researchColumn = createElement("div", "reading-column");
   const researchHeading = createSectionHeading(caseStudy.research.title);
   const researchInterviews = createElement("div", "research-interviews");
-  researchInterviews.append(createUserVoiceStack(caseStudy.research.voices));
+  researchInterviews.append(
+    createElement("p", "research-interviews-intro", caseStudy.research.interviewsIntro),
+    createUserVoiceStack(caseStudy.research.voices),
+  );
   researchColumn.append(
     researchHeading,
     createElement("p", "section-intro", caseStudy.research.intro),
@@ -1402,16 +1453,15 @@ function renderCaseStudy() {
 
   const researchBridge = createElement("div", "body-copy research-copy research-bridge");
   const insight = document.createElement("p");
-  insight.textContent =
-    caseStudy.research.insightLead +
-    caseStudy.research.insightEmphasis +
-    ". " +
-    caseStudy.research.insightConclusion;
+  insight.textContent = caseStudy.research.personaIntro;
   researchBridge.append(insight);
   researchColumn.append(
     researchBridge,
     createPersonaExplorer(caseStudy.research),
   );
+  const personaConclusion = createElement("div", "body-copy research-copy research-bridge");
+  personaConclusion.append(createElement("p", "", caseStudy.research.personaConclusion));
+  researchColumn.append(personaConclusion, createExperienceGrid(caseStudy.research.needs));
   research.append(researchColumn);
   shell.append(research);
 
@@ -1421,8 +1471,16 @@ function renderCaseStudy() {
   const designQuestionTitle = createElement(
     "h2",
     "design-question-title",
-    caseStudy.designQuestion.question,
   );
+  const questionBreak = caseStudy.designQuestion.question.indexOf(" while ");
+  if (questionBreak !== -1) {
+    designQuestionTitle.append(
+      createElement("span", "design-question-line", caseStudy.designQuestion.question.slice(0, questionBreak)),
+      createElement("span", "design-question-line", caseStudy.designQuestion.question.slice(questionBreak + 1)),
+    );
+  } else {
+    designQuestionTitle.textContent = caseStudy.designQuestion.question;
+  }
   designQuestionTitle.id = "design-question-title";
   designQuestion.append(
     createElement("p", "design-question-eyebrow", caseStudy.designQuestion.eyebrow),
@@ -1468,20 +1526,6 @@ function renderCaseStudy() {
   competitiveResearch.append(competitiveResearchColumn);
   shell.append(competitiveResearch);
 
-  const productRules = createElement(
-    "section",
-    "case-section product-rules-section",
-  );
-  productRules.id = "product-rules";
-  const productRulesColumn = createElement("div", "reading-column");
-  productRulesColumn.append(
-    createSectionHeading(caseStudy.productRules.title),
-    createElement("p", "section-intro product-rules-intro", caseStudy.productRules.intro),
-    createProductRulePath(caseStudy.productRules),
-  );
-  productRules.append(productRulesColumn);
-  shell.append(productRules);
-
   // Flow data and renderers are retained while this section is temporarily omitted.
 
   const closing = createElement("section", "case-section");
@@ -1521,13 +1565,12 @@ function renderCaseStudy() {
   shell.append(
     timeline,
     technology,
-    artifacts,
-    outcomes,
     research,
     designQuestion,
-    relationship,
     competitiveResearch,
-    productRules,
+    relationship,
+    artifacts,
+    flows,
   );
 
   contentRoot.replaceChildren(shell);
@@ -1639,6 +1682,40 @@ function setMedia(id, media = {}) {
 }
 
 
+function setupHeroScroll() {
+  const hero = document.querySelector(".hero");
+  if (!hero) return;
+  const stage = hero.closest(".hero-scroll-stage");
+  const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
+  let frame = 0;
+
+  const update = () => {
+    frame = 0;
+    if (reducedMotion.matches) {
+      hero.style.removeProperty("--hero-parallax-offset");
+      hero.style.removeProperty("--hero-depth-lift");
+      hero.style.removeProperty("--hero-depth-tilt");
+      hero.style.removeProperty("--hero-depth-scale");
+      return;
+    }
+    const bounds = stage.getBoundingClientRect();
+    const travel = Math.max(1, hero.offsetHeight * 0.5);
+    const progress = Math.min(1, Math.max(0, -bounds.top / travel));
+    const eased = progress * progress * (3 - 2 * progress);
+    hero.style.setProperty("--hero-depth-lift", "0px");
+    hero.style.setProperty("--hero-depth-tilt", `${eased * -4}deg`);
+    hero.style.setProperty("--hero-depth-scale", String(1 - eased * 0.05));
+    hero.style.setProperty("--hero-parallax-offset", `${eased * 16}px`);
+  };
+  const schedule = () => {
+    if (!frame) frame = requestAnimationFrame(update);
+  };
+  window.addEventListener("scroll", schedule, { passive: true });
+  window.addEventListener("resize", schedule);
+  reducedMotion.addEventListener("change", schedule);
+  update();
+}
+
 function setupScrollProgress() {
   const progressBar = document.querySelector(".scroll-progress");
   const progressValue = progressBar?.querySelector(".scroll-progress-value");
@@ -1670,6 +1747,7 @@ function setupScrollProgress() {
 }
 
 renderCaseStudy();
+setupHeroScroll();
 setupScrollProgress();
 
 /*
