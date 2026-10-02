@@ -327,3 +327,7 @@ Artifact layout experiment: an unboxed sketchbook spread, four columns on deskto
 All four artifact sketches are now straight, without rotation at rest or on hover. The unboxed arrangement and alternating vertical offsets remain.
 
 Member portraits use a 0.5px white circle outline. Their PNGs contain transparent padding, so each image is scaled to 122% inside an overflow-hidden circular frame; this reduces the apparent white ring while preserving the overlap and stacking order.
+
+Competitive-research accordion company names use the shared body role (20px desktop / 18px mobile), semibold, with local 28px official brand icons before the text. “What I took from this” uses the shared small-body role (18px / 16px), semibold. The component’s 10.5rem brand column controls both summary alignment and expanded-copy indentation.
+
+The interview quote stack is capped at 28rem (448px) and centred within its column, with a fluid width on narrower screens.

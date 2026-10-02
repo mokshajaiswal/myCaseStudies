@@ -38,6 +38,8 @@
 .th-avatar--hub { width:100px; height:100px; border-radius:20px; background:#c8e1e1; color:#315c73; }
 .th-avatar--hub .ds-icon { width:40px; height:40px; }
 .th-avatar--merchant { width:40px; height:40px; border-radius:12px; background:var(--color-icon-soft); color:var(--color-list-title); }
+.th-avatar.th-avatar--image { overflow:hidden; background:var(--color-surface); }
+.th-avatar__image { display:block; width:100%; height:100%; object-fit:contain; }
 .th-hub-summary--centered { position:relative; flex-direction:column; gap:var(--th-space-3); padding:0; text-align:center; }
 .th-hub-summary--centered h1 { margin:0; }
 .th-hub-summary--centered p { color:var(--color-list-detail); font-weight:var(--font-weight-semibold); text-transform:uppercase; letter-spacing:.48px; }

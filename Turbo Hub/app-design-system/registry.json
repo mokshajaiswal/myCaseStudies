@@ -195,7 +195,8 @@
         "large",
         "hub",
         "merchant",
-        "profile"
+        "profile",
+        "image"
       ],
       "dependencies": [],
       "previewConfigurations": [
@@ -223,6 +224,11 @@
           "id": "large",
           "name": "large",
           "selector": "#large"
+        },
+        {
+          "id": "image",
+          "name": "Merchant image",
+          "selector": "#image"
         }
       ],
       "anatomy": {
@@ -230,6 +236,10 @@
           {
             "name": "Root",
             "selector": ".th-avatar"
+          },
+          {
+            "name": "Image",
+            "selector": ".th-avatar__image"
           }
         ],
         "spacing": [],
@@ -237,7 +247,7 @@
         "behavior": "Presentational data supplied by caller. No independently interactive children.",
         "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
       },
-      "usage": "TurboUI.avatar({name,large,graphic,size}); default 44px, large 64px, merchant 40px and hub 100px. Hub graphic uses the replaceable Phosphor house. profile size is 56px with a 12px radius."
+      "usage": "TurboUI.avatar({name,large,graphic,size}); default 44px, large 64px, merchant 40px and hub 100px. Hub graphic uses the replaceable Phosphor house. profile size is 56px with a 12px radius. Optional src renders a decorative image within the existing size; failed images restore the graphic or initials. graphic accepts a semantic icon name or the existing boolean configuration. Image is content, not an independent appearance variant."
     },
     {
       "id": "turbo-badge",
@@ -544,7 +554,8 @@
         "long title",
         "compact",
         "compact-long",
-        "compact-minimal"
+        "compact-minimal",
+        "compact-image"
       ],
       "dependencies": [
         "turbo-avatar"
@@ -579,6 +590,11 @@
           "id": "minimal",
           "name": "minimal",
           "selector": "#minimal"
+        },
+        {
+          "id": "compact-image",
+          "name": "Compact / merchant image",
+          "selector": "#compact-image"
         }
       ],
       "anatomy": {
@@ -630,7 +646,7 @@
         "behavior": "Presentational data supplied by caller. No independently interactive children.",
         "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
       },
-      "usage": "TurboUI.row({name,detail,amount,graphic,variant}); default inset or compact transaction row. Parent owns list gaps, separators and surface."
+      "usage": "TurboUI.row({name,detail,amount,graphic,variant}); default inset or compact transaction row. Parent owns list gaps, separators and surface. Optional avatarSrc supplies a merchant image to the nested Avatar; row geometry and spacing are unchanged."
     },
     {
       "id": "turbo-member",

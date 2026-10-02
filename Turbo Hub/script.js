@@ -354,18 +354,21 @@ const caseStudy = {
     insights: [
       {
             "product": "Revolut",
+            "logo": "assets/company-logos/revolut.svg",
             "title": "Separate the member experience from the parent account",
             "description": "Revolut gives the younger user their own card, balance and spending experience instead of making them operate entirely through the parent’s account.",
             "takeaway": "Turbo Hub members needed their own clear experience: what money is available, what they can do with it, and what happens when they reach a limit. The manager should not be the interface for every action."
       },
       {
             "product": "Greenlight",
+            "logo": "assets/company-logos/greenlight.svg",
             "title": "Make the rules specific to spending",
             "description": "Greenlight lets parents control where and how money can be spent, rather than relying only on a single overall balance.",
             "takeaway": "For Turbo Hub, a boundary needed to explain more than “you have ₹X left.” Members should be able to understand the rule attached to their spending – for example, the available amount, relevant permissions, and whether they could request a change."
       },
       {
             "product": "Monzo",
+            "logo": "assets/company-logos/monzo.svg",
             "title": "Keep everyday actions with the member, account controls with the adult",
             "description": "Monzo separates everyday account use from higher-level controls. The child can view and use their money, while the adult retains control over limits and certain payment permissions.",
             "takeaway": "We separated actions by responsibility. Members should be able to check their balance, make payments and understand their own activity. Funding, changing limits and managing permissions should remain with the Hub Manager."
@@ -1145,8 +1148,17 @@ function createCompetitiveResearchBoard(config) {
         other.open = other === item;
       });
     });
+    const product = createElement("span", "competitive-product");
+    const logo = document.createElement("img");
+    logo.className = "competitive-product-logo";
+    logo.src = insight.logo;
+    logo.alt = "";
+    logo.width = 28;
+    logo.height = 28;
+    logo.decoding = "async";
+    product.append(logo, createElement("span", "", insight.product));
     summary.append(
-      createElement("span", "competitive-product", insight.product),
+      product,
       createElement("span", "competitive-lesson-title", insight.title),
     );
     const observation = createElement("div", "competitive-observation");
