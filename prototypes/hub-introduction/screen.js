@@ -1,0 +1,18 @@
+const H=TurboUI;
+const slides=[
+ {key:'hub-intro',image:'overview',title:'Introducing Turbo Hub!',copy:'An elegant way to share your account with your group with total control on spend limits and merchants.'},
+ {key:'hub-intro-family',image:'family',title:'The Family Hub!',copy:'Add your family members to share your account and partake in transactions.',features:['Give them authority to manage alongside you','Request top-ups to handle unique situations','Split expenses','And many more...']},
+ {key:'hub-intro-office',image:'office',title:'The Office Hub!',copy:'Add your assistants to share a fund to transact on a need basis.',features:['Add assistants and service agents','Accept top-up requests on a need basis','Authorize payment remotely','And many more...']},
+ {key:'hub-intro-events',image:'events',title:'Hub for Events!',copy:'Share an event budget with associate event managers and manage bills.',features:['Add event managers','Multi-manager authorization of payments','Upload bills and export payment reports','And many more...']}
+];
+let step=readStep();function readStep(){const n=Number(new URLSearchParams(location.search).get('slide'));return Number.isInteger(n)&&n>=0&&n<=4?n:0;}
+const el=(tag,cls,text)=>{const e=document.createElement(tag);e.className=cls;if(text)e.textContent=text;return e;};
+document.getElementById('statusbar').append(H.statusbar());document.getElementById('nav').append(H.navigation({title:'Discover Turbo Hub',right:{label:'Close introduction',icon:'close',href:'../accounts-cards/index.html'}}));
+function go(value){step=value;history.pushState(null,'','?slide='+step);render();document.getElementById('intro-title').focus();}
+function render(){const content=document.getElementById('content'),footer=document.getElementById('footer');content.replaceChildren();footer.replaceChildren();
+ const heading=el('h1','intro-title',step<4?slides[step].title:'And many more Hubs');heading.id='intro-title';heading.tabIndex=-1;
+ if(step<4){const slide=slides[step],article=el('article','intro-slide');const img=el('img','intro-visual');img.src='assets/'+slide.image+'.png';img.alt='';img.width=268;img.height=268;article.append(img,heading,el('p','intro-copy',slide.copy));if(slide.features){const list=el('ul','intro-features');slide.features.forEach(text=>list.append(el('li','',text)));article.append(list);}content.append(article);document.body.dataset.reference=slide.key;}
+ else{const group=el('div','intro-more');for(const [title,copy] of [['Team Hub','Create a Hub for team events and manage expenses seamlessly.'],['Buddies Hub','Pool money between friends and roommates and split expenses.'],['Hub for Petty Cash','Manage trips by allocating budgets to expense types.']]){const item=el('section','intro-more__item');const img=el('img');img.src='assets/more.png';img.alt='';img.width=80;img.height=80;const text=el('div');text.append(el('h2','',title),el('p','',copy));item.append(img,text);group.append(item);}content.append(group,heading,el('p','intro-copy','Want to manage budgets and expenses in a seamless way? We are here to facilitate.'));document.body.dataset.reference='hub-intro-more';}
+ const count=el('p','intro-count',step<4?`Slide ${step+1} of 4`:'More ways to share');count.setAttribute('role','status');footer.append(count);const actions=el('div','intro-footer__actions');actions.append(H.button({label:'Previous',quiet:true,disabled:step===0,onClick:()=>go(step-1)}),step===4?H.button({label:'Create your first Hub',href:'../create-hub/index.html'}):H.button({label:'Next',onClick:()=>go(step+1)}));footer.append(actions);content.scrollTop=0;
+}
+addEventListener('popstate',()=>{step=readStep();render();});render();

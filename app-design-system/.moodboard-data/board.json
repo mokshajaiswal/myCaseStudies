@@ -1,0 +1,66 @@
+{
+  "revision": 1,
+  "buckets": [
+    {
+      "id": "51e6c383-52ce-476f-af5d-2418915904b3",
+      "name": "Layouts & structure",
+      "x": 0,
+      "y": 0,
+      "minWidth": 200,
+      "minHeight": 160,
+      "width": 540,
+      "height": 440
+    },
+    {
+      "id": "2e5ff1dd-81dd-4269-9fcb-10084a2960ca",
+      "name": "Typography & voice",
+      "x": 580,
+      "y": 0,
+      "minWidth": 200,
+      "minHeight": 160,
+      "width": 540,
+      "height": 440
+    },
+    {
+      "id": "add9f338-5e94-431d-81e5-29724573ee7e",
+      "name": "Colour & atmosphere",
+      "x": 1160,
+      "y": 0,
+      "minWidth": 200,
+      "minHeight": 160,
+      "width": 540,
+      "height": 440
+    },
+    {
+      "id": "bdf75f0f-b481-4741-92b3-b4805659e6d1",
+      "name": "Components & details",
+      "x": 0,
+      "y": 540,
+      "minWidth": 200,
+      "minHeight": 160,
+      "width": 540,
+      "height": 440
+    },
+    {
+      "id": "5524b9b2-07be-486a-b51d-d89f27b911e6",
+      "name": "Interactions & flows",
+      "x": 580,
+      "y": 540,
+      "minWidth": 200,
+      "minHeight": 160,
+      "width": 540,
+      "height": 440
+    },
+    {
+      "id": "05af72cd-fb78-4190-a3a9-1755569d6f18",
+      "name": "North star",
+      "x": 1160,
+      "y": 540,
+      "minWidth": 200,
+      "minHeight": 160,
+      "width": 540,
+      "height": 440
+    }
+  ],
+  "images": []
+}
