@@ -50,3 +50,5 @@ never washed out. Screens now set `--home-surface` instead of `background` on
 Applies to Hub Details (Spends/Members/Analytics), Tag added, Accounts & Cards, Delivery
 details, Geofence, Spending limit, Pixel Tag, Tag scanner, payment outcome and new-user entry.
 Visual review pending with the user.
+
+- Prototypes load the design system through `prototypes/shared/ds.js` instead of hard-coded `/design-system/` paths. One synchronous check picks `../../app-design-system/` on any plain static server (Live Server, GitHub Pages) or `/design-system/` in the DS studio, which does not serve the content folder by relative path. Avatar artwork resolves relative to `components/hub.js`. The studio-only spacing inspector (`/framework/…`) is simply absent off-studio.
