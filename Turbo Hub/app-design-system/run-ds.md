@@ -12,31 +12,43 @@ do not merely give the user installation commands. Resolve paths from this
 file and studio.config.json, never from an assumed working directory.
 
 The studio is maintained separately at
-https://github.com/ishantperiwal/ds-starter.git. The verified published version
-for this attachment is a8dc3fc731589d2b9d5edbc4f2ded58dde1efccb.
+https://github.com/ishantperiwal/ds-starter.git. Always run the latest commit
+on its main branch, so every collaborator's studio matches this attachment
+even if their local copy was cloned earlier. The last verified version is
+3f260813d18131f980f540a9a382b68d9a5f70b6 (studio 0.3.1); newer main commits
+are expected and should be used.
 The current studioRoot is ../../.tmp-ds-starter relative to studio.config.json.
 This project currently has no registered studio submodule; do not assume
 that cloning this project has downloaded the studio.
 
 1. Locate this project's Git root and inspect its .gitmodules, if present.
    If the configured studio path is registered as a submodule, run
-   git submodule update --init --recursive -- "<studio path relative to Git root>"
-   from that root. Use the commit recorded by the parent repository.
+   git submodule update --init --remote --recursive -- "<studio path relative to Git root>"
+   from that root, so the submodule tracks the latest main.
 2. Otherwise, if the resolved studioRoot does not exist, clone
-   https://github.com/ishantperiwal/ds-starter.git into that exact path, then
-   check out a8dc3fc731589d2b9d5edbc4f2ded58dde1efccb in the new clone.
-   Use structured command arguments or correctly quoted absolute paths.
-   This fallback is a separate checkout, not a submodule registration.
-3. If the path already exists, inspect its identity and Git status before
-   using it. Preserve local changes. Never delete, reset, replace, or switch
-   an existing checkout automatically. Verify studio.js and the framework
-   instruction files exist; report incompatible or unrelated contents.
+   https://github.com/ishantperiwal/ds-starter.git into that exact path and
+   stay on its main branch. Use structured command arguments or correctly
+   quoted absolute paths. This fallback is a separate checkout, not a
+   submodule registration.
+3. If the path already exists, bring it up to date before using it:
+   a. Confirm it is the ds-starter repository (origin matches the URL above,
+      studio.js and the framework instruction files exist). Report and stop
+      on incompatible or unrelated contents.
+   b. Run git fetch origin in the studio checkout.
+   c. If it has no local changes (git status is clean), check out main if it
+      is on a detached HEAD at an older main commit, then run
+      git merge --ff-only origin/main. This only fast-forwards; it never
+      discards work.
+   d. If it has local changes, local-only commits, or cannot fast-forward,
+      do not reset, stash, delete, or switch it. Use it as it is and tell the
+      user it is behind origin/main and why it could not be updated.
+   e. Report the commit the studio is now on.
 4. Verify Git and Node.js are available. This studio requires Node.js 22
    or newer. Use an available compatible runtime. If none is available,
    explain the prerequisite and follow normal software-install permissions.
-   The pinned studio uses Node built-ins and has no npm dependencies;
-   no npm install is required. For another recorded version, inspect its
-   package.json and documented setup before installing dependencies.
+   The studio uses Node built-ins and has no npm dependencies; no npm
+   install is required. If a newer main adds dependencies, inspect its
+   package.json and documented setup before installing them.
 5. Now read the app AGENTS.md and the installed workflow it references,
    then continue with the attachment/startup steps below. Do not initialize
    a replacement design system or overwrite this app's existing content.
@@ -44,9 +56,9 @@ that cloning this project has downloaded the studio.
 If GitHub authentication, repository access, or runtime installation blocks
 setup, report the exact missing prerequisite; do not claim the studio is
 running. Registering a submodule is a maintainer operation, not something
-each collaborator needs to repeat. A future submodule should pin a published
-studio commit; studio changes must be committed and pushed in that separate
-repository before updating the parent repository's pointer.
+each collaborator needs to repeat. Studio changes must be committed and
+pushed in the ds-starter repository first; then update this parent
+repository's .tmp-ds-starter pointer and the last verified version above.
 
 Read AGENTS.md here and follow its linked installed workflow. Read BRIEF.md,
 the relevant registry.json entries and implementation files, plus USAGE.md or
