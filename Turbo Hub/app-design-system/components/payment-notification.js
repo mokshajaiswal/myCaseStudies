@@ -1,7 +1,7 @@
-TurboUI.paymentNotification=({message,href,app='PayZapp',time='now'}={})=>{
- const root=document.createElement('a');root.className='th-payment-notification';root.href=href;
+TurboUI.paymentNotification=({message,href,app='PayZapp',time='now',mark:markKind='payzapp'}={})=>{
+ const root=document.createElement('a');root.className='th-payment-notification';root.dataset.inspectorVariant=markKind;root.href=href;
  const header=document.createElement('div');header.className='th-payment-notification__header';
- const mark=document.createElement('span');mark.className='th-payment-notification__mark';mark.textContent='P';mark.setAttribute('aria-hidden','true');
+ const mark=document.createElement('span');mark.className='th-payment-notification__mark'+(markKind==='whatsapp'?' th-payment-notification__mark--whatsapp':'');if(markKind==='whatsapp')mark.innerHTML='<svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3Zm4.6 12.6c-.2.6-1.1 1.1-1.6 1.1-.4.1-.9.1-2.9-.7-2.4-1-3.9-3.4-4-3.6-.1-.2-1-1.3-1-2.4s.6-1.7.8-2c.2-.2.5-.3.6-.3h.5c.2 0 .4 0 .6.4l.8 1.9c.1.2.1.3 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.8-1c.2-.3.4-.2.6-.1l1.8.9c.3.1.5.2.5.3.1.2.1.6-.1 1.2Z"/></svg>';else mark.textContent='P';mark.setAttribute('aria-hidden','true');
  const brand=document.createElement('strong');brand.textContent=app;const timestamp=document.createElement('span');timestamp.className='th-payment-notification__time';timestamp.textContent=time;header.append(mark,brand,timestamp);
  const copy=document.createElement('p');copy.className='th-payment-notification__message';copy.textContent=message;root.append(header,copy);return root;
 };

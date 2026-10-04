@@ -1,11 +1,14 @@
 const storageKey='turbo-demo-delivery-draft';
 let draft={line1:'',line2:'',line3:'',pincode:'',city:'',state:'',contact:''};
-try{const stored=JSON.parse(sessionStorage.getItem(storageKey));if(stored&&typeof stored==='object')for(const key of Object.keys(draft))if(typeof stored[key]==='string')draft[key]=stored[key];}catch{}
+try{const stored=JSON.parse(TurboStoryContext.storage.getItem(storageKey));if(stored&&typeof stored==='object')for(const key of Object.keys(draft))if(typeof stored[key]==='string')draft[key]=stored[key];}catch{}
 document.getElementById('statusbar').append(TurboUI.statusbar());
-const returnSaved=new URLSearchParams(location.search).get('return')==='saved';
-document.getElementById('nav').append(TurboUI.navigation({title:'Delivery Details',left:{label:'Back to profile',icon:'navigation-back',href:'../member-profile/index.html'+(returnSaved?'?saved=true':'')}}));
+const query=new URLSearchParams(location.search),returnSaved=query.get('return')==='saved';
+// Who this is for (?member=neha&upi=active) travels on to the confirmation and back to the profile.
+const state=new URLSearchParams();for(const key of ['member','upi'])if(query.get(key))state.set(key,query.get(key));
+const withState=(path,extra={})=>{const q=new URLSearchParams(state);for(const [k,v] of Object.entries(extra))q.set(k,v);const s=q.toString();return path+(s?'?'+s:'');};
+document.getElementById('nav').append(TurboUI.navigation({title:'Delivery Details',left:{label:'Back to profile',icon:'navigation-back',href:withState('../member-profile/index.html',returnSaved?{saved:'true'}:{})}}));
 const form=document.getElementById('delivery-form'),fields={};
-const persist=()=>{try{sessionStorage.setItem(storageKey,JSON.stringify(draft));}catch{}};
+const persist=()=>{try{TurboStoryContext.storage.setItem(storageKey,JSON.stringify(draft));}catch{}};
 for(const [id,label,optional,type,autocomplete] of [['line1','Address Line 1',false,'text','address-line1'],['line2','Address Line 2',true,'text','address-line2'],['line3','Address Line 3',true,'text','address-line3'],['pincode','Pincode',false,'text','postal-code'],['city','City',false,'text','address-level2'],['state','State',false,'text','address-level1'],['contact','Contact Number',false,'tel','tel-national']]){
  const field=TurboUI.field({id,label,optional,type,value:draft[id],prefix:id==='contact'?'+91':'',onInput:value=>{draft[id]=value;field.setError('');persist();}});
  field.control.autocomplete=autocomplete;fields[id]=field;
@@ -25,6 +28,6 @@ form.onsubmit=event=>{
  confirmation.setError(confirmation.control.checked?'':'Confirm the delivery details before proceeding.');
  if(!first&&!confirmation.control.checked)first=confirmation.control;
  if(first){first.focus();return;}
- persist();location.href='../member-profile/index.html?saved=true';
+ persist();TurboStoryContext.navigate(withState('../delivery-confirmed/index.html'));
 };
 // Local draft only; city/state are editable because this demo has no postal lookup.

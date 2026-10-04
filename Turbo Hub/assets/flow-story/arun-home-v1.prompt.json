@@ -1,0 +1,12 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "useCase": "illustration-story",
+  "scope": "Only the accounts-cards scene; first composition experiment.",
+  "asset": "arun-home-v1.png",
+  "references": [
+    "family.png",
+    "father.png"
+  ],
+  "transparentBackground": true,
+  "prompt": "Use case: illustration-story. Asset: ONE wide landscape 3:2 household composition for an editorial case study, with a live HTML phone to be overlaid later at the exact center. Image1 is STYLE reference: sparse hand-drawn thin dark ink contour, very simple white/cream faces, flat saturated blue clothes and pastel lavender/mint household detail. Image2 is IDENTITY reference for Arun only: middle-aged Indian father, swept short black hair, small ink stubble beard, cobalt rolled-sleeve shirt, black trousers. Create a NEW composition: a minimal living room with a floor/rug across the lower edge connecting everything, a pale lavender sofa on LEFT, one slender floor lamp and small mint plant at far LEFT, and a LARGE Arun standing at RIGHT naturally looking at his small dark handheld phone. Arun must be substantial: his whole body spans about 80% of image height, top near 10%, feet on floor near 90%; occupies rightmost 27% of image, fully visible, no clipping. Household has very few clean lines and pale fills, ample breathable space. IMPORTANT leave a continuous blank central vertical corridor from x=31% to x=69%, above the floor, for the real phone overlay: NO furniture or character in this corridor, NO drawn large phone, NO placeholder rectangle, NO productUI. Make the two room sides connected by the common rug/floor line at y=90%. Transparent surroundings with opaque illustration fills; no dark background, no glow, no gradient shaded characters. Warm near-white paper feel inside sparse room elements. No dog or extra people, no text, logo, letters, screens or watermark."
+}

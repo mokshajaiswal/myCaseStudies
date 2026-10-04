@@ -1,0 +1,8 @@
+/* Shared shell for the member setup forms (Verify your number, Verify PAN, Set UPI PIN):
+   back-only bar, page header on the chrome, one short form on the white sheet with the action at the bottom. */
+.setup-content { flex:1; display:flex; flex-direction:column; padding:var(--th-space-6); background:var(--th-white); }
+.setup-form { flex:1; display:flex; flex-direction:column; gap:var(--th-space-4); }
+.setup-form > .th-button { margin-top:auto; }
+.setup-note { margin:0; color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.setup-note strong { color:var(--color-text); font-weight:var(--font-weight-semibold); }
+.setup-screen .home-indicator { --home-surface:var(--th-white); }

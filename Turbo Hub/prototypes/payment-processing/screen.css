@@ -4,5 +4,5 @@
 .transfer-illustration { position:relative; width:229px; height:94px; overflow:hidden; margin-bottom:54px; }
 .transfer-illustration img { position:absolute; width:177.38%; height:764.52%; left:-38.8%; top:-91.94%; max-width:none; }
 .processing-result h1 { margin:var(--th-space-1) 0 0; font:var(--type-status-heading-weight) var(--type-status-heading-size)/var(--type-status-heading-leading) var(--font-heading); }
-.processing-screen .home-indicator { margin-top:auto; background:transparent; }
+.processing-screen .home-indicator { margin-top:auto; --home-surface:transparent; }
 .processing-screen .home-indicator::after { background:var(--th-white); }

@@ -1,0 +1,14 @@
+/* Presentation tooling only. Product component geometry and typography are untouched. */
+html[data-story-embed] body { height:100svh; min-height:0; padding:0; display:grid; place-items:center; background:transparent; overflow:hidden; }
+/* 97.5% leaves room for the side buttons, which sit just outside the phone's box. */
+html[data-story-embed] .phone { width:calc(min(433.333px,100vw,calc(100svh * 100 / 206.4)) * .975); filter:none; }
+html[data-story-embed] .preview-comparison { display:contents; }
+html[data-story-embed] .preview-prototype { display:contents; }
+html[data-story-embed] .preview-reference,
+html[data-story-embed] .preview-prototype__toolbar,
+html[data-story-embed] .preview-screen-navigation,
+html[data-story-embed] .preview-flow-navigation { display:none; }
+html[data-story-locked] { --chrome-backdrop-motion-state:paused; --chrome-backdrop-motion-intensity:0; }
+html[data-story-locked] .phone-screen { pointer-events:none; }
+html[data-story-embed]:has(.onboarding) { font-size:16px; background:transparent; }
+html[data-story-embed] .onboarding { width:390px; height:844px; min-height:0; max-width:none; }

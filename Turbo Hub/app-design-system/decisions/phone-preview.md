@@ -1,5 +1,7 @@
 # Phone chrome and preview geometry
 
+The phone-screen explicitly restores --color-text at the product boundary. The preview toolbar's light text color must not inherit into product labels and controls. This corrects pale labels on Create a Hub and other screens using inherited text color. Browser review remains with the user.
+
 Standalone full-page previews enable the shared inspector's keyboardActivation option.
 S opens spacing, C opens components, and Escape dismisses inspection and restores page
 interaction. Inspection starts hidden on plain URLs. The adapter checks top === self
@@ -30,4 +32,21 @@ Shell viewport clipping radius reduced from 15.5% / 7.2% to 13% / 6% so the rend
 
 Source comparison: shared phone-preview.js places the matching original image to the right of every prototype, including studio embeds and full-page previews. Screen state sets data-reference; shared preview tooling owns the source mapping, cropping and image link. Hub tabs, member setup steps and payment request feedback update the reference. Long originals scroll independently; below 760px the reference stacks after the phone. These controls are preview tooling, not product components. Existing 390 × 844 product geometry remains unchanged. Verified desktop comparison, composite crop, tab switching, payment pending mapping and narrow stacked layout.
 
+The toolbar above the prototype phone includes Copy reference for LLM prompts, per the user’s placement preference. At the user's request, copied text identifies only the prototype screen, current state, page URL (including query parameters), and HTML/CSS/JS source paths. The user supplies their requested changes separately. The reference is read at activation so tab/step changes use the current state. Native clipboard copying falls back to a selected textarea; an accessible status reports success or failure. This action belongs to preview tooling outside the product screen. The toolbar reserves 44px above the phone; preview scaling fits the remaining height. Verified the moved action and copy feedback on Accounts & Cards. Verified actual clipboard text on Accounts & Cards and after switching Hub Details from Spends to Members; verified the button remains visible in the stacked 390px layout. Clipboard failure fallback was reviewed in source but not forced in the browser.
+
 Default typography is now locally bundled Inter Variable, weights 100–900. --th-font points to Inter; existing 400/600/700 assignments remain. Case-study/reference and onboarding defaults also use Inter.
+
+Family story embed exception (3 October 2026): `embed=story` keeps only the existing phone presentation and exits before comparison panels, reference-copy tools and external flow navigation are created. Standalone previews retain those tools. The explicit scene context isolates fictional drafts and freezes locked timed states; see [family-flow-story.md](family-flow-story.md). Browser review for this addition remains manual with the user.
+
+## Home indicator fade (4 October 2026)
+
+Where a scrolling `.phone-content` sits directly above the home indicator, the indicator now
+overlays the bottom 40px instead of reserving a solid strip: content runs underneath, a
+gradient of the screen's own surface plus a masked 3px blur fades it out, and the pill stays
+on top. A 24px spacer at the end of the scroll region keeps the last content reachable above
+the fade. Screens that end in a fixed footer keep the in-flow strip, so footer buttons are
+never washed out. Screens now set `--home-surface` instead of `background` on
+`.home-indicator` (16 screen overrides converted), so both modes use the right colour.
+Applies to Hub Details (Spends/Members/Analytics), Tag added, Accounts & Cards, Delivery
+details, Geofence, Spending limit, Pixel Tag, Tag scanner, payment outcome and new-user entry.
+Visual review pending with the user.

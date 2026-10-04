@@ -1,4 +1,5 @@
 .limit-editor-heading{flex:none}
 .limit-editor-content{padding:var(--th-space-6);background:var(--color-surface)}
 .limit-editor-form{display:grid;gap:var(--th-space-4)}
+.limit-editor-slider{min-width:0;padding-inline:var(--th-space-4)}
 .limit-editor-feedback{display:grid;gap:var(--th-space-4)}

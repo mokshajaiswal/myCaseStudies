@@ -1,0 +1,23 @@
+/* Wallet summary floats over its action surface; this screen owns the arrangement. */
+.th-account-card { flex:none; border:1px solid var(--color-border); border-radius:var(--wallet-card-radius); overflow:hidden; background:var(--wallet-action-surface); box-shadow:var(--wallet-card-shadow); }
+.th-account-card__summary { position:relative; display:flex; align-items:center; justify-content:space-between; gap:var(--th-space-4); min-height:90px; padding:var(--th-space-4); border-radius:calc(var(--wallet-card-radius) - 1px) calc(var(--wallet-card-radius) - 1px) var(--th-space-4) var(--th-space-4); background:var(--color-surface); box-shadow:var(--wallet-summary-shadow); }
+.th-account-card__balance { min-width:0; }
+.th-account-card__balance h2 { margin:0; color:var(--color-text); font:var(--type-item-title-weight) var(--wallet-title-size)/var(--type-item-title-leading) var(--font-body); }
+.th-account-card__balance p { margin:var(--th-space-1) 0 0; color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--wallet-amount-size)/var(--type-supporting-text-leading) var(--font-body); }
+.th-account-card__icon { flex:none; display:grid; place-items:center; width:56px; height:56px; border-radius:50%; background:var(--wallet-icon-surface); color:var(--wallet-icon-color); }
+.th-account-action { display:flex; align-items:center; gap:var(--th-space-2); width:100%; min-height:60px; padding:var(--th-space-3) var(--th-space-4); border:0; border-radius:0 0 calc(var(--wallet-card-radius) - 1px) calc(var(--wallet-card-radius) - 1px); background:transparent; color:var(--color-action); text-align:left; font:var(--type-action-weight) var(--type-action-size)/var(--type-action-leading) var(--font-label); cursor:pointer; }
+.th-account-action__icon { flex:none; display:grid; place-items:center; width:32px; height:32px; border-radius:50%; background:var(--color-surface); }
+.th-account-action:hover { background:var(--wallet-action-hover); }
+.th-account-action:focus-visible { outline:3px solid var(--color-action); outline-offset:3px; }
+.th-account-action:active { background:var(--wallet-action-active); }
+
+.th-account-card--summary-only .th-account-card__summary { border-radius:calc(var(--wallet-card-radius) - 1px); box-shadow:none; }
+.th-account-cards { display:flex; align-items:center; gap:var(--th-space-2); min-height:60px; overflow-x:auto; padding:var(--th-space-3) var(--th-space-4); }
+.th-account-action--icon { flex:none; display:grid; place-items:center; width:44px; height:44px; min-height:44px; padding:0; border:0; border-radius:50%; background:transparent; color:var(--color-action); cursor:pointer; }
+.th-account-action--icon:focus-visible { outline:3px solid var(--color-action); outline-offset:2px; }
+.th-account-cards__chip { flex:none; display:inline-flex; align-items:center; gap:var(--th-space-2); min-height:32px; padding:var(--th-space-1) var(--th-space-2); border-radius:var(--th-space-5); background:var(--color-surface); color:var(--color-text-secondary); white-space:nowrap; font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
+.th-account-cards__bank { display:grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--wallet-icon-surface); color:var(--wallet-icon-color); font-weight:var(--font-weight-semibold); }
+
+.th-account-action:disabled { opacity:.45; cursor:not-allowed; }
+
+.th-account-card__balance { overflow-wrap:anywhere; }

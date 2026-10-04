@@ -1,0 +1,49 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "useCase": "illustration-story",
+  "style": "Sparse hand-drawn editorial ink outlines with selective saturated blue/violet fills and pale pastel household surroundings.",
+  "reference": "User-supplied style reference codex-clipboard-df7e7a48-755b-4114-b151-b6ac4aad044d.png",
+  "assets": [
+    {
+      "name": "family",
+      "file": "family.png",
+      "prompt": "Use case: illustration-story. Create a new wide family household vignette. Input reference is STYLE ONLY: copy its sparse hand-drawn ink contour language, exaggerated simple proportions, almost-white skin and faces with only a few marks, dark solid hair, tiny expressive eyes, selected flat color blocks. Do NOT make polished cartoon gradients, realism, dimensional shading, painted skin, or detailed clothing. This should feel like the attached minimalist editorial pen drawing. Four Indian adults: father Arun about 48 short dark hair small outlined beard cobalt blue shirt dark trousers seated holding phone; mother Kavya about 45 dark bob violet kurta cream trousers seated phone; daughter Neha 19 long dark hair blue-violet top seated nearby phone; son Rohan22 wavy dark hair blue shirt standing nearby phone. Simple lavender line-and-wash sofa and pale mint plant suggest a household; wide negative space above and around. Colors cream #fffef8 paper, thin near-black/navy ink, saturated cobalt #217dff and violet on clothing, extremely light pastel environment. Warm natural expressions. No orange theme from reference. No text letters logos phone screen content. Create ONE coherent family scene, not a contact sheet.",
+      "transparentBackground": false
+    },
+    {
+      "name": "father",
+      "prompt": "Use case illustration-story. Create one full-body transparent character cutout for a case-study page. Reference image1 is the FAMILY identity and drawing style: reproduce sparse hand-drawn thin dark ink outlines, nearly white faces and skin, solid black hair, simple tiny facial marks, exaggerated editorial proportions, selective flat saturated blue/violet clothing. No dimensional shading, realistic skin, gradient cartoon, dense texture. Keep the character recognizably the same as the family reference. Natural relaxed phone-using pose. All feet and hands fully visible with generous transparent margins. NO sofa plant scenery floor shadows text logos screenUI, no other people. True transparent alpha background. Subject: Father Arun, seated at LEFT in reference: middle-aged, short swept black hair, small ink stubble beard, bright cobalt collared shirt with rolled sleeves, black trousers. Standing looking at his plain dark phone held one hand, other hand relaxed.",
+      "file": "father.png",
+      "transparentBackground": true,
+      "identityReference": "family.png"
+    },
+    {
+      "name": "mother",
+      "prompt": "Use case illustration-story. Create one full-body transparent character cutout for a case-study page. Reference image1 is the FAMILY identity and drawing style: reproduce sparse hand-drawn thin dark ink outlines, nearly white faces and skin, solid black hair, simple tiny facial marks, exaggerated editorial proportions, selective flat saturated blue/violet clothing. No dimensional shading, realistic skin, gradient cartoon, dense texture. Keep the character recognizably the same as the family reference. Natural relaxed phone-using pose. All feet and hands fully visible with generous transparent margins. NO sofa plant scenery floor shadows text logos screenUI, no other people. True transparent alpha background. Subject: Mother Kavya, second person from left in reference: middle-aged woman, short black bob, violet kurta, cream trousers. Standing in a natural slight lean, holding a plain dark phone with two hands.",
+      "file": "mother.png",
+      "transparentBackground": true,
+      "identityReference": "family.png"
+    },
+    {
+      "name": "daughter",
+      "prompt": "Use case illustration-story. Create one full-body transparent character cutout for a case-study page. Reference image1 is the FAMILY identity and drawing style: reproduce sparse hand-drawn thin dark ink outlines, nearly white faces and skin, solid black hair, simple tiny facial marks, exaggerated editorial proportions, selective flat saturated blue/violet clothing. No dimensional shading, realistic skin, gradient cartoon, dense texture. Keep the character recognizably the same as the family reference. Natural relaxed phone-using pose. All feet and hands fully visible with generous transparent margins. NO sofa plant scenery floor shadows text logos screenUI, no other people. True transparent alpha background. Subject: Daughter Neha, third from left: clearly adult19, long loose black hair, periwinkle blue top, dark trousers. Standing relaxed holding a plain dark phone at chest with one hand, other gesturing lightly.",
+      "file": "daughter.png",
+      "transparentBackground": true,
+      "identityReference": "family.png"
+    },
+    {
+      "name": "son",
+      "prompt": "Use case illustration-story. Create one full-body transparent character cutout for a case-study page. Reference image1 is the FAMILY identity and drawing style: reproduce sparse hand-drawn thin dark ink outlines, nearly white faces and skin, solid black hair, simple tiny facial marks, exaggerated editorial proportions, selective flat saturated blue/violet clothing. No dimensional shading, realistic skin, gradient cartoon, dense texture. Keep the character recognizably the same as the family reference. Natural relaxed phone-using pose. All feet and hands fully visible with generous transparent margins. NO sofa plant scenery floor shadows text logos screenUI, no other people. True transparent alpha background. Subject: Son Rohan, standing at right: adult22, tall slim, wavy black hair, bright cobalt shirt and black trousers. Standing one hand in pocket, other holding a plain dark phone. Same recognisable face and clothes.",
+      "file": "son.png",
+      "transparentBackground": true,
+      "identityReference": "family.png"
+    },
+    {
+      "name": "father-create",
+      "prompt": "Use case illustration-story. Create one full-body transparent character cutout for a case-study page. Reference image1 is the FAMILY identity and drawing style: reproduce sparse hand-drawn thin dark ink outlines, nearly white faces and skin, solid black hair, simple tiny facial marks, exaggerated editorial proportions, selective flat saturated blue/violet clothing. No dimensional shading, realistic skin, gradient cartoon, dense texture. Keep the character recognizably the same as the family reference. Natural relaxed phone-using pose. All feet and hands fully visible with generous transparent margins. NO sofa plant scenery floor shadows text logos screenUI, no other people. True transparent alpha background. Subject: Father Arun, seated at LEFT in reference: middle-aged short swept black hair and ink stubble beard, cobalt rolled sleeve collared shirt, black trousers. DIFFERENT pose for creating a family Hub: sitting on a very simple outlined stool, leaning slightly forward focused on a plain dark phone held in both hands. Stool is tiny and mostly outline, no other environment.",
+      "file": "father-create.png",
+      "transparentBackground": true,
+      "identityReference": "family.png"
+    }
+  ]
+}

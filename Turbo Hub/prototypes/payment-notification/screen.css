@@ -2,5 +2,5 @@
 .lock-time { margin:calc(var(--th-space-6) * 2) 0 0; text-align:center; font:var(--type-lock-time-weight) var(--type-lock-time-size)/var(--type-lock-time-leading) var(--font-heading); }
 .lock-date { margin:var(--th-space-2) 0 0; text-align:center; text-transform:uppercase; letter-spacing:2px; font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
 .lock-notifications { margin-top:var(--th-space-6); padding:var(--th-space-5); }
-.lock-screen .home-indicator { margin-top:auto; background:transparent; }
+.lock-screen .home-indicator { margin-top:auto; --home-surface:transparent; }
 .lock-screen .home-indicator::after { background:var(--th-white); }

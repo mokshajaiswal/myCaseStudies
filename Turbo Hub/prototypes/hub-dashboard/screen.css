@@ -1,5 +1,19 @@
 @import url('../shared/phone-preview.css');
-.overview { display:grid; gap:var(--th-space-4); padding:var(--th-space-6) var(--th-space-6) var(--th-space-4); background:var(--hub-identity-background); }
+/* Hub identity on the blue chrome; the content scroller is transparent so the backdrop shows behind it,
+   and the light sheet (rounded 24px top) begins at the tabs. */
+/* No elastic bounce: the transparent scroller would otherwise reveal the backdrop past the white sheet. */
+.phone-screen > .phone-content { background:transparent; overscroll-behavior-y:none; }
+.overview { display:grid; gap:var(--th-space-6); padding:var(--th-space-1) var(--th-space-6) var(--th-space-8); }
+/* Tabs sit on the blue (chrome tone); the light sheet with the shared 24px top corners starts at the panel. */
+#tabs { position:relative; }
+#hub-panel { border-radius:var(--th-space-6) var(--th-space-6) 0 0; }
+/* Docked tabs paint the same backdrop (pinned to the screen top) so the list scrolls cleanly beneath them, and redraw
+   the sheet's rounded top corners just below with two masked corner wedges of the same backdrop. */
+.phone-content.is-docked > #tabs { background-image:var(--chrome-backdrop); background-position:0 calc(var(--chrome-h,112px) * -1); background-size:100% 844px; background-repeat:no-repeat; }
+.phone-content.is-docked > #tabs::after { content:""; position:absolute; top:100%; left:0; right:0; height:var(--th-space-6); pointer-events:none; background-image:var(--chrome-backdrop); background-position:0 calc((var(--chrome-h,112px) + var(--tabs-h,64px)) * -1); background-size:100% 844px; background-repeat:no-repeat;
+  mask-image:radial-gradient(circle at 100% 100%,transparent calc(var(--th-space-6) - .5px),#000 var(--th-space-6)),radial-gradient(circle at 0 100%,transparent calc(var(--th-space-6) - .5px),#000 var(--th-space-6));
+  mask-size:var(--th-space-6) var(--th-space-6); mask-position:0 0,100% 0; mask-repeat:no-repeat; }
+#hub-panel, .phone-screen > .phone-content::after { background:var(--color-surface); }
 .phone-content { display:flex; flex-direction:column; }
 .overview, #tabs { flex:none; }
 #hub-panel { display:flex; flex-direction:column; flex:1 0 auto; padding:24px 24px 8px; outline-offset:-4px; }
@@ -10,11 +24,11 @@
 .row-list { background: white; border: 1px solid var(--color-border); border-radius: 16px; padding: 0 16px; }
 .row-list .th-row + .th-row { border-top: 1px solid var(--color-border); }
 .transaction-list { display:grid; gap:var(--th-space-8); }
-body[data-reference=spends] #hub-panel { padding-top:var(--th-space-4); background:var(--color-surface); }
-body[data-reference=spends] .home-indicator { background:var(--color-surface); }
+body[data-reference=spends] #hub-panel { padding-top:var(--th-space-6); background:var(--color-surface); }
+body[data-reference=spends] .home-indicator { --home-surface:var(--color-surface); }
 .member-list { display: grid; gap: 16px; }
-body[data-reference=members] #hub-panel { padding-top:var(--th-space-4); background:var(--color-surface); }
-body[data-reference=members] .home-indicator { background:var(--color-surface); }
+body[data-reference=members] #hub-panel { padding-top:var(--th-space-6); background:var(--color-surface); }
+body[data-reference=members] .home-indicator { --home-surface:var(--color-surface); }
 body[data-reference=members] .section-top { min-height:32px; margin-bottom:var(--th-space-4); }
 body[data-reference=members] .section-top h2 { color:var(--color-text-secondary); font:var(--type-section-heading-small-weight) var(--type-section-heading-small-size)/var(--type-section-heading-small-leading) var(--font-heading); }
 body[data-reference=members] .member-list { gap:var(--th-space-4); }
@@ -36,3 +50,30 @@ body[data-reference=spends] .hub-artwork { padding-top:calc(var(--th-space-8) + 
 }
 
 .panel-section .section-heading{font:var(--type-section-heading-small-weight) var(--type-section-heading-small-size)/var(--type-section-heading-small-leading) var(--font-heading);}
+/* The chrome floats, transparent, over the scroller. Content scrolls up behind it through a progressive blur
+   (none 24px below the chrome edge, strongest at the top) while each hero block fades out (screen.js), so nothing
+   is ever cut by a line. When the tabs dock at the chrome edge, a rounded clip keeps member content out of the nav. */
+.phone-screen > .phone-chrome { position:absolute; inset:0 0 auto; z-index:3; }
+.phone-screen > .phone-chrome > :not(.chrome-blur) { position:relative; }
+/* Progressive blur: six stacked backdrop blurs (1 → 20px), each masked to an overlapping band, spanning the chrome
+   plus 24px below it, weakest at the bottom. Sits under the nav controls, inside the screen edges (extending past them
+   sampled the dark phone body and darkened the corners). Shown while the hero scrolls; hidden at rest and once the tabs are within reach. */
+/* A no-op filter makes the screen the blur's backdrop root, so the blur samples only the screen's own pixels and
+   not the dark page outside its rounded corners. */
+.phone-screen:has(> .phone-chrome .chrome-blur) { filter:saturate(1); }
+.chrome-blur { position:absolute; top:0; left:0; right:0; height:calc(var(--chrome-h,112px) + 24px); pointer-events:none; display:none; }
+.phone-screen:has(> .phone-content.is-feathered) .chrome-blur { display:block; }
+.chrome-blur > span { position:absolute; inset:0; }
+.chrome-blur > span:nth-child(1) { backdrop-filter:blur(1px); -webkit-backdrop-filter:blur(1px); mask-image:linear-gradient(to top,transparent 0%,#000 12.5%,#000 25%,transparent 37.5%); }
+.chrome-blur > span:nth-child(2) { backdrop-filter:blur(2px); -webkit-backdrop-filter:blur(2px); mask-image:linear-gradient(to top,transparent 12.5%,#000 25%,#000 37.5%,transparent 50%); }
+.chrome-blur > span:nth-child(3) { backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px); mask-image:linear-gradient(to top,transparent 25%,#000 37.5%,#000 50%,transparent 62.5%); }
+.chrome-blur > span:nth-child(4) { backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); mask-image:linear-gradient(to top,transparent 37.5%,#000 50%,#000 62.5%,transparent 75%); }
+.chrome-blur > span:nth-child(5) { backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); mask-image:linear-gradient(to top,transparent 50%,#000 62.5%,#000 75%,transparent 87.5%); }
+.chrome-blur > span:nth-child(6) { backdrop-filter:blur(20px); -webkit-backdrop-filter:blur(20px); mask-image:linear-gradient(to top,transparent 62.5%,#000 75%,#000 100%); }
+.phone-screen > .phone-content { padding-top:var(--chrome-h,112px); border-radius:0; }
+/* Sticky offsets already start below the scroller's padding, so top:0 docks the tabs at the chrome edge. */
+.phone-screen > .phone-content > #tabs { top:0; }
+.phone-screen > .phone-content.is-docked { clip-path:inset(var(--chrome-h,112px) 0 0 0); }
+/* New-Hub state (?state=new): prompt and list Actions on the sheet. */
+.created-intro { margin:0 0 var(--th-space-5); text-align:center; color:var(--color-text-secondary); text-wrap:balance; font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.created-actions { display:grid; border:1px solid var(--color-border); border-radius:var(--th-radius); overflow:hidden; }

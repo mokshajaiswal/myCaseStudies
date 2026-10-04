@@ -1,0 +1,18 @@
+/* Joined: same full-blue success surface as Delivery confirmed. The two remaining steps sit on one glass card. */
+.phone-viewport:has(.joined-screen) { background:var(--chrome-backdrop); }
+.joined-screen { color:var(--th-white); }
+.joined-result { flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--th-space-4); padding:0 var(--th-space-6); text-align:center; }
+.joined-result__symbol { margin-bottom:var(--th-space-4); }
+.joined-result h1 { margin:0; font:var(--type-amount-summary-weight) var(--type-screen-heading-size)/var(--type-screen-heading-leading) var(--font-heading); }
+.joined-result__copy { margin:0; max-width:300px; color:rgb(255 255 255 / .88); text-wrap:balance; font:var(--type-field-value-weight) var(--type-field-value-size)/var(--font-leading-relaxed) var(--font-body); }
+.joined-steps { display:grid; gap:var(--th-space-3); width:100%; margin:var(--th-space-4) 0 0; padding:var(--th-space-4); border:1px solid rgb(255 255 255 / .28); border-radius:var(--th-radius); background:rgb(255 255 255 / .12); box-shadow:inset 0 1px 0 rgb(255 255 255 / .24); list-style:none; text-align:left; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+.joined-steps li { display:flex; align-items:center; gap:var(--th-space-3); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.joined-steps__icon { display:inline-grid; place-items:center; width:32px; height:32px; flex:none; border-radius:10px; background:rgb(255 255 255 / .18); }
+.joined-actions { flex:none; display:grid; padding:0 var(--th-space-6) var(--th-space-4); }
+.joined-screen .home-indicator { --home-surface:transparent; }
+.joined-screen .home-indicator::after { background:var(--th-white); }
+@media (prefers-reduced-motion: no-preference) {
+ .joined-result h1, .joined-result__copy, .joined-steps, .joined-actions { animation:joined-rise 560ms cubic-bezier(.16,1,.3,1) both; }
+ .joined-result h1 { animation-delay:620ms; } .joined-result__copy { animation-delay:720ms; } .joined-steps { animation-delay:840ms; } .joined-actions { animation-delay:980ms; }
+}
+@keyframes joined-rise { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }

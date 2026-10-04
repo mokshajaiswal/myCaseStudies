@@ -1,10 +1,17 @@
-.request-identity { display:flex; justify-content:center; padding:var(--th-space-4) var(--th-space-6); }
-.requested-amount { display:flex; justify-content:space-between; align-items:center; gap:var(--th-space-4); padding:var(--th-space-4); margin:var(--th-space-2) var(--th-space-6) 48px; border-radius:var(--th-radius); background:#ffffff20; color:var(--th-white); }
-.requested-amount dt { font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
-.requested-amount dd { margin:0; font:var(--type-amount-summary-weight) var(--type-amount-summary-size)/var(--type-amount-summary-leading) var(--font-body); }
-.authorization-details { padding:var(--th-space-6); text-align:center; display:flex; flex-direction:column; align-items:center; gap:var(--th-space-6); }
-.authorization-details h1,.authorization-details p { margin:0; font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body); }
-.authorization-details strong { font-weight:var(--weight-action); }
-.authorization-details #declined { color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
-.authorization-actions { display:grid; gap:var(--th-space-4); padding:var(--th-space-4) var(--th-space-6); background:var(--th-canvas); }
-.authorization-actions .decline-action { --color-action-soft:transparent; --color-action:#e63e42; }
+/* Full-blue decision screen (exception to the light content surface, like Request pending):
+   the request sits centred on the Chrome backdrop; only the actions get a short light sheet. */
+.phone-viewport:has(.authorize-screen) { background:var(--chrome-backdrop); }
+/* The request centres in the open space; the countdown sits at the bottom, just above the swipe. */
+.request-body { flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; padding:0 var(--th-space-6) var(--th-space-6); color:var(--th-white); }
+.request-hero { display:flex; flex-direction:column; align-items:center; gap:var(--th-space-6); margin-block:auto; text-align:center; }
+.request-hero__heading { display:flex; flex-direction:column; align-items:center; gap:var(--th-space-2); margin:0; }
+.request-hero__lead { text-wrap:balance; font:var(--type-field-value-weight) var(--type-status-heading-size)/var(--font-leading-relaxed) var(--font-body); }
+/* Page-owned inline mark, sized to the text line and spaced on both sides; decorative because the text names Nykaa. */
+.request-hero__logo { width:20px; height:20px; margin:0 var(--th-space-2) 0 var(--th-space-1); border-radius:5px; object-fit:cover; vertical-align:-3px; }
+.request-hero__amount { font:var(--type-payment-amount-weight) var(--type-payment-amount-size)/var(--type-payment-amount-leading) var(--font-heading); }
+.request-countdown { width:240px; max-width:100%; }
+
+/* Action sheet: rounded like the shared content surface, sized to its two actions.
+   Decline uses the registered danger Action; an outcome replaces both controls. */
+.authorization-actions { display:grid; gap:var(--th-space-3); padding:var(--th-space-6) var(--th-space-6) var(--th-space-4); border-radius:var(--th-space-6) var(--th-space-6) 0 0; background:var(--th-canvas); }
+.request-outcome { margin:0; text-align:center; font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }

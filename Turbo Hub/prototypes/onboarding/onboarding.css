@@ -40,8 +40,11 @@ button:focus-visible, a:focus-visible, .carousel:focus-visible, .complete:focus-
   overflow: hidden;
   background: var(--paper);
 }
+.app-chrome { flex: none; margin-inline: -1.5rem; }
+.app-chrome .th-navigation { padding-bottom: 0; }
+.app-chrome .th-navigation .th-button--quiet { color: var(--ink); }
 .app-header {
-  height: 6.5rem;
+  height: 2.75rem;
   flex: none;
   display: flex;
   align-items: flex-end;
@@ -136,7 +139,7 @@ h1 strong, h2 strong { font: inherit; }
 .complete .replay { align-self: center; margin-top: 1rem; padding: .75rem; border: 0; background: none; color: var(--accent); font-weight: 600; }
 .noscript-message { font-size: .8rem; }
 @media (max-height: 600px) {
-  .app-header { height: 5.5rem; }
+  .app-header { height: 2.25rem; }
   .slide-copy { padding-top: .75rem; }
   h1, h2 { font-size: 1.85rem; }
   .description { margin-top: .85rem; font-size: 1rem; }

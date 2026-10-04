@@ -1,0 +1,31 @@
+/* Delivery confirmed: full-blue Chrome backdrop like Invitation sent. The result centres in the open space and
+   arrives in sequence after the animated tick; Done sits at the bottom as the white inverse Action. */
+.phone-viewport:has(.delivery-confirmed-screen) { background:var(--chrome-backdrop); }
+.delivery-confirmed-screen { color:var(--th-white); }
+.delivery-result { flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--th-space-4); padding:0 var(--th-space-6); text-align:center; }
+.delivery-result__symbol { margin-bottom:var(--th-space-4); }
+.delivery-result h1 { margin:0; font:var(--type-amount-summary-weight) var(--type-screen-heading-size)/var(--type-screen-heading-leading) var(--font-heading); }
+.delivery-result__copy { margin:0; max-width:300px; color:rgb(255 255 255 / .88); text-wrap:balance; font:var(--type-field-value-weight) var(--type-field-value-size)/var(--font-leading-relaxed) var(--font-body); }
+.delivery-result__copy strong { color:var(--th-white); font-weight:var(--font-weight-semibold); }
+
+/* The saved address on a frosted card: one quiet confirmation of where the card is going. */
+.delivery-address { display:flex; align-items:center; gap:var(--th-space-3); width:100%; margin-top:var(--th-space-4); padding:var(--th-space-4); border:1px solid rgb(255 255 255 / .28); border-radius:var(--th-radius); background:rgb(255 255 255 / .12); box-shadow:inset 0 1px 0 rgb(255 255 255 / .24); text-align:left; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); }
+.delivery-address .th-icon { flex:none; }
+.delivery-address p { display:grid; gap:2px; min-width:0; margin:0; }
+.delivery-address span:first-child { color:rgb(255 255 255 / .75); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.delivery-address span:nth-child(3) { color:rgb(255 255 255 / .85); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.delivery-address span:nth-child(2) { font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body); }
+
+.delivery-confirmed-actions { flex:none; display:grid; padding:0 var(--th-space-6) var(--th-space-4); }
+.delivery-confirmed-screen .home-indicator { --home-surface:transparent; }
+.delivery-confirmed-screen .home-indicator::after { background:var(--th-white); }
+
+/* Copy follows the tick: heading as the check finishes, then the date, the address and Done. */
+@media (prefers-reduced-motion: no-preference) {
+ .delivery-result h1, .delivery-result__copy, .delivery-address, .delivery-confirmed-actions { animation:delivery-rise 560ms cubic-bezier(.16,1,.3,1) both; }
+ .delivery-result h1 { animation-delay:620ms; }
+ .delivery-result__copy { animation-delay:720ms; }
+ .delivery-address { animation-delay:840ms; }
+ .delivery-confirmed-actions { animation-delay:980ms; }
+}
+@keyframes delivery-rise { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }

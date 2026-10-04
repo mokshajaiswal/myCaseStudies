@@ -331,3 +331,22 @@ Member portraits use a 0.5px white circle outline. Their PNGs contain transparen
 Competitive-research accordion company names use the shared body role (20px desktop / 18px mobile), semibold, with local 28px official brand icons before the text. “What I took from this” uses the shared small-body role (18px / 16px), semibold. The component’s 10.5rem brand column controls both summary alignment and expanded-copy indentation.
 
 The interview quote stack is capped at 28rem (448px) and centred within its column, with a fluid width on narrower screens.
+
+## Family-flow playback presentation
+
+The `kavya-invite-flow` experiment places a clickable vertical ordered step list
+to the left of one live 300px phone preview. Each step has a Helix small-body title
+and brief explanation, with a thin vertical track that fills over the complete
+screen action queue. The current step uses an accent title and subtle accent-soft
+background. Selecting a step restarts its screen while respecting Pause/Play;
+autoplay advances both the list and the phone together.
+
+The desktop columns are capped at 360px and 300px with `--space-16` between them,
+reducing to `--space-8` below 760px. At 640px and below, the list stacks above the
+proportionally scaled phone. All content remains within the case-study column.
+Step fills pause offscreen/hidden and exclude frame-loading time. Reduced motion
+starts paused and replaces continuous fills with discrete progress updates. The
+translucent touch dot, tap ripple and shared button press remain independent of
+this editorial navigation. Static scene presentation remains available; other
+flows retain their current presentation. See `FLOW-PLAYBACK-PLAYBOOK.md` for the
+repeatable implementation and restoration rules.

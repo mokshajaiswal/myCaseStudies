@@ -43,3 +43,18 @@ measures 8px gap, 8px/16px insets, 44px dismiss width and no internal overflow. 
 844, profile/reference stack without horizontal overflow and images load locally.
 Desktop, saved and narrow captures are under the prototypes' verification folders.
 Catalog validation passes with zero errors; syntax checks pass for changed JS.
+
+Member profile hero (4 October 2026, browser-checked): same treatment as Hub Details. Hub summary gains
+person (shows that person's Avatar instead of the Hub graphic); the profile renders it centred in chrome tone
+(framed portrait, "Wife · Manager") with the glass Monthly Limit, profile options in the nav, and Payment
+Methods on the white sheet. Saved-address state and delivery action unchanged.
+
+- Payment Methods rows end in a chevron. The Card row is the link to delivery details; while details are pending, a registered warning Badge ("Details needed", warning-circle icon) sits just before the chevron as a status, not a button.
+
+- Proceed on Delivery details opens **Delivery confirmed**, a full-blue success screen: the animated Success indicator, "Delivery address added", the expected delivery date (a week out) with a note that the card works virtually until then, the saved address on a glass card, and a white (inverse) Done back to the profile. The profile no longer shows an "Address added successfully" notice, since the success screen already confirms it.
+
+## Member join and activation (Neha), from Figma "Child invited to hub" (409:61369)
+- **Join:** the WhatsApp invite links to the Play Store (an external app drawn in code, like the WhatsApp chat). First launch opens straight on **Welcome to The Sharma's Family Hub**, a rebuild of Figma About Hub: who invited her, the members, what Arun set up (UPI, card, ₹5,000 limit), terms and Accept invite. A single OTP for the invited number follows, then **You're in**. The case study highlights that PayZapp handled the onboarding: no generic intro, no long sign-up.
+- **Activation lives on the profile:** `member-profile?member=neha` shows UPI pending with a **Verify PAN** warning Badge and the card with **Details needed**. UPI takes Verify PAN, then Set UPI PIN (two steps), and comes back with a notice and UPI active. The card reuses Delivery details and Delivery confirmed, carrying `member`/`upi` in the URL.
+- The member setup forms share `prototypes/shared/member-setup.css`: an icons-only bar, a page header, and one short form with the action at the bottom.
+- Figma's notification says Kavya invited Neha while its About Hub says Arun. We use Arun throughout, matching the story.

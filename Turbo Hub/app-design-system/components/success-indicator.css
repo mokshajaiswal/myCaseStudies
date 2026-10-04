@@ -1,2 +1,24 @@
 .th-success-indicator { display:inline-grid; place-items:center; width:var(--success-indicator-size); height:var(--success-indicator-size); flex:none; border-radius:50%; background:var(--th-white); color:var(--color-success); }
 .th-success-indicator svg { display:block; }
+.th-success-indicator.th-success-indicator--action { color:var(--color-action); }
+
+/* Animated: the white circle moves to ::before so it can spring behind the check. */
+.th-success-indicator--animated { position:relative; isolation:isolate; background:none; }
+.th-success-indicator--animated::before,
+.th-success-indicator--animated::after { content:""; position:absolute; inset:0; border-radius:50%; }
+.th-success-indicator--animated::before { z-index:-1; background:var(--th-white); transform:scale(0); }
+.th-success-indicator--animated::after { z-index:-2; border:2px solid rgb(255 255 255 / .75); opacity:0; }
+.th-success-indicator--animated polyline { stroke-dasharray:1; stroke-dashoffset:1; }
+/* 0ms circle springs in · 180ms halo ripples out · 320ms check draws. */
+.th-success-indicator--animated.is-playing::before { animation:th-success-spring 720ms cubic-bezier(.33,0,.2,1) both; }
+.th-success-indicator--animated.is-playing::after { animation:th-success-halo 900ms cubic-bezier(.2,.7,.3,1) 180ms both; }
+.th-success-indicator--animated.is-playing polyline { animation:th-success-draw 440ms cubic-bezier(.65,0,.35,1) 320ms both; }
+@keyframes th-success-spring { 0% { transform:scale(0); } 38% { transform:scale(1.16); } 56% { transform:scale(.93); } 72% { transform:scale(1.04); } 86% { transform:scale(.99); } 100% { transform:scale(1); } }
+@keyframes th-success-halo { 0% { opacity:.9; transform:scale(.9); } 100% { opacity:0; transform:scale(1.75); } }
+@keyframes th-success-draw { to { stroke-dashoffset:0; } }
+@media (prefers-reduced-motion: reduce) {
+ .th-success-indicator--animated::before { transform:none; }
+ .th-success-indicator--animated polyline { stroke-dashoffset:0; }
+ .th-success-indicator--animated.is-playing::before, .th-success-indicator--animated.is-playing::after,
+ .th-success-indicator--animated.is-playing polyline { animation:none; }
+}

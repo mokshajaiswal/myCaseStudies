@@ -1,11 +1,13 @@
 // Shared preview geometry and Figma source comparison; not product UI.
 (() => {
   // Inspection is available on standalone previews, not overview thumbnails.
-  if (window.top === window.self) window.dsInspectorConfig = {...window.dsInspectorConfig, keyboardActivation:true};
+  if (!window.TurboStoryContext?.embedded && window.top === window.self) window.dsInspectorConfig = {...window.dsInspectorConfig, keyboardActivation:true};
   TurboUI.chromeBackdrop({host:document.querySelector('.phone-screen')});
   const viewport=document.querySelector('.phone-viewport');
-  const fit=()=>viewport.style.setProperty('--screen-scale',viewport.getBoundingClientRect().width/390);
+  const fit=()=>{const r=viewport.getBoundingClientRect();viewport.style.setProperty('--screen-scale',(r.width+0.5)/390);};
   fit();new ResizeObserver(fit).observe(viewport);
+  // Story presentation keeps the existing phone, without comparison/inspection tooling.
+  if(window.TurboStoryContext?.embedded)return;
   const assets={
     invitation:['419:29279','Invitation · WhatsApp source'],
     'tag-added':['436:58199','Hub Members · Tag added'],
@@ -39,6 +41,28 @@
   };
   const phone=document.querySelector('.phone'),layout=document.createElement('div');layout.className='preview-comparison';phone.before(layout);layout.append(phone);
   const figure=document.createElement('figure');figure.className='preview-reference';const caption=document.createElement('figcaption'),title=document.createElement('span'),link=document.createElement('a');link.textContent='Original';link.target='_blank';link.rel='noopener';caption.append(title,link);const stage=document.createElement('div');stage.className='preview-reference__image';stage.setAttribute('tabindex','0');stage.setAttribute('aria-label','Scrollable source reference');const crop=document.createElement('div');crop.className='preview-reference__crop';const img=document.createElement('img');crop.append(img);stage.append(crop);figure.append(caption,stage);layout.append(figure);
+  const prototype=document.createElement('div');prototype.className='preview-prototype';phone.before(prototype);prototype.append(phone);
+  const toolbar=document.createElement('div');toolbar.className='preview-prototype__toolbar';const label=document.createElement('span');label.textContent='Prototype';toolbar.append(label);phone.before(toolbar);
+  const copy=document.createElement('button');copy.type='button';copy.className='preview-copy-reference';copy.title='Copy page reference';copy.setAttribute('aria-label','Copy page reference');
+  copy.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor"/><path d="M10 3V2H2v8h1" stroke="currentColor" stroke-linejoin="round"/></svg><span>Copy reference</span>';
+  toolbar.append(copy);
+  const feedback=document.createElement('p');feedback.className='preview-copy-feedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');toolbar.append(feedback);
+  let feedbackTimer;
+  copy.addEventListener('click',async()=>{
+    // Read the current state at activation, including references changed by tabs/steps.
+    const page=new URL(location.href),source=decodeURIComponent(page.pathname).replace(/^\/app\//,'Turbo Hub/');
+    const directory=source.slice(0,source.lastIndexOf('/')+1);
+    const text=['Prototype screen reference','Screen: '+document.title,'Current state: '+document.body.dataset.reference,
+      'Preview: '+page.href,
+      'HTML: '+source,'CSS: '+directory+'screen.css','Script: '+directory+'screen.js'].join('\n');
+    let copied=false;
+    try{await navigator.clipboard.writeText(text);copied=true;}catch{
+      const input=document.createElement('textarea');input.value=text;input.style.cssText='position:fixed;left:-9999px';document.body.append(input);input.select();
+      try{copied=document.execCommand('copy');}catch{}input.remove();copy.focus();
+    }
+    clearTimeout(feedbackTimer);feedback.textContent=copied?'Page reference copied':'Could not copy page reference';
+    feedbackTimer=setTimeout(()=>{feedback.textContent='';},2600);
+  });
   function update(){const key=document.body.dataset.reference,asset=assets[key];if(!asset)return;const [id,label]=asset;img.src='../shared/references/figma/'+key+'.png';img.alt='Figma reference · '+label;title.textContent=label+' · Figma';link.textContent='Open in Figma';link.href='https://www.figma.com/design/IJU02E1n5jSddJqd3SpkG7/Turbo-Hub?node-id='+id.replace(':','-');img.classList.remove('is-composite');img.style.setProperty('--reference-offset','0%');stage.scrollTop=0;}
   update();
   if(document.body.dataset.reference==='pixel-tag'){

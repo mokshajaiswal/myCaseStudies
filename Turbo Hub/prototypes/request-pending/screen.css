@@ -14,5 +14,5 @@
 .pending-footer { flex:none; display:grid; gap:var(--th-space-4); padding:0 var(--th-space-6) 72px; text-align:center; }
 .pending-footer p { margin:0; font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
 .pending-footer p:empty,.pending-footer #recovery:empty { display:none; }
-.pending-screen .home-indicator { background:transparent; }
+.pending-screen .home-indicator { --home-surface:transparent; }
 .pending-screen .home-indicator::after { background:var(--th-white); }

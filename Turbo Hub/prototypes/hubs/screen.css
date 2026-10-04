@@ -1,5 +1,8 @@
 .hubs-content { padding:var(--th-space-6); background:var(--th-white); }
-.hubs-list { display:grid; gap:var(--th-space-4); padding-top:var(--th-space-6); }
-.hubs-empty { margin:0; padding:var(--th-space-6) 0; color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
-.hubs-footer { padding:var(--th-space-4) var(--th-space-6); display:grid; background:var(--th-white); }
-.hubs-screen .home-indicator { background:var(--th-white); }
+/* The hero is just the title and New Hub; the segmented tabs open the white sheet. */
+.hubs-heading { flex:none; }
+/* Same rhythm as Add Member's heading: 24px down to the sheet. */
+.hubs-heading .th-page-header { --page-header-bottom-inset:var(--th-space-6); }
+.hubs-tabs { position:static; margin-bottom:var(--th-space-5); }
+.hubs-list { display:grid; gap:var(--th-space-4); }
+.hubs-screen .home-indicator { --home-surface:var(--th-white); }

@@ -2,4 +2,4 @@
 .delivery-form { display:grid; gap:var(--th-space-4); }
 .delivery-locality { display:grid; grid-template-columns:1fr 1fr; gap:var(--th-space-4); }
 .delivery-locality > * { min-width:0; }
-.delivery-screen .home-indicator { background:var(--th-white); }
+.delivery-screen .home-indicator { --home-surface:var(--th-white); }

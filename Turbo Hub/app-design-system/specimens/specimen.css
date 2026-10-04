@@ -2,3 +2,8 @@ body{margin:0;padding:20px;background:#f5f8fd;color:var(--color-text);font:16px/
 .countdown-example { background:var(--chrome-backdrop); }
 .countdown-example > .label { color:var(--th-white); }
 .backdrop-example-frame { width:100%; height:420px; resize:both; overflow:auto; max-width:100%; min-width:180px; min-height:120px; }
+
+.th-account-action[data-preview-state=hover] { background:var(--wallet-action-hover); }
+.th-account-action[data-preview-state=active] { background:var(--wallet-action-active); }
+.th-account-action[data-preview-state=focus-visible] { outline:3px solid var(--color-action); outline-offset:3px; }
+.camera-action-context { display:grid; place-items:center; min-height:132px; border-radius:12px; background:#52616b url('../../prototypes/scan-qr/assets/beauty-counter.png') center 55%/cover; }

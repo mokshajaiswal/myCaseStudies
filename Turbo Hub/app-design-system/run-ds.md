@@ -52,8 +52,10 @@ Read AGENTS.md here and follow its linked installed workflow. Read BRIEF.md,
 the relevant registry.json entries and implementation files, plus USAGE.md or
 a local checklist when present. Reuse matching shared components, tokens and
 icons; do not create lookalike copies. Keep one-off layout app-owned.
-Review spacing inside and between components on new or rearranged screens
-using the available inspector. Report unavailable visual checks honestly.
+Follow the manual browser review policy in the repository and app AGENTS.md:
+leave browser testing and visual review to the user unless explicitly asked.
+When browser review is requested, review spacing inside and between components
+using the available inspector. Report pending visual checks honestly.
 Follow the app’s review policy and explicit constraints. Do not migrate
 unrelated screens or override a later request to use another design system.
 

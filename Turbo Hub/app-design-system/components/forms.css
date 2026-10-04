@@ -1,8 +1,8 @@
 .th-field { display:flex; flex-direction:column; gap:var(--th-space-1); min-width:0; }
-.th-field__surface { --field-text-gap:2px; position:relative; display:flex; flex-direction:column; padding:12px 16px; border:1px solid var(--color-border); border-radius:12px; background:var(--color-surface); min-width:0; gap:var(--field-text-gap);}
+.th-field__surface { --field-text-gap:var(--th-space-1); position:relative; display:flex; flex-direction:column; padding:12px 16px; border:1px solid var(--color-border); border-radius:12px; background:var(--color-surface); min-width:0; gap:var(--field-text-gap);}
 .th-field__label {color:var(--color-text-secondary);font:var(--type-field-label-weight) var(--type-field-label-size)/var(--type-field-label-leading) var(--font-label);}
 .th-field__optional { font-weight:var(--weight-body); }
-.th-field__body { display:flex; align-items:center; gap:var(--th-space-2); min-width:0; }
+.th-field__body { display:flex; align-items:baseline; gap:var(--th-space-2); min-width:0; }
 .th-field__prefix {color:var(--color-text-secondary);font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body);}
 .th-field__input {width:100%;min-width:0;height:24px;border:0;padding:0;background:transparent;color:var(--color-text);border-radius:0;font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body);}
 .th-field__input::placeholder { color:var(--color-text-secondary); opacity:1; }
@@ -15,7 +15,7 @@
 .th-field.is-invalid .th-field__surface { border-color:#b42318; }
 .th-switch { display:flex; align-items:flex-start; justify-content:space-between; gap:var(--th-space-4); }
 .th-switch__copy { min-width:0; }
-.th-switch__label {display:block;font:var(--type-item-title-weight) var(--type-item-title-size)/var(--type-item-title-leading) var(--font-body);}
+.th-switch__label {display:block;font:var(--type-item-title-weight) var(--font-size-16)/var(--type-item-title-leading) var(--font-body);}
 .th-switch__description {display:block;margin-top:var(--th-space-1);color:var(--color-text-secondary);font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body);}
 .th-switch__control { position:relative; flex:none; width:52px; height:44px; border:0; padding:0; background:transparent; cursor:pointer; }
 .th-switch__control::before { content:""; position:absolute; left:0; top:7px; width:52px; height:30px; border-radius:16px; background:#7a879a; }
@@ -26,16 +26,28 @@
 .th-switch__control:focus-visible { outline:3px solid #91baff; outline-offset:2px; border-radius:8px; }
 .th-check { display:flex; flex-direction:column; gap:var(--th-space-2); }
 .th-check__label { min-height:44px; display:flex; align-items:flex-start; gap:var(--component-gap); cursor:pointer; }
-.th-check__input { flex:none; width:22px; height:22px; margin:2px 0 0; accent-color:var(--color-action); }
+.th-check__input { flex:none; appearance:none; display:grid; place-items:center; width:22px; height:22px; margin:0; border:1.5px solid var(--check-box-border); border-radius:6px; background:var(--color-surface); cursor:inherit; }
+.th-check__input:checked { border-color:var(--color-action); background:var(--color-action) var(--check-mark) center / 14px no-repeat; }
 .th-check__input:focus-visible { outline:3px solid #91baff; outline-offset:3px; }
-.th-check__copy {min-width:0;font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body);}
+/* The first line of text is centred on the 22px box: pad the copy by half the difference (1lh = its line height). */
+.th-check__copy {min-width:0;padding-top:max(0px, calc((22px - 1lh) / 2));font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body);}
 .th-check__title { display:block; }
+.th-check__link { color:var(--color-action); font-weight:var(--font-weight-semibold); text-decoration:underline; text-underline-offset:2px; }
+.th-check__link:focus-visible { outline:2px solid var(--color-action); outline-offset:2px; border-radius:2px; }
 .th-check__description {display:block;color:var(--color-text-secondary);margin-top:var(--th-space-2);font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body);}
 .th-check__price {display:block;margin-top:var(--th-space-3);font:var(--type-choice-price-weight) var(--type-choice-price-size)/var(--type-choice-price-leading) var(--font-label);}
-.th-check--card { padding:var(--component-inset); border:1px solid var(--color-border); border-radius:var(--th-radius); background:var(--color-surface); }
-.th-check--card .th-check__title {font:var(--type-choice-title-weight) var(--type-choice-title-size)/var(--type-choice-title-leading) var(--font-label);}
-.th-check--card.is-checked { border-color:var(--color-action); background:var(--color-action-soft); }
+/* Card choices sit on a soft tint (Figma Payment methods): white fading to blue, or violet for UPI. */
+.th-check--card { padding:var(--component-inset); border:1px solid var(--check-card-edge); border-radius:var(--th-radius); background:linear-gradient(160deg,var(--color-surface) 0%,var(--check-card-tint) 100%); }
+.th-check--card.th-check--violet { border-color:var(--check-card-edge-violet); background:linear-gradient(160deg,var(--color-surface) 0%,var(--check-card-tint-violet) 100%); }
+.th-check--card .th-check__title {color:var(--color-action);font:var(--type-choice-title-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-label);}
+/* The filled checkbox carries selection; the card keeps its tint and its border becomes a soft 55% tint of the tone's
+   accent at 2px (border plus a 1px ring, so the card does not shift). The checkbox keeps the full accent. Violet uses a deeper violet for border and checkbox. */
+.th-check--card.is-checked { --check-card-selected-edge:color-mix(in srgb,var(--check-card-accent) 55%,white); border-color:var(--check-card-selected-edge); box-shadow:0 0 0 1px var(--check-card-selected-edge); }
+.th-check--card { --check-card-accent:var(--color-action); }
+.th-check--card.th-check--violet { --check-card-accent:var(--check-card-accent-violet); }
+.th-check--card.th-check--violet .th-check__input:checked { border-color:var(--check-card-accent); background-color:var(--check-card-accent); }
 .th-check:has(:disabled) { color:var(--color-text-secondary); }
+.th-check__input:disabled { opacity:.45; }
 .th-check:has(:disabled) .th-check__label { cursor:not-allowed; }
 
 .th-field > .th-form-error { padding-inline:16px; }
@@ -45,3 +57,55 @@
 
 .th-field--prominent .th-field__surface { gap:var(--field-text-gap); }
 
+
+/* Placeholder-only presentation retains a persistent accessible label. */
+.th-field--placeholder .th-field__label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.th-field--placeholder .th-field__surface { min-height:64px; box-sizing:border-box; justify-content:center; padding:var(--th-space-3) var(--th-space-4); gap:0; }
+
+/* Empty labelled fields show their name as a prompt; filled fields show the caption. */
+.th-field.is-empty:not(.th-field--placeholder) .th-field__label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.th-field.is-empty:not(.th-field--placeholder) .th-field__surface { min-height:64px; justify-content:center; }
+
+/* Select retains its caption; the arrow is centered within the complete surface. */
+.th-select .th-field__surface { min-height:64px; padding-right:48px; }
+.th-select .th-field__input { height:32px; appearance:none; }
+.th-select__arrow { position:absolute; right:var(--th-space-4); top:50%; transform:translateY(-50%) rotate(-90deg); display:flex; color:var(--color-text-secondary); pointer-events:none; }
+
+/* Stable text-field surface across placeholder, caption and filled states. */
+.th-field:not(.th-select) .th-field__surface { box-sizing:border-box; min-height:64px; height:64px; padding:calc(var(--th-space-3) / 2) var(--th-space-4); justify-content:center; }
+
+.th-switch__heading { display:flex; align-items:center; gap:var(--th-space-2); }
+.th-info-pill { display:inline-flex; align-items:center; justify-content:center; width:28px; height:28px; padding:0; border:1px solid var(--color-border); border-radius:999px; background:var(--color-action-soft); color:var(--color-action); cursor:pointer; flex:none; }
+.th-info-pill:focus-visible { outline:2px solid var(--color-action); outline-offset:2px; }
+
+.th-field__body .th-field__prefix { line-height:24px; }
+.th-field__body .th-field__input { line-height:24px; }
+.th-field--prominent .th-field__body .th-field__prefix, .th-field--prominent .th-field__body .th-field__input { line-height:28px; }
+
+/* Heading and toggle share the same centered grid row; description sits below. */
+.th-switch { display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; column-gap:var(--th-space-4); row-gap:var(--th-space-1); }
+.th-switch__copy { display:contents; }
+.th-switch__heading { grid-column:1; grid-row:1; min-width:0; }
+.th-switch__control { grid-column:2; grid-row:1; align-self:center; }
+.th-switch__description { grid-column:1; grid-row:2; margin-top:0; }
+
+/* Match Text field height without losing the caption or centered arrow. */
+.th-select .th-field__surface { box-sizing:border-box; height:64px; min-height:64px; padding:calc(var(--th-space-3) / 2) 48px calc(var(--th-space-3) / 2) var(--th-space-4); justify-content:center; }
+.th-select .th-field__input { height:24px; line-height:24px; }
+:root { --check-box-border:#c4cfdf; --check-mark:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none' stroke='%23fff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 8.5l3 3 6-6.5'/%3E%3C/svg%3E"); --check-card-tint:#e3f0ff; --check-card-tint-violet:#f5e8fb; --check-card-edge:#cfe0f5; --check-card-edge-violet:#e6d3f1; --check-card-accent-violet:#8a4fc8; }
+/* Range slider: label + live value, a 6px track filled to --slider-fill, a 24px thumb, and min/max captions. */
+:root { --slider-track-height:6px; --slider-thumb-size:24px; --slider-track-color:var(--color-border); }
+.th-slider { display:grid; gap:var(--th-space-2); }
+.th-slider__head { display:flex; justify-content:space-between; align-items:baseline; gap:var(--th-space-3); }
+.th-slider__label { color:var(--color-text-secondary); font:var(--type-field-label-weight) var(--slider-label-size)/var(--type-field-label-leading) var(--font-label); }
+.th-slider__value { font:var(--type-field-value-weight) var(--slider-value-size)/var(--type-field-value-leading) var(--font-body); font-variant-numeric:tabular-nums; }
+.th-slider__control { width:100%; height:var(--control-height); margin:0; appearance:none; background:transparent; cursor:pointer; }
+.th-slider__control::-webkit-slider-runnable-track { height:var(--slider-track-height); border-radius:999px; background:linear-gradient(to right,var(--color-action) var(--slider-fill,0%),var(--slider-track-color) var(--slider-fill,0%)); }
+.th-slider__control::-moz-range-track { height:var(--slider-track-height); border-radius:999px; background:linear-gradient(to right,var(--color-action) var(--slider-fill,0%),var(--slider-track-color) var(--slider-fill,0%)); }
+.th-slider__control::-webkit-slider-thumb { appearance:none; width:var(--slider-thumb-size); height:var(--slider-thumb-size); margin-top:calc((var(--slider-track-height) - var(--slider-thumb-size)) / 2); border:2px solid var(--color-action); border-radius:50%; background:var(--color-surface); box-shadow:0 1px 4px rgb(27 41 64 / .18); }
+.th-slider__control::-moz-range-thumb { width:var(--slider-thumb-size); height:var(--slider-thumb-size); border:2px solid var(--color-action); border-radius:50%; background:var(--color-surface); box-shadow:0 1px 4px rgb(27 41 64 / .18); }
+.th-slider__control:focus-visible { outline:none; }
+.th-slider__control:focus-visible::-webkit-slider-thumb { outline:3px solid #91baff; outline-offset:2px; }
+.th-slider__control:focus-visible::-moz-range-thumb { outline:3px solid #91baff; outline-offset:2px; }
+.th-slider__control:disabled { opacity:.45; cursor:not-allowed; }
+.th-slider__range { display:flex; justify-content:space-between; color:var(--color-text-secondary); font:var(--type-caption-weight) var(--slider-caption-size)/var(--type-caption-leading) var(--font-body); }

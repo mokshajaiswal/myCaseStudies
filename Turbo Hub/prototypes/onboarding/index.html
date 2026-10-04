@@ -5,11 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#e7efff">
   <title>Welcome to Turbo Hub</title>
+  <link rel="stylesheet" href="/design-system/tokens.css">
+  <link rel="stylesheet" href="/design-system/components/hub.css">
   <link rel="stylesheet" href="onboarding.css">
+  <script src="/design-system/icons/phosphor.js" defer></script>
+  <script src="/design-system/icons/turbo-icons.js" defer></script>
+  <script src="/design-system/components/hub.js" defer></script>
   <script src="onboarding.js" defer></script>
-</head>
+<script src="../shared/flow-navigation.js" defer></script><script src="../../flow-story-data.js"></script><script src="../shared/story-context.js"></script></head>
 <body>
   <main class="onboarding" aria-label="Welcome to Turbo Hub">
+    <div class="app-chrome" id="chrome"></div>
     <header class="app-header">
       <nav class="pagination" aria-label="Choose onboarding slide">
         <button type="button" aria-label="Go to slide 1: Your family" aria-current="step" data-go="0"><span></span></button>

@@ -1,0 +1,15 @@
+/* Full-page review navigation, outside product UI and studio embeds. */
+.preview-screen-navigation { position:fixed; inset:0; pointer-events:none; z-index:20; }
+.preview-screen-navigation[hidden] { display:none; }
+.preview-screen-navigation a { position:absolute; top:50%; transform:translateY(-50%); display:grid; place-items:center; width:44px; height:44px; border:1px solid #ffffff30; border-radius:50%; background:#252730; color:#e8eaed; text-decoration:none; font:24px/1 system-ui; pointer-events:auto; }
+.preview-screen-navigation__previous { left:16px; }
+.preview-screen-navigation__next { right:16px; }
+.preview-screen-navigation a:hover { background:#383b45; }
+.preview-screen-navigation a:focus-visible { outline:2px solid #bdc5d4; outline-offset:3px; }
+.preview-screen-navigation a[aria-disabled=true] { opacity:.3; pointer-events:none; }
+.preview-screen-navigation__position { position:absolute; bottom:8px; left:50%; transform:translateX(-50%); border-radius:12px; padding:2px 8px; background:#252730; color:#bdc5d4; font:12px/20px system-ui; }
+@media(max-width:760px) {
+ .preview-screen-navigation a { top:auto; bottom:12px; transform:none; }
+ .preview-screen-navigation__position { bottom:24px; }
+ body { padding-bottom:76px; }
+}

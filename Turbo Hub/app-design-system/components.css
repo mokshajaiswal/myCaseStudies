@@ -10,3 +10,7 @@
 
 @import url("components/hub-entry.css");
 @import url("components/payment-notification.css");
+
+@import url('./components/account-card.css');
+
+@import url('components/action-footer.css');

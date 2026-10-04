@@ -9,3 +9,10 @@ No control or row spacing changes: merchant Avatar remains 40px square with a 12
 Verification: Chrome rendered all eight images at 40 × 40 logical pixels. The desktop preview was visually inspected; at a 390px browser viewport, images loaded without horizontal phone-content overflow. A deliberately unavailable image restored the payment icon. JavaScript syntax, whitespace checks and the attached catalog check passed.
 
 Reference correction: INOX and Gupta Stores artwork now includes a pale-blue 40px rounded tile, with the category symbol centered in a 24px icon frame. BESCOM has a thin light border, white rounded tile and 4px inset around its logo. These are local image-content changes; the registered Avatar/Row geometry stays unchanged. BESCOM's SVG embeds the original logo so it loads reliably as an image. Chrome confirms all eight assets load, remain 40px square, and have no overflow at desktop or 390px browser width; fallback still works. Visually inspected the updated transaction list.
+
+Transaction row compact amount (4 October 2026): amount raised 14→16px (field-value size/leading, item-title
+weight) and vertically centred against the logo and two-line copy (align-self:center); title and detail
+unchanged. Applies to every compact row (Hub Spends, Accounts & Cards, Tag added).
+Spender under amount (4 October 2026, browser-checked): Transaction row gains optional by (caption-style
+name under the amount; amount and name stack right and centre against the row; specimen "Compact / spent by").
+Hub Spends supplies sample spenders (Arun, Kavya, Rohan, Neha). Rows without by are unchanged.

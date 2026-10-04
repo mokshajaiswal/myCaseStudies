@@ -403,38 +403,6 @@ const caseStudy = {
       "I started with low-fidelity wireframes to work through the structure of the manager and member journeys before moving into high-fidelity design.",
     continuation:
       "As the flows became clearer, I translated them into PayZapp’s existing design language, reusing familiar patterns and components so Turbo Hub felt like a natural extension of the product rather than a separate experience.",
-    items: [
-      {
-        eyebrow: "Flow 01",
-        title: "Creating a family Hub",
-        description:
-          "The manager creates the shared space, decides how it will be used, and brings the first family member in.",
-        highlight: {
-          id: "flow-create-hub-highlight",
-          label: "Creating a family Hub interaction highlight",
-        },
-        screens: [
-          {
-            id: "flow-create-hub",
-            label: "Create a family Hub screen",
-            noteTitle: "Start with the shared purpose",
-            note: "The opening step explains what the Hub enables before asking the manager to configure it.",
-          },
-          {
-            id: "flow-set-boundary",
-            label: "Set a spending boundary screen",
-            noteTitle: "Make the boundary explicit",
-            note: "The manager sets the available amount as part of setup, rather than discovering controls later.",
-          },
-          {
-            id: "flow-invite-member",
-            label: "Invite a family member screen",
-            noteTitle: "Connect the other side",
-            note: "The final step brings a member into the Hub and makes their access clear.",
-          },
-        ],
-      },
-    ],
   },
   closing: {
     media: { id: "phone-closing", label: "Closing media" },
@@ -1202,53 +1170,6 @@ function createProductRulePath(config) {
   return component;
 }
 
-function createFlowJourney(flow) {
-  const component = createElement("article", "flow-journey");
-  const header = createElement("header", "flow-journey-header");
-  const headerCopy = createElement("div", "flow-journey-copy");
-  headerCopy.append(
-    createElement("span", "flow-eyebrow", flow.eyebrow),
-    createElement("h3", "flow-title", flow.title),
-    createElement("p", "flow-description", flow.description),
-  );
-
-  const highlight = createElement("figure", "flow-highlight");
-  highlight.setAttribute("aria-label", flow.highlight.label);
-  const highlightSlot = createElement("div", "media-slot");
-  highlightSlot.dataset.mediaId = flow.highlight.id;
-  highlightSlot.append(placeholderTemplate.content.cloneNode(true));
-  highlight.append(
-    highlightSlot,
-    createElement("figcaption", "flow-highlight-label", "Key interaction"),
-  );
-  header.append(headerCopy, highlight);
-
-  const viewport = createElement("div", "flow-scroll");
-  viewport.tabIndex = 0;
-  viewport.setAttribute("aria-label", flow.title + " screens. Scroll vertically to explore.");
-
-  const track = createElement("ol", "flow-track");
-  flow.screens.forEach((screen, index) => {
-    const step = createElement("li", "flow-step");
-    const phoneWrap = createElement("div", "flow-phone");
-    phoneWrap.append(createPhone(screen));
-
-    const note = createElement("div", "flow-note");
-    note.append(
-      createElement("span", "flow-note-number", String(index + 1).padStart(2, "0")),
-      createElement("h4", "", screen.noteTitle),
-      createElement("p", "", screen.note),
-    );
-
-    step.append(phoneWrap, note);
-    track.append(step);
-  });
-
-  viewport.append(track);
-  component.append(header, viewport);
-  return component;
-}
-
 function createTimeline() {
   const card = createElement("section", "timeline-card detail-box");
   card.setAttribute("aria-labelledby", "timeline-card-title");
@@ -1446,7 +1367,7 @@ function renderCaseStudy() {
     createElement("p", "", caseStudy.flows.continuation),
   );
   flowsColumn.append(createSectionHeading(caseStudy.flows.title), flowsCopy);
-  flows.append(flowsColumn);
+  flows.append(flowsColumn, TurboFlowStory.render());
 
   const research = createElement("section", "case-section");
   research.id = "research";

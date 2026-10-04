@@ -11,3 +11,8 @@ The backdrop never owns foreground color. Navigation and Page header own white c
 Navigation and Page header specimens show their own controls against this background. Those are examples of those components, not backdrop variants. The backdrop’s own preview is empty.
 
 The catalog requires a states entry, so default is its sole presentational state, without an interaction or variant. Catalog validation passes. Runtime reduced-motion emulation remains unverified.
+
+Status bar fill removed (4 October 2026): the Phone status bar no longer paints its own
+--color-action background; it is transparent and the screen backdrop shows through. The
+Chrome backdrop override that reset it to transparent is removed. Navigation and Page header
+were already transparent. Specimen now shows the default tone on the backdrop.

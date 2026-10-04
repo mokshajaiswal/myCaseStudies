@@ -1,0 +1,32 @@
+{
+  "tool": "Built-in ImageGen",
+  "generated": "2026-10-04",
+  "notes": "Generic category illustrations represent the named merchants; they are not official logos. Scanner photograph is a staged beauty checkout with a fictitious QR-like pattern. Existing Swiggy logo is reused from hub-dashboard assets. No image changes shared component styling.",
+  "assets": [
+    {
+      "file": "beauty-counter.png",
+      "prompt": "Photorealistic staged smartphone-camera view of a contemporary Indian beauty store checkout counter. Portrait composition, 2:3 aspect ratio. A clean upright white payment placard centered, with a large black fictitious QR-like square pattern occupying its middle, visible straight-on; illustrative pattern only, no real payment details. Placard centered about 53 percent down the image and about 64 percent of image width. Softly out-of-focus peach, pink and neutral beauty product packaging on shelves behind it; warm daylight, natural subtle depth of field, polished cream counter, premium but everyday shop atmosphere. No readable words, logos, watermarks, hands, people, screen UI or phone frame. Crisp contrasting black and white square pattern, believable quiet surroundings, no blue graphic banner.",
+      "original": "/Users/ishant.p/.codex/generated_images/01a0fe32-511b-7673-a1b3-3d0ff72b5112/exec-26bbfb93-eb2f-470e-9d2f-63171aab0b1f.png"
+    },
+    {
+      "file": "apna-kirana.png",
+      "prompt": "Create one square image for a 40px merchant avatar in a mobile payments prototype. Minimal polished flat editorial illustration, bold simple silhouette, clean rounded shapes, very few details, no gradients or 3D rendering, no text, letters, logos, border or UI. Center the subject and fill most of the square. Edge-to-edge very pale pastel background. This is generic category artwork, not a brand logo. Subject: a tidy grocery shopping bag holding a leafy green vegetable and two small colorful produce shapes. Deep forest green bag, lime and coral produce accents, pale mint background.",
+      "original": "/Users/ishant.p/.codex/generated_images/01a0fe32-511b-7673-a1b3-3d0ff72b5112/exec-3b8595ff-74a6-48db-856b-f1fc123974f0.png"
+    },
+    {
+      "file": "asia-bazaar.png",
+      "prompt": "Create one square image for a 40px merchant avatar in a mobile payments prototype. Minimal polished flat editorial illustration, bold simple silhouette, clean rounded shapes, very few details, no gradients or 3D rendering, no text, letters, logos, border or UI. Center the subject and fill most of the square. Edge-to-edge very pale pastel background. This is generic category artwork, not a brand logo. Subject: a small neighborhood market storefront with a striped blue and cream awning, one warm orange door, simple facade. Rich cobalt blue and ochre accents, pale sky-blue background.",
+      "original": "/Users/ishant.p/.codex/generated_images/01a0fe32-511b-7673-a1b3-3d0ff72b5112/exec-4130dd2a-ee33-4ef1-ac14-1ecd3e0028fc.png"
+    },
+    {
+      "file": "chef-bakers.png",
+      "prompt": "Create one square image for a 40px merchant avatar in a mobile payments prototype. Minimal polished flat editorial illustration, bold simple silhouette, clean rounded shapes, very few details, no gradients or 3D rendering, no text, letters, logos, border or UI. Center the subject and fill most of the square. Edge-to-edge very pale pastel background. This is generic category artwork, not a brand logo. Subject: a golden croissant over a simple small bread loaf, appetizing bakery shapes. Warm orange and caramel with a dark cocoa outline or detail, pale peach background.",
+      "original": "/Users/ishant.p/.codex/generated_images/01a0fe32-511b-7673-a1b3-3d0ff72b5112/exec-c188f0c3-c5cd-47b8-919e-5d53be3ac299.png"
+    },
+    {
+      "file": "cult-fitness.png",
+      "prompt": "Create one square image for a 40px merchant avatar in a mobile payments prototype. Minimal polished flat editorial illustration, bold simple silhouette, clean rounded shapes, very few details, no gradients or 3D rendering, no text, letters, logos, border or UI. Center the subject and fill most of the square. Edge-to-edge very pale pastel background. This is generic category artwork, not a brand logo. Subject: a strong diagonal dumbbell with a small subtle lightning accent. Charcoal dumbbell and saturated violet accent, pale lavender background.",
+      "original": "/Users/ishant.p/.codex/generated_images/01a0fe32-511b-7673-a1b3-3d0ff72b5112/exec-b97a1714-7729-464a-9ad5-2a26be1cb385.png"
+    }
+  ]
+}

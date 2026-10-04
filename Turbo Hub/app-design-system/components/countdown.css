@@ -4,3 +4,6 @@
 .th-countdown__track { width:100%; height:var(--countdown-track-height); background:var(--countdown-track-color); border-radius:var(--countdown-track-radius); overflow:hidden; }
 .th-countdown__fill { display:block; height:100%; background:var(--countdown-ink); border-radius:inherit; }
 .th-countdown__caption { margin:0; text-align:center; font:var(--type-field-value-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
+/* Inline: prefix and time share one line above the track; no caption. */
+.th-countdown__head { margin:0; font:var(--type-field-value-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-label); }
+.th-countdown--inline .th-countdown__time { font-variant-numeric:tabular-nums; }

@@ -4,7 +4,7 @@
 .message-field { margin:12px 0 24px; }
 .payment-title {margin:24px 0 16px;font:var(--type-section-heading-weight) var(--type-section-heading-size)/var(--type-section-heading-leading) var(--font-heading);}
 .payment-footer { flex:none; padding:16px 24px 12px; background:white; }
-.home-indicator { background:white; }
+.home-indicator { --home-surface:white; }
 .request { text-align:center; padding:28px 0; }
 .request h2 {margin:16px 0 8px;font:var(--type-status-heading-weight) var(--type-status-heading-size)/var(--type-status-heading-leading) var(--font-heading);}
 .request p {color:var(--color-text-secondary);margin:8px 0;font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body);}

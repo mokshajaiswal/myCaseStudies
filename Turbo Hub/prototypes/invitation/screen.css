@@ -7,3 +7,32 @@
 .invitation-copy p{margin:0;font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body)}
 .invitation-actions{display:grid;gap:var(--th-space-2)}
 .invitation-caption{margin:0;text-align:center;color:var(--color-text-secondary);font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body)}
+
+/* WhatsApp chat (external app exception, Figma 419:29279). Page-owned; no DS component is restyled. */
+.wa-screen { --wa-blue:#0a7cff; --wa-ink:#111b21; --wa-muted:#667781; background:#f6f6f6; color:var(--wa-ink); font-family:var(--font-body); }
+.phone-viewport:has(.wa-screen) { background:#f6f6f6; }
+.wa-header { flex:none; display:flex; align-items:center; gap:10px; padding:4px 14px 10px 6px; border-bottom:1px solid #e3e3e3; background:#f6f6f6; }
+.wa-back,.wa-actions { display:flex; align-items:center; color:var(--wa-blue); }
+.wa-actions { gap:22px; margin-left:auto; }
+.wa-contact-avatar { display:grid; place-items:center; flex:none; width:36px; height:36px; border-radius:50%; color:#fff; background:#c4ccd4; }
+.wa-contact { display:grid; line-height:1.25; }
+.wa-contact strong { font-size:16px; font-weight:600; }
+.wa-contact span { color:var(--wa-muted); font-size:12px; }
+.wa-chat { flex:1; min-height:0; overflow-y:auto; display:flex; flex-direction:column; align-items:center; gap:10px; padding:12px 12px 16px; background:#efeae2 radial-gradient(#d9d2c6 1px,transparent 1.2px) 0 0/18px 18px; }
+.wa-day { margin:0; padding:4px 10px; border-radius:8px; background:#fff; color:var(--wa-muted); font-size:12px; font-weight:500; box-shadow:0 1px 0 #0000001a; }
+.wa-notice { margin:0; padding:6px 10px; border-radius:8px; background:#fdf4c5; color:#54656f; font-size:12px; line-height:1.4; text-align:center; }
+.wa-notice svg { vertical-align:-2px; }
+.wa-bubble { position:relative; align-self:flex-start; max-width:86%; display:grid; gap:8px; padding:6px 8px 20px; border-radius:0 10px 10px 10px; background:#fff; font-size:15px; line-height:1.4; box-shadow:0 1px 0 #0000001a; }
+.wa-bubble::before { content:''; position:absolute; top:0; left:-7px; border-top:8px solid #fff; border-left:8px solid transparent; }
+.wa-bubble p { margin:0 4px; }
+.wa-bubble a { color:#027eb5; overflow-wrap:anywhere; }
+.wa-bubble .wa-preview { display:grid; justify-items:center; gap:6px; padding:14px 12px 12px; border-radius:8px; background:#a8c7c6; color:var(--wa-ink); text-decoration:none; }
+.wa-preview img { width:96px; height:96px; border-radius:50%; object-fit:cover; background:#d6e4e3; }
+.wa-preview strong { font-size:14px; font-weight:500; }
+.wa-people { display:flex; }
+.wa-people span { display:grid; place-items:center; width:22px; height:22px; margin-left:-5px; border:2px solid #a8c7c6; border-radius:50%; background:#f3efe6; font-size:10px; font-weight:600; }
+.wa-people span:first-child { margin-left:0; }
+.wa-time { position:absolute; right:8px; bottom:4px; color:var(--wa-muted); font-size:11px; }
+.wa-composer { flex:none; display:flex; align-items:center; gap:14px; padding:8px 14px; background:#f6f6f6; color:var(--wa-blue); }
+.wa-input { flex:1; height:34px; border:1px solid #dcdcdc; border-radius:18px; background:#fff; }
+.wa-screen .home-indicator { --home-surface:#f6f6f6; }

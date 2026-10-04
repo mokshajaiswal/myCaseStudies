@@ -6,3 +6,4 @@
 .th-payment-notification:hover { background:rgba(13,18,29,.92); }
 .th-payment-notification:focus-visible { outline:3px solid var(--th-white); outline-offset:3px; }
 .th-payment-notification:active { opacity:.9; }
+.th-payment-notification__mark--whatsapp { color:var(--th-white); background:#25d366; }

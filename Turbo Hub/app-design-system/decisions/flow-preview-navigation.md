@@ -1,0 +1,3 @@
+# Full-page flow navigation
+
+Flow-reference/flow-data.js owns chapter ordering and prototype route mappings, shared by the flow-reference page and standalone preview navigation. Previous/next arrows follow chapter/group/screen order, including query-specific steps; the first/last arrows are unavailable at the boundaries. The standalone-only navigation is preview tooling outside product UI. Below 760px controls dock to the bottom. Route matching prefers the most specific matching query and updates on clicks, reference-state changes and history navigation. Existing within-product navigation remains independently owned. No browser verification performed, per project policy.

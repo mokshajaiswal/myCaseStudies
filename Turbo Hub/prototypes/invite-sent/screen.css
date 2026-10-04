@@ -1,0 +1,10 @@
+/* Invitation sent: full-blue Chrome backdrop (like Request pending and Authorize), result centred in the open
+   space. No action or sheet: the screen dismisses itself to Members. */
+.phone-viewport:has(.invite-sent-screen) { background:var(--chrome-backdrop); }
+.invite-sent-screen { color:var(--th-white); }
+.invite-sent-result { flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:var(--th-space-4); padding:0 var(--th-space-6); text-align:center; }
+.invite-sent-result #symbol { margin-bottom:var(--th-space-2); }
+.invite-sent-result h1 { margin:0; font:var(--type-amount-summary-weight) var(--type-screen-heading-size)/var(--type-screen-heading-leading) var(--font-heading); }
+.invite-sent-result p { margin:0; max-width:300px; color:rgb(255 255 255 / .9); text-wrap:balance; font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body); }
+.invite-sent-screen .home-indicator { --home-surface:transparent; }
+.invite-sent-screen .home-indicator::after { background:var(--th-white); }

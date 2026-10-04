@@ -12,6 +12,20 @@
   let current = 0;
   let finished = false;
   let pointerStart = null;
+  const autoplayDelay = 3500;
+  let autoplay = 0;
+
+  // Same status bar and back navigation as the other Turbo Hub screens.
+  if (window.TurboUI) {
+    const back = () => window.TurboStoryContext ? TurboStoryContext.navigate('../accounts-cards/index.html') : history.back();
+    document.getElementById('chrome').append(TurboUI.statusbar({ tone: 'light' }), TurboUI.navigation({ left: { label: 'Back', icon: 'navigation-back', onClick: back } }));
+  }
+
+  // Slides advance on their own and loop; any manual navigation restarts the wait.
+  function scheduleAutoplay() {
+    clearTimeout(autoplay);
+    if (!finished) autoplay = setTimeout(() => showSlide((current + 1) % slides.length, false), autoplayDelay);
+  }
 
   function showSlide(index, announce = true) {
     current = Math.max(0, Math.min(slides.length - 1, index));
@@ -33,10 +47,12 @@
     next.querySelector('.primary-label').textContent = labels[current];
     if (focusWillHide) next.focus({ preventScroll: true });
     if (announce) announcement.textContent = slides[current].getAttribute('aria-label');
+    scheduleAutoplay();
   }
 
   function finish(reason) {
     finished = true;
+    clearTimeout(autoplay);
     carousel.hidden = true;
     footer.hidden = true;
     header.hidden = true;
@@ -69,5 +85,8 @@
     if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy) * 1.4) showSlide(current + (dx < 0 ? 1 : -1));
   });
   window.addEventListener('pointercancel', () => { pointerStart = null; });
-  showSlide(0, false);
+  // Story fixtures select the declared onboarding screen; standalone still starts at zero.
+  const storyContext = window.TurboStoryContext;
+  const initialSlide = storyContext?.embedded ? Number(new URLSearchParams(storyContext.scene?.route.split('?')[1] || '').get('slide')) : 0;
+  showSlide(initialSlide || 0, false);
 })();

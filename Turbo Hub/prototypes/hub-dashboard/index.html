@@ -13,7 +13,7 @@
   <script src="screen.js" defer></script>
   <script src="../shared/phone-preview.js" defer></script>
   <script src="/framework/spacing-inspector.js" defer></script>
-</head>
+<script src="../shared/flow-navigation.js" defer></script><script src="../../flow-story-data.js"></script><script src="../shared/story-context.js"></script></head>
 <body>
   <main class="phone" aria-label="Turbo Hub phone preview">
     <div class="phone-viewport">
@@ -21,7 +21,7 @@
         <div class="phone-chrome"><div id="statusbar"></div>
         <header id="nav"></header></div>
         <div class="phone-content" role="region" aria-label="Hub Details content" tabindex="0">
-          <section class="overview" id="overview"></section>
+          <section class="overview" id="overview" style="padding-bottom:var(--th-space-6)"></section>
           <div id="tabs"></div>
           <section id="hub-panel" role="tabpanel" tabindex="0"></section>
         </div>

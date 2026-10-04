@@ -1,8 +1,32 @@
-.th-hub-entry { display:flex; align-items:center; gap:var(--th-space-4); padding:var(--th-space-4); border:1px solid var(--color-border); border-radius:var(--th-radius); background:var(--color-surface); color:var(--color-text); text-decoration:none; min-width:0; }
-.th-hub-entry__copy { min-width:0; display:grid; gap:var(--th-space-2); }
-.th-hub-entry__name { overflow-wrap:anywhere; font:var(--type-section-heading-weight) var(--type-section-heading-size)/var(--type-section-heading-leading) var(--font-body); }
+/* Cover layout: tile row on top, name and spend below. */
+.th-hub-entry { display:grid; gap:var(--th-space-5); min-width:0; padding:var(--th-space-5) var(--th-space-5) var(--th-space-6); border:1px solid var(--color-border); border-radius:var(--th-radius); background:var(--color-surface); color:var(--color-text); text-decoration:none; }
+.th-hub-entry__top { display:flex; align-items:center; gap:var(--th-space-2); }
+/* Hub picture: a subtle white frame lifts it off the tinted card. */
+.th-hub-entry__top > .th-avatar { box-shadow:0 0 0 3px rgb(255 255 255 / .9), 0 4px 12px rgb(20 24 80 / .08); }
+.th-hub-entry__members { display:flex; margin-left:auto; padding-left:var(--th-space-2); }
+/* Members overlap by a quarter, matching Figma's avatar group. */
+.th-hub-entry__members > .th-avatar { margin-left:calc(var(--th-space-2) * -1); }
+.th-hub-entry__chevron { display:inline-flex; flex:none; margin-left:auto; color:var(--color-text-secondary); }
+.th-hub-entry__members + .th-hub-entry__chevron { margin-left:0; }
+.th-hub-entry__body { display:grid; gap:var(--th-space-3); }
+.th-hub-entry__head { display:flex; align-items:baseline; justify-content:space-between; gap:var(--th-space-3); }
+.th-hub-entry__copy { flex:1; min-width:0; display:grid; gap:var(--th-space-1); }
+.th-hub-entry__name { overflow-wrap:anywhere; font:var(--type-section-heading-weight) var(--type-section-heading-size)/var(--type-section-heading-leading) var(--font-heading); }
 .th-hub-entry__type { text-transform:uppercase; color:var(--color-text-secondary); font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
-.th-hub-entry__members { display:flex; flex-wrap:wrap; gap:var(--th-space-1); }
-.th-hub-entry:hover { border-color:var(--color-action); }
+.th-hub-entry__amount { flex:none; font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); font-weight:var(--font-weight-semibold); }
+.th-hub-entry__amount small { color:var(--color-text-secondary); font-size:inherit; font-weight:var(--font-weight-medium); }
+.th-hub-entry__bar { display:block; height:6px; overflow:hidden; border-radius:999px; background:var(--color-progress-track); }
+.th-hub-entry__bar-fill { display:block; height:100%; border-radius:inherit; background:var(--hub-accent, var(--color-action)); }
+.th-hub-entry[class*='th-hub-entry--'] .th-hub-entry__bar { background:color-mix(in srgb, var(--hub-accent) 16%, var(--color-surface)); }
 .th-hub-entry:focus-visible { outline:3px solid var(--color-action); outline-offset:3px; }
 .th-hub-entry:active { background:var(--color-action-soft); }
+
+/* Accents: a soft wash from the top-left corner, a tinted border, and the accent on the tile and bar.
+   The entry owns its tile's surface here, so the Hub's colour reads first. */
+.th-hub-entry--violet { --hub-accent:#6d4fd8; --hub-accent-soft:#efeaff; }
+.th-hub-entry--teal { --hub-accent:#0f8577; --hub-accent-soft:#dff4f0; }
+.th-hub-entry--amber { --hub-accent:#b26a00; --hub-accent-soft:#fff0d9; }
+.th-hub-entry[class*='th-hub-entry--'] { border-color:color-mix(in srgb, var(--hub-accent) 18%, var(--color-border)); background:linear-gradient(135deg, var(--hub-accent-soft) 0%, color-mix(in srgb, var(--hub-accent-soft) 35%, var(--color-surface)) 55%, var(--color-surface) 100%); }
+.th-hub-entry[class*='th-hub-entry--'] .th-hub-entry__top > .th-avatar { background:var(--hub-accent-soft); color:var(--hub-accent); }
+.th-hub-entry[class*='th-hub-entry--'] .th-hub-entry__members > .th-avatar { box-shadow:0 0 0 2px var(--color-surface); }
+.th-hub-entry[class*='th-hub-entry--'] 

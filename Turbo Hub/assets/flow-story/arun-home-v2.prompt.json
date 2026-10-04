@@ -1,0 +1,9 @@
+{
+  "tool": "Built-in image_gen.imagegen",
+  "useCase": "illustration-story",
+  "scope": "Accounts & Cards scene only. Character left, reserved introduction upper-left, live preview right.",
+  "asset": "arun-home-v2.png",
+  "reference": "arun-home-v1.png",
+  "transparentBackground": true,
+  "prompt": "Use case: illustration-story. Recompose this sparse editorial household artwork for a web page. Preserve exactly the illustrated identity and ink style of Arun, saturated cobalt shirt, black trousers, simple cream face, swept black hair and ink stubble, pale lavender/mint household palette, and transparent surroundings. New composition is WIDE LANDSCAPE 4:3. Arun must now be on the LEFT, positioned in x=6%-35% with head around y=28% and feet on common rug at y=90%, full body visible, naturally looking at his small handheld phone. Small simple lavender armchair/sofa behind him and a tiny mint plant are sufficient household context; keep furniture restrained. IMPORTANT: reserve x=3%-42%, y=0%-23% completely blank transparent for character introduction text, no lamp or artwork there. Reserve x=49%-93% above the floor completely blank transparent for the live HTML phone preview to be added by code at right; no drawn large phone, no placeholder rectangle, no screenUI. The floor/rug near y=90% connects left character area and right preview area. Lots of uncluttered breathing room between the two areas. Tiny plant at far right edge only if space permits. No added characters, no dog, no text logos symbols or rendered UI. Thin hand-drawn ink lines, almost-white flat skin, no realistic shading or 3D, surroundings exceptionally soft pale pastel. True transparent background outside illustrated elements."
+}

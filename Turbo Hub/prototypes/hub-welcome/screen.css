@@ -1,0 +1,14 @@
+/* Welcome: the invitation on the blue chrome (art, 'Arun Sharma has invited you to' the Hub, and its members), then a sheet with what Arun has set up
+   and a single Accept invite. PayZapp's first launch is this screen, with no generic onboarding before it. */
+.welcome-hero { flex:none; display:flex; flex-direction:column; align-items:center; padding:var(--th-space-8) var(--th-space-6) var(--th-space-8); color:var(--th-white); text-align:center; }
+.welcome-hero__art { width:96px; height:96px; margin-bottom:var(--th-space-5); border-radius:24px; object-fit:cover; box-shadow:0 0 0 4px rgb(255 255 255 / .28), 0 10px 28px rgb(20 24 80 / .22); }
+.welcome-hero__kicker { margin:0 0 var(--th-space-1); color:rgb(255 255 255 / .8); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.welcome-hero h1 { margin:0; font:var(--type-amount-summary-weight) var(--font-size-26)/var(--type-screen-heading-leading) var(--font-heading); }
+.welcome-hero__family { display:flex; margin-top:var(--th-space-5); padding-left:var(--th-space-3); }
+.welcome-hero__family > .th-avatar { margin-left:calc(var(--th-space-3) * -1); }
+.welcome-content { flex:1; display:flex; flex-direction:column; gap:var(--th-space-4); padding:var(--th-space-6); background:var(--th-white); }
+.welcome-content h2 { margin:0; color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.welcome-offer { display:grid; gap:var(--th-space-3); margin:0 0 var(--th-space-4); padding:0; list-style:none; }
+.welcome-offer li { display:flex; align-items:center; gap:var(--th-space-3); font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body); }
+.welcome-footer { display:grid; gap:var(--th-space-4); margin-top:auto; }
+.welcome-screen .home-indicator { --home-surface:var(--th-white); }

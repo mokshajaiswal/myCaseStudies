@@ -4,4 +4,23 @@
 .th-radio-choice__description { grid-column:1/-1; font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); overflow-wrap:anywhere; }
 .th-radio-choice:has(:checked) { border-color:var(--color-action); background:var(--color-action-soft); }
 .th-radio-choice:has(:disabled) { opacity:.45; cursor:not-allowed; }
-.th-radio-choice:focus-within { outline:3px solid #91baff; outline-offset:3px; }
+.th-radio-choice:has(.th-radio-choice__input:focus-visible) { outline:3px solid #91baff; outline-offset:3px; }
+
+.th-radio-choice--prominent .th-radio-choice__title { font-size:var(--radio-choice-prominent-title-size); }
+.th-radio-choice--prominent .th-radio-choice__description { font-size:var(--radio-choice-prominent-description-size); }
+
+/* The containing list owns the outline and separators. */
+.th-radio-choice--list { border:0; border-radius:0; background:transparent; }
+/* List rows carry selection in the radio itself; no selected fill. */
+.th-radio-choice.th-radio-choice--list:has(:checked) { background:transparent; }
+.th-radio-choice--list:has(.th-radio-choice__input:focus-visible) { outline-offset:-3px; }
+
+/* One predictable radio glyph; the row owns the keyboard focus indicator. */
+.th-radio-choice__input { appearance:none; border:1px solid var(--color-text-secondary); border-radius:50%; background:var(--color-surface); display:grid; place-content:center; flex:none; }
+.th-radio-choice__input::before { content:""; width:12px; height:12px; border-radius:50%; background:var(--color-action); transform:scale(0); }
+.th-radio-choice__input:checked { border-color:var(--color-action); border-width:2px; }
+.th-radio-choice__input:checked::before { transform:scale(1); }
+.th-radio-choice__input:focus { outline:none; }
+@media (forced-colors:active) { .th-radio-choice__input { appearance:auto; } .th-radio-choice__input::before { display:none; } }
+
+.th-radio-choice:has(.th-radio-choice__input:checked) .th-radio-choice__title { color:var(--color-action); }

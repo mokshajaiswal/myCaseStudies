@@ -42,7 +42,7 @@ After the blue rounded hero using `assets/bg.webp`, the page renders these areas
 16. “What we learned from other products”: a taped competitive-research collage with draggable images and unboxed product-to-Turbo-Hub comparisons.
 17. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
 18. The former product-rule path is removed.
-19. A “Designing the core flows” introduction follows the four sketches. The detailed phone-screen flow reel is reserved for later work.
+19. “Designing the core flows” follows the four sketches with a fictional Sharma-family story and live prototype previews. Arun's invitation to Kavya has reversible single-phone touch playback with a clickable vertical step list and per-screen timer fills beside the phone; the remaining groups retain their existing presentation. Use [FLOW-PLAYBACK-PLAYBOOK.md](FLOW-PLAYBACK-PLAYBOOK.md) to implement and review the other flows one at a time.
 
 The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 
@@ -56,6 +56,9 @@ All page content is defined in the `caseStudy` object near the top of `script.js
 | `styles.css` | Design tokens, typography, responsive layout, components, progress indicator, and reveal states. |
 | `tokens.html` / `tokens.js` | Standalone visual token reference and live computed measurements; no build step. |
 | `script.js` | Case-study data, DOM rendering, media-slot API, reveal scheduler, and scroll progress behavior. |
+| `flow-story-data.js` / `flow-story.js` / `flow-story.css` | Fictional family narrative, declared screen sequences and editorial preview presentation. |
+| `flow-story-playback.js` | Reversible scripted touch choreography over locked prototype embeds. |
+| `FLOW-PLAYBACK-PLAYBOOK.md` | Reusable execution recipes, per-flow implementation briefs, validation and static restoration. |
 | `design.md` | Canonical detailed design-system and behavior specification. |
 | `README.md` | Fast project handoff and current-state summary for humans and new LLM chats. |
 | `assets/` | Hero background, transparent phone casing, annotation art, and future case-study media. |

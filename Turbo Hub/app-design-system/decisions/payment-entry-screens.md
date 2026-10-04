@@ -1,5 +1,21 @@
 # Payment entry screens
 
+## Scanner camera actions — 2026-10-04
+
+The right-side flash/gallery tools use the registered Action `variant='camera'`: 44px circular targets, an 8px tokenized inset, 24px white Fill glyphs, translucent white surface and a subtle backdrop blur. Hover increases surface opacity; focus uses a white ring, active and disabled retain Action behavior. The shared renderer enforces icon-only semantics and an accessible label; no screen overrides target Action roots or internals. Page-owned tools positioning and 12px inter-tool gap remain unchanged. Callbacks remain visual prototype placeholders.
+
+Canonical Action specimens include flash, gallery and disabled camera examples against a photographic context. Registry configuration, interaction targets and spacing metadata expose the same shared renderer. Semantic camera surface colors derive from existing white; no spacing primitives changed. The icon provider accepts optional per-render `weight` without mutating the global weight. Flash maps to the new Phosphor lightning entry available in Regular/Bold/Fill; gallery reuses image. Source-level renderer checks, syntax and catalog validation passed; browser/visual review remains with the user.
+
+## Scan QR imagery refresh — 2026-10-04
+
+Recent merchant captions stay on one line beneath each image. Page-owned item wrappers grow to the caption's natural width with the existing 66px minimum; the containing row retains native horizontal overflow. Avatar dimensions and shared typography/spacing tokens are unchanged. Source whitespace checks passed; browser review remains pending with the user.
+
+Scan QR now uses a locally saved, generated beauty-store checkout photograph in place of the cropped tutorial banner. The photographed placard contains a fictitious QR-like pattern, with no payment/contact details. The camera image uses proportional `object-fit: cover` within its page-owned surface. The Nykaa caption and simulated scan target retain their existing behavior.
+
+Recent merchants supply images through the unchanged registered Avatar's `src` content prop and `merchant` size. Apna Kirana, Asia Bazaar, Chef Bakers and Cult fitness use generic category illustrations, not verified brand logos; Swiggy reuses the existing local brand asset documented in `merchant-artwork.md`. Generated originals and exact prompts are recorded in `prototypes/scan-qr/assets/image-prompts.json`.
+
+Ownership audit: Status bar, Navigation, Action and Avatar remain shared renderer instances with no local root/internal styling overrides added. Only page-owned camera fitting and image content changed; existing spacings, icon controls and prototype handoffs are preserved. JavaScript syntax, asset paths/dimensions and scoped whitespace checks passed. Generated assets were inspected directly. Browser composition, scanner framing and responsive visual review remain with the user; historical verification below predates this refresh.
+
 Implemented Scan QR (Figma 436:65155) and Manager payment notification (436:66403), registered in Overview and linked from Flow References. High-fidelity design contexts and screenshots grounded both screens. Screenshot references are separate preview images; implementation uses the supplied merchant-scene photograph and wallpaper assets, not flattened screen screenshots.
 
 Scanner reuses Status bar, Navigation, Action and Avatar. The camera scene, target frame, side-tool positioning, lower panel and Recent row are page-owned layout. The rounded white lower surface retains the established chrome transition. The source scene crops a wide photographed QR placard and overlays Nykaa Phoenix Mall; implementation follows that composition. Target framing remains visible at the fixed 390 × 844 product geometry. Generic Phosphor lightbulb/image icons and merchant initials replace detailed source branding as allowed by the brief. Existing Action styling remains unchanged. Help, flashlight, image selection and manual-entry actions are no-op placeholders for undefined behavior. No camera, image picker or payment QR decoding runs. The QR target is a keyboard-accessible button that simulates scanning by opening the Nykaa review. The preview’s Next screen link offers the same continuation outside product UI.

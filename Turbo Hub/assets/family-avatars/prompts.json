@@ -1,0 +1,102 @@
+[
+  {
+    "id": "arun",
+    "reference": "Turbo Hub/assets/flow-story/father.png",
+    "description": "Arun, the father: swept short black hair, short ink stubble beard, bright cobalt collared shirt.",
+    "bg": "pale sky blue",
+    "prompt": "Use case: identity-preserve. Create one square head-and-shoulders illustrated profile avatar of the same person in the attached full-body character reference. Preserve recognizable facial features, hairstyle, clothing color and sparse hand-drawn editorial style. Arun, the father: swept short black hair, short ink stubble beard, bright cobalt collared shirt. Warm understated smile, face facing mostly toward viewer. Portrait composition: full hair silhouette contained with a small margin, face large and readable at 40px, head centered in upper two thirds, shoulders extend to the bottom edge. Near-white face, fine dark ink contours, tiny simple eyes, saturated clothing color. Flat solid pale sky blue background fills square. No hands, phones, full body, glowing halo, shadows, gradients, 3D realism, lettering, logos, border or other objects. ONE portrait, not a contact sheet.",
+    "file": "arun.png",
+    "generator": "Built-in ImageGen",
+    "edits": [
+      {
+        "request": "Tighter face framing, less torso",
+        "generator": "Built-in ImageGen",
+        "reference": "originals/arun.png",
+        "prompt": "Use case: identity-preserve. Edit target: attached square illustrated avatar. Make ONLY a tighter square crop / zoom, approximately 20 percent larger, anchored around the head rather than the torso. Keep the entire hair silhouette visible with a small top margin. Show the face, neck and just the upper shoulders at the bottom; remove the excess chest/torso from the framing. Preserve the exact same person, face, expression, hairstyle, clothing, linework, palette, background and illustration style. Do not redraw, redesign or add detail. Keep a square aspect ratio and the existing opaque pastel background. Output one avatar."
+      }
+    ]
+  },
+  {
+    "id": "kavya",
+    "reference": "Turbo Hub/assets/flow-story/mother.png",
+    "description": "Kavya, the mother: short black bob, small simple earrings, violet kurta.",
+    "bg": "pale lavender",
+    "prompt": "Use case: identity-preserve. Create one square head-and-shoulders illustrated profile avatar of the same person in the attached full-body character reference. Preserve recognizable facial features, hairstyle, clothing color and sparse hand-drawn editorial style. Kavya, the mother: short black bob, small simple earrings, violet kurta. Warm understated smile, face facing mostly toward viewer. Portrait composition: full hair silhouette contained with a small margin, face large and readable at 40px, head centered in upper two thirds, shoulders extend to the bottom edge. Near-white face, fine dark ink contours, tiny simple eyes, saturated clothing color. Flat solid pale lavender background fills square. No hands, phones, full body, glowing halo, shadows, gradients, 3D realism, lettering, logos, border or other objects. ONE portrait, not a contact sheet.",
+    "file": "kavya.png",
+    "generator": "Built-in ImageGen",
+    "edits": [
+      {
+        "request": "Tighter face framing, less torso",
+        "generator": "Built-in ImageGen",
+        "reference": "originals/kavya.png",
+        "prompt": "Use case: identity-preserve. Edit target: attached square illustrated avatar. Make ONLY a tighter square crop / zoom, approximately 20 percent larger, anchored around the head rather than the torso. Keep the entire hair silhouette visible with a small top margin. Show the face, neck and just the upper shoulders at the bottom; remove the excess chest/torso from the framing. Preserve the exact same person, face, expression, hairstyle, clothing, linework, palette, background and illustration style. Do not redraw, redesign or add detail. Keep a square aspect ratio and the existing opaque pastel background. Output one avatar."
+      }
+    ]
+  },
+  {
+    "id": "neha",
+    "reference": "Turbo Hub/assets/flow-story/daughter.png",
+    "description": "Neha, adult daughter aged19: long black hair, periwinkle top.",
+    "bg": "pale periwinkle",
+    "prompt": "Use case: identity-preserve. Create one square head-and-shoulders illustrated profile avatar of the same person in the attached full-body character reference. Preserve recognizable facial features, hairstyle, clothing color and sparse hand-drawn editorial style. Neha, adult daughter aged19: long black hair, periwinkle top. Warm understated smile, face facing mostly toward viewer. Portrait composition: full hair silhouette contained with a small margin, face large and readable at 40px, head centered in upper two thirds, shoulders extend to the bottom edge. Near-white face, fine dark ink contours, tiny simple eyes, saturated clothing color. Flat solid pale periwinkle background fills square. No hands, phones, full body, glowing halo, shadows, gradients, 3D realism, lettering, logos, border or other objects. ONE portrait, not a contact sheet.",
+    "file": "neha.png",
+    "generator": "Built-in ImageGen",
+    "edits": [
+      {
+        "request": "Tighter face framing, less torso",
+        "generator": "Built-in ImageGen",
+        "reference": "originals/neha.png",
+        "prompt": "Use case: identity-preserve. Edit target: attached square illustrated avatar. Make ONLY a tighter square crop / zoom, approximately 20 percent larger, anchored around the head rather than the torso. Keep the entire hair silhouette visible with a small top margin. Show the face, neck and just the upper shoulders at the bottom; remove the excess chest/torso from the framing. Preserve the exact same person, face, expression, hairstyle, clothing, linework, palette, background and illustration style. Do not redraw, redesign or add detail. Keep a square aspect ratio and the existing opaque pastel background. Output one avatar."
+      }
+    ]
+  },
+  {
+    "id": "rohan",
+    "reference": "Turbo Hub/assets/flow-story/son.png",
+    "description": "Rohan, adult son aged22: wavy black hair, clean-shaven face, cobalt collared shirt.",
+    "bg": "pale mint",
+    "prompt": "Use case: identity-preserve. Create one square head-and-shoulders illustrated profile avatar of the same person in the attached full-body character reference. Preserve recognizable facial features, hairstyle, clothing color and sparse hand-drawn editorial style. Rohan, adult son aged22: wavy black hair, clean-shaven face, cobalt collared shirt. Warm understated smile, face facing mostly toward viewer. Portrait composition: full hair silhouette contained with a small margin, face large and readable at 40px, head centered in upper two thirds, shoulders extend to the bottom edge. Near-white face, fine dark ink contours, tiny simple eyes, saturated clothing color. Flat solid pale mint background fills square. No hands, phones, full body, glowing halo, shadows, gradients, 3D realism, lettering, logos, border or other objects. ONE portrait, not a contact sheet.",
+    "file": "rohan.png",
+    "generator": "Built-in ImageGen",
+    "edits": [
+      {
+        "request": "Tighter face framing, less torso",
+        "generator": "Built-in ImageGen",
+        "reference": "originals/rohan.png",
+        "prompt": "Use case: identity-preserve. Edit target: attached square illustrated avatar. Make ONLY a tighter square crop / zoom, approximately 20 percent larger, anchored around the head rather than the torso. Keep the entire hair silhouette visible with a small top margin. Show the face, neck and just the upper shoulders at the bottom; remove the excess chest/torso from the framing. Preserve the exact same person, face, expression, hairstyle, clothing, linework, palette, background and illustration style. Do not redraw, redesign or add detail. Keep a square aspect ratio and the existing opaque pastel background. Output one avatar."
+      }
+    ]
+  },
+  {
+    "id": "family-home",
+    "prompt": "Use case: illustration-story. Create one square avatar image of a minimal welcoming Indian family house, for a mobile Family Hub. Clean sparse flat 2D editorial illustration with softly rounded shapes. Cream walls, warm coral terracotta pitched roof, a small cobalt blue door, two simple pale blue windows, one tiny mint leafy shrub beside the wall. House fills about 80 percent of the image, centered, unobstructed and readable at 40px. Solid very pale mint background edge-to-edge. Restrained pastel palette with more saturated coral and blue focal details. Minimal dark contours only where needed. No realistic shading, gradients, 3D rendering, ground scene, people, text, lettering, logos or UI. ONE house illustration, not a sheet.",
+    "file": "family-home.png",
+    "generator": "Built-in ImageGen",
+    "edits": [
+      {
+        "request": "Replace the front-on house with an angled three-quarter illustration",
+        "generator": "Built-in ImageGen",
+        "reference": "originals/family-home.png",
+        "prompt": "Use case: illustration-story. Edit the attached Family Hub house avatar into a much nicer minimal illustrated home seen from a slightly elevated three-quarter angle, with both the front and right side visible and a clear angled roof plane. Redesign the stiff front-on facade into a charming compact asymmetrical house: cream walls, warm coral terracotta pitched roof, a cobalt blue front door, a few pale blue windows, a small porch step and one tiny leafy mint shrub. Use the attached image only as a palette reference. Soft pastel flat 2D editorial illustration with simple confident shapes, subtle paper texture and very restrained dark blue contours. Gentle depth comes from overlapping flat shapes and two wall tones, not realistic rendering. The house occupies about 80% of the square, centered with comfortable margins and clearly recognizable at 40px. Solid very pale mint background fills the square. No large surrounding landscape, people, text, lettering, logos, UI, glossy 3D, dramatic shadows, photorealism, heavy tile detail, or ornamental symbols. One square house avatar."
+      },
+      {
+        "request": "Match supplied gentle angle, add black outline, simplify details",
+        "generator": "Built-in ImageGen",
+        "reference": "originals/house-angle-reference.png",
+        "previousVersion": "originals/family-home-angled-v1.png",
+        "prompt": "Use case: illustration-story. Create a replacement square Family Hub house avatar. The attached screenshot is the composition and ANGLE reference: copy its gentle almost-eye-level three-quarter orientation, with the FRONT GABLED facade on the RIGHT and the narrow SIDE WALL on the LEFT. The ridge recedes toward the upper-left. Only a little of the roof top is visible. NOT a high overhead isometric view; NOT a wide right side wall. Remove the screenshot's edit button, frame, white surrounding area and all UI. Render the house in minimal flat 2D editorial illustration: warm off-white walls, coral terracotta roof, a small simple chimney toward the back left, cobalt blue front door and two simple pale blue windows. Add clear slim BLACK/charcoal ink outlines around the house silhouette, wall corner, roof, doorway and windows, so the cream walls are distinct from the backdrop. Sparse slightly organic contours, clean pastel fills, gently simplified geometry. Roof is one plain colored shape with at most two seam strokes, no individual tile grid. No decorative arches, panel ornament, trim layers or detailed landscaping. One tiny green shrub is enough. House should fill about 75-80% of the square, centered with breathing room, on a solid pale muted mint-teal background. Strong readable silhouette at tiny avatar sizes. No realism, glossy 3D, gradients, dramatic shadows, text, logos, people or UI. Preserve the reference angle, but draw a simple outlined illustration."
+      },
+      {
+        "request": "Match the existing family character illustration style",
+        "generator": "Built-in ImageGen",
+        "references": [
+          "Turbo Hub/assets/flow-story/father.png",
+          "Turbo Hub/assets/flow-story/mother.png",
+          "originals/house-angle-reference.png"
+        ],
+        "previousVersion": "originals/family-home-outlined-v2.png",
+        "prompt": "Use case: style-transfer / illustration-story. Create ONE square illustrated house avatar that belongs to the exact same visual family as the PEOPLE in references 1 and 2. Those two character drawings are the PRIMARY style references: contemporary sparse editorial ink drawing, fluid slightly imperfect pen contours, off-white forms with a few vivid cobalt blue/violet color blocks, selective line details and gentle asymmetry. Translate their drawing language to a HOUSE. Reference 3 gives ONLY the low eye-level gentle three-quarter angle (front gable on right, side wall on left); ignore its realism and UI. A small welcoming compact house, casually drawn rather than geometrically constructed, with a big clean COBALT BLUE pitched roof, ivory walls, a simple VIOLET rectangular door and two small black-ink windows. Use light organically varied dark charcoal pen contours (similar thin line-to-object ratio to the people), not a heavy uniform icon outline. Let a few contours remain open, as in an editorial sketch. A single tiny black/blue leafy sprig can sit beside the house. No traditional red tiled cottage, rounded clip-art border, diagram symmetry, molded window sills, chimney ornament, tile seams, 3D shading, architectural model, gradients, glow, halo or surrounding environment. Entire house visible, centered, fills about 75% of square. Solid very pale cool lavender background fills the square. This is a playful modern hand-drawn editorial asset, NOT a preschool house icon or vintage stock illustration. No people, text, numbers, logos or UI. Keep the effortless sparse character-illustration style of references 1 and 2 above all else."
+      }
+    ]
+  }
+]

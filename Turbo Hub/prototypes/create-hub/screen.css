@@ -1,14 +1,51 @@
-.creation-content { padding:var(--th-space-6); background:var(--th-white); }
+/* Transparent scrolling viewport lets the rounded sheet move as one surface. */
+.creation-scroll { flex:1; min-height:0; display:flex; flex-direction:column; overflow-y:auto; overflow-x:hidden; overscroll-behavior-y:none; scrollbar-width:none; background:transparent; outline-offset:-3px; }
+.creation-scroll::-webkit-scrollbar { display:none; }
+.creation-content { flex:1 0 auto; min-height:auto; overflow:visible; padding:var(--th-space-6); background:var(--th-white); }
+.creation-footer, .creation-feedback { flex:none; }
 .creation-form { display:grid; gap:var(--th-space-4); }
 .creation-choices { display:grid; gap:var(--th-space-4); margin:0; padding:0; border:0; }
-.creation-choices legend { margin-bottom:var(--th-space-2); font:var(--type-item-title-weight) var(--type-item-title-size)/var(--type-item-title-leading) var(--font-heading); }
+.creation-choices legend { margin-bottom:var(--th-space-2); font:var(--type-section-heading-weight) var(--type-section-heading-size)/var(--type-section-heading-leading) var(--font-heading); }
 .creation-portrait { display:flex; justify-content:center; padding-bottom:var(--th-space-1); }
-.creation-footer { padding:var(--th-space-4) var(--th-space-6); background:var(--th-white); display:grid; }
+.creation-footer { grid-column:1; grid-row:2; align-self:end; z-index:1; }
 .creation-error { margin:0; color:#c63535; font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
-.created-actions { display:grid; gap:var(--th-space-4); }
-.created-intro { margin:0; text-align:center; color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.created-actions { display:grid; border:1px solid var(--color-border); border-radius:var(--th-radius); overflow:hidden; }
+.created-actions__divider { height:1px; background:var(--color-border); }
+.created-intro { margin:0; text-align:center; color:#909090; font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
 .creation-feedback { padding:0 var(--th-space-4) var(--th-space-4); background:var(--th-white); }
-.creation-screen .home-indicator { background:var(--th-white); }
+.creation-screen .home-indicator { --home-surface:var(--th-white); }
 
 .creation-content--created { display:flex; flex-direction:column; gap:var(--th-space-6); }
-.created-intro { padding-top:var(--th-space-6); border-top:1px solid var(--color-border); }
+.created-intro { margin-inline:calc(-1 * var(--th-space-6)); padding:var(--th-space-6) var(--th-space-6) 0; border-top:1px solid var(--color-border); }
+
+.creation-choices .creation-choices__accessible-label { position:absolute; width:1px; height:1px; margin:-1px; padding:0; border:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+
+.creation-account-list { display:grid; border:1px solid var(--color-border); border-radius:var(--th-radius); overflow:hidden; }
+/* Drawn as a border (not a 1px fill) so it snaps to device pixels exactly like the list's own border. */
+.creation-account-list__divider { height:0; margin-inline:var(--th-space-4); border-top:1px solid var(--color-border); }
+
+.creation-choices--accounts legend { margin-bottom:var(--th-space-5); }
+
+.creation-choices--accounts { margin-top:var(--th-space-2); }
+
+/* Add account sits at the right of the Source Account heading (page-owned placement; no-op for now). A wrapper
+   positions it, because a fieldset legend sits outside the fieldset's padding box. */
+.creation-accounts { position:relative; }
+.creation-account-add { position:absolute; top:calc(var(--th-space-2) - 5px); right:0; }
+
+/* Screen-owned ambient glow, fading before the action list. */
+.creation-content--created {
+  background-color:var(--th-white);
+  background-image:linear-gradient(to bottom, transparent 0%, transparent 45%, var(--th-white) 100%), radial-gradient(ellipse at 35% 15%, #fbe7f3 0%, transparent 65%), radial-gradient(ellipse at 80% 0%, #f0eaff 0%, transparent 60%), radial-gradient(ellipse at 20% 100%, var(--color-action-soft) 0%, transparent 65%);
+  background-size:100% 230px;
+  background-position:top;
+  background-repeat:no-repeat;
+}
+
+/* Bottom action layout: scroll and footer occupy the same bounded grid area. */
+.creation-screen { display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto minmax(0,1fr) auto; }
+.creation-screen > .phone-chrome { grid-area:1 / 1; }
+.creation-scroll { grid-area:2 / 1; }
+.creation-content { padding-bottom:112px; }
+.creation-feedback:empty { display:none; }
+.creation-screen > .home-indicator { grid-area:3 / 1; }

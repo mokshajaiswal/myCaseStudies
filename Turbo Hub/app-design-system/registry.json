@@ -54,6 +54,56 @@
           "id": "disabled",
           "name": "disabled",
           "selector": "#disabled"
+        },
+        {
+          "id": "list",
+          "name": "List action",
+          "selector": "#list"
+        },
+        {
+          "id": "danger",
+          "name": "Danger",
+          "selector": "#danger"
+        },
+        {
+          "id": "danger-compact",
+          "name": "Danger / compact",
+          "selector": "#danger-compact"
+        },
+        {
+          "id": "camera",
+          "name": "Camera / flash",
+          "selector": "#camera"
+        },
+        {
+          "id": "camera-gallery",
+          "name": "Camera / gallery",
+          "selector": "#camera-gallery"
+        },
+        {
+          "id": "camera-disabled",
+          "name": "Camera / disabled",
+          "selector": "#camera-disabled"
+        },
+        {
+          "id": "glass",
+          "name": "Glass (on chrome)",
+          "selector": "#glass"
+        },
+        {
+          "id": "warning",
+          "name": "Warning",
+          "selector": "#warning"
+        },
+        {
+          "id": "inverse",
+          "name": "Inverse (primary on chrome)",
+          "selector": "#inverse"
+        },
+        {
+          "id": "inverse-pill",
+          "name": "Inverse pill (create on chrome)",
+          "selector": "#inverse-pill"
         }
       ],
       "anatomy": {
@@ -91,13 +141,25 @@
             "selector": ".th-button--compact",
             "property": "padding-left",
             "token": "--th-space-3"
+          },
+          {
+            "label": "Default vertical inset",
+            "token": "--button-inset-y",
+            "selector": ".th-button:not(.th-button--compact):not(.th-button--icon)",
+            "property": "padding-top"
+          },
+          {
+            "label": "Camera action inset",
+            "selector": ".th-button--camera",
+            "property": "padding-top",
+            "token": "--th-space-2"
           }
         ],
         "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
-        "behavior": "Native button/link activation. Caller supplies disabled and action/href; icon-only actions require a label. Decorative icon wrappers use inline-flex with block SVG to remove baseline offset; 20px glyphs center inside 44px icon targets. Accepts native type (button by default, submit for form actions). size=compact uses a 32px minimum height, 6px vertical/12px horizontal padding and 12px Medium type; default remains 44px.",
+        "behavior": "Native button/link activation. Enabled actions press to 98% scale and return over 120ms per phase; reduced motion suppresses the scale. TurboUI.pressButton(control) reuses this visual feedback without dispatching activation. Caller supplies disabled and action/href; icon-only actions require a label. Decorative icon wrappers use inline-flex with block SVG to remove baseline offset; 20px glyphs center inside 44px icon targets. Accepts native type (button by default, submit for form actions). size=compact uses a 32px minimum height, 6px vertical/12px horizontal padding, 14px Medium type and a 16px icon; default labeled actions use a 56px minimum height and 16px vertical inset; icon-only actions use 44px. Camera variant owns a 44px circle, 8px inset, centered 24px filled glyph and white focus ring; label names the native icon-only control.",
         "interactionOwnership": "Own control semantics and input handling; caller owns action/selected value."
       },
-      "usage": "Use TurboUI.button(); source and specimen use the same renderer. iconPosition=start (default) or end positions the decorative icon before/after the label.",
+      "usage": "Use TurboUI.button(); source and specimen use the same renderer. iconPosition=start (default) or end positions the decorative icon before/after the label. Default labeled actions use a 56px minimum height. There is no separate Tall variant; compact and icon-only configurations retain their own dimensions. variant='list' supplies a left-aligned 16px label and 44px icon well, 16px inset and 8px gap. Parent owns the grouped outline, rounded clipping and separate divider siblings; rows retain native link/button behavior. variant='danger' gives a reddish tint (--color-danger-soft) with red text (--color-danger) for declining or destructive actions; it combines with size='compact'. Prefer one danger action per screen, never the primary path. variant='camera' renders an icon-only 44px round translucent white action with a 24px Fill icon and white foreground, for camera/photo backdrops. It requires label and icon; quiet and compact options are ignored. Page owns backdrop, external placement and gaps. Disabled, hover, active and focus-visible retain native Action ownership. variant='glass' is a frosted translucent action with white text for blue chrome or full-blue screens. variant='warning' (amber tint, --color-warning / --color-warning-soft) marks a pending step that still needs the person, not an error. variant='inverse' is the primary action on full-blue Chrome screens (white fill, action-blue label), e.g. Done on Delivery confirmed; glass stays the secondary there. shape='pill' rounds it fully; a compact inverse pill puts its leading icon in a blue disc, available for a prominent create on chrome. New Hub uses the compact glass pill.",
       "interactions": {
         "preview": "specimens/component.html?component=button",
         "targets": [
@@ -178,9 +240,81 @@
               "focus-visible",
               "disabled"
             ]
+          },
+          {
+            "id": "danger",
+            "name": "Danger",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "camera",
+            "name": "Camera / flash",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "camera-gallery",
+            "name": "Camera / gallery",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "camera-disabled",
+            "name": "Camera / disabled",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "disabled"
+            ]
+          },
+          {
+            "id": "glass",
+            "name": "Glass",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "warning",
+            "name": "Warning",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible"
+            ]
           }
         ]
-      }
+      },
+      "searchTags": [
+        "destructive",
+        "decline",
+        "red",
+        "delete"
+      ]
     },
     {
       "id": "turbo-avatar",
@@ -196,9 +330,14 @@
         "hub",
         "merchant",
         "profile",
-        "image"
+        "image",
+        "editable",
+        "contact",
+        "contact-medium"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "turbo-avatar-edit"
+      ],
       "previewConfigurations": [
         {
           "id": "profile",
@@ -229,6 +368,31 @@
           "id": "image",
           "name": "Merchant image",
           "selector": "#image"
+        },
+        {
+          "id": "editable",
+          "name": "Editable Hub",
+          "selector": "#editable"
+        },
+        {
+          "id": "contact",
+          "name": "Editable contact",
+          "selector": "#contact"
+        },
+        {
+          "id": "contact-medium",
+          "name": "Editable contact · medium",
+          "selector": "#contact-medium"
+        },
+        {
+          "id": "badge-success",
+          "name": "Icon / success badge",
+          "selector": "#badge-success"
+        },
+        {
+          "id": "stack",
+          "name": "Stack (overlapping group)",
+          "selector": "#stack"
         }
       ],
       "anatomy": {
@@ -244,10 +408,10 @@
         ],
         "spacing": [],
         "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
-        "behavior": "Presentational data supplied by caller. No independently interactive children.",
-        "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
+        "behavior": "Caller supplies presentational content. editable=true composes the unchanged avatar with the registered Avatar edit action; wrapper owns lower-right placement.",
+        "interactionOwnership": "Avatar is presentational; turbo-avatar-edit owns the optional edit button and focus. Caller owns onEdit behavior."
       },
-      "usage": "TurboUI.avatar({name,large,graphic,size}); default 44px, large 64px, merchant 40px and hub 100px. Hub graphic uses the replaceable Phosphor house. profile size is 56px with a 12px radius. Optional src renders a decorative image within the existing size; failed images restore the graphic or initials. graphic accepts a semantic icon name or the existing boolean configuration. Image is content, not an independent appearance variant."
+      "usage": "TurboUI.avatar({name,large,graphic,size}); default 44px, large 64px, merchant 40px and hub 100px. Family Hub graphic uses the centrally mapped colored house illustration, with the Phosphor house retained as an image-error fallback. profile size is 56px with a 12px radius. Optional src takes precedence and renders a decorative image within the existing size; failed images restore the graphic or initials. Without src, known family names (Arun, Kavya, Neha, Rohan, with optional Sharma surname) resolve through TurboUI.avatarArtwork.users. Generic Family graphics resolve through TurboUI.avatarArtwork.home. The central artwork folder is assets/family-avatars; unknown names retain initials. No screen-specific image mapping is needed. graphic accepts a semantic icon name or the existing boolean configuration. Image is content, not an independent appearance variant. editable=true adds the registered edit action. onEdit, editLabel and editDisabled configure that child without page styling. size=contact is a 100px contact portrait with 20px corners, 32px initials or 40px graphic, compatible with editable=true. size=contact-medium is 80px with 16px corners, 28px initials and 32px graphics; supports editable=true. frame=true adds a subtle translucent white ring for tiles on the blue header (used by Hub summary tone='chrome'). badge='success' adds a small green tick at the bottom-right corner (decorative; the row or caller names the status). size='stack' is a 32px round face with a white ring for overlapping member groups; the parent owns the overlap. size='stack-large' is the same ringed round face at 40px for a standalone group, such as the members on Welcome to the Hub."
     },
     {
       "id": "turbo-badge",
@@ -283,6 +447,16 @@
           "id": "relationship-long",
           "name": "Long relationship",
           "selector": "#relationship-long"
+        },
+        {
+          "id": "success",
+          "name": "Success",
+          "selector": "#success"
+        },
+        {
+          "id": "warning",
+          "name": "Warning with icon",
+          "selector": "#warning"
         }
       ],
       "anatomy": {
@@ -310,7 +484,7 @@
         "behavior": "Presentational data supplied by caller. No independently interactive children.",
         "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
       },
-      "usage": "TurboUI.badge(text,{variant}); default badge or compact role/relationship tag. Label is caller-supplied and noninteractive."
+      "usage": "TurboUI.badge(text,{variant}); default badge or compact role/relationship tag. Label is caller-supplied and noninteractive. variant='success' is a green status tag (e.g. Active). variant='warning' is an amber attention status; an optional icon (e.g. warning-circle) leads the label."
     },
     {
       "id": "turbo-limit",
@@ -387,6 +561,21 @@
           "id": "full",
           "name": "full",
           "selector": "#full"
+        },
+        {
+          "id": "circular-glass",
+          "name": "Circular / glass on chrome",
+          "selector": "#circular-glass"
+        },
+        {
+          "id": "setup",
+          "name": "Setup (no limit yet)",
+          "selector": "#setup"
+        },
+        {
+          "id": "setup-glass",
+          "name": "Setup / glass on chrome",
+          "selector": "#setup-glass"
         }
       ],
       "anatomy": {
@@ -468,7 +657,7 @@
         "behavior": "Presentational data supplied by caller. No independently interactive children.",
         "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
       },
-      "usage": "TurboUI.limit({spent,limit,label,variant}); default horizontal or circular 45px progress. Accessible progress and clamped geometry; non-positive limits render an empty track. member variant displays a horizontal bar above spent/monthly-limit value columns."
+      "usage": "TurboUI.limit({spent,limit,label,variant}); default horizontal or circular 45px progress. Accessible progress and clamped geometry; non-positive limits render an empty track. member variant displays a horizontal bar above spent/monthly-limit value columns. tone='glass' renders a frosted translucent card with white text and ring for the blue header. variant='setup' is the empty state before a limit exists: one centred button (icon, default plus, and action.label) in the card surface; tone='glass' makes it a frosted button on the blue header. action takes href or onClick."
     },
     {
       "id": "turbo-tabs",
@@ -489,6 +678,16 @@
           "id": "default",
           "name": "default",
           "selector": "#default"
+        },
+        {
+          "id": "chrome",
+          "name": "On chrome",
+          "selector": "#chrome"
+        },
+        {
+          "id": "segmented",
+          "name": "Segmented (on a light sheet)",
+          "selector": "#segmented"
         }
       ],
       "anatomy": {
@@ -522,7 +721,7 @@
         "behavior": "Caller supplies selected; tabs emit onChange(label). Arrow/Home/End navigate and focus selected tabs.",
         "interactionOwnership": "Own control semantics and input handling; caller owns action/selected value."
       },
-      "usage": "Use TurboUI.tabs(); source and specimen use the same renderer.",
+      "usage": "Use TurboUI.tabs(); source and specimen use the same renderer. tone='chrome' places the tabs on the blue header: labels hug their text and centre as a group; inactive 70% white, active white on a frosted pill; no underline, fill or divider. tone='segmented' is a soft track with the selected option as a raised white pill (Figma 515:76029), used for My Hubs / Shared with me at the top of the Hubs sheet.",
       "interactions": {
         "preview": "specimens/component.html?component=tabs",
         "targets": [
@@ -595,6 +794,11 @@
           "id": "compact-image",
           "name": "Compact / merchant image",
           "selector": "#compact-image"
+        },
+        {
+          "id": "compact-by",
+          "name": "Compact / spent by",
+          "selector": "#compact-by"
         }
       ],
       "anatomy": {
@@ -614,6 +818,10 @@
           {
             "name": "Amount",
             "selector": ".th-row__amount"
+          },
+          {
+            "name": "Spender (optional)",
+            "selector": ".th-row__by"
           }
         ],
         "spacing": [
@@ -646,7 +854,7 @@
         "behavior": "Presentational data supplied by caller. No independently interactive children.",
         "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
       },
-      "usage": "TurboUI.row({name,detail,amount,graphic,variant}); default inset or compact transaction row. Parent owns list gaps, separators and surface. Optional avatarSrc supplies a merchant image to the nested Avatar; row geometry and spacing are unchanged."
+      "usage": "TurboUI.row({name,detail,amount,graphic,variant}); default inset or compact transaction row. Parent owns list gaps, separators and surface. Optional avatarSrc supplies a merchant image to the nested Avatar; row geometry and spacing are unchanged. Optional by='Neha' shows who made the payment as a caption under the amount; amount and name stack on the right and centre against the row."
     },
     {
       "id": "turbo-member",
@@ -695,6 +903,11 @@
           "id": "pending",
           "name": "pending",
           "selector": "#pending"
+        },
+        {
+          "id": "profile-chevron",
+          "name": "Profile / with chevron",
+          "selector": "#profile-chevron"
         }
       ],
       "anatomy": {
@@ -718,6 +931,10 @@
           {
             "name": "Pending status",
             "selector": ".th-member__status"
+          },
+          {
+            "name": "Chevron (optional)",
+            "selector": ".th-member__chevron"
           }
         ],
         "spacing": [
@@ -774,7 +991,7 @@
         "behavior": "Presentational data supplied by caller. No independently interactive children.",
         "interactionOwnership": "No owned interactions. Nested registered parts are presentational."
       },
-      "usage": "TurboUI.member({name,role,relation,pending,spent,limit,variant,statusText}); default card or profile card. Profile composes 56px Avatar, compact role/relationship Badges and member Limit, or a named pending message. No card-click behavior."
+      "usage": "TurboUI.member({name,role,relation,pending,spent,limit,variant,statusText}); default card or profile card. Profile composes 56px Avatar, compact role/relationship Badges and member Limit, or a named pending message. No card-click behavior. chevron=true adds a right caret at the end of the identity row to signal the card opens member details."
     },
     {
       "id": "turbo-chart",
@@ -859,6 +1076,11 @@
           "id": "centered-long",
           "name": "centered long",
           "selector": "#centered-long"
+        },
+        {
+          "id": "centered-chrome",
+          "name": "Centered / on chrome",
+          "selector": "#centered-chrome"
         }
       ],
       "anatomy": {
@@ -896,7 +1118,7 @@
         "behavior": "Presentational data supplied by caller. No independently interactive children.",
         "interactionOwnership": "Presentational identity; optional registered Action owns its native interaction states. Caller supplies action callback/href. Centered action preserves a 44px target."
       },
-      "usage": "TurboUI.summary({name,type,variant}); default horizontal or centered identity. Caller owns content and placement. Optional action accepts registered button props; centered options action sits to the right of the hub graphic."
+      "usage": "TurboUI.summary({name,type,variant}); default horizontal or centered identity. Caller owns content and placement. Optional action accepts registered button props; centered options action sits to the right of the hub graphic. tone='chrome' gives a white name and type for the blue header (Hub Details); the default 'surface' tone is for light backgrounds. On chrome, the avatar is framed and the subtext uses the 12px caption size. person='Kavya Sharma' shows that person's Avatar (portrait or initials) instead of the Hub graphic, for member profiles."
     },
     {
       "id": "turbo-statusbar",
@@ -915,6 +1137,11 @@
           "id": "default",
           "name": "default",
           "selector": "#default"
+        },
+        {
+          "id": "light",
+          "name": "Light surface",
+          "selector": "#light"
         }
       ],
       "anatomy": {
@@ -956,7 +1183,11 @@
         "behavior": "56px high. Fixed 76px side slots leave camera clearance; centered Phosphor indicators share a visual centerline. Decorative mock status, not live device data. Caller supplies time (default 9:41).",
         "interactionOwnership": "No interactions; time and indicators are presentational internal parts."
       },
-      "usage": "Use TurboUI.statusbar({time: \"9:41\"}). The page owns the phone shell and viewport scaling."
+      "usage": "Use TurboUI.statusbar({time: \"9:41\"}). The page owns the phone shell and viewport scaling. tone='light' is for screens whose top is white or light, such as an external messaging app or onboarding. The status bar has no fill of its own; the screen's Chrome backdrop (or other surface) paints behind it.",
+      "props": {
+        "time": "Displayed time, default 9:41.",
+        "tone": "chrome (default: white ink on the blue chrome) or light (dark ink, no fill, for white or light tops)."
+      }
     },
     {
       "id": "turbo-field",
@@ -999,6 +1230,26 @@
           "id": "disabled",
           "name": "disabled",
           "selector": "#disabled"
+        },
+        {
+          "id": "placeholder",
+          "name": "Placeholder",
+          "selector": "#placeholder"
+        },
+        {
+          "id": "placeholder-filled",
+          "name": "Placeholder · filled",
+          "selector": "#placeholder-filled"
+        },
+        {
+          "id": "placeholder-error",
+          "name": "Placeholder · error",
+          "selector": "#placeholder-error"
+        },
+        {
+          "id": "placeholder-disabled",
+          "name": "Placeholder · disabled",
+          "selector": "#placeholder-disabled"
         }
       ],
       "anatomy": {
@@ -1038,7 +1289,7 @@
         "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked. Validation message sits below the bordered field surface. prominent=true uses the shared 16px Medium field value and prefix with a 2px label gap; semantics and validation stay unchanged.",
         "interactionOwnership": "Owns control semantics; caller owns application state and validation."
       },
-      "usage": "Use TurboUI.field({id, label, ...}). IDs must be unique. See Add Member for composed form usage."
+      "usage": "Use TurboUI.field({id, label, ...}). IDs must be unique. See Add Member for composed form usage. variant='placeholder' displays a vertically centered input prompt instead of the small visible label; the associated label stays available to assistive technology. Placeholder defaults to label and disappears when typing. Surface has 60px minimum height, 12px vertical and 16px horizontal insets; validation remains below it."
     },
     {
       "id": "turbo-select",
@@ -1123,7 +1374,9 @@
         "on",
         "disabled"
       ],
-      "dependencies": [],
+      "dependencies": [
+        "turbo-info-pill"
+      ],
       "previewConfigurations": [
         {
           "id": "off",
@@ -1139,6 +1392,11 @@
           "id": "disabled",
           "name": "disabled",
           "selector": "#disabled"
+        },
+        {
+          "id": "info",
+          "name": "Label with info pill",
+          "selector": "#info"
         }
       ],
       "anatomy": {
@@ -1162,9 +1420,9 @@
         ],
         "ownership": "Component owns label, control, internal spacing and error feedback. Page owns grouping and external gaps.",
         "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked.",
-        "interactionOwnership": "Owns control semantics; caller owns application state and validation."
+        "interactionOwnership": "Owns control semantics; caller owns application state and validation. Optional turbo-info-pill owns its own activation; its state is independent of Switch."
       },
-      "usage": "Use TurboUI.toggle({id, label, ...}). IDs must be unique. See Add Member for composed form usage."
+      "usage": "Use TurboUI.toggle({id, label, ...}). IDs must be unique. See Add Member for composed form usage. info=true adds the registered Info pill next to the label; omit description for title-only copy. onInfo is caller-owned and independent of switch activation."
     },
     {
       "id": "turbo-check",
@@ -1178,6 +1436,7 @@
         "confirmation",
         "card",
         "selected",
+        "violet",
         "error",
         "disabled"
       ],
@@ -1199,6 +1458,11 @@
           "selector": "#selected"
         },
         {
+          "id": "violet",
+          "name": "Card / violet tone",
+          "selector": "#violet"
+        },
+        {
           "id": "error",
           "name": "error",
           "selector": "#error"
@@ -1207,6 +1471,11 @@
           "id": "disabled",
           "name": "disabled",
           "selector": "#disabled"
+        },
+        {
+          "id": "link",
+          "name": "With inline link",
+          "selector": "#link"
         }
       ],
       "anatomy": {
@@ -1238,7 +1507,15 @@
         "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked.",
         "interactionOwnership": "Owns control semantics; caller owns application state and validation."
       },
-      "usage": "Use TurboUI.check({id, label, ...}). IDs must be unique. See Add Member for composed form usage."
+      "usage": "Use TurboUI.check({id, label, ...}). IDs must be unique. See Add Member for composed form usage. Card choices use a soft gradient tint (tone='blue' default, 'violet' for UPI), a blue title and a custom 22px rounded checkbox that fills blue with a white check when selected; selection is carried by the checkbox, not a card colour change.",
+      "props": {
+        "card": "true renders the tinted choice card (title, description, price).",
+        "tone": "Card only: blue (default, white to light blue) or violet (white to lavender), matching Figma Payment methods.",
+        "checked": "Initial state; setChecked(value) updates it.",
+        "disabled": "Native disabled state, faded.",
+        "error": "Inline error text; setError(message) updates it.",
+        "link": "Optional {label, href, onClick}: an inline link at the end of the label, e.g. 'I agree to the Terms and conditions'. Clicking it never toggles the box."
+      }
     },
     {
       "id": "turbo-payment-account",
@@ -1419,6 +1696,16 @@
           "id": "long",
           "name": "long",
           "selector": "#long"
+        },
+        {
+          "id": "icons-back",
+          "name": "Icon only",
+          "selector": "#icons-back"
+        },
+        {
+          "id": "icons-both",
+          "name": "Two icons",
+          "selector": "#icons-both"
         }
       ],
       "anatomy": {
@@ -1466,7 +1753,7 @@
         "ownership": "Owns chrome geometry and title placement; Chrome backdrop owns the visual background; page owns surrounding header, status bar and screen layout.",
         "interactionOwnership": "No private interactions. Registered turbo-button children own activation, focus and disabled state; screen owns callbacks or href."
       },
-      "usage": "TurboUI.navigation({title,left:{label,icon,href/onClick,disabled},right:{...}}). Omit either side as needed. Place inside turbo-chrome-backdrop for continuous phone chrome."
+      "usage": "TurboUI.navigation({title,left:{label,icon,href/onClick,disabled},right:{...}}). Omit either side as needed. Place inside turbo-chrome-backdrop for continuous phone chrome. variant='icons-only' omits visible title while preserving left/right action slots, geometry and accessible navigation label. Supports one or two icons."
     },
     {
       "id": "turbo-page-header",
@@ -1500,6 +1787,11 @@
           "id": "long",
           "name": "long",
           "selector": "#long"
+        },
+        {
+          "id": "action",
+          "name": "Heading with action",
+          "selector": "#action"
         }
       ],
       "anatomy": {
@@ -1561,7 +1853,7 @@
         "ownership": "Owns title/subtext alignment, visual slot and internal spacing; Chrome backdrop owns the visual background; page owns placement within shared chrome.",
         "interactionOwnership": "Presentational only; no private controls."
       },
-      "usage": "TurboUI.pageHeader({heading,subtext,verified,icon,visual}). Supply only icon or visual and place inside turbo-chrome-backdrop. Trailing visual is decorative; meaningful information belongs in heading/subtext."
+      "usage": "TurboUI.pageHeader({heading,subtext,verified,icon,visual}). Supply only icon or visual and place inside turbo-chrome-backdrop. Trailing visual is decorative; meaningful information belongs in heading/subtext. action: an optional trailing control aligned with the heading, e.g. a compact glass pill 'New Hub' Action on the Hubs list."
     },
     {
       "id": "turbo-countdown",
@@ -1578,9 +1870,11 @@
       "props": {
         "remaining": "Seconds remaining, clamped to 0–total; default 900.",
         "total": "Positive duration in seconds; default 900.",
-        "label": "Caption; default Request will expire after this time."
+        "label": "Caption; default Request will expire after this time.",
+        "variant": "default (time, track, caption) or inline (prefix and time on one line above the track; no caption).",
+        "prefix": "Inline only: text before the time; default Expires in."
       },
-      "usage": "White countdown for blue chrome surfaces. Caller owns the clock and expiry outcome; the renderer never starts a timer or submits a request.",
+      "usage": "White countdown for blue chrome surfaces. Caller owns the clock and expiry outcome; the renderer never starts a timer or submits a request. variant='inline' reads \"Expires in 13:36\" on one line above the track and omits the caption, for tight spaces such as just above an action sheet.",
       "anatomy": {
         "parts": [
           {
@@ -1594,6 +1888,10 @@
           {
             "name": "Caption",
             "selector": ".th-countdown__caption"
+          },
+          {
+            "name": "Inline head (prefix + time)",
+            "selector": ".th-countdown__head"
           }
         ],
         "spacing": [
@@ -1642,6 +1940,12 @@
           "name": "Expired",
           "selector": "#expired",
           "interactionTarget": "countdown"
+        },
+        {
+          "id": "inline",
+          "name": "Inline",
+          "selector": "#inline",
+          "interactionTarget": "countdown"
         }
       ]
     },
@@ -1656,7 +1960,7 @@
       "states": [
         "default"
       ],
-      "usage": "Decorative success check; caller supplies the visible result heading. No text, children, variants, callbacks or animation.",
+      "usage": "Decorative success check; caller supplies the visible result heading. No text, children or callbacks. The check is a registered heavy stroke (check-heavy, 34 units vs Phosphor bold 24). tone='action' colours it blue for full-blue screens such as Invitation sent. animated=true is for a flow's closing confirmation (e.g. Delivery confirmed): the circle springs in elastically, a halo ripples out and the check draws itself. It plays once when first in view (.play() replays) and settles to the final frame under reduced motion.",
       "anatomy": {
         "parts": [
           {
@@ -1669,7 +1973,28 @@
         "behavior": "Fixed dimensions, no interaction; aria-hidden because adjacent visible text describes the outcome.",
         "interactionOwnership": "No interactive children or state changes."
       },
-      "dependencies": []
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "success",
+          "name": "Success (green)",
+          "selector": "#success"
+        },
+        {
+          "id": "action",
+          "name": "Action (blue)",
+          "selector": "#action"
+        },
+        {
+          "id": "animated",
+          "name": "Animated (click to replay)",
+          "selector": "#animated"
+        }
+      ],
+      "props": {
+        "tone": "success (default, green check) or action (blue check, for blue screens).",
+        "animated": "false (default, static) or true (choreographed entrance: elastic circle, halo, self-drawing check)."
+      }
     },
     {
       "id": "turbo-notice",
@@ -1741,7 +2066,8 @@
       "states": [
         "checked",
         "unselected",
-        "disabled"
+        "disabled",
+        "keyboard focus"
       ],
       "props": {
         "id": "Required unique input ID.",
@@ -1751,7 +2077,9 @@
         "description": "Optional wrapping supporting text.",
         "checked": "Initial supplied boolean, false by default. Native group owns subsequent exclusive selection.",
         "disabled": "Supplied boolean; false by default.",
-        "onChange": "Called with selected value on native change; caller persists application state."
+        "onChange": "Called with selected value on native change; caller persists application state.",
+        "size": "default or prominent; prominent uses 16px title and description typography.",
+        "appearance": "card (default) or list; list removes the individual outline and rounding for a parent-owned grouped surface."
       },
       "anatomy": {
         "parts": [
@@ -1789,10 +2117,10 @@
           }
         ],
         "ownership": "Owns 16px inset, 8px gaps and 24px native control. Parent owns group, legend and external spacing.",
-        "behavior": "Fluid width with wrapping text; native keyboard, focus and disabled semantics. Label activates input.",
+        "behavior": "Fluid width with wrapping text; native keyboard, focus and disabled semantics. Label activates input. Shared radio geometry uses a 24px ring and 12px selected dot. Mouse selection shows selection tint without a focus outline; input focus-visible exposes one row-owned keyboard outline. Forced colors retains native radio appearance.",
         "interactionOwnership": "Radio choice owns native activation and focus; caller supplies initial state and handles selected-value output."
       },
-      "usage": "Use within a fieldset with a legend. Reuse one group name for mutually exclusive choices.",
+      "usage": "Use within a fieldset with a legend. Reuse one group name for mutually exclusive choices. size=prominent is the registered larger typography configuration used by Choose a Hub Type. appearance=list retains row padding and native selection; parent owns the shared outline, rounded clipping and inset dividers. appearance='list' has no selected fill; the radio carries selection.",
       "previewConfigurations": [
         {
           "id": "descriptive",
@@ -1803,6 +2131,16 @@
           "id": "plain",
           "name": "Title only",
           "selector": "#plain"
+        },
+        {
+          "id": "prominent",
+          "name": "Prominent",
+          "selector": "#prominent"
+        },
+        {
+          "id": "list",
+          "name": "Grouped list",
+          "selector": "#list"
         }
       ],
       "dependencies": []
@@ -1817,7 +2155,6 @@
       "preview": "specimens/hub-entry.html",
       "states": [
         "default",
-        "hover",
         "focus",
         "active"
       ],
@@ -1834,27 +2171,53 @@
           "id": "plain",
           "name": "Without members",
           "selector": "#plain"
+        },
+        {
+          "id": "limit",
+          "name": "With monthly limit",
+          "selector": "#limit"
+        },
+        {
+          "id": "accents",
+          "name": "Accents (violet, teal, amber)",
+          "selector": "#accents"
         }
       ],
       "props": {
         "name": "Hub name, wrapping plain text.",
-        "type": "Hub category; defaults to Family Hub.",
-        "members": "Optional member names; first three render as decorative initials. Accessible name announces total supplied count.",
-        "href": "Required navigation destination."
+        "type": "Optional Hub category label; omitted by default (the Hubs list shows only the name).",
+        "members": "Optional member names; first three render as an overlapping group of 32px stack Avatars using central family artwork or initials for unknown names. Accessible name announces total supplied count.",
+        "href": "Required navigation destination.",
+        "graphic": "Tile: true (default) for the family home artwork, or a registered icon name such as briefcase or buildings for other Hubs.",
+        "spent": "Optional amount spent this month across the Hub.",
+        "limit": "Optional Hub monthly limit; when set, '₹spent / ₹limit' sits at the right of the name, above a full-width bar.",
+        "accent": "Optional Hub colour: violet, teal or amber. Tints the card (corner wash and border), the tile (white surface, accent icon) and the spend bar; omit for the neutral card."
       },
       "anatomy": {
         "parts": [
+          {
+            "name": "Top row",
+            "selector": ".th-hub-entry__top"
+          },
+          {
+            "name": "Members",
+            "selector": ".th-hub-entry__members"
+          },
+          {
+            "name": "Chevron",
+            "selector": ".th-hub-entry__chevron"
+          },
           {
             "name": "Name",
             "selector": ".th-hub-entry__name"
           },
           {
-            "name": "Type",
-            "selector": ".th-hub-entry__type"
+            "name": "Spend",
+            "selector": ".th-hub-entry__amount"
           },
           {
-            "name": "Members",
-            "selector": ".th-hub-entry__members"
+            "name": "Bar",
+            "selector": ".th-hub-entry__bar"
           }
         ],
         "spacing": [
@@ -1865,27 +2228,21 @@
             "property": "padding-left"
           },
           {
-            "label": "Identity gap",
+            "label": "Row gap",
             "token": "--th-space-4",
             "selector": ".th-hub-entry",
-            "property": "column-gap"
-          },
-          {
-            "label": "Copy gap",
-            "token": "--th-space-2",
-            "selector": ".th-hub-entry__copy",
             "property": "row-gap"
           },
           {
-            "label": "Member gap",
+            "label": "Copy gap",
             "token": "--th-space-1",
-            "selector": ".th-hub-entry__members",
-            "property": "column-gap"
+            "selector": ".th-hub-entry__copy",
+            "property": "row-gap"
           }
         ],
-        "ownership": "Entry owns inset, identity gap, copy and member spacing. Avatar owns all child geometry. Parent owns list gaps.",
-        "behavior": "Fluid native link, keyboard Enter navigation, wrapping name and member row. Optional members omitted.",
-        "interactionOwnership": "Entry owns navigation semantics and hover/focus/active. Caller supplies destination. Nested Avatars are decorative."
+        "ownership": "Entry owns its cover layout: tile row (tile, overlapping member faces, chevron), name, spend line and bar. Avatar owns tile and face geometry. Parent owns list gaps.",
+        "behavior": "Fluid native link; one accessible name covering Hub, members and spend, with the visual parts hidden from assistive tech. Optional type, members and limit are omitted when not supplied.",
+        "interactionOwnership": "Entry owns navigation semantics and its pressed (active) and keyboard focus states. No hover state, since this is a touch surface. Caller supplies destination. Nested Avatars are decorative."
       }
     },
     {
@@ -1907,7 +2264,8 @@
         "message": "Plain wrapping request text; caller owns member/merchant/amount content.",
         "href": "Required destination for opening the request.",
         "app": "App name, defaults to PayZapp.",
-        "time": "Timestamp label, defaults to now."
+        "time": "Timestamp label, defaults to now.",
+        "mark": "payzapp (default, P tile) or whatsapp (green chat mark) for a messaging-app notification such as a Hub invitation."
       },
       "anatomy": {
         "parts": [
@@ -1948,7 +2306,473 @@
         "behavior": "Fluid link with wrapping plain text. Enter opens caller-supplied request. No live notification permission or delivery behavior.",
         "interactionOwnership": "Owns link hover/focus/active and native activation. Caller owns request data and destination."
       },
-      "usage": "Use on a dark lock-screen preview; all text belongs to the consuming screen."
+      "usage": "Use on a dark lock-screen preview; all text belongs to the consuming screen. mark='whatsapp' with app='WhatsApp' shows an incoming invitation message on the lock screen.",
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "PayZapp request",
+          "selector": "#default"
+        },
+        {
+          "id": "whatsapp",
+          "name": "WhatsApp invitation",
+          "selector": "#whatsapp"
+        }
+      ]
+    },
+    {
+      "css": "components/account-card.css",
+      "module": "components/account-card.js",
+      "category": "Accounts",
+      "preview": "specimens/account-card.html",
+      "id": "turbo-account-card",
+      "name": "Account card",
+      "class": "th-account-card",
+      "states": [
+        "without detail",
+        "empty linked cards",
+        "long content"
+      ],
+      "dependencies": [
+        "turbo-account-action"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "summary",
+          "name": "Summary",
+          "selector": "#summary"
+        },
+        {
+          "id": "wallet",
+          "name": "Wallet",
+          "selector": "#wallet"
+        },
+        {
+          "id": "linked",
+          "name": "Linked cards",
+          "selector": "#linked"
+        },
+        {
+          "id": "minimal",
+          "name": "Without detail",
+          "selector": "#minimal"
+        },
+        {
+          "id": "empty",
+          "name": "No linked cards",
+          "selector": "#empty"
+        },
+        {
+          "id": "long",
+          "name": "Long account name",
+          "selector": "#long"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Summary",
+            "selector": ".th-account-card__summary"
+          },
+          {
+            "name": "Balance",
+            "selector": ".th-account-card__balance"
+          },
+          {
+            "name": "Icon",
+            "selector": ".th-account-card__icon"
+          },
+          {
+            "name": "Linked cards",
+            "selector": ".th-account-cards"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Summary inset",
+            "token": "--th-space-4",
+            "selector": ".th-account-card__summary",
+            "property": "padding-left"
+          },
+          {
+            "label": "Summary gap",
+            "token": "--th-space-4",
+            "selector": ".th-account-card__summary",
+            "property": "column-gap"
+          },
+          {
+            "label": "Title to detail",
+            "token": "--th-space-1",
+            "selector": ".th-account-card__balance p",
+            "property": "margin-top"
+          },
+          {
+            "label": "Card strip gap",
+            "token": "--th-space-2",
+            "selector": ".th-account-cards",
+            "property": "column-gap"
+          },
+          {
+            "label": "Card strip inset",
+            "token": "--th-space-4",
+            "selector": ".th-account-cards",
+            "property": "padding-left"
+          },
+          {
+            "label": "Strip vertical inset",
+            "token": "--th-space-3",
+            "selector": ".th-account-cards",
+            "property": "padding-top"
+          },
+          {
+            "label": "Bank pill gap",
+            "token": "--th-space-2",
+            "selector": ".th-account-cards__chip",
+            "property": "column-gap"
+          },
+          {
+            "label": "Bank pill inset",
+            "token": "--th-space-2",
+            "selector": ".th-account-cards__chip",
+            "property": "padding-left"
+          }
+        ],
+        "ownership": "Owns summary, surfaces and bank pills; parent owns placement and external gaps. Registered Account action owns its buttons.",
+        "interactionOwnership": "No parent interaction. Add money and Add card are turbo-account-action children; caller owns callbacks and disabled input.",
+        "behavior": "Fluid width, 90px minimum summary, 56px decorative icon. Long names wrap; linked pills scroll horizontally in a keyboard-focusable strip. Summary/wallet/linked variants; optional detail and empty cards supported."
+      },
+      "usage": "TurboUI.accountCard({name,detail,icon,variant,cards,actionLabel,disabled,onAction}). variant defaults to summary; wallet adds a labeled action; linked adds an icon action and bank pills. Content and disabled state are caller supplied. onAction is invoked by the child; no account operation is performed.",
+      "variants": [
+        "summary",
+        "wallet",
+        "linked"
+      ]
+    },
+    {
+      "css": "components/account-card.css",
+      "module": "components/account-card.js",
+      "category": "Accounts",
+      "preview": "specimens/account-card.html?component=action",
+      "id": "turbo-account-action",
+      "name": "Account action",
+      "class": "th-account-action",
+      "states": [
+        "hover",
+        "active",
+        "focus-visible",
+        "disabled"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "label",
+          "name": "label",
+          "selector": "#label"
+        },
+        {
+          "id": "icon",
+          "name": "icon",
+          "selector": "#icon"
+        }
+      ],
+      "interactions": {
+        "preview": "specimens/account-card.html?component=action",
+        "targets": [
+          {
+            "id": "label",
+            "name": "label",
+            "owner": "turbo-account-action",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "icon",
+            "name": "icon",
+            "owner": "turbo-account-action",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          }
+        ]
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Action",
+            "selector": ".th-account-action"
+          },
+          {
+            "name": "Plus",
+            "selector": ".th-account-action__icon"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Action inset",
+            "token": "--th-space-4",
+            "selector": ".th-account-action:not(.th-account-action--icon)",
+            "property": "padding-left"
+          },
+          {
+            "label": "Icon to label",
+            "token": "--th-space-2",
+            "selector": ".th-account-action",
+            "property": "column-gap"
+          },
+          {
+            "label": "Action vertical inset",
+            "token": "--th-space-3",
+            "selector": ".th-account-action:not(.th-account-action--icon)",
+            "property": "padding-top"
+          }
+        ],
+        "ownership": "Owns hit area, plus, typography and button state; parent owns placement.",
+        "interactionOwnership": "Native button owns click/keyboard activation; caller owns disabled and onClick.",
+        "behavior": "Label action is full-width with 60px minimum height; icon-only action is circular 44px. disabled defaults false, suppresses native activation. Hover, active and focus-visible belong to this control."
+      },
+      "usage": "TurboUI.accountAction({label,iconOnly,disabled,onClick}). iconOnly defaults false and requires an accessible label. Caller supplies disabled and callback; no persistent selection state."
+    },
+    {
+      "id": "turbo-avatar-edit",
+      "name": "Avatar edit action",
+      "class": "th-avatar-edit",
+      "css": "components/hub.css",
+      "module": "components/hub.js",
+      "category": "Controls",
+      "preview": "specimens/component.html?component=avatar-edit",
+      "states": [
+        "default",
+        "hover",
+        "active",
+        "focus-visible",
+        "disabled"
+      ],
+      "dependencies": [],
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "Default",
+          "selector": "#default"
+        },
+        {
+          "id": "disabled",
+          "name": "Disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Button",
+            "selector": ".th-avatar-edit"
+          }
+        ],
+        "spacing": [],
+        "ownership": "Owns 36px button, 2px blue border, 3px white outer ring and 20px icon. Parent owns placement.",
+        "behavior": "Native labelled button; invokes supplied onClick, supports disabled and visible keyboard focus. Enabled edit actions share the Action press feedback (98% scale, 120ms per phase); reduced motion suppresses movement.",
+        "interactionOwnership": "Owns edit activation; caller owns editing state."
+      },
+      "usage": "TurboUI.avatarEdit({label,onClick,disabled}); composed by editable Avatar."
+    },
+    {
+      "id": "turbo-info-pill",
+      "name": "Info pill",
+      "class": "th-info-pill",
+      "css": "components/forms.css",
+      "module": "components/forms.js",
+      "category": "Controls",
+      "preview": "specimens/form.html?component=info-pill",
+      "states": [
+        "default",
+        "focus-visible"
+      ],
+      "dependencies": [],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Button",
+            "selector": ".th-info-pill"
+          }
+        ],
+        "spacing": [],
+        "ownership": "Owns 28px pill and 16px icon; parent owns external gap.",
+        "behavior": "Native button with accessible label and supplied onClick callback.",
+        "interactionOwnership": "Owns info activation; caller owns any sheet or explanation."
+      },
+      "usage": "TurboUI.infoPill({label,onClick}); omission of callback is a visual prototype only."
+    },
+    {
+      "id": "turbo-action-footer",
+      "name": "Action footer",
+      "class": "th-action-footer",
+      "category": "Navigation",
+      "css": "components/action-footer.css",
+      "module": "components/hub.js",
+      "preview": "specimens/component.html?component=action-footer",
+      "states": [
+        "single action",
+        "multiple actions"
+      ],
+      "dependencies": [
+        "turbo-button",
+        "turbo-check"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "single",
+          "name": "Single action",
+          "selector": "#single"
+        },
+        {
+          "id": "multiple",
+          "name": "Multiple actions",
+          "selector": "#multiple"
+        },
+        {
+          "id": "acceptance",
+          "name": "Acceptance and action",
+          "selector": "#acceptance"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Footer",
+            "selector": ".th-action-footer"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Horizontal inset",
+            "selector": ".th-action-footer",
+            "property": "padding-left",
+            "token": "--th-space-6"
+          },
+          {
+            "label": "Action gap",
+            "selector": ".th-action-footer",
+            "property": "row-gap",
+            "token": "--th-space-3"
+          }
+        ],
+        "ownership": "Owns translucent blurred surface, fade, 16px top/24px horizontal/12px bottom insets and 12px action gap. Parent owns bottom anchoring and scroll clearance.",
+        "behavior": "Full-width grid of registered Actions. Solid surface fallback when backdrop-filter unsupported.",
+        "interactionOwnership": "Footer has no independent activation; nested turbo-button owns action semantics and state. Optional turbo-check owns acceptance interaction; caller controls Action eligibility."
+      },
+      "usage": "TurboUI.actionFooter({actions,label}); actions are Action API props. Overlay at bottom of a bounded scroll region and reserve content clearance for its height. Add Member demonstrates scroll-behind adoption without child style overrides. content accepts unchanged registered child nodes before actions, including an acceptance Checkbox choice. Caller owns acceptance and Action disabled state."
+    },
+    {
+      "id": "turbo-slider",
+      "name": "Range slider",
+      "class": "th-slider",
+      "css": "components/forms.css",
+      "module": "components/forms.js",
+      "preview": "specimens/form.html?component=slider",
+      "category": "Controls",
+      "states": [
+        "default",
+        "maximum",
+        "disabled"
+      ],
+      "dependencies": [],
+      "props": {
+        "id": "Unique control id.",
+        "label": "Visible label; also names the control.",
+        "min": "Lower bound (number).",
+        "max": "Upper bound (number).",
+        "step": "Step size.",
+        "value": "Initial value.",
+        "format": "Formats the live value, aria-valuetext and min/max captions, e.g. Indian rupees.",
+        "disabled": "Native disabled state.",
+        "onInput": "Called with each new numeric value."
+      },
+      "previewConfigurations": [
+        {
+          "id": "default",
+          "name": "Default",
+          "selector": "#default",
+          "interactionTarget": "slider"
+        },
+        {
+          "id": "maximum",
+          "name": "At maximum",
+          "selector": "#maximum",
+          "interactionTarget": "slider"
+        },
+        {
+          "id": "disabled",
+          "name": "Disabled",
+          "selector": "#disabled",
+          "interactionTarget": "slider"
+        }
+      ],
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Label",
+            "selector": ".th-slider__label"
+          },
+          {
+            "name": "Value",
+            "selector": ".th-slider__value"
+          },
+          {
+            "name": "Control",
+            "selector": ".th-slider__control"
+          },
+          {
+            "name": "Range captions",
+            "selector": ".th-slider__range"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Row gap",
+            "token": "--th-space-2",
+            "selector": ".th-slider",
+            "property": "row-gap"
+          },
+          {
+            "label": "Label to value",
+            "token": "--th-space-3",
+            "selector": ".th-slider__head",
+            "property": "column-gap"
+          }
+        ],
+        "ownership": "Slider owns its label row, 6px track, 24px thumb, 44px hit height and captions. Parent owns width and external gaps.",
+        "behavior": "Native range input: pointer drag, arrow keys, Page Up/Down, Home/End. setValue(v) and setRange(min,max) sync from other inputs (e.g. a Text field). Fluid width.",
+        "interactionOwnership": "Owns range semantics and aria-valuetext; caller owns the value, bounds and validation."
+      },
+      "interactions": {
+        "preview": "specimens/form.html?component=slider",
+        "targets": [
+          {
+            "id": "slider",
+            "name": "Slider",
+            "owner": "turbo-slider",
+            "states": [
+              "live",
+              "disabled"
+            ]
+          }
+        ]
+      },
+      "usage": "TurboUI.slider({id,label,min,max,step,value,format,onInput}). Use when a value has a meaningful upper bound; pair with a Text field when exact entry matters and sync both with setValue. Shared typography uses --slider-label-size (14px), --slider-value-size (18px) and --slider-caption-size (14px), mapped to existing font-size primitives. Parent layout may narrow the available width without overriding Slider internals.",
+      "searchTags": [
+        "range",
+        "slider",
+        "limit",
+        "amount"
+      ]
     }
   ],
   "compositions": [],
@@ -1956,8 +2780,8 @@
     {
       "id": "rounded-screen-surface",
       "name": "Blue header + rounded content surface",
-      "category": "Screen layout",
-      "preview": "../app/prototypes/hub-dashboard/index.html",
+      "category": "Layouts",
+      "preview": "patterns/layout.html?kind=rounded",
       "summary": "Default Turbo Hub screen layout: continuous blue chrome above a light content surface with 24px top corners.",
       "structure": [
         "The .phone-screen adopts .th-chrome-backdrop so fixed status, navigation and optional page heading share one visual treatment.",
@@ -1974,6 +2798,31 @@
       "behavior": "Native registered controls own keyboard behavior; scroll remains inside .phone-content. Preview scales a fixed 390 × 844 viewport.",
       "examples": [
         "Hub Details",
+        "Add Member details and payment methods"
+      ]
+    },
+    {
+      "id": "bottom-action-overlay",
+      "name": "Bottom actions with blurred backdrop",
+      "category": "Layouts",
+      "preview": "patterns/layout.html?kind=footer",
+      "summary": "Keep shared Action footer anchored to the bottom while the bounded content scrolls behind its translucent blurred surface.",
+      "structure": [
+        "Place the scroll region and a page-owned footer mount in the same grid area, with the mount aligned to the bottom.",
+        "Render TurboUI.actionFooter in the mount; supply registered Action props or unchanged Action nodes.",
+        "Reserve bottom scroll padding for the full footer plus a comfortable gap; keep the home indicator outside the scrolling area."
+      ],
+      "requirements": [
+        "Use the shared Action footer renderer and its blurred surface; do not override Action sizing or component internals.",
+        "For one default Action, these examples reserve 112px bottom content clearance. Increase clearance to match multiple actions or wrapped labels.",
+        "Keep footer placement page-owned; do not make the entire document sticky."
+      ],
+      "route": "Caller supplies Action destinations and callbacks. Native form submit buttons remain inside their form or use the form attribute.",
+      "behavior": "Content alone scrolls. Footer remains bottom-anchored. Focused final controls must remain reachable above reserved clearance. Blur has a solid surface fallback.",
+      "responsive": "Use the bounded phone viewport; footer spans its content width and buttons wrap naturally.",
+      "optionalRegions": "Supports one or multiple registered Actions; no footer is needed when the screen has no bottom action.",
+      "examples": [
+        "Create Hub type, details and created",
         "Add Member details and payment methods"
       ]
     }
@@ -2006,6 +2855,12 @@
       "description": "Direct view of the existing payment-choice step. Reuses Checkbox choice and Action. Selections persist when returning to details; Send Invite requires valid member details and remains a local demo."
     },
     {
+      "id": "invite-sent",
+      "name": "Add Member · Invitation sent",
+      "preview": "../app/prototypes/invite-sent/index.html?name=Kavya%20Sharma",
+      "description": "Success outcome after Send Invite: shared green success surface, registered Success indicator, 'Invitation sent to Kavya' with a short note, and a light action sheet with View members (Hub Details · Members)."
+    },
+    {
       "id": "payment-review",
       "name": "Member · Review payment",
       "preview": "../app/prototypes/payment-review/index.html",
@@ -2026,7 +2881,7 @@
       "id": "payment-authorize",
       "name": "Manager · Review and authorize",
       "preview": "../app/prototypes/payment-authorize/index.html",
-      "description": "Member, merchant and requested amount with local Decline feedback and Swipe to Authorize navigation."
+      "description": "Full-blue decision screen: requester, amount, merchant and response countdown centred on the Chrome backdrop; a short light action sheet holds Decline and Swipe to Authorize. Decline and expiry replace the footer with an outcome; Swipe to Authorize opens the confirmation."
     },
     {
       "id": "payment-processing",
@@ -2049,6 +2904,60 @@
       "preview": "../app/prototypes/delivery-details/index.html"
     },
     {
+      "id": "delivery-confirmed",
+      "name": "Member · Delivery confirmed",
+      "preview": "../app/prototypes/delivery-confirmed/index.html",
+      "description": "Full-blue success after Delivery details: animated Success indicator, expected delivery date, the saved address on a glass card, and Done back to the profile. Local demo; nothing is ordered."
+    },
+    {
+      "id": "play-store",
+      "name": "Member · Play Store install",
+      "preview": "../app/prototypes/play-store/index.html",
+      "description": "External app drawn in code (like the WhatsApp chat): PayZapp listing; Install shows a short progress, then Open launches the Hub welcome. Nothing is installed."
+    },
+    {
+      "id": "hub-welcome",
+      "name": "Member · Welcome to the Hub",
+      "preview": "../app/prototypes/hub-welcome/index.html",
+      "description": "PayZapp first launch from an invite (Figma About Hub 406:61169, rebuilt): family art, who invited, members, what Arun set up (UPI, card, monthly limit), terms and Accept invite."
+    },
+    {
+      "id": "verify-mobile",
+      "name": "Member · Verify your number",
+      "preview": "../app/prototypes/verify-mobile/index.html",
+      "description": "The only account step: OTP to the invited number, filled from SMS. Page header, prominent Field, Action."
+    },
+    {
+      "id": "hub-joined",
+      "name": "Member · Joined",
+      "preview": "../app/prototypes/hub-joined/index.html",
+      "description": "Full-blue success with the animated Success indicator, the two remaining setup steps on a glass card, and a white Set up payments action."
+    },
+    {
+      "id": "neha-profile",
+      "name": "Member · Neha profile (pending)",
+      "preview": "../app/prototypes/member-profile/index.html?member=neha",
+      "description": "Neha's profile with UPI pending (Verify PAN) and card pending (Details needed), each row linking to its step."
+    },
+    {
+      "id": "verify-pan",
+      "name": "Member · Verify PAN",
+      "preview": "../app/prototypes/verify-pan/index.html",
+      "description": "UPI activation step 1 of 2: PAN, name, date of birth and consent."
+    },
+    {
+      "id": "upi-pin",
+      "name": "Member · Set UPI PIN",
+      "preview": "../app/prototypes/upi-pin/index.html",
+      "description": "UPI activation step 2 of 2: new and confirm PIN; returns to the profile with UPI active and a confirmation notice."
+    },
+    {
+      "id": "neha-ready",
+      "name": "Member · Neha ready to pay",
+      "preview": "../app/prototypes/member-profile/index.html?member=neha&upi=active&saved=true",
+      "description": "Both payment methods set up."
+    },
+    {
       "id": "address-saved",
       "name": "Member · Address saved",
       "preview": "../app/prototypes/member-profile/index.html?saved=true"
@@ -2066,7 +2975,8 @@
     {
       "id": "hub-created",
       "name": "Create Hub · Created",
-      "preview": "../app/prototypes/create-hub/index.html?step=created"
+      "preview": "../app/prototypes/hub-dashboard/index.html?state=new",
+      "description": "Hub Details in its just-created state (Figma 397:49311): the shared blue hero with the framed Hub tile and member count, no limit or tabs yet, and a sheet prompting Invite Member or Add Pixel Tag (registered list Actions). Create Hub lands here."
     },
     {
       "id": "hubs",
@@ -2082,6 +2992,12 @@
       "id": "payment-notification",
       "name": "Manager · Payment notification",
       "preview": "../app/prototypes/payment-notification/index.html"
+    },
+    {
+      "id": "invite-notification",
+      "name": "Member · Invitation notification",
+      "preview": "../app/prototypes/payment-notification/index.html?kind=invite",
+      "description": "Neha's lock screen with a WhatsApp notification from HDFC Bank inviting her to The Sharma's family Hub. Reuses Payment request notification with mark='whatsapp'; opens the WhatsApp invitation chat."
     },
     {
       "id": "accounts-cards",
@@ -2115,7 +3031,7 @@
       "id": "invitation",
       "name": "Member · Invitation entry",
       "preview": "../app/prototypes/invitation/index.html",
-      "description": "DS adaptation of Figma WhatsApp invitation content. Existing-user action opens the local member profile; no invitation is sent and no live deep link is used."
+      "description": "External WhatsApp chat (Figma 419:29279): HDFC Bank business message with a family Hub link preview, invitation text and pzlive link that opens the member profile. Documented exception to the DS shell; uses the light Phone status bar."
     },
     {
       "id": "request-declined",
@@ -2630,6 +3546,35 @@
       "--type-payment-amount-leading": {
         "kind": "leading",
         "layer": "semantic"
+      },
+      "--th-red": {
+        "label": "Red",
+        "layer": "primitive"
+      },
+      "--th-red-light": {
+        "label": "Red light",
+        "layer": "primitive"
+      },
+      "--color-danger": {
+        "label": "Danger",
+        "layer": "semantic"
+      },
+      "--color-danger-soft": {
+        "label": "Danger soft",
+        "layer": "semantic"
+      },
+      "--font-leading-relaxed": {
+        "label": "Relaxed",
+        "kind": "leading",
+        "layer": "primitive"
+      },
+      "--color-warning": {
+        "label": "Warning",
+        "layer": "semantic"
+      },
+      "--color-warning-soft": {
+        "label": "Warning soft",
+        "layer": "semantic"
       }
     },
     "textStyles": [
@@ -2818,7 +3763,7 @@
         "name": "Compact action",
         "sample": "Change bank account",
         "family": "--font-family-inter",
-        "size": "--font-size-12",
+        "size": "--font-size-14",
         "weight": "--font-weight-medium",
         "leading": "--font-leading-normal",
         "semanticTokens": {
@@ -2863,7 +3808,7 @@
         "name": "Tab label",
         "sample": "Tab label",
         "family": "--font-family-inter",
-        "size": "--font-size-14",
+        "size": "--font-size-16",
         "weight": "--font-weight-regular",
         "leading": "--font-leading-normal",
         "semanticTokens": {
@@ -2878,7 +3823,7 @@
         "name": "Active tab",
         "sample": "Active tab",
         "family": "--font-family-inter",
-        "size": "--font-size-14",
+        "size": "--font-size-16",
         "weight": "--font-weight-bold",
         "leading": "--font-leading-normal",
         "semanticTokens": {
@@ -2908,7 +3853,7 @@
         "name": "Small section heading",
         "sample": "Small section heading",
         "family": "--font-family-inter",
-        "size": "--font-size-14",
+        "size": "--font-size-16",
         "weight": "--font-weight-semibold",
         "leading": "--font-leading-normal",
         "semanticTokens": {
@@ -2953,7 +3898,7 @@
         "name": "Tag label",
         "sample": "Manager",
         "family": "--font-family-inter",
-        "size": "--font-size-10",
+        "size": "--font-size-12",
         "weight": "--font-weight-medium",
         "leading": "--font-leading-normal",
         "semanticTokens": {
@@ -2968,7 +3913,7 @@
         "name": "Member limit value",
         "sample": "₹45,000",
         "family": "--font-family-inter",
-        "size": "--font-size-12",
+        "size": "--font-size-14",
         "weight": "--font-weight-semibold",
         "leading": "--font-leading-normal",
         "semanticTokens": {
@@ -2983,7 +3928,7 @@
         "name": "Small metadata",
         "sample": "Monthly Limit",
         "family": "--font-family-inter",
-        "size": "--font-size-10",
+        "size": "--font-size-12",
         "weight": "--font-weight-regular",
         "leading": "--font-leading-normal",
         "semanticTokens": {

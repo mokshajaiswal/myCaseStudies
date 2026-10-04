@@ -13,7 +13,8 @@ function tick(){
  countdown.setRemaining(remaining);
  if(!remaining&&!expired){expired=true;clearInterval(interval);document.getElementById('request-heading').textContent='Approval request expired';document.getElementById('outcome').textContent='No approval was received before the request expired.';document.getElementById('recovery').append(TurboUI.button({label:'Back to review',quiet:true,href:'../payment-review/index.html?amount='+amount}));}
 }
-let interval=setInterval(tick,1000);
+const frozen=TurboStoryContext.locked;
+let interval=frozen?null:setInterval(tick,1000);
 window.addEventListener('pagehide',()=>clearInterval(interval));
-window.addEventListener('pageshow',event=>{if(event.persisted&&!expired){tick();if(!expired)interval=setInterval(tick,1000);}});
-document.addEventListener('visibilitychange',tick);
+window.addEventListener('pageshow',event=>{if(!frozen&&event.persisted&&!expired){tick();if(!expired)interval=setInterval(tick,1000);}});
+if(!frozen)document.addEventListener('visibilitychange',tick);

@@ -7,3 +7,7 @@
 :root{--th-space-8:32px}
 
 :root{--font-size-78:78px;--font-weight-light:300;}
+/* Danger reds. #c4281c on #fdecec measures about 5:1, enough for 16px action labels. */
+:root{--th-red:#c4281c;--th-red-light:#fdecec}
+/* Relaxed leading for short centred statements that carry inline marks. */
+:root{--font-leading-relaxed:1.6}
