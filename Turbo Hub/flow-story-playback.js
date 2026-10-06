@@ -9,6 +9,15 @@
   // Choreography is keyed by flow ID, then scene ID, so two flows that reuse a route never share actions or resets.
   // reload:true resets a scene by reloading its locked fixture on each repeat (for controls without an undo path).
   const FLOWS={
+    'whatsapp-invite-flow':{scenes:{
+      'invite-notification':[{kind:'hide',wait:1800},{kind:'enter',wait:600},move('#notifications .th-payment-notification'),tap(),{kind:'hold',wait:450},next],
+      'invitation':[{kind:'hide',wait:1800},{kind:'enter',wait:600},move('.wa-preview'),tap(),{kind:'hold',wait:450},next],
+      'play-store':[{kind:'hide',wait:1000},{kind:'enter',wait:600},move('#install button'),tap(),{kind:'hide',wait:0},{kind:'store',state:'progress',value:0,wait:400},{kind:'store',state:'progress',value:35,wait:500},{kind:'store',state:'progress',value:75,wait:500},{kind:'store',state:'progress',value:100,wait:350},{kind:'store',state:'ready',wait:650},move('#install a'),tap(),{kind:'hold',wait:450},next],
+      'hub-welcome':[{kind:'hide',wait:2200},{kind:'enter',wait:600},move('#welcome-terms'),tap(),set('#welcome-terms',true),{kind:'hold',wait:500},move('.welcome-footer button'),tap(),{kind:'hold',wait:450},next],
+      'verify-mobile':[{kind:'hide',wait:1400},set('#otp','482913'),{kind:'hold',wait:1000},{kind:'enter',wait:600},move('#form button[type="submit"]'),tap(),{kind:'hold',wait:450},next],
+      'hub-joined':[{kind:'success',wait:2200},{kind:'enter',wait:600},move('#actions a'),tap(),{kind:'hold',wait:450},next],
+      'neha-hub':[{kind:'hide',wait:4200},next]
+    }},
     'request-flow':{scenes:{
       'scan-qr':[{kind:'enter',wait:600},move('.scan-camera__target'),tap(),{kind:'hold',wait:700},next],
       'payment-review':[move('#amount'),tap(),...type('#amount','2500'),{kind:'hold',wait:700},move('#pay'),tap(),...drag('#pay',[10,20,30,40,50,60,70,80,90,100]),{kind:'hold',wait:650},next],
@@ -49,7 +58,11 @@
     }
   }
   function prepare(doc,id,flow){
-    if(id==='add-member'||id==='invite-son'){
+    if(flow==='whatsapp-invite-flow'){
+      if(id==='play-store'){doc.querySelector('#install').setPlaybackState('idle');doc.querySelector('#store').scrollTop=0;}
+      if(id==='hub-welcome'){setControl(doc,'#welcome-terms',false);doc.querySelector('#content').scrollTop=0;}
+      if(id==='verify-mobile'){setControl(doc,'#otp','');doc.querySelector('#content').scrollTop=0;}
+    }else if(id==='add-member'||id==='invite-son'){
       for(const selector of ['#relation','#name','#nickname','#mobile'])setControl(doc,selector,'');
       setControl(doc,'#manager',false);setControl(doc,'#confirmed',false);
       doc.querySelector('#content').scrollTop=0;
@@ -119,6 +132,7 @@
           if(animation){presses.add(animation);animation.onfinish=()=>presses.delete(animation);}
         }
         if(action.kind==='set')setControl(doc,action.selector,action.value);
+        if(action.kind==='store')doc.querySelector('#install').setPlaybackState(action.state,action.value);
         if(action.kind==='hide')hideDots();
         if(action.kind==='success'){hideDots();doc.querySelector('.th-success-indicator')?.play?.();}
         // Add, Next and Send Invite taps are visual only. The parent advances existing

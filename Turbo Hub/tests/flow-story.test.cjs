@@ -8,6 +8,7 @@ class Element{
   setAttribute(name,value){this.attributes[name]=value}
   removeAttribute(name){delete this.attributes[name]}
   querySelector(){return null}
+  querySelectorAll(){return []}
   addEventListener(name,fn){this.listeners[name]=fn}
   remove(){this.parent.children=this.parent.children.filter(item=>item!==this)}
 }
@@ -110,7 +111,7 @@ function loopHarness(reducedMotion=false){
 }
 test('only the scripted playback flows loop, and the static sequence remains reversible',()=>{
   const beats=story.chapters.flatMap(c=>c.scenes),loop=beats.filter(s=>s.presentation==='loop');
-  assert.deepEqual(loop.map(s=>s.id),['create-flow','kavya-invite-flow','children-invite-flow','request-flow']);
+  assert.deepEqual(loop.map(s=>s.id),['create-flow','kavya-invite-flow','children-invite-flow','whatsapp-invite-flow','request-flow']);
   assert.deepEqual(loop[0].sequence.map(s=>s.id),['hub-setup','hub-created']);
   assert.deepEqual(loop[1].sequence.map(s=>s.id),['members-owner','add-member','member-payment-methods','invite-sent','hub-members']);
   const h=loopHarness();h.window.TurboFamilyStory={...story,chapters:story.chapters.map(c=>({...c,scenes:c.scenes.map(s=>s.presentation==='loop'?{...s,presentation:'static'}:s)}))};
@@ -118,6 +119,51 @@ test('only the scripted playback flows loop, and the static sequence remains rev
   const walk=el=>[el,...el.children.flatMap(walk)];
   assert.equal(walk(rendered).filter(el=>el.classList.contains('family-story__screen-rail--loop')).length,0);
   assert.equal(walk(rendered).filter(el=>el.dataset.scene).length,story.chapters.filter(c=>!c.hidden).flatMap(c=>c.scenes.flatMap(s=>s.sequence||[s])).length);
+});
+test('development buttons open an in-page screen overlay with ordered standalone links and return focus',()=>{
+  const walk=el=>[el,...el.children.flatMap(walk)];
+  const render=(search,options)=>{
+    const h=loopHarness();h.window.location={search};
+    const nodes=walk(h.window.TurboFlowStory.render(options));
+    h.document.body=new Element('body');
+    h.document.createElement=tag=>{
+      const el=new Element(tag);el.focus=()=>{h.document.activeElement=el};
+      if(tag==='dialog'){el.showModal=()=>{el.open=true};el.close=()=>{el.open=false;el.listeners.close()};}
+      return el;
+    };
+    return {nodes,h};
+  };
+  const links=nodes=>nodes.filter(el=>el.className?.includes('family-story__dev-screens'));
+  assert.equal(links(render('').nodes).length,0);
+  assert.equal(links(render('?dev=false').nodes).length,0);
+  const flows=story.chapters.filter(c=>!c.hidden).flatMap(c=>c.scenes).filter(s=>s.presentation==='loop');
+  const {nodes:mainNodes,h}=render('?dev=true');
+  const devLinks=links(mainNodes);
+  assert.equal(devLinks.length,flows.length);
+  for(const [index,flow] of flows.entries()){
+    const button=devLinks[index];button.focus=()=>{h.document.activeElement=button};
+    assert.equal(button.tag,'button');assert.equal(button.attributes['aria-haspopup'],'dialog');
+    button.listeners.click();
+    const dialog=h.document.body.children[index];assert.equal(dialog.tag,'dialog');assert.equal(dialog.open,true);
+    assert.equal(dialog.id,button.attributes['aria-controls']);
+    const nodes=walk(dialog);
+    assert.equal(nodes.some(el=>el.tag==='h2'||el.tag==='h3'||el.tag==='h4'||el.tag==='figcaption'||el.tag==='p'),false);
+    assert.deepEqual(nodes.filter(el=>el.dataset.scene).map(el=>el.dataset.scene),flow.sequence.map(s=>s.id));
+    assert.equal(nodes.filter(el=>el.classList.contains('family-story__screen-rail--loop')).length,0);
+    assert.equal(nodes.filter(el=>el.classList.contains('family-story__screen-rail--list')).length,1);
+    const pages=nodes.filter(el=>el.tag==='a'&&el.textContent==='Open full page ↗');
+    assert.equal(pages.length,flow.sequence.length);
+    pages.forEach((link,i)=>{
+      const route=flow.sequence[i].route.split('?'),page=new URL(link.href);
+      assert.equal(page.pathname,'/app/prototypes/'+route[0]+'/index.html');
+      assert.equal(page.search,route[1]?'?'+route[1]:'');assert.equal(page.searchParams.has('embed'),false);
+    });
+    const close=nodes.find(el=>el.attributes['aria-label']==='Close flow screens');close.listeners.click();
+    assert.equal(dialog.open,false);assert.equal(h.document.activeElement,button);assert.equal(h.document.body.classList.contains('has-open-dialog'),false);
+    button.listeners.click();assert.equal(h.document.body.children.length,index+1);dialog.close();
+  }
+  const ids=[...mainNodes,...walk(h.document.body)].map(el=>el.id).filter(Boolean);assert.equal(new Set(ids).size,ids.length);
+  assert.equal(render('',{flowId:'missing'}).nodes.some(el=>el.dataset.scene),false);
 });
 test('one phone advances in order and wraps; step selection follows the current playback choice',()=>{
   const h=loopHarness(),[,caption,toggle]=h.controls.children,steps=h.steps;

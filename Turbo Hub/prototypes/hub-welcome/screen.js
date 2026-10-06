@@ -11,7 +11,7 @@ const kicker=document.createElement('p');kicker.className='welcome-hero__kicker'
 const heading=document.createElement('h1');heading.id='welcome-heading';heading.textContent='The Sharma’s Family Hub';
 // The members already in the Hub, as overlapping round faces.
 const family=document.createElement('div');family.className='welcome-hero__family';family.setAttribute('aria-label','Members: Arun, Kavya and Rohan');
-for(const name of ['Arun Sharma','Kavya Sharma','Rohan Sharma'])family.append(H.avatar({name,size:'stack-large'}));
+for(const name of ['Arun Sharma','Kavya Sharma','Rohan Sharma']){const slot=document.createElement('span');slot.className='welcome-hero__portrait';slot.append(H.avatar({name,size:'stack-large'}));family.append(slot);}
 hero.append(art,kicker,heading,family);
 
 const content=document.getElementById('content');
@@ -24,6 +24,6 @@ for(const [graphic,name] of [['upi-fill','UPI payments'],['card-fill','A Hub car
 // The terms link is a placeholder in this prototype.
 const terms=H.check({id:'welcome-terms',label:'I agree to the',link:{label:'Terms and conditions',href:'#terms',onClick:()=>{}},onChange:()=>terms.setError('')});
 const accept=H.button({label:'Accept invite',onClick:()=>{if(!terms.control.checked){terms.setError('Agree to the terms to join the Hub.');terms.control.focus();return;}TurboStoryContext.navigate('../verify-mobile/index.html');}});
-const footer=document.createElement('div');footer.className='welcome-footer';footer.append(terms,accept);
+const footer=document.createElement('div');footer.className='welcome-footer';footer.id='footer';footer.append(terms,accept);
 content.append(title,list,footer);
 // Local prototype only; no account is created.

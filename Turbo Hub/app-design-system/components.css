@@ -14,3 +14,7 @@
 @import url('./components/account-card.css');
 
 @import url('components/action-footer.css');
+
+@import url('./components/otp.css');
+
+@import url('./components/payment-method.css');

@@ -109,3 +109,8 @@
 .th-slider__control:focus-visible::-moz-range-thumb { outline:3px solid #91baff; outline-offset:2px; }
 .th-slider__control:disabled { opacity:.45; cursor:not-allowed; }
 .th-slider__range { display:flex; justify-content:space-between; color:var(--color-text-secondary); font:var(--type-caption-weight) var(--slider-caption-size)/var(--type-caption-leading) var(--font-body); }
+
+/* Registered digit configuration, shared by the segmented verification code. */
+.th-field.th-field--digit .th-field__surface { min-width:44px; padding:var(--th-space-2); }
+.th-field--digit .th-field__input { text-align:center; height:32px; font:var(--type-amount-summary-weight) var(--type-amount-summary-size)/var(--type-amount-summary-leading) var(--font-body); font-variant-numeric:tabular-nums; }
+.th-field--digit .th-field__body .th-field__input { line-height:32px; }

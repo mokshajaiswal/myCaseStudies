@@ -17,18 +17,11 @@ document.getElementById('statusbar').append(TurboUI.statusbar());
 document.getElementById('nav').append(TurboUI.navigation({title:'',left:{label:'Back to flow references',icon:'navigation-back',href:'../../flow-reference/index.html'},right:{label:'Profile options',icon:'more',onClick:()=>{}}}));
 // Same hero treatment as Hub Details: identity and the glass Monthly Limit on the blue chrome; methods on the sheet.
 document.getElementById('hero').append(TurboUI.summary({name:person.name,type:person.type,variant:'centered',tone:'chrome',person:person.name}),TurboUI.limit({spent:0,limit:person.limit,label:'Monthly Limit',variant:'circular',tone:'glass'}));
-document.getElementById('card-avatar').append(TurboUI.avatar({name:'Card',graphic:'card-fill'}));
-document.getElementById('upi-avatar').append(TurboUI.avatar({name:'UPI',graphic:'upi-fill'}));
-document.getElementById('card-detail').textContent=person.card;document.getElementById('upi-detail').textContent=person.upi;
-// Each row is a link while something is pending; an amber status sits just before the chevron.
-const cardRow=document.getElementById('card-row');cardRow.href=withState('../delivery-details/index.html',saved?{return:'saved'}:{});
-cardRow.setAttribute('aria-label',saved?`Card ${person.card}, edit delivery address`:`Card ${person.card}, add delivery details`);
-if(!saved)document.getElementById('card-chevron').before(TurboUI.badge('Details needed',{variant:'warning',icon:'warning-circle'}));
-document.getElementById('card-chevron').innerHTML=TurboIcons.render('caret-right',{size:20});
-const upiRow=document.getElementById('upi-row');
-if(!upiActive){upiRow.href='../verify-pan/index.html';upiRow.setAttribute('aria-label',`UPI ${person.upi}, verify PAN to activate`);document.getElementById('upi-chevron').before(TurboUI.badge('Verify PAN',{variant:'warning',icon:'warning-circle'}));}
-else upiRow.setAttribute('aria-label',`UPI ${person.upi}, active`);
-document.getElementById('upi-chevron').innerHTML=TurboIcons.render('caret-right',{size:20});
+// Shared payment-method rows preserve identifiers, pending status and destination state.
+document.getElementById('methods').append(
+ TurboUI.paymentMethod({id:'card-row',name:'Card',detail:person.card,graphic:'card-fill',href:withState('../delivery-details/index.html',saved?{return:'saved'}:{}),status:saved?'':'Details needed',label:saved?`Card ${person.card}, edit delivery address`:`Card ${person.card}, add delivery details`}),
+ TurboUI.paymentMethod({id:'upi-row',name:'UPI',detail:person.upi,graphic:'upi-fill',href:upiActive?null:'../verify-pan/index.html',status:upiActive?'':'Verify PAN',label:upiActive?`UPI ${person.upi}, active`:`UPI ${person.upi}, verify PAN to activate`})
+);
 // Neha arrives here straight from Set UPI PIN: confirm activation once.
 if(params.get('done')==='upi'){const host=document.getElementById('feedback');host.append(TurboUI.notice({message:'UPI is active. You can pay now, '+first+'.',onDismiss:()=>host.replaceChildren()}));}
 // Saving an address does not activate a physical card or initiate card delivery.

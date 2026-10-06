@@ -1,0 +1,3 @@
+.th-otp { display:grid; gap:var(--th-space-3); min-width:0; margin:0; padding:0; border:0; }
+.th-otp__label { padding:0; margin-bottom:var(--th-space-3); color:var(--color-text-secondary); font:var(--type-field-label-weight) var(--type-field-label-size)/var(--type-field-label-leading) var(--font-label); }
+.th-otp__digits { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:var(--th-space-2); }

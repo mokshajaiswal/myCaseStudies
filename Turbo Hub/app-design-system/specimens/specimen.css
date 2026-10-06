@@ -7,3 +7,6 @@ body{margin:0;padding:20px;background:#f5f8fd;color:var(--color-text);font:16px/
 .th-account-action[data-preview-state=active] { background:var(--wallet-action-active); }
 .th-account-action[data-preview-state=focus-visible] { outline:3px solid var(--color-action); outline-offset:3px; }
 .camera-action-context { display:grid; place-items:center; min-height:132px; border-radius:12px; background:#52616b url('../../prototypes/scan-qr/assets/beauty-counter.png') center 55%/cover; }
+
+/* Single digit configuration retains its intended parent allocation. */
+.example--digit { max-width:84px; }

@@ -29,6 +29,7 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
     const control=(selector,tag,type='',inContent=true)=>{
       const target=new Element(tag,{left:40,top:220,width:type==='checkbox'?20:200,height:30});target.type=type;target.value='prefilled';target.checked=true;target.inContent=inContent;controls[selector]=target;return target;
     };
+    if(screen.id==='hub-joined')control('#actions a','a');
     if(screen.id==='members-owner'||screen.id==='members-parents')control('#hub-panel .section-top a','a');
     if(screen.id==='add-member'||screen.id==='invite-son'){
       control('#relation','select');for(const name of ['name','nickname','mobile'])control('#'+name,'input','text');
@@ -42,6 +43,15 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
       control('#limit-target','select');const range=control('#limit-amount','input','range');range.min='500';range.max='100000';control('#content button[type="submit"]','button','submit');
     }
     if(screen.id==='scan-qr')control('.scan-camera__target','button');
+    if(screen.id==='invite-notification')control('#notifications .th-payment-notification','a', '',false);
+    if(screen.id==='invitation')control('.wa-preview','a');
+    if(screen.id==='play-store'){
+      const store=control('#store','div'),install=control('#install','div');store.scrollTop=0;
+      install.setPlaybackState=(state,value=0)=>{install.state=state;install.percent=value;delete controls['#install button'];delete controls['#install a'];if(state==='idle')control('#install button','button');if(state==='ready')control('#install a','a');};
+      install.setPlaybackState('idle');
+    }
+    if(screen.id==='hub-welcome'){control('#welcome-terms','input','checkbox');control('.welcome-footer button','button');}
+    if(screen.id==='verify-mobile'){control('#otp','input','text');control('#form button[type="submit"]','button','submit');}
     if(screen.id==='payment-review'){
       control('#amount','input','text');const swipe=control('#pay','input','range',false);swipe.min='0';swipe.max='100';swipe.classList.add('th-swipe__control');
     }
@@ -187,4 +197,41 @@ test('Neha request loop scans, types the amount and visually swipes without navi
   const dot=h.previews[1].slot.children.at(-1),middle=Number.parseFloat(dot.style.left);
   h.until(()=>review['#pay'].value==='100');assert.ok(Number.parseFloat(dot.style.left)>middle);assert.equal(review['#pay'].events.includes('change'),false);
   h.until(()=>h.current()===2);assert.equal(h.scene.sequence[2].id,'request-pending');h.until(()=>h.current()===0);assert.equal(h.errors(),0);
+});
+
+test('Neha joins through seven fixtures into the Hub with pausable install, terms acceptance, SMS autofill and full reset',()=>{
+  const h=harness({flowId:'whatsapp-invite-flow'});h.start();
+  assert.deepEqual(h.scene.sequence.map(s=>s.id),['invite-notification','invitation','play-store','hub-welcome','verify-mobile','hub-joined','neha-hub']);
+  h.until(()=>h.current()===2);
+  const install=h.controlsByScene[2]['#install'];assert.equal(install.state,'idle');
+  h.until(()=>install.percent===35);h.controls.children[2].listeners.click();
+  assert.equal(h.timers.size,0);assert.equal(install.state,'progress');assert.equal(install.percent,35);
+  h.advanceClock(10000);h.controls.children[2].listeners.click();h.until(()=>install.state==='ready');
+  h.until(()=>h.current()===3);const terms=h.controlsByScene[3]['#welcome-terms'];assert.equal(terms.checked,false);
+  h.until(()=>terms.checked);assert.deepEqual(terms.events,['change','change']);
+  h.until(()=>h.current()===4);const otp=h.controlsByScene[4]['#otp'];assert.equal(otp.value,'');
+  h.until(()=>otp.value==='482913');assert.deepEqual(otp.events,['input','input']);
+  h.until(()=>h.current()===5);h.until(()=>h.current()===6);assert.equal(h.scene.sequence[6].route,'hub-dashboard?state=joined&member=neha');h.until(()=>h.current()===0);h.until(()=>h.current()===2);
+  assert.equal(install.state,'idle');assert.equal(install.percent,0);
+  h.steps[3].listeners.click();assert.equal(terms.checked,false);
+  h.steps[4].listeners.click();assert.equal(otp.value,'');assert.equal(h.errors(),0);
+  for(const selectors of h.controlsByScene)for(const el of Object.values(selectors))if(el.tagName==='A'||el.tagName==='BUTTON')assert.deepEqual(el.events,[]);
+});
+
+test('Play Store story adapter freezes native install timers while standalone installation still opens the app',()=>{
+  for(const locked of [true,false]){
+    const make=()=>({children:[],append(...items){this.children.push(...items)},replaceChildren(...items){this.children=items},classList:{remove(){}}});
+    const nodes={statusbar:make(),store:make(),install:make()},timers=[];
+    const window={TurboStoryContext:{embedded:locked,locked}};
+    vm.runInNewContext(read('prototypes/play-store/screen.js'),{window,TurboIcons:{render:()=>'<svg></svg>'},TurboUI:{statusbar:make},document:{getElementById:id=>nodes[id],createElement:make,querySelector:make},addEventListener(){},setTimeout:(callback,delay)=>timers.push({callback,delay})});
+    nodes.install.children[0].onclick();
+    if(locked){
+      assert.equal(timers.length,0);nodes.install.setPlaybackState('progress',35);assert.ok(nodes.install.innerHTML.includes('aria-valuenow="35"'));
+      nodes.install.setPlaybackState('ready');assert.equal(nodes.install.children[0].textContent,'Open');
+      nodes.install.setPlaybackState('idle');assert.equal(nodes.install.children[0].textContent,'Install');
+    }else{
+      assert.equal(nodes.install.setPlaybackState,undefined);assert.equal(timers.length,1);assert.equal(timers[0].delay,1600);
+      timers[0].callback();assert.equal(nodes.install.children[0].textContent,'Open');assert.equal(nodes.install.children[0].href,'../hub-welcome/index.html');
+    }
+  }
 });

@@ -1,0 +1,7 @@
+/* Shared payment-method treatment extracted from Kavya's profile. */
+.th-payment-method { --payment-method-copy-gap:calc(var(--th-space-1) / 2); display:flex; align-items:center; gap:var(--th-space-3); padding:var(--th-space-2) 0; color:var(--color-text); text-decoration:none; }
+.th-payment-method__copy { flex:1; min-width:0; display:grid; gap:var(--payment-method-copy-gap); }
+.th-payment-method__title { margin:0; font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body); }
+.th-payment-method__detail { margin:0; color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.th-payment-method__chevron { display:inline-flex; flex:none; color:var(--color-text-secondary); }
+a.th-payment-method:focus-visible { outline:3px solid #91baff; outline-offset:2px; border-radius:var(--th-radius); }

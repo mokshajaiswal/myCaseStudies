@@ -58,3 +58,10 @@ Methods on the white sheet. Saved-address state and delivery action unchanged.
 - **Activation lives on the profile:** `member-profile?member=neha` shows UPI pending with a **Verify PAN** warning Badge and the card with **Details needed**. UPI takes Verify PAN, then Set UPI PIN (two steps), and comes back with a notice and UPI active. The card reuses Delivery details and Delivery confirmed, carrying `member`/`upi` in the URL.
 - The member setup forms share `prototypes/shared/member-setup.css`: an icons-only bar, a page header, and one short form with the action at the bottom.
 - Figma's notification says Kavya invited Neha while its About Hub says Arun. We use Arun throughout, matching the story.
+
+Payment-method reuse (6 October 2026): the existing row treatment is extracted
+into registered Payment method with Avatar and warning Badge dependencies. Member
+profiles and Neha’s first-visit Hub consume the same renderer. Card/UPI identifiers,
+card-delivery query parameters, saved-address status and active/pending UPI behavior
+are preserved. The page retains only external grouping; no registered internals
+are overridden. Source/catalog checks pass; visual review remains with the user.

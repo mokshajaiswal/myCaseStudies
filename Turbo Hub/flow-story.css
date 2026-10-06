@@ -129,6 +129,18 @@
 .family-story__loop-step[aria-current=step] .family-story__step-title { color:var(--accent); }
 .family-story__loop-caption { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 .family-story__loop-toggle { justify-self:start; padding:var(--space-2) var(--space-4); border:1px solid var(--line); border-radius:var(--radius-small); background:var(--surface-raised); color:var(--ink); font:var(--font-small-body); cursor:pointer; }
+.family-story__dev-screens { text-decoration:none; }
+/* Development tooling: an unboxed horizontal screen strip over the backdrop. */
+.family-story__screens-dialog { width:calc(100% - var(--space-4) * 2); max-width:none; max-height:calc(100dvh - var(--space-4) * 2); padding:0; overflow-y:auto; overscroll-behavior:contain; border:0; border-radius:0; background:transparent; color:var(--ink); }
+.family-story__screens-dialog::backdrop { background:rgb(30 35 45 / .42); backdrop-filter:blur(5px); }
+.family-story__screens-header { display:flex; justify-content:flex-end; padding:var(--space-1) var(--space-4); }
+.family-story__dev-open--button { width:fit-content; margin-inline:auto; text-decoration:none; }
+.family-story--screen-list,.family-story--screen-list .family-story__chapter,.family-story--screen-list .family-story__scene { margin:0; }
+.family-story--screen-list .family-story__scene { gap:0; }
+.family-story--screen-list .family-story__stage { grid-template-columns:minmax(0,1fr); }
+.family-story__screen-rail.family-story__screen-rail--list { display:flex; flex-direction:row; flex-wrap:nowrap; align-items:flex-start; justify-content:safe center; gap:var(--space-6); width:100%; padding:var(--space-4); overflow-x:auto; overscroll-behavior-x:contain; }
+.family-story__screen-rail--list > .family-story__preview { flex:0 0 auto; width:min(300px,calc((100dvh - var(--space-24) - var(--space-16)) / 2.064),calc(100vw - var(--space-16))); }
+.family-story__screen-rail.family-story__screen-rail--list > .family-story__preview::before { content:none; }
 .family-story__loop-step:focus-visible,.family-story__loop-toggle:focus-visible { outline:2px solid var(--accent); outline-offset:var(--space-1); }
 @media (max-width:760px) { .family-story__stage.family-story__stage--loop { column-gap:var(--space-8); } }
 @media (max-width:640px) {

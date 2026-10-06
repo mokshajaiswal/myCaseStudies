@@ -1202,7 +1202,8 @@
         "optional",
         "error",
         "disabled",
-        "prominent amount"
+        "prominent amount",
+        "digit"
       ],
       "dependencies": [],
       "previewConfigurations": [
@@ -1250,6 +1251,21 @@
           "id": "placeholder-disabled",
           "name": "Placeholder · disabled",
           "selector": "#placeholder-disabled"
+        },
+        {
+          "id": "digit",
+          "name": "Digit",
+          "selector": "#digit"
+        },
+        {
+          "id": "digit-filled",
+          "name": "Digit · filled",
+          "selector": "#digit-filled"
+        },
+        {
+          "id": "digit-disabled",
+          "name": "Digit · disabled",
+          "selector": "#digit-disabled"
         }
       ],
       "anatomy": {
@@ -1283,13 +1299,19 @@
             "selector": ".th-field__surface",
             "property": "row-gap",
             "token": "--th-space-1"
+          },
+          {
+            "label": "Digit inset",
+            "selector": ".th-field--digit .th-field__surface",
+            "property": "padding-left",
+            "token": "--th-space-2"
           }
         ],
         "ownership": "Component owns label, control, internal spacing and error feedback. Page owns grouping and external gaps.",
         "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked. Validation message sits below the bordered field surface. prominent=true uses the shared 16px Medium field value and prefix with a 2px label gap; semantics and validation stay unchanged.",
         "interactionOwnership": "Owns control semantics; caller owns application state and validation."
       },
-      "usage": "Use TurboUI.field({id, label, ...}). IDs must be unique. See Add Member for composed form usage. variant='placeholder' displays a vertically centered input prompt instead of the small visible label; the associated label stays available to assistive technology. Placeholder defaults to label and disappears when typing. Surface has 60px minimum height, 12px vertical and 16px horizontal insets; validation remains below it."
+      "usage": "Use TurboUI.field({id, label, ...}). IDs must be unique. See Add Member for composed form usage. variant='placeholder' displays a vertically centered input prompt instead of the small visible label; the associated label stays available to assistive technology. Placeholder defaults to label and disappears when typing. Surface has 60px minimum height, 12px vertical and 16px horizontal insets; validation remains below it. variant='digit' uses a blank, centered 64px-high box with 8px insets and a hidden accessible label, intended for a 44px-or-wider allocation in a segmented OTP. It retains Text field focus, disabled and input ownership."
     },
     {
       "id": "turbo-select",
@@ -2773,6 +2795,203 @@
         "limit",
         "amount"
       ]
+    },
+    {
+      "id": "turbo-otp",
+      "name": "Verification code",
+      "class": "th-otp",
+      "css": "components/otp.css",
+      "module": "components/otp.js",
+      "category": "Controls",
+      "preview": "specimens/form.html?component=otp",
+      "states": [
+        "empty",
+        "partial",
+        "complete",
+        "error",
+        "disabled"
+      ],
+      "dependencies": [
+        "turbo-field"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "empty",
+          "name": "Empty",
+          "selector": "#empty"
+        },
+        {
+          "id": "partial",
+          "name": "Partial",
+          "selector": "#partial"
+        },
+        {
+          "id": "complete",
+          "name": "Complete",
+          "selector": "#complete"
+        },
+        {
+          "id": "error",
+          "name": "Error",
+          "selector": "#error"
+        },
+        {
+          "id": "disabled",
+          "name": "Disabled",
+          "selector": "#disabled"
+        }
+      ],
+      "props": {
+        "id": "Required unique aggregate input ID. Digit IDs append -digit-1 through -digit-6.",
+        "label": "Group legend, default 6-digit code.",
+        "value": "Initial numeric string, up to 6 digits; default empty. setValue(value) updates all boxes without emitting onInput.",
+        "disabled": "Supplied availability propagated to all six Text fields.",
+        "error": "Group validation message, default empty. setError(text) updates it and associates each digit with the message.",
+        "onInput": "Receives the current numeric string after a user edit or aggregate input event."
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Group",
+            "selector": ".th-otp"
+          },
+          {
+            "name": "Legend",
+            "selector": ".th-otp__label"
+          },
+          {
+            "name": "Digit grid",
+            "selector": ".th-otp__digits"
+          },
+          {
+            "name": "Validation",
+            "selector": ".th-otp > .th-form-error"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Digit gap",
+            "selector": ".th-otp__digits",
+            "property": "column-gap",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Validation gap",
+            "selector": ".th-otp",
+            "property": "row-gap",
+            "token": "--th-space-3"
+          },
+          {
+            "label": "Legend separation",
+            "selector": ".th-otp__label",
+            "property": "margin-bottom",
+            "token": "--th-space-3"
+          }
+        ],
+        "ownership": "Verification code owns six-slot coordination, group legend/error and inter-field gaps; nested Text fields own digit controls and their visual states. Parent owns placement and available width.",
+        "interactionOwnership": "Six registered turbo-field instances own native input/focus/disabled semantics. Verification code coordinates advance, paste, autofill, arrow and backspace navigation; caller owns submission and validation decisions.",
+        "behavior": "Six numeric text boxes, stable 64px height, fluid equal-width grid with 8px gaps (minimum group width 304px). Typing advances; empty Backspace clears/focuses the previous digit; arrows navigate; paste and SMS autofill distribute numeric digits. No automatic submit. Hidden aggregate control exposes the full value for forms and locked editorial playback. control is the aggregate; controls are visible digits; focus() focuses the first empty digit. Supplied partial/complete/error/disabled states are demonstrated through the same renderer. Direct child focus states belong to Text field."
+      },
+      "usage": "TurboUI.otp({id,label,value,disabled,error,onInput}); load forms.js before otp.js. Use setValue for programmatic state, setError for validation and focus for failed-submit recovery. The screen and specimen consume this same renderer."
+    },
+    {
+      "id": "turbo-payment-method",
+      "name": "Payment method",
+      "class": "th-payment-method",
+      "css": "components/payment-method.css",
+      "module": "components/payment-method.js",
+      "preview": "specimens/payment-method.html",
+      "category": "Data display",
+      "states": [
+        "pending",
+        "without status",
+        "link",
+        "informational",
+        "focus-visible (link)"
+      ],
+      "dependencies": [
+        "turbo-avatar",
+        "turbo-badge"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "card-pending",
+          "name": "Card · pending",
+          "selector": "#card-pending"
+        },
+        {
+          "id": "upi-pending",
+          "name": "UPI · pending",
+          "selector": "#upi-pending"
+        },
+        {
+          "id": "upi-active",
+          "name": "UPI · active",
+          "selector": "#upi-active"
+        },
+        {
+          "id": "card-saved",
+          "name": "Card · address saved",
+          "selector": "#card-saved"
+        }
+      ],
+      "props": {
+        "name": "Method title, such as Card or UPI.",
+        "detail": "Optional identifier below the title.",
+        "graphic": "Registered Avatar graphic icon name.",
+        "href": "Destination; renders a native anchor when supplied, informational div otherwise.",
+        "status": "Optional plain-text pending message, rendered by the registered warning Badge.",
+        "label": "Optional accessible label describing the method and destination.",
+        "id": "Optional stable row ID."
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Row",
+            "selector": ".th-payment-method"
+          },
+          {
+            "name": "Copy",
+            "selector": ".th-payment-method__copy"
+          },
+          {
+            "name": "Title",
+            "selector": ".th-payment-method__title"
+          },
+          {
+            "name": "Identifier",
+            "selector": ".th-payment-method__detail"
+          },
+          {
+            "name": "Chevron",
+            "selector": ".th-payment-method__chevron"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Vertical inset",
+            "selector": ".th-payment-method",
+            "property": "padding-top",
+            "token": "--th-space-2"
+          },
+          {
+            "label": "Row gap",
+            "selector": ".th-payment-method",
+            "property": "column-gap",
+            "token": "--th-space-3"
+          },
+          {
+            "label": "Title and identifier gap",
+            "selector": ".th-payment-method__copy",
+            "property": "row-gap",
+            "token": "--payment-method-copy-gap"
+          }
+        ],
+        "ownership": "Payment method owns row geometry, copy, native anchor semantics and chevron. Avatar and Badge own their unchanged appearance. Parent owns list gap and placement.",
+        "interactionOwnership": "The row is the sole interactive owner when href is supplied; Avatar, Badge and chevron are noninteractive children. Informational rows have no activation. Caller supplies destination and pending state.",
+        "behavior": "Plain fluid row extracted from Kavya’s profile: 8px vertical inset, 12px gaps, 2px title/detail gap. Identifier and title wrap; optional warning Badge precedes a decorative 20px chevron. Native anchor keyboard/focus behavior when linked; informational rows retain the existing profile chevron with no action. No activation or delivery state is inferred."
+      },
+      "usage": "TurboUI.paymentMethod({name,detail,graphic,href,status,label,id}); shared by member profiles and Neha’s first-visit Hub. Canonical fixtures use this renderer without overrides."
     }
   ],
   "compositions": [],
@@ -2913,25 +3132,25 @@
       "id": "play-store",
       "name": "Member · Play Store install",
       "preview": "../app/prototypes/play-store/index.html",
-      "description": "External app drawn in code (like the WhatsApp chat): PayZapp listing; Install shows a short progress, then Open launches the Hub welcome. Nothing is installed."
+      "description": "Simplified external Google Play listing: official PayZapp icon and listing metadata with neutral screenshot/data-safety skeletons. Install shows a short progress, then Open launches the Hub welcome. Nothing is installed."
     },
     {
       "id": "hub-welcome",
       "name": "Member · Welcome to the Hub",
       "preview": "../app/prototypes/hub-welcome/index.html",
-      "description": "PayZapp first launch from an invite (Figma About Hub 406:61169, rebuilt): family art, who invited, members, what Arun set up (UPI, card, monthly limit), terms and Accept invite."
+      "description": "Invite landing screen with family artwork, inviter, overlapping members and What you get (UPI, card and monthly limit), followed by terms and Accept invite."
     },
     {
       "id": "verify-mobile",
       "name": "Member · Verify your number",
       "preview": "../app/prototypes/verify-mobile/index.html",
-      "description": "The only account step: OTP to the invited number, filled from SMS. Page header, prominent Field, Action."
+      "description": "Six individual numeric OTP boxes, supporting typing, paste and SMS autofill, followed by Verify and join."
     },
     {
       "id": "hub-joined",
       "name": "Member · Joined",
       "preview": "../app/prototypes/hub-joined/index.html",
-      "description": "Full-blue success with the animated Success indicator, the two remaining setup steps on a glass card, and a white Set up payments action."
+      "description": "Full-blue success with the animated Success indicator, the two remaining setup steps on a glass card, and a white Go to Hub action opening Neha’s member dashboard."
     },
     {
       "id": "neha-profile",

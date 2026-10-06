@@ -77,3 +77,6 @@ body[data-reference=spends] .hub-artwork { padding-top:calc(var(--th-space-8) + 
 /* New-Hub state (?state=new): prompt and list Actions on the sheet. */
 .created-intro { margin:0 0 var(--th-space-5); text-align:center; color:var(--color-text-secondary); text-wrap:balance; font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
 .created-actions { display:grid; border:1px solid var(--color-border); border-radius:var(--th-radius); overflow:hidden; }
+
+/* First-visit payment options use the same registered rows as member profiles. */
+.joined-hub-methods { display:grid; gap:var(--th-space-2); }

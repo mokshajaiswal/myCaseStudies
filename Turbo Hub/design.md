@@ -334,6 +334,23 @@ The interview quote stack is capped at 28rem (448px) and centred within its colu
 
 ## Family-flow playback presentation
 
+Development screen access: `?dev=true` adds a **View all screens** button beneath
+Pause/Play beside each `presentation:'loop'` preview. It opens a native modal
+on the case study with a transparent surface, a Close control at the top right,
+and a horizontal screen strip over the dimmed backdrop. No panel, heading,
+scene description, captions or summaries are rendered.
+The overlay uses `TurboFlowStory.render({flowId})` to show only the selected
+sequence as centered phone previews capped at 300px, scaled to fit the viewport
+height while retaining their aspect ratio. The strip scrolls horizontally when
+the phones exceed its width, including on mobile. It keeps deterministic locked
+embeds and lazy mounting; it does not start flow playback. Every preview has an **Open full
+page** link styled as an editorial button, preserving its route’s query
+parameters and opening the standalone prototype in a new tab. Close, Escape
+and backdrop dismissal restore focus to View all screens; body scrolling is
+locked while open. Overlay IDs are distinct from the case study and other flows.
+Page spacing and control styling use existing case-study tokens; product
+components are unchanged.
+
 The `kavya-invite-flow` experiment places a clickable vertical ordered step list
 to the left of one live 300px phone preview. Each step has a Helix small-body title
 and brief explanation, with a thin vertical track that fills over the complete
@@ -350,3 +367,94 @@ translucent touch dot, tap ripple and shared button press remain independent of
 this editorial navigation. Static scene presentation remains available; other
 flows retain their current presentation. See `FLOW-PLAYBACK-PLAYBOOK.md` for the
 repeatable implementation and restoration rules.
+
+## Simplified Play Store listing — 6 October 2026
+
+The external Play Store fixture keeps a white surface and green pill action,
+with the real PayZapp icon, two-line listing title and developer above a three-column
+metadata row. Values are a snapshot from the supplied Google Play listing:
+4.4, 13.2L reviews, 1Cr+ downloads and Everyone. Three muted portrait skeleton
+previews replace unfinished blue promotional blocks. About this app uses a short
+capability summary and Finance chip; Data safety uses decorative skeleton lines
+rather than invented policy claims. Placeholders are static and hidden from
+assistive technology. The app icon is bundled locally with source attribution.
+
+The existing shared light Status bar and phone geometry are unchanged; navigation
+icons use TurboIcons. This documented external-app exception removes the shared
+Turbo Hub Chrome backdrop class at startup and owns its own white/green styling.
+Layout spacing and text sizes use existing primitives. Install still shows local
+progress before Open leads to Hub welcome; reduced motion skips the progress fill
+animation. Source checks passed; visual and keyboard review remain with the user.
+
+The white PayZapp icon has a 1px gray (#cbd2ce) outline so its rounded boundary
+remains visible on the white listing surface. Border-box sizing retains its 72px
+footprint and existing 16px corner radius.
+
+## WhatsApp joining playback — 6 October 2026
+
+Neha’s seven-screen joining sequence now uses the existing single-phone playback
+and step-list layout: WhatsApp notification → invitation chat → Play Store →
+Hub welcome → number verification → joined confirmation → member Hub. It keeps all current
+fixtures, routes, proposed flags and product styling. The touch dot visually
+opens the notification and invite, presses Install/Open, accepts the terms and
+presses Verify and join. The code arrives as one SMS-autofill update rather than
+manual typing. The confirmation leads into Neha’s Hub, which holds for 4.2 seconds before repeating.
+
+The Play Store’s locked-only visual adapter shows discrete installation progress
+under the common editorial clock, so Pause stops progress immediately. Native
+store timers are blocked only in locked embeds. Preparation restores Install,
+unchecks welcome terms, clears the code and resets relevant child scroll positions.
+Existing manual-step selection, offscreen pause, reduced motion, screen-layer
+transition and dev screen access remain shared. Source checks and 37 tests passed;
+visual and keyboard review remain with the user.
+
+## Hub welcome layout — 6 October 2026
+
+The earlier invitation layout is restored at the user’s request: family artwork,
+inviter and Hub name, overlapping member portraits, then the What you get list
+with UPI, card and monthly allowance. Terms and Accept invite remain in that
+scrolling content surface. Avatar overlap now belongs to parent wrappers instead
+of overriding the registered Avatar. Consent, allowance and autoplay selectors
+are retained.
+
+The joining flow now ends inside the Hub. The confirmation keeps its success
+feedback and offers Go to Hub. The member dashboard reuses the existing Hub
+layout with Neha’s allowance, zero initial spends, Spends/Members tabs and the
+shared Card and UPI rows matching Kavya’s profile. Manager-only Add and analytics are omitted. Source tests
+cover the seventh scene and repeat; manual visual review remains with the user.
+
+## Six-box OTP and payment options — 6 October 2026
+
+Verification uses a shared six-digit code component composed of registered Text
+fields with a digit configuration. Each box is 64px high with centered amount
+text and 8px internal insets; a 6-column grid uses 8px gaps. Group validation and
+its accessible legend belong to Verification code. Typing advances focus,
+backspace/arrows support correction, and pasted or autofilled codes distribute
+across boxes. Submission remains explicit. The aggregate input preserves the
+existing playback reset/autofill interface. Real canonical specimens cover empty,
+partial, complete, error and disabled states; Text field owns digit focus visuals.
+
+Neha’s Hub lists Card and UPI using the shared Payment method renderer, opening
+PAN verification and card delivery details respectively. No umbrella setup button
+or extra explanatory block remains. Source checks and 41 tests pass; browser and
+visual review remain with the user.
+
+## Consistent payment-method rows — 6 October 2026
+
+The first-visit Hub now uses Kavya’s profile treatment: Card first, then UPI,
+with dark field-value labels, secondary identifiers, amber pending badges and
+chevrons. The same shared Payment method renderer supplies both member profiles
+and the member Hub. It extracts the existing profile geometry unchanged: 8px
+vertical inset, 12px icon/copy/status gaps and 2px title/identifier gap. Parent
+lists retain their 8px gap. Avatar and warning Badge remain registered children;
+the row owns its native link and focus outline. Saved-address and active-UPI
+profiles preserve their existing destination and pending-state behavior.
+
+Canonical specimens cover pending card, pending UPI, active UPI and saved-address
+card. Syntax/catalog checks and 41 existing source tests pass. Visual review
+remains with the user.
+
+Welcome benefits container (6 October 2026): the UPI, card and monthly-limit items
+share a rounded outlined list, using the existing border, surface and radius tokens
+and a 16px inset. The What you get heading remains outside; child Avatar geometry
+and 12px row gaps are unchanged. Source review only; visual review remains manual.

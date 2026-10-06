@@ -6,9 +6,10 @@ visible, and preserve the static version so any experiment can be reversed.
 
 **Working example:** [Arun invites Kavya](http://localhost:8020/app/index.html#scene-kavya-invite-flow).
 It demonstrates Add → member details → Next → payment methods → Send Invite →
-confirmation → Members. This is the only flow with scripted touch playback today.
+confirmation → Members. Creation, children’s invitations, Neha’s WhatsApp joining
+and her payment request also have scripted playback; see the checklist below.
 
-The other flow plans below are implementation briefs, not claims that those
+Unimplemented flow plans below are implementation briefs, not claims that those
 demonstrations already work. This document does not enable or change any flows.
 
 ## Start with one flow
@@ -71,9 +72,10 @@ the current story intentionally omits.
 
 ## Current implementation versus extensions
 
-The current renderer accepts `presentation:'loop'` for a grouped sequence, but
-scripted execution is specifically dispatched when `playback:'invite'` is set.
-The executor's action and reset lists are currently keyed to Kavya's scene IDs.
+The renderer accepts `presentation:'loop'` for a grouped sequence and starts the
+executor when its `playback` flag is set. Current flows use `playback:'scripted'`
+with choreography keyed by flow ID + scene ID in `FLOWS`; Kavya retains the
+legacy `playback:'invite'` and scene-keyed fallback.
 
 **Setting a new playback name alone will not implement another flow.** Extend
 the dispatcher and action definitions deliberately. Do not reuse `'invite'`
@@ -230,7 +232,7 @@ a working operation.
 
 ## Flow checklist
 
-The current story defines eleven flow groups, including the hidden tag branch.
+The current story defines flow groups including the hidden tag branch.
 Check off a flow only when its source validation is complete; record visual review
 separately. These are convenient units of work, not a requirement to enable them
 all at once.
@@ -241,8 +243,8 @@ all at once.
 | Set up the family Hub | Implemented; source tests pass | Browser-checked by agent (full loop, reset) | [Creation](#2-create-the-family-hub) |
 | Arun invites Kavya | Implemented; source tests pass | Pending | [Co-manager invitation](#3-arun-invites-kavya) |
 | Kavya finishes her card setup | Not implemented | Pending | [Card setup](#4-kavya-finishes-her-card-setup) |
-| Arun invites the children | Scripted four-screen loop | Source checks pass; visual review pending | [Children](#5-arun-invites-the-children) |
-| The invite arrives on WhatsApp | Not implemented | Pending | [Invitation arrival](#6-the-invite-arrives-on-whatsapp) |
+| Arun invites the children | Scripted five-screen loop | Source checks pass; visual review pending | [Children](#5-arun-invites-the-children) |
+| Neha joins from a WhatsApp invite | Implemented seven-screen loop; source tests pass | Pending with user | [WhatsApp joining](#6-the-invite-arrives-on-whatsapp) |
 | Neha requests to pay | Scripted three-screen loop | Source checks pass; visual review pending | [Request](#7-neha-asks-to-pay) |
 | Arun approves | Not implemented | Pending | [Approval](#8-arun-approves) |
 | Neha's payment goes through | Not implemented | Pending | [Completion](#9-nehas-payment-goes-through) |
@@ -346,16 +348,39 @@ correct slider bounds and preservation of the editor's proposed designation.
 
 **Flow:** `whatsapp-invite-flow` · [Preview](http://localhost:8020/app/index.html#scene-whatsapp-invite-flow)
 
-**Sequence:** `invite-notification` → `invitation`.
+**Sequence:** `invite-notification` → `invitation` → `play-store` →
+`hub-welcome` → `verify-mobile` → `hub-joined` → `hub-dashboard?state=joined&member=neha`.
 
-Hold Neha's invitation notification, then show the existing WhatsApp invitation.
-Demonstrate opening the notification only if the fixture has a real target. Keep
-the sender, inviter and Hub identity consistent. The current story ends at the
-invitation; do not navigate the iframe outside the story to fabricate registration
-or an additional joined screen.
+**Implemented (6 October 2026).** The current story already includes the full
+new-user sequence. `whatsapp-invite-flow` uses `presentation:'loop',
+playback:'scripted'`; its queue is keyed by flow and scene in `FLOWS`.
 
-**Recipes:** E, F. **Review focus:** readable notification timing and the proposed
-invitation designation. The separate new-user route remains outside this story.
+Hold Neha’s WhatsApp notification, visually tap its real notification link,
+then hold the chat and visually tap its existing invitation preview. On the
+store, visually press Install, show discrete 0/35/75/100% progress, then Open.
+The locked store exposes `#install.setPlaybackState(state, value)` solely for
+the editorial executor. Its native install timer is blocked in locked embeds;
+standalone Install still uses its normal 1.6-second timer and Open destination.
+
+Hold the welcome with Arun, the family and ₹5,000 limit. Reveal and check the
+existing terms checkbox through its handler, then visually press Accept invite.
+Verification starts empty, fills the fictional six-digit code in one SMS-autofill
+update, holds it, then visually presses Verify and join. Hide the dot and play
+and hold the existing joined-success indicator, visually press Go to Hub, then
+hold Neha’s first-visit member dashboard for 4.2 seconds before looping. No real link
+clicks, form submission, account creation, SMS or store installation occurs.
+
+Reset: store returns to Install and zero child scroll; welcome unchecks terms
+and resets child scroll; verification clears the code and resets child scroll.
+The common queue owns all waits, pause/resume, late loading and step restart.
+**Restore:** set `presentation:'static'` or remove its presentation/playback flags.
+The original sequence and prototype routes remain intact. `dev=true` exposes
+View all screens with the existing horizontal screen overlay.
+
+**Recipes:** A, B, E, F. **Validation:** syntax and story/playback/button-feedback
+source tests pass, including paused install progress, full loop/reset, terms,
+SMS autofill, native-timer suppression and standalone installation preservation.
+Browser, keyboard and visual review remain with the user.
 
 ### 7. Neha asks to pay
 

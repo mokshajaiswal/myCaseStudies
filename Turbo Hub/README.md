@@ -42,11 +42,13 @@ After the blue rounded hero using `assets/bg.webp`, the page renders these areas
 16. “What we learned from other products”: a taped competitive-research collage with draggable images and unboxed product-to-Turbo-Hub comparisons.
 17. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
 18. The former product-rule path is removed.
-19. “Designing the core flows” follows the four sketches with a fictional Sharma-family story and live prototype previews. Arun's invitation to Kavya has reversible single-phone touch playback with a clickable vertical step list and per-screen timer fills beside the phone; the remaining groups retain their existing presentation. Use [FLOW-PLAYBACK-PLAYBOOK.md](FLOW-PLAYBACK-PLAYBOOK.md) to implement and review the other flows one at a time.
+19. “Designing the core flows” follows the four sketches with a fictional Sharma-family story and live prototype previews. Hub creation, Arun’s invitations to Kavya and the children, Neha’s WhatsApp joining sequence and her payment request use reversible single-phone touch playback with a clickable vertical step list and per-screen timer fills beside the phone; other groups retain their existing presentation. Use [FLOW-PLAYBACK-PLAYBOOK.md](FLOW-PLAYBACK-PLAYBOOK.md) to implement and review the other flows one at a time.
 
 The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 
 All page content is defined in the `caseStudy` object near the top of `script.js` and rendered by `renderCaseStudy()`.
+
+With `?dev=true`, each autoplay family-flow preview includes **View all screens** beside its playback controls. It opens an unboxed overlay on the case study, showing that flow’s unchanged phone fixtures side by side without flow playback or repeated narrative text. The strip scrolls horizontally when needed. Every preview has an **Open full page** button underneath for editing and inspecting its standalone prototype. Close, Escape or backdrop dismissal returns to the same case-study position. The overlay reads the same ordered sequence from `flow-story-data.js`, so newly autoplayed flows get this access automatically.
 
 ## File map
 
@@ -193,3 +195,19 @@ The existing phone-shell asset frames a fixed 390 × 844 screen. Smaller browser
 prototypes/add-member/index.html implements the source details and payment-method screens. Existing DS controls are reused; four new form components are registered with shared-renderer specimens. Validation and back navigation work. Send Invite creates a pending member in this browser session only; nothing is sent externally. Shared phone-preview files retain the same 390 × 844 viewport across both screens.
 
 Member payment review lives at prototypes/payment-review/index.html. Payment account and Swipe action are registered with shared-renderer examples. The amount configuration extends the existing Text field. Only local demo request feedback is implemented; no external payment occurs.
+
+## Hub welcome layout
+
+`prototypes/hub-welcome/` retains the earlier family artwork, inviter, Hub name and overlapping member portraits above the What you get list. Terms and Accept invite follow the benefits within the content surface. Consent validation and the route to number verification are unchanged. Review at http://127.0.0.1:8020/app/prototypes/hub-welcome/index.html; browser review remains with the user.
+
+## Play Store prototype
+
+`prototypes/play-store/` uses the user-supplied PayZapp Google Play listing for the app icon, title, developer and metadata. Secondary screenshots and data-safety content use static neutral skeletons. The screen retains its external-store white/green styling and local Install → Open → Hub welcome flow. The official icon is stored locally with provenance in `prototypes/play-store/assets/README.md`.
+
+## Joining ends inside the Hub
+
+The WhatsApp joining flow continues from the brief success confirmation into `prototypes/hub-dashboard/index.html?state=joined&member=neha`. This first-visit member fixture shows Neha’s monthly allowance, Card and UPI using the same payment-method rows as Kavya’s profile, with identifiers, pending badges and chevrons. The success screen’s Go to Hub action follows the same route.
+
+The number-verification screen uses the registered six-box Verification code control. Digits advance as they are entered; backspace and arrows support correction, and paste/SMS autofill populate all boxes. The standalone screen starts empty; locked story playback fills its fictional code through the same aggregate input.
+
+The welcome screen’s What you get list uses one rounded outlined container with the existing grouped-list tokens and 16px inset. Terms and Accept invite follow below it.

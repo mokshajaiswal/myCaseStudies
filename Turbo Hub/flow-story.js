@@ -7,8 +7,32 @@
     const [path,query='']=scene.route.split('?'),url=new URL('prototypes/'+path+'/index.html',document.baseURI);
     url.search=query;return url;
   }
-  function devLink(scene){
-    const link=node('a','family-story__dev-open','Open full page ↗');link.href=pageURL(scene).href;link.target='_blank';link.rel='noopener';return link;
+  function devLink(scene,button=false){
+    const link=node('a',button?'family-story__loop-toggle family-story__dev-open family-story__dev-open--button':'family-story__dev-open','Open full page ↗');link.href=pageURL(scene).href;link.target='_blank';link.rel='noopener';return link;
+  }
+  function flowScreensButton(scene){
+    const button=node('button','family-story__loop-toggle family-story__dev-screens','View all screens');button.type='button';
+    button.setAttribute('aria-label','View all screens for '+scene.title);button.setAttribute('aria-haspopup','dialog');
+    button.setAttribute('aria-controls','flow-screens-dialog-'+scene.id);
+    let dialog;
+    button.addEventListener('click',()=>{
+      if(!dialog){
+        dialog=node('dialog','family-story__screens-dialog');dialog.id='flow-screens-dialog-'+scene.id;
+        dialog.setAttribute('aria-label',scene.title+' — All screens');
+        const header=node('header','family-story__screens-header'),close=node('button','family-story__loop-toggle','Close');close.type='button';close.autofocus=true;close.setAttribute('aria-label','Close flow screens');
+        header.append(close);
+        dialog.append(header,render({flowId:scene.id}));document.body.append(dialog);
+        close.addEventListener('click',()=>dialog.close());
+        dialog.addEventListener('close',()=>{document.body.classList.remove('has-open-dialog');button.focus();});
+        dialog.addEventListener('click',event=>{
+          if(event.target!==dialog)return;
+          const rect=dialog.getBoundingClientRect();
+          if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)dialog.close();
+        });
+      }
+      dialog.showModal();document.body.classList.add('has-open-dialog');
+    });
+    return button;
   }
   function sceneURL(scene){
     const [path,query='']=scene.route.split('?');
@@ -95,8 +119,11 @@
     controls.append(progress,caption,toggle);show(0);sync();
     return controls;
   }
-  function render(){
-    const story=root.TurboFamilyStory,section=node('div','family-story');const dev=/[?&]dev=true(&|$)/.test(root.location?.search||'');const beats=[];
+  function render({flowId}={}){
+    const story=root.TurboFamilyStory,section=node('div','family-story');const dev=Boolean(flowId)||/[?&]dev=true(&|$)/.test(root.location?.search||'');const beats=[];
+    if(flowId)section.classList.add('family-story--screen-list');
+    if(flowId&&!story.chapters.some(chapter=>!chapter.hidden&&chapter.scenes.some(scene=>scene.id===flowId&&scene.sequence))){section.append(node('p','','Flow not found. Return to the case study and choose View all screens beside a preview.'));return section;}
+    if(!flowId){
     const intro=node('div','family-story__intro');
     intro.append(node('h3','family-story__heading','Meet the Sharmas'),node('p','family-story__lead','To walk through the flows, I’ll follow one fictional family. Arun and Kavya want to support their children’s spending with clear boundaries; Neha and Rohan want to pay on their own. Each section below picks up a moment in their journey, with the screens and the reasoning behind them.'));
     const home=node('img','family-story__home');home.src=asset+'family.png';home.alt='The Sharma family, Arun, Kavya, Neha and Rohan, together at home, each with a phone.';home.width=1536;home.height=1024;home.loading='lazy';
@@ -134,18 +161,19 @@
     }
     
     section.append(intro);
+    }
     const mounts=[];let count=0;
     for(const chapter of story.chapters.filter(c=>!c.hidden)){
-      const chapterEl=node('section','family-story__chapter');chapterEl.id='story-'+chapter.id;chapterEl.setAttribute(chapter.headerless?'aria-label':'aria-labelledby',chapter.headerless?chapter.title:chapterEl.id+'-title');
+      const chapterEl=node('section','family-story__chapter');chapterEl.id=(flowId?'flow-screens-'+flowId+'-story-':'story-')+chapter.id;chapterEl.setAttribute(chapter.headerless||flowId?'aria-label':'aria-labelledby',chapter.headerless||flowId?chapter.title:chapterEl.id+'-title');
       const header=node('header','family-story__chapter-header');
       const title=node('h3','family-story__heading',chapter.title);title.id=chapterEl.id+'-title';
       header.append(title,node('p','family-story__lead',chapter.intro));
       // headerless:true keeps a chapter's sections but drops its heading and intro (the sections follow on directly).
-      if(chapter.headerless)chapterEl.classList.add('family-story__chapter--headerless');else chapterEl.append(header);
-      for(const scene of chapter.scenes){
-        const actor=story.cast[scene.actor],article=node('article','family-story__scene'+(count++%2?' family-story__scene--reverse':''));article.id='scene-'+scene.id;
+      if(chapter.headerless||flowId)chapterEl.classList.add('family-story__chapter--headerless');else chapterEl.append(header);
+      for(const scene of chapter.scenes.filter(scene=>!flowId||scene.id===flowId)){
+        const actor=story.cast[scene.actor],article=node('article','family-story__scene'+(count++%2?' family-story__scene--reverse':''));article.id=(flowId?'flow-screens-scene-':'scene-')+scene.id;
         const copy=node('div','family-story__copy');
-        const heading=node('h4','family-story__scene-title',scene.title);heading.id=article.id+'-title';article.setAttribute('aria-labelledby',heading.id);
+        const heading=node('h4','family-story__scene-title',scene.title);heading.id=article.id+'-title';article.setAttribute(flowId?'aria-label':'aria-labelledby',flowId?scene.title:heading.id);
         copy.append(heading,node('p','',scene.copy));
         if(scene.proposed)copy.append(node('p','family-story__designation','Proposed prototype behavior'));
         const figure=node('div','family-story__figure');
@@ -158,15 +186,22 @@
             const fixture=story.scenes.find(item=>item.id===screen.id),slot=node('div','family-story__phone-slot');slot.dataset.scene=fixture.id;
             const loading=node('span','family-story__loading','Screen preview');loading.setAttribute('aria-hidden','true');slot.append(loading);
             if(!fixture.interactive){const gesture=node('div','family-story__gesture-surface');gesture.setAttribute('aria-hidden','true');slot.append(gesture);}
-            const preview=node('figure','family-story__preview');preview.append(slot,node('figcaption','',screen.title),node('p','family-story__screen-summary',screen.copy));rail.append(preview);previews.push(preview);mounts.push({slot,scene:fixture});
-            if(dev)preview.append(devLink(fixture));
+            const preview=node('figure','family-story__preview');preview.append(slot);
+            if(flowId)preview.setAttribute('aria-label',screen.title);
+            else preview.append(node('figcaption','',screen.title),node('p','family-story__screen-summary',screen.copy));
+            rail.append(preview);previews.push(preview);mounts.push({slot,scene:fixture});
+            if(dev)preview.append(devLink(fixture,Boolean(flowId)));
           }
           rail.classList.add('family-story__screen-rail--n'+previews.length);
           // Four or more screens snake through two columns: row 1 left→right, down, row 2 right→left, down, and so on.
           // Each screen records its cell and the direction of the chevron that leads into it.
-          if(scene.presentation==='loop'){
+          if(scene.presentation==='loop'&&!flowId){
             stage.classList.add('family-story__stage--loop');
-            stage.append(sequenceLoop(rail,previews,scene),rail);
+            const controls=sequenceLoop(rail,previews,scene);
+            if(dev)controls.append(flowScreensButton(scene));
+            stage.append(controls,rail);
+          }else if(flowId){
+            rail.classList.add('family-story__screen-rail--list');stage.append(rail);
           }else{
             if(previews.length>=4){rail.classList.add('family-story__screen-rail--snake');previews.forEach((preview,i)=>{const row=Math.floor(i/2),pos=i%2,reverse=row%2===1;preview.style.gridRow=String(row+1);preview.style.gridColumn=String(reverse?2-pos:pos+1);preview.dataset.arrow=i===0?'none':pos===0?'down':reverse?'left':'right';});}if(scene.connected===false)rail.classList.add('family-story__screen-rail--loose');
             stage.append(rail);
@@ -181,7 +216,7 @@
         if(!scene.sequence){const art=node('img','family-story__character');art.src=asset+(scene.artwork||actor.image);art.alt='';art.width=1024;art.height=1536;art.loading='lazy';art.decoding='async';const artwork=node('figure','family-story__artwork');artwork.append(art,node('figcaption','',actor.name+' · '+actor.role));stage.append(artwork);}
         figure.append(stage);
         let pair;
-        if(scene.designRationale){
+        if(scene.designRationale&&!flowId){
           pair=node('div','family-story__narrative-pair');
           if(!scene.actionBubble)pair.classList.add('family-story__narrative-pair--single');
           if(scene.actionBubble){
@@ -194,15 +229,16 @@
           rationale.append(rationaleHeader,node('p','family-story__rationale-copy',scene.designRationale.copy));pair.append(rationale);
         }
         // Story beat, then the screens, then the designer's boxed note on why.
-        article.append(copy,figure);
+        if(!flowId)article.append(copy);
+        article.append(figure);
         if(pair)article.append(pair);
         chapterEl.append(article);beats.push({article,actor:scene.actor});
       }
-      section.append(chapterEl);
+      if(!flowId||chapterEl.children.length)section.append(chapterEl);
     }
     // Page backdrop: a faded portrait of whoever the section in view is about; hidden outside the story.
     const body=root.document?.body;
-    if(body&&'IntersectionObserver' in root){
+    if(!flowId&&body&&'IntersectionObserver' in root){
       const backdrop=node('div','family-story__backdrop');backdrop.setAttribute('aria-hidden','true');
       const portraits={};
       for(const [key,person] of Object.entries(story.cast)){const img=node('img');img.src=asset+person.image;img.alt='';img.decoding='async';portraits[key]=img;backdrop.append(img);}
