@@ -8,7 +8,7 @@ if(kind==='action'){
 }else{
  add('summary','Summary',TurboUI.accountCard({name:'UPI Accounts',detail:'7667376343@pz',icon:'bank'}));
  add('wallet','Wallet',TurboUI.accountCard({name:'PayZapp Wallet',detail:'₹0',variant:'wallet',onAction}));
- add('linked','Linked cards',TurboUI.accountCard({name:'Linked Cards',detail:'7 cards linked',icon:'card',variant:'linked',cards:[{name:'ICICI',detail:'8179',initial:'i'},{name:'PNB',detail:'4122'}],onAction}));
+ add('linked','Linked cards',TurboUI.accountCard({name:'Linked Cards',detail:'7 cards linked',icon:'card',variant:'linked',cards:[{name:'ICICI',detail:'8179',logo:'../../assets/bank-logos/icici.png'},{name:'PNB',detail:'4122',logo:'../../assets/bank-logos/pnb.ico'},{name:'Bank of Baroda',logo:'../../assets/bank-logos/bank-of-baroda.png'}],onAction}));
  add('minimal','Without detail',TurboUI.accountCard({name:'UPI Accounts',icon:'bank'}));
  add('empty','No linked cards',TurboUI.accountCard({name:'Linked Cards',detail:'No cards linked',icon:'card',variant:'linked',onAction}));
  add('long','Long account name',TurboUI.accountCard({name:'Family household spending account',detail:'family.household@bank',icon:'bank'}));

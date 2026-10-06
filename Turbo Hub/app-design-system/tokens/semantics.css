@@ -87,3 +87,33 @@
 :root{--color-danger:var(--th-red);--color-danger-soft:var(--th-red-light)}
 /* Attention, not error: something the person should still do. */
 :root{--color-warning:#8a5a00;--color-warning-soft:#fff3d6}
+
+/* Glossy Turbo Hub introduction: shared chrome hue, stationary surface reflection. */
+:root {
+ --hub-promo-surface:var(--chrome-backdrop-base);
+ --hub-promo-reflection:linear-gradient(160deg,rgba(255,255,255,.24) 0%,rgba(255,255,255,.08) 43%,transparent 44%);
+ --hub-promo-sheen:inset 0 1px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(21,40,107,.18);
+ --hub-promo-pressed-sheen:inset 0 2px 8px rgba(21,40,107,.2);
+}
+
+:root { --hub-promo-title-size:var(--font-size-22); }
+:root { --hub-promo-intro-weight:var(--font-weight-light); --hub-promo-description-size:var(--font-size-13); }
+
+:root {
+ --hub-promo-v2-surface:linear-gradient(145deg,#fafdff 10%,#c7ddf7 100%);
+ --hub-promo-v2-border-base:#b5d5f2;
+ --hub-promo-v2-border-glow:#6bb7ee;
+}
+
+:root {
+ --hub-promo-v2-border-width:2px;
+ --hub-promo-v2-title-color:#202020;
+ --hub-promo-v2-intro-color:#6c6c6c;
+ --hub-promo-v2-description-color:#444444;
+ --hub-promo-v2-title-weight:var(--type-item-title-weight);
+ --hub-promo-v2-description-weight:var(--font-weight-light);
+}
+
+:root { --hub-promo-intro-gap:4px; --hub-promo-description-gap:2px; }
+
+:root { --hub-promo-v2-border:linear-gradient(110deg,var(--hub-promo-v2-border-base) 0%,var(--hub-promo-v2-border-base) 40%,var(--hub-promo-v2-border-glow) 47%,var(--th-white) 50%,var(--hub-promo-v2-border-glow) 53%,var(--hub-promo-v2-border-base) 60%,var(--hub-promo-v2-border-base) 100%); }

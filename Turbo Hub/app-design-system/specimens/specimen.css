@@ -10,3 +10,5 @@ body{margin:0;padding:20px;background:#f5f8fd;color:var(--color-text);font:16px/
 
 /* Single digit configuration retains its intended parent allocation. */
 .example--digit { max-width:84px; }
+.th-hub-promo[data-preview-state=active] { box-shadow:var(--hub-promo-pressed-sheen); }
+.th-hub-promo[data-preview-state=focus-visible] { outline:3px solid var(--color-action); outline-offset:4px; }

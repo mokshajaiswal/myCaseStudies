@@ -1,3 +1,2 @@
 .accounts-content { padding:var(--th-space-6); background:var(--th-white); display:flex; flex-direction:column; gap:var(--th-space-6); }
 .accounts-screen .home-indicator { --home-surface:var(--th-white); }
-.accounts-content > .th-button { min-height:96px; }

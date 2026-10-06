@@ -1,0 +1,89 @@
+.user-voice-stack {
+  --interview-card-inset: var(--space-6, 24px);
+  --interview-card-gap: var(--space-4, 16px);
+  position: relative;
+  min-width: 0;
+  display: grid;
+  perspective: 1000px;
+  padding-bottom: var(--quote-stack-clearance);
+}
+
+.user-voice-card {
+  position: relative;
+  grid-area: 1 / 1;
+  display: flex;
+  width: 100%;
+  min-height: calc(var(--space-24) * 2);
+  padding: var(--interview-card-inset);
+  gap: var(--interview-card-gap);
+  overflow: hidden;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border:0;
+  border-radius: var(--radius-medium);
+  outline-offset: 4px;
+  background: var(--voice-background);
+  color: var(--heading-ink);
+  cursor: pointer;
+  font: inherit;
+  text-align: center;
+  transform: translate(var(--voice-x), var(--voice-y)) rotate(var(--voice-rotation)) scale(var(--voice-scale));
+  transform-origin: 50% 85%;
+  opacity: var(--voice-opacity);
+  transition:none;
+}
+
+.user-voice-card:disabled {
+  cursor: default;
+  pointer-events: none;
+}
+
+.user-voice-quote {
+  max-width: 28rem;
+  text-wrap: balance;
+
+  font: var(--font-body-copy);
+  letter-spacing: var(--tracking-body);
+}
+
+.user-voice-source {
+  color: var(--ink-soft);
+  text-transform: none;
+
+  font: var(--font-utility);
+  letter-spacing: var(--tracking-label);
+}
+
+.user-voice-accent {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: var(--voice-accent);
+}
+
+.user-voice-card[hidden] { display:none; }
+.user-voice-card { backface-visibility:hidden; }
+.user-voice-footer { display:flex; align-items:center; justify-content:center; gap:var(--interview-card-gap); width:100%; }
+.user-voice-card:not(:disabled):focus-visible { outline:2px solid var(--voice-accent); outline-offset:-4px; }
+.user-voice-card {
+  --interview-fold:32px;
+  clip-path:polygon(0 0, calc(100% - var(--interview-fold)) 0, 100% var(--interview-fold), 100% 100%, 0 100%);
+}
+.user-voice-fold { display:block; position:absolute; top:.5px; right:.5px; width:var(--interview-fold); height:var(--interview-fold); overflow:visible; pointer-events:none; }
+.user-voice-fold__shadow { fill:color-mix(in srgb, var(--voice-accent) 20%, var(--voice-background)); filter:blur(1px); }
+.user-voice-fold__underside { fill:color-mix(in srgb, var(--voice-accent) 9%, white); }
+.user-voice-fold__curl { fill:none; stroke:white; stroke-width:1.5; opacity:.75; }
+.user-voice-outline { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; z-index:2; }
+.user-voice-outline path { fill:none; stroke:var(--voice-accent); stroke-width:1; vector-effect:non-scaling-stroke; stroke-linejoin:round; stroke-linecap:round; }
+
+.user-voice-stack.is-turning .user-voice-card { transition:none; }
+.user-voice-status { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+@media (hover:hover) and (pointer:fine) {
+  .user-voice-stack.is-hovered .user-voice-card:not(:disabled) .user-voice-outline path { stroke-width:1.5; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .user-voice-card { transition:none; }
+}

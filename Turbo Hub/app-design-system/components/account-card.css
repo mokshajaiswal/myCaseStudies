@@ -21,3 +21,6 @@
 .th-account-action:disabled { opacity:.45; cursor:not-allowed; }
 
 .th-account-card__balance { overflow-wrap:anywhere; }
+
+.th-account-cards__bank--logo { background:var(--color-surface); overflow:hidden; border-radius:50%; flex:none; }
+.th-account-cards__logo { display:block; width:24px; height:24px; object-fit:contain; border-radius:50%; }

@@ -381,7 +381,7 @@
         },
         {
           "id": "contact-medium",
-          "name": "Editable contact · medium",
+          "name": "Editable contact \u00b7 medium",
           "selector": "#contact-medium"
         },
         {
@@ -1239,17 +1239,17 @@
         },
         {
           "id": "placeholder-filled",
-          "name": "Placeholder · filled",
+          "name": "Placeholder \u00b7 filled",
           "selector": "#placeholder-filled"
         },
         {
           "id": "placeholder-error",
-          "name": "Placeholder · error",
+          "name": "Placeholder \u00b7 error",
           "selector": "#placeholder-error"
         },
         {
           "id": "placeholder-disabled",
-          "name": "Placeholder · disabled",
+          "name": "Placeholder \u00b7 disabled",
           "selector": "#placeholder-disabled"
         },
         {
@@ -1259,12 +1259,12 @@
         },
         {
           "id": "digit-filled",
-          "name": "Digit · filled",
+          "name": "Digit \u00b7 filled",
           "selector": "#digit-filled"
         },
         {
           "id": "digit-disabled",
-          "name": "Digit · disabled",
+          "name": "Digit \u00b7 disabled",
           "selector": "#digit-disabled"
         }
       ],
@@ -1645,7 +1645,7 @@
           }
         ],
         "spacing": [],
-        "behavior": "Native range control, 0–100. Release at 95 or higher emits onComplete once and disables the control. Incomplete gestures reset. Keyboard Arrow/End keys are supported. Caller validates and owns the resulting flow. No real payment operation.",
+        "behavior": "Native range control, 0\u2013100. Release at 95 or higher emits onComplete once and disables the control. Incomplete gestures reset. Keyboard Arrow/End keys are supported. Caller validates and owns the resulting flow. No real payment operation.",
         "ownership": "Component owns internal geometry; screen owns external layout.",
         "interactionOwnership": "Owns range semantics and completion threshold; caller owns effect."
       },
@@ -1890,7 +1890,7 @@
         "expired"
       ],
       "props": {
-        "remaining": "Seconds remaining, clamped to 0–total; default 900.",
+        "remaining": "Seconds remaining, clamped to 0\u2013total; default 900.",
         "total": "Positive duration in seconds; default 900.",
         "label": "Caption; default Request will expire after this time.",
         "variant": "default (time, track, caption) or inline (prefix and time on one line above the track; no caption).",
@@ -2212,7 +2212,7 @@
         "href": "Required navigation destination.",
         "graphic": "Tile: true (default) for the family home artwork, or a registered icon name such as briefcase or buildings for other Hubs.",
         "spent": "Optional amount spent this month across the Hub.",
-        "limit": "Optional Hub monthly limit; when set, '₹spent / ₹limit' sits at the right of the name, above a full-width bar.",
+        "limit": "Optional Hub monthly limit; when set, '\u20b9spent / \u20b9limit' sits at the right of the name, above a full-width bar.",
         "accent": "Optional Hub colour: violet, teal or amber. Tints the card (corner wash and border), the tile (white surface, accent icon) and the spend bar; omit for the neutral card."
       },
       "anatomy": {
@@ -2407,6 +2407,10 @@
           {
             "name": "Linked cards",
             "selector": ".th-account-cards"
+          },
+          {
+            "name": "Bank logo",
+            "selector": ".th-account-cards__logo"
           }
         ],
         "spacing": [
@@ -2463,7 +2467,7 @@
         "interactionOwnership": "No parent interaction. Add money and Add card are turbo-account-action children; caller owns callbacks and disabled input.",
         "behavior": "Fluid width, 90px minimum summary, 56px decorative icon. Long names wrap; linked pills scroll horizontally in a keyboard-focusable strip. Summary/wallet/linked variants; optional detail and empty cards supported."
       },
-      "usage": "TurboUI.accountCard({name,detail,icon,variant,cards,actionLabel,disabled,onAction}). variant defaults to summary; wallet adds a labeled action; linked adds an icon action and bank pills. Content and disabled state are caller supplied. onAction is invoked by the child; no account operation is performed.",
+      "usage": "TurboUI.accountCard({name,detail,icon,variant,cards,actionLabel,disabled,onAction}). variant defaults to summary; wallet adds a labeled action; linked adds an icon action and bank pills. Content and disabled state are caller supplied. onAction is invoked by the child; no account operation is performed. Each cards item accepts {name,detail,initial,logo}; logo is an optional image URL, with initials restored if loading fails.",
       "variants": [
         "summary",
         "wallet",
@@ -2916,22 +2920,22 @@
       "previewConfigurations": [
         {
           "id": "card-pending",
-          "name": "Card · pending",
+          "name": "Card \u00b7 pending",
           "selector": "#card-pending"
         },
         {
           "id": "upi-pending",
-          "name": "UPI · pending",
+          "name": "UPI \u00b7 pending",
           "selector": "#upi-pending"
         },
         {
           "id": "upi-active",
-          "name": "UPI · active",
+          "name": "UPI \u00b7 active",
           "selector": "#upi-active"
         },
         {
           "id": "card-saved",
-          "name": "Card · address saved",
+          "name": "Card \u00b7 address saved",
           "selector": "#card-saved"
         }
       ],
@@ -2989,9 +2993,227 @@
         ],
         "ownership": "Payment method owns row geometry, copy, native anchor semantics and chevron. Avatar and Badge own their unchanged appearance. Parent owns list gap and placement.",
         "interactionOwnership": "The row is the sole interactive owner when href is supplied; Avatar, Badge and chevron are noninteractive children. Informational rows have no activation. Caller supplies destination and pending state.",
-        "behavior": "Plain fluid row extracted from Kavya’s profile: 8px vertical inset, 12px gaps, 2px title/detail gap. Identifier and title wrap; optional warning Badge precedes a decorative 20px chevron. Native anchor keyboard/focus behavior when linked; informational rows retain the existing profile chevron with no action. No activation or delivery state is inferred."
+        "behavior": "Plain fluid row extracted from Kavya\u2019s profile: 8px vertical inset, 12px gaps, 2px title/detail gap. Identifier and title wrap; optional warning Badge precedes a decorative 20px chevron. Native anchor keyboard/focus behavior when linked; informational rows retain the existing profile chevron with no action. No activation or delivery state is inferred."
       },
-      "usage": "TurboUI.paymentMethod({name,detail,graphic,href,status,label,id}); shared by member profiles and Neha’s first-visit Hub. Canonical fixtures use this renderer without overrides."
+      "usage": "TurboUI.paymentMethod({name,detail,graphic,href,status,label,id}); shared by member profiles and Neha\u2019s first-visit Hub. Canonical fixtures use this renderer without overrides."
+    },
+    {
+      "id": "interview-stack",
+      "name": "Interview card stack",
+      "class": "user-voice-stack",
+      "css": "components/interview-stack.css",
+      "module": "components/interview-stack.js",
+      "preview": "specimens/interview-stack.html",
+      "category": "Case study",
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "turning",
+        "reduced-motion"
+      ],
+      "dependencies": [],
+      "usage": "TurboInterviewStack(voices, {autoplay:true}); caller provides quote, type, accent and background. Only the top card is interactive; click, Enter or Space turns to the next quote. Autoplay is optional and pauses when focused, hovered, hidden or offscreen. Uses the case-study editorial tokens, distinct from mobile product typography.",
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Top card",
+            "selector": ".user-voice-card:not(:disabled)"
+          },
+          {
+            "name": "Quote",
+            "selector": ".user-voice-quote"
+          },
+          {
+            "name": "Footer",
+            "selector": ".user-voice-footer"
+          },
+          {
+            "name": "Curled paper corner",
+            "selector": ".user-voice-fold"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Card inset",
+            "selector": ".user-voice-card",
+            "property": "padding-top",
+            "token": "--interview-card-inset"
+          },
+          {
+            "label": "Quote to footer",
+            "selector": ".user-voice-card",
+            "property": "row-gap",
+            "token": "--interview-card-gap"
+          },
+          {
+            "label": "Footer internal gap",
+            "selector": ".user-voice-footer",
+            "property": "column-gap",
+            "token": "--interview-card-gap"
+          }
+        ],
+        "ownership": "Stack owns card positions, cycling, motion, internal geometry and the card action; parent owns width and surrounding placement.",
+        "behavior": "Persistent folded note shapes. Hover reinforces the front outline without changing card geometry. Activation animates all cards on one 440ms timeline; the front note sweeps sideways and settles behind the deck. Resting positions commit before animation holds release. Repeated clicks during motion are ignored. Reduced motion switches instantly. Manual activation moves focus and announces position; background cards are disabled and aria-hidden. No visible instructions or counter.",
+        "interactionOwnership": "Owns the single card-cycling action. Footer cue and counter are noninteractive parts of that button."
+      }
+    },
+    {
+      "id": "turbo-hub-promo",
+      "name": "Hub introduction",
+      "class": "th-hub-promo",
+      "category": "Accounts",
+      "css": "components/hub-promo.css",
+      "module": "components/hub-promo.js",
+      "preview": "specimens/hub-promo.html",
+      "states": [
+        "active",
+        "focus-visible",
+        "title only",
+        "without introduction",
+        "long content",
+        "reduced motion"
+      ],
+      "usage": "TurboUI.hubPromo({href,intro,title,description,label,variant}). variant defaults to v1 (original glossy blue-violet, artwork right). v2 is a two-tone near-white-to-cool-blue background gradient with neutral black/gray text and lighter weights, artwork left and a moving gradient-border highlight. Both retain the same original wallet asset and copy inputs. One full-card native link; no arrow, hover effect or nested CTA. In v2 only, wallet artwork gently floats 6px on a 4.8-second cycle. A soft reflection sweeps across the gradient border in 2.5 seconds; text stays still. Reduced motion disables both animations.",
+      "previewConfigurations": [
+        {
+          "id": "v1",
+          "name": "Version 1 \u00b7 Glossy",
+          "selector": "#v1",
+          "interactionTarget": "v1"
+        },
+        {
+          "id": "v2",
+          "name": "Version 2 \u00b7 Light",
+          "selector": "#v2",
+          "interactionTarget": "v2"
+        },
+        {
+          "id": "minimal",
+          "name": "Title only",
+          "selector": "#minimal",
+          "interactionTarget": "minimal"
+        },
+        {
+          "id": "without-intro",
+          "name": "Without introduction",
+          "selector": "#without-intro",
+          "interactionTarget": "without-intro"
+        },
+        {
+          "id": "long",
+          "name": "Long content",
+          "selector": "#long",
+          "interactionTarget": "long"
+        }
+      ],
+      "interactions": {
+        "preview": "specimens/hub-promo.html",
+        "targets": [
+          {
+            "id": "v1",
+            "name": "Version 1 \u00b7 Glossy",
+            "owner": "turbo-hub-promo",
+            "states": [
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "v2",
+            "name": "Version 2 \u00b7 Light",
+            "owner": "turbo-hub-promo",
+            "states": [
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "minimal",
+            "name": "Title only",
+            "owner": "turbo-hub-promo",
+            "states": [
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "without-intro",
+            "name": "Without introduction",
+            "owner": "turbo-hub-promo",
+            "states": [
+              "active",
+              "focus-visible"
+            ]
+          },
+          {
+            "id": "long",
+            "name": "Long content",
+            "owner": "turbo-hub-promo",
+            "states": [
+              "active",
+              "focus-visible"
+            ]
+          }
+        ]
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Link",
+            "selector": ".th-hub-promo"
+          },
+          {
+            "name": "Introducing",
+            "selector": ".th-hub-promo__intro"
+          },
+          {
+            "name": "Title",
+            "selector": ".th-hub-promo__title"
+          },
+          {
+            "name": "Description",
+            "selector": ".th-hub-promo__description"
+          },
+          {
+            "name": "Wallet artwork",
+            "selector": ".th-hub-promo__art"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Card inset",
+            "token": "--th-space-5",
+            "selector": ".th-hub-promo",
+            "property": "padding-left"
+          },
+          {
+            "label": "Copy to artwork",
+            "token": "--th-space-3",
+            "selector": ".th-hub-promo",
+            "property": "column-gap"
+          },
+          {
+            "label": "Introducing to title",
+            "token": "--hub-promo-intro-gap",
+            "selector": ".th-hub-promo__intro",
+            "property": "margin-bottom"
+          },
+          {
+            "label": "Title to description",
+            "token": "--hub-promo-description-gap",
+            "selector": ".th-hub-promo__description",
+            "property": "margin-top"
+          }
+        ],
+        "ownership": "Owns glossy surface, copy hierarchy, wallet artwork and internal spacing. Parent owns external placement and gaps.",
+        "interactionOwnership": "One native anchor owns navigation, touch active feedback and keyboard focus-visible. Caller supplies href and accessible label. Decorative shimmer has no input handling; no arrow or nested controls.",
+        "behavior": "V2 uses a two-tone near-white/cool-blue surface, 2px blue gradient border, wallet artwork on the left and neutral text. A soft light reflection sweeps across the border every 2.5 seconds; there is no travelling outline or rotating segment. Wallet floats 6px over 4.8 seconds. Text and layout stay still. Reduced motion disables both animations. Shared fluid geometry and optional content support remain unchanged."
+      },
+      "variants": [
+        "v1",
+        "v2"
+      ]
     }
   ],
   "compositions": [],
@@ -3014,7 +3236,7 @@
         "Page owns its content insets; preserve registered component internals."
       ],
       "route": "Screen route owns navigation.",
-      "behavior": "Native registered controls own keyboard behavior; scroll remains inside .phone-content. Preview scales a fixed 390 × 844 viewport.",
+      "behavior": "Native registered controls own keyboard behavior; scroll remains inside .phone-content. Preview scales a fixed 390 \u00d7 844 viewport.",
       "examples": [
         "Hub Details",
         "Add Member details and payment methods"
@@ -3051,234 +3273,234 @@
   "screens": [
     {
       "id": "hub-dashboard",
-      "name": "Hub Details · Spends",
+      "name": "Hub Details \u00b7 Spends",
       "preview": "../app/prototypes/hub-dashboard/index.html?tab=Spends",
-      "description": "Figma-refined Spends view with centered hub identity, circular limit and transaction list. Fixed 390 × 844 phone viewport; internal scroll and Hub tabs remain available."
+      "description": "Figma-refined Spends view with centered hub identity, circular limit and transaction list. Fixed 390 \u00d7 844 phone viewport; internal scroll and Hub tabs remain available."
     },
     {
       "id": "hub-members",
-      "name": "Hub Details · Members",
+      "name": "Hub Details \u00b7 Members",
       "preview": "../app/prototypes/hub-dashboard/index.html?tab=Members",
       "description": "Figma-refined Members view with joined/pending profile cards, role and relationship tags, member limits and the Add Member route. Reuses the shared Hub page with its Members tab selected."
     },
     {
       "id": "add-member",
-      "name": "Add Member · Details and payment methods",
+      "name": "Add Member \u00b7 Details and payment methods",
       "preview": "../app/prototypes/add-member/index.html",
       "description": "Two defined source steps. Validates details, preserves back-navigation values, and adds a pending invitation to the demo session. No invitation is sent externally."
     },
     {
       "id": "member-payment-methods",
-      "name": "Add Member · Payment methods",
+      "name": "Add Member \u00b7 Payment methods",
       "preview": "../app/prototypes/add-member/index.html?step=payments",
       "description": "Direct view of the existing payment-choice step. Reuses Checkbox choice and Action. Selections persist when returning to details; Send Invite requires valid member details and remains a local demo."
     },
     {
       "id": "invite-sent",
-      "name": "Add Member · Invitation sent",
+      "name": "Add Member \u00b7 Invitation sent",
       "preview": "../app/prototypes/invite-sent/index.html?name=Kavya%20Sharma",
-      "description": "Success outcome after Send Invite: shared green success surface, registered Success indicator, 'Invitation sent to Kavya' with a short note, and a light action sheet with View members (Hub Details · Members)."
+      "description": "Success outcome after Send Invite: shared green success surface, registered Success indicator, 'Invitation sent to Kavya' with a short note, and a light action sheet with View members (Hub Details \u00b7 Members)."
     },
     {
       "id": "payment-review",
-      "name": "Member · Review payment",
+      "name": "Member \u00b7 Review payment",
       "preview": "../app/prototypes/payment-review/index.html",
       "description": "Nykaa payment review with amount, optional message and Hub account. Swipe demonstrates a local approval request; no money or message is sent."
     },
     {
       "id": "request-pending",
-      "name": "Member · Request pending",
+      "name": "Member \u00b7 Request pending",
       "preview": "../app/prototypes/request-pending/index.html"
     },
     {
       "id": "authorization-confirmed",
-      "name": "Manager · Authorization confirmed",
+      "name": "Manager \u00b7 Authorization confirmed",
       "preview": "../app/prototypes/authorization-confirmed/index.html",
       "description": "Manager-side success outcome from Figma 436:65736. Close returns to Hub Spends. A local preview, separate from payment completion."
     },
     {
       "id": "payment-authorize",
-      "name": "Manager · Review and authorize",
+      "name": "Manager \u00b7 Review and authorize",
       "preview": "../app/prototypes/payment-authorize/index.html",
       "description": "Full-blue decision screen: requester, amount, merchant and response countdown centred on the Chrome backdrop; a short light action sheet holds Decline and Swipe to Authorize. Decline and expiry replace the footer with an outcome; Swipe to Authorize opens the confirmation."
     },
     {
       "id": "payment-processing",
-      "name": "Member · Payment processing",
+      "name": "Member \u00b7 Payment processing",
       "preview": "../app/prototypes/payment-processing/index.html"
     },
     {
       "id": "payment-receipt",
-      "name": "Member · Payment receipt",
+      "name": "Member \u00b7 Payment receipt",
       "preview": "../app/prototypes/payment-receipt/index.html"
     },
     {
       "id": "member-profile",
-      "name": "Member · Profile pending action",
+      "name": "Member \u00b7 Profile pending action",
       "preview": "../app/prototypes/member-profile/index.html"
     },
     {
       "id": "delivery-details",
-      "name": "Member · Delivery details",
+      "name": "Member \u00b7 Delivery details",
       "preview": "../app/prototypes/delivery-details/index.html"
     },
     {
       "id": "delivery-confirmed",
-      "name": "Member · Delivery confirmed",
+      "name": "Member \u00b7 Delivery confirmed",
       "preview": "../app/prototypes/delivery-confirmed/index.html",
       "description": "Full-blue success after Delivery details: animated Success indicator, expected delivery date, the saved address on a glass card, and Done back to the profile. Local demo; nothing is ordered."
     },
     {
       "id": "play-store",
-      "name": "Member · Play Store install",
+      "name": "Member \u00b7 Play Store install",
       "preview": "../app/prototypes/play-store/index.html",
       "description": "Simplified external Google Play listing: official PayZapp icon and listing metadata with neutral screenshot/data-safety skeletons. Install shows a short progress, then Open launches the Hub welcome. Nothing is installed."
     },
     {
       "id": "hub-welcome",
-      "name": "Member · Welcome to the Hub",
+      "name": "Member \u00b7 Welcome to the Hub",
       "preview": "../app/prototypes/hub-welcome/index.html",
       "description": "Invite landing screen with family artwork, inviter, overlapping members and What you get (UPI, card and monthly limit), followed by terms and Accept invite."
     },
     {
       "id": "verify-mobile",
-      "name": "Member · Verify your number",
+      "name": "Member \u00b7 Verify your number",
       "preview": "../app/prototypes/verify-mobile/index.html",
       "description": "Six individual numeric OTP boxes, supporting typing, paste and SMS autofill, followed by Verify and join."
     },
     {
       "id": "hub-joined",
-      "name": "Member · Joined",
+      "name": "Member \u00b7 Joined",
       "preview": "../app/prototypes/hub-joined/index.html",
-      "description": "Full-blue success with the animated Success indicator, the two remaining setup steps on a glass card, and a white Go to Hub action opening Neha’s member dashboard."
+      "description": "Full-blue success with the animated Success indicator, the two remaining setup steps on a glass card, and a white Go to Hub action opening Neha\u2019s member dashboard."
     },
     {
       "id": "neha-profile",
-      "name": "Member · Neha profile (pending)",
+      "name": "Member \u00b7 Neha profile (pending)",
       "preview": "../app/prototypes/member-profile/index.html?member=neha",
       "description": "Neha's profile with UPI pending (Verify PAN) and card pending (Details needed), each row linking to its step."
     },
     {
       "id": "verify-pan",
-      "name": "Member · Verify PAN",
+      "name": "Member \u00b7 Verify PAN",
       "preview": "../app/prototypes/verify-pan/index.html",
       "description": "UPI activation step 1 of 2: PAN, name, date of birth and consent."
     },
     {
       "id": "upi-pin",
-      "name": "Member · Set UPI PIN",
+      "name": "Member \u00b7 Set UPI PIN",
       "preview": "../app/prototypes/upi-pin/index.html",
       "description": "UPI activation step 2 of 2: new and confirm PIN; returns to the profile with UPI active and a confirmation notice."
     },
     {
       "id": "neha-ready",
-      "name": "Member · Neha ready to pay",
+      "name": "Member \u00b7 Neha ready to pay",
       "preview": "../app/prototypes/member-profile/index.html?member=neha&upi=active&saved=true",
       "description": "Both payment methods set up."
     },
     {
       "id": "address-saved",
-      "name": "Member · Address saved",
+      "name": "Member \u00b7 Address saved",
       "preview": "../app/prototypes/member-profile/index.html?saved=true"
     },
     {
       "id": "hub-type",
-      "name": "Create Hub · Type",
+      "name": "Create Hub \u00b7 Type",
       "preview": "../app/prototypes/create-hub/index.html?step=type"
     },
     {
       "id": "hub-setup",
-      "name": "Create Hub · Name & source",
+      "name": "Create Hub \u00b7 Name & source",
       "preview": "../app/prototypes/create-hub/index.html?step=details"
     },
     {
       "id": "hub-created",
-      "name": "Create Hub · Created",
+      "name": "Create Hub \u00b7 Created",
       "preview": "../app/prototypes/hub-dashboard/index.html?state=new",
       "description": "Hub Details in its just-created state (Figma 397:49311): the shared blue hero with the framed Hub tile and member count, no limit or tabs yet, and a sheet prompting Invite Member or Add Pixel Tag (registered list Actions). Create Hub lands here."
     },
     {
       "id": "hubs",
-      "name": "Hubs · Managed by me",
+      "name": "Hubs \u00b7 Managed by me",
       "preview": "../app/prototypes/hubs/index.html"
     },
     {
       "id": "scan-qr",
-      "name": "Member · Scan QR",
+      "name": "Member \u00b7 Scan QR",
       "preview": "../app/prototypes/scan-qr/index.html"
     },
     {
       "id": "payment-notification",
-      "name": "Manager · Payment notification",
+      "name": "Manager \u00b7 Payment notification",
       "preview": "../app/prototypes/payment-notification/index.html"
     },
     {
       "id": "invite-notification",
-      "name": "Member · Invitation notification",
+      "name": "Member \u00b7 Invitation notification",
       "preview": "../app/prototypes/payment-notification/index.html?kind=invite",
       "description": "Neha's lock screen with a WhatsApp notification from HDFC Bank inviting her to The Sharma's family Hub. Reuses Payment request notification with mark='whatsapp'; opens the WhatsApp invitation chat."
     },
     {
       "id": "accounts-cards",
-      "name": "Discovery · Accounts & Cards",
+      "name": "Discovery \u00b7 Accounts & Cards",
       "preview": "../app/prototypes/accounts-cards/index.html"
     },
     {
       "id": "hub-introduction",
-      "name": "Discovery · Turbo Hub introduction",
+      "name": "Discovery \u00b7 Turbo Hub introduction",
       "preview": "../app/prototypes/onboarding/index.html"
     },
     {
       "id": "pixel-tag",
-      "name": "Pixel Tag · Link or buy",
+      "name": "Pixel Tag \u00b7 Link or buy",
       "preview": "../app/prototypes/pixel-tag/index.html",
       "description": "Defined Figma choice screen, shared Navigation, Page header and Action. Generic artwork and no-op purchase/link actions pending subsequent flows."
     },
     {
       "id": "tag-scanner",
-      "name": "Pixel Tag · Scan QR",
+      "name": "Pixel Tag \u00b7 Scan QR",
       "preview": "../app/prototypes/tag-scanner/index.html",
       "description": "Static Figma tag-camera scene and QR overlay, registered Navigation close action. No camera permission or decoding."
     },
     {
       "id": "tag-added",
-      "name": "Pixel Tag · Added to Hub",
+      "name": "Pixel Tag \u00b7 Added to Hub",
       "preview": "../app/prototypes/tag-added/index.html",
       "description": "Figma Members snapshot with Card Keys Pixel+ Tag and its unfinished geofence prompt; scanner advance is external preview navigation."
     },
     {
       "id": "invitation",
-      "name": "Member · Invitation entry",
+      "name": "Member \u00b7 Invitation entry",
       "preview": "../app/prototypes/invitation/index.html",
       "description": "External WhatsApp chat (Figma 419:29279): HDFC Bank business message with a family Hub link preview, invitation text and pzlive link that opens the member profile. Documented exception to the DS shell; uses the light Phone status bar."
     },
     {
       "id": "request-declined",
-      "name": "Member · Request declined",
+      "name": "Member \u00b7 Request declined",
       "preview": "../app/prototypes/payment-unapproved/index.html?state=declined",
       "description": "Proposed recovery outcome using Figma pending request as a related reference and unchanged DS controls. Local demonstration only."
     },
     {
       "id": "request-expired",
-      "name": "Member · Request expired",
+      "name": "Member \u00b7 Request expired",
       "preview": "../app/prototypes/payment-unapproved/index.html?state=expired",
       "description": "Proposed recovery outcome using Figma pending request as a related reference and unchanged DS controls. Local demonstration only."
     },
     {
       "id": "spending-limit",
-      "name": "Hub · Spending limit editor",
+      "name": "Hub \u00b7 Spending limit editor",
       "preview": "../app/prototypes/spending-limit/index.html",
       "description": "Proposed monthly Hub/member editor with shared fields, select, Action and Notice. Saves in the local demo session."
     },
     {
       "id": "geofence-setup",
-      "name": "Pixel+ Tag · Geofence setup",
+      "name": "Pixel+ Tag \u00b7 Geofence setup",
       "preview": "../app/prototypes/geofence-setup/index.html",
       "description": "Proposed location/radius form, illustrative boundary and simulated permission. Local save updates Card Keys; no geocoding or device permission."
     },
     {
       "id": "new-user-entry",
-      "name": "Member · New-user entry",
+      "name": "Member \u00b7 New-user entry",
       "preview": "../app/prototypes/invitation/index.html?audience=new",
       "description": "Single proposed invitation landing for new users; no onboarding carousel. Account creation is outside the prototype, with explicit after-setup preview navigation."
     }
@@ -3294,7 +3516,8 @@
   ],
   "tokenFiles": [
     "tokens/primitives.css",
-    "tokens/semantics.css"
+    "tokens/semantics.css",
+    "components/interview-stack.css"
   ],
   "knownGaps": [],
   "decisions": [
@@ -3306,7 +3529,8 @@
     "decisions/payment-review.md",
     "decisions/navigation-bar.md",
     "decisions/page-header.md",
-    "decisions/chrome-backdrop.md"
+    "decisions/chrome-backdrop.md",
+    "decisions/hub-promo.md"
   ],
   "foundationPresentation": {
     "tokens": {
@@ -3935,7 +4159,7 @@
       {
         "id": "field-value",
         "name": "Field value",
-        "sample": "₹2,500",
+        "sample": "\u20b92,500",
         "family": "--font-family-inter",
         "size": "--font-size-16",
         "weight": "--font-weight-medium",
@@ -3950,7 +4174,7 @@
       {
         "id": "amount-summary",
         "name": "Spending amount",
-        "sample": "₹14,500",
+        "sample": "\u20b914,500",
         "family": "--font-family-inter",
         "size": "--font-size-20",
         "weight": "--font-weight-bold",
@@ -4130,7 +4354,7 @@
       {
         "id": "limit-value",
         "name": "Member limit value",
-        "sample": "₹45,000",
+        "sample": "\u20b945,000",
         "family": "--font-family-inter",
         "size": "--font-size-14",
         "weight": "--font-weight-semibold",
@@ -4160,7 +4384,7 @@
       {
         "id": "payment-amount",
         "name": "Payment amount",
-        "sample": "₹2,500",
+        "sample": "\u20b92,500",
         "family": "--font-family-inter",
         "size": "--font-size-32",
         "weight": "--font-weight-bold",

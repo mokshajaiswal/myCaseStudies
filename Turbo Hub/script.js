@@ -802,102 +802,15 @@ function createPersonaExplorer(config) {
 }
 
 function createUserVoiceStack(voices) {
-  const stack = createElement("div", "user-voice-stack");
-  stack.setAttribute("aria-label", "User interview quotes");
-  let order = voices.map((_, index) => index);
-  const transforms = [[0, 0, 0, 1, 1], [-8, 12, -2.2, 0.985, 1], [10, 21, 2.6, 0.968, 0.96], [-4, 29, -3.4, 0.95, 0.9]];
-
-  const render = () => {
-    stack.replaceChildren();
-    const visibleOrder = order.slice(0, 4);
-    visibleOrder.slice().reverse().forEach((voiceIndex, reverseIndex) => {
-      const stackPosition = visibleOrder.length - 1 - reverseIndex;
-      const voice = voices[voiceIndex];
-      const isTop = stackPosition === 0;
-      const [x, y, rotation, scale, opacity] = transforms[stackPosition];
-      const card = createElement("button", "user-voice-card");
-      card.type = "button";
-      card.disabled = !isTop;
-      card.style.cssText = `--voice-accent:${voice.accent};--voice-background:${voice.background};--voice-x:${x}px;--voice-y:${y}px;--voice-rotation:${rotation}deg;--voice-scale:${scale};--voice-opacity:${opacity};z-index:${20 - stackPosition}`;
-      card.setAttribute("aria-label", isTop ? "Show next user quote" : `${voice.type} user quote`);
-      card.append(
-        createElement("span", "user-voice-quote", `“${voice.quote}”`),
-        createElement("span", "user-voice-source", voice.type),
-        createElement("span", "user-voice-accent"),
-      );
-      if (isTop) card.addEventListener("click", () => {
-        advance();
-        stack.querySelector(".user-voice-card:not(:disabled)")?.focus();
-      });
-      stack.append(card);
-    });
-  };
-
-  const advance = () => {
-    order = [...order.slice(1), order[0]];
-    render();
-    restartCycling();
-  };
-
-  const CYCLE_INTERVAL = 6000;
-  const allowsAutoplay = !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let timer = null;
-  let isVisible = false;
-  let isPaused = false;
-
-  const stopCycling = () => {
-    if (timer === null) return;
-    window.clearInterval(timer);
-    timer = null;
-  };
-
-  const startCycling = () => {
-    if (timer !== null || isPaused || !isVisible || !allowsAutoplay) return;
-    timer = window.setInterval(() => {
-      order = [...order.slice(1), order[0]];
-      render();
-    }, CYCLE_INTERVAL);
-  };
-
-  const restartCycling = () => {
-    stopCycling();
-    startCycling();
-  };
-
-  stack.addEventListener("pointerenter", () => {
-    isPaused = true;
-    stopCycling();
+  if (typeof window.TurboInterviewStack === "function") return window.TurboInterviewStack(voices);
+  // Keep the full narrative available if an optional interaction asset fails to load.
+  const fallback = createElement("div", "user-voice-stack");
+  voices.forEach(voice => {
+    const quote = createElement("blockquote", "", `“${voice.quote}”`);
+    quote.append(createElement("cite", "", voice.type));
+    fallback.append(quote);
   });
-  stack.addEventListener("pointerleave", () => {
-    isPaused = false;
-    startCycling();
-  });
-  stack.addEventListener("focusin", () => {
-    isPaused = true;
-    stopCycling();
-  });
-  stack.addEventListener("focusout", (event) => {
-    if (stack.contains(event.relatedTarget)) return;
-    isPaused = false;
-    startCycling();
-  });
-
-  if (allowsAutoplay && typeof IntersectionObserver === "function") {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        isVisible = entry.isIntersecting;
-        if (isVisible) startCycling();
-        else stopCycling();
-      });
-    }, { threshold: 0.3 });
-    observer.observe(stack);
-  } else if (allowsAutoplay) {
-    isVisible = true;
-    startCycling();
-  }
-
-  render();
-  return stack;
+  return fallback;
 }
 
 function createRelationshipRoleArt(kind) {

@@ -15,7 +15,7 @@ H.accountCard=({name,detail='',icon='wallet',variant='summary',cards=[],actionLa
  if(variant==='linked'){
   const strip=node('div','th-account-cards');strip.setAttribute('aria-label','Linked bank cards');strip.tabIndex=0;
   strip.append(H.accountAction({label:'Add card',iconOnly:true,disabled,onClick:onAction}));
-  for(const {name:bank,detail:digits='',initial=bank.slice(0,1)} of cards){const chip=node('span','th-account-cards__chip'),mark=node('span','th-account-cards__bank',initial);mark.setAttribute('aria-hidden','true');chip.append(mark,document.createTextNode(bank+(digits?' · '+digits:'')));strip.append(chip);}card.append(strip);
+  for(const {name:bank,detail:digits='',initial=bank.slice(0,1),logo=null} of cards){const chip=node('span','th-account-cards__chip'),mark=node('span','th-account-cards__bank',initial);mark.setAttribute('aria-hidden','true');if(logo){const image=node('img','th-account-cards__logo');image.src=logo;image.alt='';image.width=24;image.height=24;image.addEventListener('error',()=>{mark.classList.remove('th-account-cards__bank--logo');mark.replaceChildren(document.createTextNode(initial));},{once:true});mark.classList.add('th-account-cards__bank--logo');mark.replaceChildren(image);}chip.append(mark,document.createTextNode(bank+(digits?' · '+digits:'')));strip.append(chip);}card.append(strip);
  }return card;
 };
 })();
