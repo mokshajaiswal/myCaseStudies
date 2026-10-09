@@ -53,3 +53,13 @@ Constant-speed border correction: conic rotation produced unequal apparent speed
 Shimmer visibility refinement: the measured SVG now receives explicit intrinsic and CSS dimensions and sits above the card surface. Trail uses stronger blue #318fdf with longer 3px strokes and a wider white crest, retaining constant-speed 2.5-second travel. Strokes are visible by default; reduced motion leaves a static highlight rather than removing all sheen. Layout, border base and text remain unchanged. Browser visual review remains with the user.
 
 User rejected the travelling outline: removed the SVG, resize observer, dash trails and their styles. Border now uses a soft broad reflection passing through a stationary-looking gradient rim via background position over 2.5 seconds. Equal base colors at both ends keep the cycle restart quiet. No rotating angle or travelling border segment. Wallet float, two-tone fill and text hierarchy remain unchanged; reduced motion disables movement.
+
+
+## Family-and-home illustration
+
+At the user's request, v2 replaces the wallet artwork with `assets/hub-promo/family-home-3d.png`: a transparent soft clay-style blue family embracing beside a light blue home, with a cobalt roof and small gold details. This follows the supplied style reference and expresses the family proposition directly. The original wallet remains in v1. Both Accounts & Cards and embedded story/overview screens use the same registered Hub introduction renderer, as do its canonical specimens.
+
+Source ownership audit: no geometry or typography changes. The existing 104px art allocation (88px at the narrow breakpoint), 20px card inset (16px narrow), 12px gap (8px narrow), optional copy states, whole-card link, focus and reduced-motion behavior remain owned by the component. Decorative image retains empty alt text and error removal; the card's accessible label names its destination. The alpha PNG is project-local and the previous asset is preserved. Syntax and catalog checks pass; visual review remains manual.
+
+
+Illustration correction: the reference specifies visual language rather than the same subject. The current v2 asset is `assets/hub-promo/family-shared-fund-3d.png`, a distinct composition of two adults and a child holding one shared gold rupee coin. It retains the soft rounded blue clay materials, gold accent, transparency and existing art allocation/float. The house reference version remains as an unused earlier asset. No component spacing, controls or page overrides change. Syntax and asset-path checks pass; browser review remains with the user.

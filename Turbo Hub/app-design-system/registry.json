@@ -3081,7 +3081,7 @@
         "long content",
         "reduced motion"
       ],
-      "usage": "TurboUI.hubPromo({href,intro,title,description,label,variant}). variant defaults to v1 (original glossy blue-violet, artwork right). v2 is a two-tone near-white-to-cool-blue background gradient with neutral black/gray text and lighter weights, artwork left and a moving gradient-border highlight. Both retain the same original wallet asset and copy inputs. One full-card native link; no arrow, hover effect or nested CTA. In v2 only, wallet artwork gently floats 6px on a 4.8-second cycle. A soft reflection sweeps across the gradient border in 2.5 seconds; text stays still. Reduced motion disables both animations.",
+      "usage": "TurboUI.hubPromo({href,intro,title,description,label,variant}). variant defaults to v1 (original glossy blue-violet, artwork right). v2 is a two-tone near-white-to-cool-blue background gradient with neutral black/gray text and lighter weights, artwork left and a moving gradient-border highlight. v1 retains the original wallet; v2 uses the soft blue 3D family holding a shared gold rupee coin. Both retain their copy inputs. One full-card native link; no arrow, hover effect or nested CTA. In v2 only, family artwork gently floats 6px on a 4.8-second cycle. A soft reflection sweeps across the gradient border in 2.5 seconds; text stays still. Reduced motion disables both animations.",
       "previewConfigurations": [
         {
           "id": "v1",

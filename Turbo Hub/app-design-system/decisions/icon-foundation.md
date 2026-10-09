@@ -45,3 +45,5 @@ and reading-expand make them discoverable in the existing real-renderer gallery.
 The case-study toggle uses Regular at 20px with currentColor. New geometry is
 owned by the provider; no product-component roots or internal parts are overridden.
 Source renderer and navigation-state checks pass. Browser review stays with the user.
+
+Reading navigation uses `reading-menu`, the official Phosphor Regular list icon (three horizontal lines without bullets), registered through the app provider and inheriting currentColor. Collapse uses the existing close icon. Both retain the existing 20px allocation, focus treatment and spring motion. Source checks only; visual review remains manual.

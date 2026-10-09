@@ -60,7 +60,7 @@
     if (window.TurboIcons) {
       const icon = make('span', 'case-navigation__tab-icon');
       icon.setAttribute('aria-hidden', 'true');
-      icon.innerHTML = TurboIcons.render('list-bullets', {size: 18});
+      icon.innerHTML = TurboIcons.render('reading-menu', {size: 18});
       toggle.append(icon);
     }
     toggle.append(make('span', 'case-navigation__tab-label', 'Sections'));
@@ -130,9 +130,9 @@
       list.inert = !open;
       list.setAttribute('aria-hidden', String(!open));
       minimize.setAttribute('aria-expanded', String(open));
-      minimize.setAttribute('aria-label', open ? 'Minimize section navigation' : 'Expand section navigation');
+      minimize.setAttribute('aria-label', open ? 'Collapse section navigation' : 'Expand section navigation');
       minimize.title = open ? 'Hide sections' : 'Show sections';
-      icon.innerHTML = TurboIcons.render(open ? 'reading-collapse' : 'reading-expand', {size: 20, weight: 'regular'});
+      icon.innerHTML = TurboIcons.render(open ? 'close' : 'reading-menu', {size: 20, weight: 'regular'});
 
       if (reduced.matches || !host.isConnected || document.hidden) finish();
       else {

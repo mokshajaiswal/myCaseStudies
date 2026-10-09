@@ -18,10 +18,9 @@
 }
 /* Text and flower opacity read the same animated progress, with no separate delay. */
 .case-ending__card-copy > h3, .case-ending__card-copy > p, .case-ending__meta strong { color: color-mix(in srgb, var(--heading-ink), #fff calc(var(--case-card-reveal) * 100%)); }
-.case-ending__arrows { display: inline-flex; flex: 0 0 auto; color: #fff; opacity: 0; transition: opacity 150ms ease; pointer-events: none; }
+.case-ending__arrows { display: inline-flex; flex: 0 0 auto; color: #fff; opacity: var(--case-card-reveal); pointer-events: none; }
 .case-ending__arrows > svg { display: block; width: 46px; height: auto; }
 .case-ending__arrow { opacity: .3; }
-.case-ending__card:is(:hover, :focus-visible) .case-ending__arrows { opacity: 1; transition-delay: 420ms; }
 .case-ending__card:is(:hover, :focus-visible) .case-ending__arrow { animation: case-card-arrow-first 1500ms steps(1, end) infinite; }
 .case-ending__card:is(:hover, :focus-visible) .case-ending__arrow:nth-child(2) { animation-name: case-card-arrow-second; }
 .case-ending__card:is(:hover, :focus-visible) .case-ending__arrow:nth-child(3) { animation-name: case-card-arrow-third; }
