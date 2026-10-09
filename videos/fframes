@@ -1,0 +1,8 @@
+#!/bin/sh
+set -eu
+
+# Homebrew Rust proxies plus cargo-installed tools; no shell-profile edits needed.
+export PATH="/opt/homebrew/opt/rustup/bin:$HOME/.cargo/bin:/opt/homebrew/bin:$PATH"
+VIDEO_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cd "$VIDEO_ROOT/case-study-video"
+exec cargo run --release -- "$@"

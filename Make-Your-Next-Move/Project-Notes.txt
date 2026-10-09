@@ -1,0 +1,23 @@
+MAKE YOUR NEXT MOVE
+10-second editable motion study, authored in Tesseract 0.3.1.
+
+Deliverable: Make-Your-Next-Move.mp4 (1920x1080, 30 fps, 300 frames, 10 seconds, H.264/AAC).
+Editable document: Make-Your-Next-Move.tsrct, with embedded font and audio assets.
+Previews: Filmstrip.png and Poster.png.
+Assets: Original Space Grotesk variable font and OFL license, plus three locally synthesized WAV accents.
+Font source: https://github.com/google/fonts/tree/main/ofl/spacegrotesk
+
+Story: One small move / Can change everything / Make your next move.
+43 native visual layers and 95 editable animation tracks, plus 5 audio placements.
+All text, shapes, timing and sound placements remain editable.
+No brand or third-party logo is represented.
+
+Sound origins: procedural Tesseract soft-pop (220ms, seed 5), air-whoosh (600ms, seed 12), soft-impact (800ms, seed 3).
+Sound is deliberately sparse, with pauses and no music bed or narration.
+Measured final AAC: -24.32 LUFS integrated, -10.14 dBTP true peak.
+
+Checks: Native commit/apply and export succeeded. ffprobe confirmed duration, frame count, dimensions, video codec and audio stream. Audio measurement confirmed non-silent cues and peak headroom. Visual review and playback/listening are left to the user under the project policy. No browser verification performed.
+
+Authoring recipe and schema snapshots are retained in .tesseract-work. The build.py recipe uses editable.json as its document/asset scaffold, then generates actions.json; commit the document and apply actions to rebuild. Rendering on this host needs Metal GPU access outside the sandbox.
+
+Browser editor: http://127.0.0.1:8767/Editor/ (files retained in Editor/). Browser-compatible background is an editable Rect layer. See Editor/Editor-Notes.txt for saving and runtime limitations.

@@ -1,0 +1,41 @@
+[
+  {
+    "type": "createFxRectLayer",
+    "compositionId": "main",
+    "layerId": 1,
+    "name": "Renderer test card",
+    "insertIndex": 0,
+    "activeRange": {
+      "start": 0,
+      "duration": 3000
+    },
+    "transform": {
+      "anchorPoint": [
+        0,
+        0
+      ],
+      "position": [
+        80,
+        80
+      ],
+      "scale": [
+        100,
+        100
+      ],
+      "rotation": 0,
+      "opacity": 100
+    },
+    "rect": {
+      "size": [
+        400,
+        160
+      ],
+      "fillColor": [
+        0.05,
+        0.25,
+        0.8,
+        1
+      ]
+    }
+  }
+]

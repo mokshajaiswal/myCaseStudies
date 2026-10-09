@@ -1,0 +1,185 @@
+{
+  "$schema": "https://jerboa.dev/schemas/fx-composition/editable/v1/document.schema.json",
+  "formatVersion": 1,
+  "dimensions": {
+    "width": 1920,
+    "height": 1080
+  },
+  "duration": 10,
+  "composition": {
+    "id": "main",
+    "layers": [
+      {
+        "type": "Audio",
+        "id": 900,
+        "name": "pop at 180 ms",
+        "source": {
+          "assetId": "pop"
+        },
+        "sourceRange": {
+          "start": 0,
+          "duration": 220
+        },
+        "sourceIntrinsicDuration": 220,
+        "volume": 1.1,
+        "captionsEnabled": false,
+        "playback": {
+          "type": "windowed",
+          "inputRange": {
+            "start": 180,
+            "duration": 220
+          },
+          "mapping": {
+            "type": "linear",
+            "input": {
+              "start": 180,
+              "duration": 220
+            },
+            "output": {
+              "start": 0,
+              "duration": 220
+            }
+          },
+          "inputOffsetMs": 0
+        }
+      },
+      {
+        "type": "Audio",
+        "id": 901,
+        "name": "pop at 2750 ms",
+        "source": {
+          "assetId": "pop"
+        },
+        "sourceRange": {
+          "start": 0,
+          "duration": 220
+        },
+        "sourceIntrinsicDuration": 220,
+        "volume": 0.8,
+        "captionsEnabled": false,
+        "playback": {
+          "type": "windowed",
+          "inputRange": {
+            "start": 2750,
+            "duration": 220
+          },
+          "mapping": {
+            "type": "linear",
+            "input": {
+              "start": 2750,
+              "duration": 220
+            },
+            "output": {
+              "start": 0,
+              "duration": 220
+            }
+          },
+          "inputOffsetMs": 0
+        }
+      },
+      {
+        "type": "Audio",
+        "id": 902,
+        "name": "whoosh at 5150 ms",
+        "source": {
+          "assetId": "whoosh"
+        },
+        "sourceRange": {
+          "start": 0,
+          "duration": 600
+        },
+        "sourceIntrinsicDuration": 600,
+        "volume": 1.0,
+        "captionsEnabled": false,
+        "playback": {
+          "type": "windowed",
+          "inputRange": {
+            "start": 5150,
+            "duration": 600
+          },
+          "mapping": {
+            "type": "linear",
+            "input": {
+              "start": 5150,
+              "duration": 600
+            },
+            "output": {
+              "start": 0,
+              "duration": 600
+            }
+          },
+          "inputOffsetMs": 0
+        }
+      },
+      {
+        "type": "Audio",
+        "id": 903,
+        "name": "impact at 5780 ms",
+        "source": {
+          "assetId": "impact"
+        },
+        "sourceRange": {
+          "start": 0,
+          "duration": 800
+        },
+        "sourceIntrinsicDuration": 800,
+        "volume": 1.25,
+        "captionsEnabled": false,
+        "playback": {
+          "type": "windowed",
+          "inputRange": {
+            "start": 5780,
+            "duration": 800
+          },
+          "mapping": {
+            "type": "linear",
+            "input": {
+              "start": 5780,
+              "duration": 800
+            },
+            "output": {
+              "start": 0,
+              "duration": 800
+            }
+          },
+          "inputOffsetMs": 0
+        }
+      },
+      {
+        "type": "Audio",
+        "id": 904,
+        "name": "pop at 6280 ms",
+        "source": {
+          "assetId": "pop"
+        },
+        "sourceRange": {
+          "start": 0,
+          "duration": 220
+        },
+        "sourceIntrinsicDuration": 220,
+        "volume": 0.65,
+        "captionsEnabled": false,
+        "playback": {
+          "type": "windowed",
+          "inputRange": {
+            "start": 6280,
+            "duration": 220
+          },
+          "mapping": {
+            "type": "linear",
+            "input": {
+              "start": 6280,
+              "duration": 220
+            },
+            "output": {
+              "start": 0,
+              "duration": 220
+            }
+          },
+          "inputOffsetMs": 0
+        }
+      }
+    ],
+    "name": "Make your next move \u2014 10 second motion study"
+  }
+}

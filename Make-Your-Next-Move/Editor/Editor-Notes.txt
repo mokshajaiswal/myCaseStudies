@@ -1,0 +1,15 @@
+LOCAL TESSERACT EDITOR
+Open http://127.0.0.1:8767/Editor/ in a browser with WebGPU support (current Chrome or Edge recommended by the official template).
+
+Built from the official Tesseract timeline-editor example with release 0.3.1 web runtime. The official ZIP SHA-256 checksum passed before extraction. JavaScript, type definitions and WASM come from the same release.
+
+The motion study loads automatically at 1.5 seconds. Play/pause and scrub the timeline; select a layer on the canvas or in the timeline to edit text, fill color and supported static properties. Animated numeric fields are marked with a diamond and remain locked in this basic editor. This template does not provide keyframe editing or video export.
+
+Download saves an edited .tsrct copy, including its embedded fonts and audio. To save directly to a chosen original file, open it with the folder button using a browser that supports the file picker, then use Save and grant the browser write permission. Refreshing discards unsaved edits. Return the edited project to the agent for MP4 rendering.
+
+The app and runtime are served locally; no project upload service is used by this editor.
+
+Restart server from the project root:
+python3 -m http.server 8767 --bind 127.0.0.1
+
+Checks performed: JavaScript syntax passed; HTTP 200 confirmed for editor HTML, WASM and project. Native project was saved and rendered successfully after replacing the unsupported document background color with an equivalent native rectangle layer. No browser or visual verification performed, per project policy.
