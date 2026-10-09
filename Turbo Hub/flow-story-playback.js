@@ -170,5 +170,23 @@
     }).observe(rail);
     return {activate,pause,resume};
   }
-  root.TurboStoryPlayback={create};
+  // Deterministic seeking for the full walkthrough. Never follows links or submits forms.
+  function snapshot(doc,id,flow,elapsed){
+    const context=doc?.defaultView?.TurboStoryContext;
+    if(!context?.embedded||!context.locked||context.scene?.id!==id)throw new Error('Snapshot requires the matching locked fixture');
+    if(id==='hub-setup'){
+      if(!doc.defaultView.TurboCreateHubPlaybackReset)throw new Error('Creation fixture cannot be reset');
+      doc.defaultView.TurboCreateHubPlaybackReset();
+    }else prepare(doc,id,flow);
+    let time=0,lastTarget=null;
+    for(const action of actions(id,flow)){
+      if(time>elapsed)break;
+      if(action.kind==='set'||action.kind==='drag')setControl(doc,action.selector,action.value);
+      if(action.kind==='store')doc.querySelector('#install').setPlaybackState(action.state,action.value);
+      if(action.kind==='move'||action.kind==='drag')lastTarget=action.selector;
+      time+=action.wait;
+    }
+    if(lastTarget){const target=doc.querySelector(lastTarget);if(target)reveal(doc,target);}
+  }
+  root.TurboStoryPlayback={create,actionsFor:actions,snapshot};
 })(window);

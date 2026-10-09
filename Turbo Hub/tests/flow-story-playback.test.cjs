@@ -79,6 +79,18 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
   const steps=controls.children[0].children.map(item=>item.children[0]),fills=steps.map(button=>button.children[0].children[0]);
   return {scene,window,document,documentEvents,events,previews,controlsByScene,rail,controls,steps,fills,timers,tick,until,start,current,presses,errors:()=>errors,advanceClock:ms=>clock+=ms};
 }
+test('scrubbing backward restores input and role state without activating a submit action',()=>{
+  const h=harness(),index=h.scene.sequence.findIndex(item=>item.id==='add-member');
+  const doc=h.previews[index].frame.contentDocument,fields=h.controlsByScene[index];
+  const snapshot=h.window.TurboStoryPlayback.snapshot;
+  snapshot(doc,'add-member','kavya-invite-flow',100000);
+  assert.equal(fields['#name'].value,'Kavya Sharma');assert.equal(fields['#confirmed'].checked,true);
+  snapshot(doc,'add-member','kavya-invite-flow',0);
+  assert.equal(fields['#name'].value,'');assert.equal(fields['#confirmed'].checked,false);assert.equal(fields['#manager'].getAttribute('aria-checked'),'false');
+  assert.equal(fields['#footer button[type="submit"]'].events.includes('click'),false);
+  doc.defaultView.TurboStoryContext.locked=false;
+  assert.throws(()=>snapshot(doc,'add-member','kavya-invite-flow',0),/locked fixture/);
+});
 test('scripted touch enters from the side, reaches Add, and continues across all five screens',()=>{
   const h=harness();assert.equal(h.timers.size,0);h.start();h.tick();
   const dot=h.previews[0].slot.children.at(-1);assert.equal(dot.style.left,'-16px');assert.ok(dot.classList.contains('is-visible'));

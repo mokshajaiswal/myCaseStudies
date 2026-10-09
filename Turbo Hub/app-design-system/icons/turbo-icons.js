@@ -12,7 +12,7 @@ dsIcon.register("figma-card", "<path fill-rule=\"evenodd\" clip-rule=\"evenodd\"
 dsIcon.register("figma-upi", "<path d=\"M16.7866 29.0002L21.8097 11.5586L26.3752 20.207L16.7866 29.0002Z\" opacity=\".55\"/><path d=\"M13.625 28.4416L18.6481 11L23.2136 19.6484L13.625 28.4416Z\"/>", "11 11 18 18");
 
 window.TurboIcons = {
-  mapping: {flash:'lightning',gallery:'image',bank:'bank',card:'figma-card',wallet:'wallet',help:'question','help-fill':'figma-help',limit:'gauge',upi:'figma-upi','card-fill':'figma-card','upi-fill':'figma-upi','success-heavy':'check-heavy','navigation-back':'figma-arrow-back',hub:'house',more:'figma-kebab',family:'users',member:'users',invite:'user-plus',payment:'currency-dollar',analytics:'chart-line',location:'map-pin',success:'check',pending:'clock',back:'caret-left',close:'x',edit:'figma-edit',tag:'tag',settings:'gear',signal:'system-signal',wifi:'system-wifi',battery:'system-battery'},
+  mapping: {'playback-play':'playback-play','playback-pause':'playback-pause','reading-collapse':'arrows-in-simple','reading-expand':'arrows-out-simple',flash:'lightning',gallery:'image',bank:'bank',card:'figma-card',wallet:'wallet',help:'question','help-fill':'figma-help',limit:'gauge',upi:'figma-upi','card-fill':'figma-card','upi-fill':'figma-upi','success-heavy':'check-heavy','navigation-back':'figma-arrow-back',hub:'house',more:'figma-kebab',family:'users',member:'users',invite:'user-plus',payment:'currency-dollar',analytics:'chart-line',location:'map-pin',success:'check',pending:'clock',back:'caret-left',close:'x',edit:'figma-edit',tag:'tag',settings:'gear',signal:'system-signal',wifi:'system-wifi',battery:'system-battery'},
   render(name, options={}) { return dsIcon(this.mapping[name] || name, {size:24,...options}); },
   replace(name, svgBody, viewBox='0 0 24 24') { dsIcon.register('turbo-'+name, svgBody, viewBox); this.mapping[name]='turbo-'+name; }
 };
@@ -40,3 +40,7 @@ dsIcon.register("house", "<path d=\"M219.31,108.68l-80-80a16,16,0,0,0-22.62,0l-8
 
 // Phosphor core 2.1.1, MIT.
 dsIcon.register("dots-three", "<path d=\"M148,128a20,20,0,1,1-20-20A20,20,0,0,1,148,128Zm52-20a20,20,0,1,0,20,20A20,20,0,0,0,200,108ZM56,108a20,20,0,1,0,20,20A20,20,0,0,0,56,108Z\"/>", "0 0 256 256");
+
+// Phosphor core fill weights (MIT): play-fill.svg and pause-fill.svg.
+dsIcon.register("playback-play", '<path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"/>');
+dsIcon.register("playback-pause", '<path d="M216,48V208a16,16,0,0,1-16,16H160a16,16,0,0,1-16-16V48a16,16,0,0,1,16-16h40A16,16,0,0,1,216,48ZM96,32H56A16,16,0,0,0,40,48V208a16,16,0,0,0,16,16H96a16,16,0,0,0,16-16V48A16,16,0,0,0,96,32Z"/>');

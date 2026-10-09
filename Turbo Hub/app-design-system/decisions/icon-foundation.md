@@ -36,3 +36,12 @@ Roles now pointing at them: navigation-back, help-fill, more, edit, card, card-f
 The earlier Phosphor registrations (question-fill, gauge, qr-code, credit-card-fill, qr-code-fill)
 remain available. Verified in the browser: Navigation back/more, payment-method tiles and the Avatar edit
 badge render the Figma geometry; no console errors.
+
+## Reading navigation icons (9 October 2026)
+
+Registered upstream Phosphor core 2.1.1 arrows-in-simple and arrows-out-simple
+(MIT) in Regular, Bold and Fill. The shared semantic mappings reading-collapse
+and reading-expand make them discoverable in the existing real-renderer gallery.
+The case-study toggle uses Regular at 20px with currentColor. New geometry is
+owned by the provider; no product-component roots or internal parts are overridden.
+Source renderer and navigation-state checks pass. Browser review stays with the user.

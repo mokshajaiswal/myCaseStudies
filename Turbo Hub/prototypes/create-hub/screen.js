@@ -34,4 +34,5 @@ function render(){
  content.scrollTop=0;
 }
 addEventListener('popstate',()=>{const value=new URLSearchParams(location.search).get('step');step=['details','created'].includes(value)?value:'type';render();});render();
+if(TurboStoryContext.embedded&&TurboStoryContext.locked)window.TurboCreateHubPlaybackReset=()=>{draft.name='';draft.account='';persist();render();};
 // Local case-study creation only. Existing account identifiers are sample data.

@@ -11,3 +11,5 @@ if(kind==='info-pill'){const section=document.createElement('section');section.i
 
 if(kind==='field'){add('digit',{variant:'digit',label:'Digit 1 of 6'});add('digit-filled',{variant:'digit',label:'Digit 1 of 6',value:'4'});add('digit-disabled',{variant:'digit',label:'Digit 1 of 6',value:'4',disabled:true});}
 if(kind==='otp'){add('empty',{label:'6-digit code'});add('partial',{label:'6-digit code',value:'482'});add('complete',{label:'6-digit code',value:'482913'});add('error',{label:'6-digit code',value:'482',error:'Enter all 6 digits.'});add('disabled',{label:'6-digit code',value:'482913',disabled:true});}
+
+if(kind==='slider')add('media',{variant:'media',label:'Seek prototype',min:0,max:120,value:32,format:v=>'0:'+String(v).padStart(2,'0')});

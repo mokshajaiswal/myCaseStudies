@@ -20,8 +20,8 @@
   };
   // Range slider: a labelled native range with a filled track and min/max captions. The caller owns the value
   // (onInput emits each step); setValue/setRange keep the fill and captions in sync with external input.
-  H.slider=({id,label,min=0,max=100,step=1,value=min,format=v=>String(v),disabled=false,onInput})=>{
-    const root=el('div','th-slider');const head=el('div','th-slider__head');const name=el('label','th-slider__label',label);name.htmlFor=id;const readout=el('output','th-slider__value');readout.htmlFor=id;head.append(name,readout);
+  H.slider=({id,label,min=0,max=100,step=1,value=min,format=v=>String(v),disabled=false,onInput,variant='default'})=>{
+    const root=el('div','th-slider'+(variant==='media'?' th-slider--media':''));root.dataset.inspectorVariant=variant;const head=el('div','th-slider__head');const name=el('label','th-slider__label',label);name.htmlFor=id;const readout=el('output','th-slider__value');readout.htmlFor=id;head.append(name,readout);
     const control=el('input','th-slider__control');Object.assign(control,{id,name:id,type:'range',disabled});
     const ends=el('div','th-slider__range');const low=el('span','',''),high=el('span','','');ends.append(low,high);ends.setAttribute('aria-hidden','true');
     root.append(head,control,ends);

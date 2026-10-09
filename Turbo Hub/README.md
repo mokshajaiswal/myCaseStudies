@@ -1,5 +1,7 @@
 # Turbo Hub case study
 
+The final `#learning` section includes Turbo Hub reflections, a flower divider, a recap card and a pink wave at the end of the page. The wave scrolls with the footer. The decorative `#closing-illustration` slot plays the supplied `assets/closing/looped-flowers.json` behind the wave. `closing-flowers.js` loads the local Lottie player near the section and pauses offscreen or in hidden tabs; reduced motion shows a still frame. Closing layout lives in `case-ending.css`. Browser review remains manual.
+
 This repository contains a single-page product-design case study for Turbo Hub, a family-payments concept created within PayZapp. It is a custom static site built with plain HTML, CSS, and JavaScript—there is no framework, build step, package manager, or backend.
 
 Open `index.html` directly or serve this folder with any static server.
@@ -123,6 +125,24 @@ The left-edge scroll indicator has no empty rail. Its filled bar and percentage 
 
 ## Extending the case study
 
+Reading navigation has two preserved versions. The default (`?nav=1`) starts
+expanded, with Overview, Research, Learnings, Roles and Flows in a white tray.
+The 56px surface has 22px corners, even label spacing and soft blue hover
+highlights with 10px corners. Only the current section has a blue underline.
+A separate 44px control sits 10px to the right. Fine 20px Regular Phosphor
+arrows point inward to collapse and outward to expand, retaining the spring
+bounce with subtle icon deformation. On collapse it glides
+to the horizontal center while the tray retracts and fades; expanding reverses
+that motion. Responsive insets preserve all five labels on narrow screens.
+One interruptible spring drives the tray surface and label opacity; rapid
+clicks reverse from the current position and velocity instead of restarting.
+Text stays at its normal size throughout. Escape minimizes and focuses the
+control; section selection leaves the bar open. Reduced motion settles instantly.
+`?nav=2` retains the right-edge bookmark and chapter index. Both keep scrolling
+available. `case-navigation.js` owns links, versions and motion;
+`case-navigation.css` uses editorial tokens. Source-level state/rapid-reversal
+checks and the Impeccable detector passed; visual review remains with the user.
+
 When adding a section:
 
 1. Add factual content to the `caseStudy` object.
@@ -211,3 +231,36 @@ The WhatsApp joining flow continues from the brief success confirmation into `pr
 The number-verification screen uses the registered six-box Verification code control. Digits advance as they are entered; backspace and arrows support correction, and paste/SMS autofill populate all boxes. The standalone screen starts empty; locked story playback fills its fictional code through the same aggregate input.
 
 The welcome screen’s What you get list uses one rounded outlined container with the existing grouped-list tokens and 16px inset. Terms and Accept invite follow below it.
+
+## Design trade-offs
+
+“What we chose to leave out” follows the core flows at #design-tradeoffs: one
+short paragraph, two reconstructed screen concepts and a short description.
+The concepts illustrate all-at-once setup and generic onboarding, inferred at
+the user’s request rather than presented as historical or tested wireframes.
+Copy/rendering live in script.js, layout in design-tradeoffs.css, and the static
+SVG illustrations in assets/tradeoffs/. Visual review remains with the user.
+
+## Impact & future
+
+#impact-future follows the design trade-offs. Six colorful selection frames and
+caption bubbles gather around a central italic statement, matching the supplied
+reference. Assumed baseline/target comparisons map to the three earlier success
+metrics and are labeled as illustrative rather than measured. Travel bounds
+include caption overhangs; the larger canvas has visible overflow. Per-note
+scroll progress gathers lower frames with the central statement, with 220px
+desktop / 140px mobile requested vertical travel. Blue/purple frames and bubbles
+are shorter; purple is wider. Red frames contain only their paragraph. Mobile keeps
+a readable staggered composition. Reduced motion is static; hidden/offscreen
+stages pause. impact-future.js/css own this page-only renderer and scroll motion.
+Browser/visual review remains with the user.
+
+The existing pink contact card is repeated after Impact & future at #contact-end.
+Both placements use createContactSection() and the same contact copy, styling
+and action URL; the earlier #contact remains in place.
+
+Lower impact frames now anchor 32px below the measured center text, avoiding
+fixed-position gaps and adapting to heading wrapping on narrow screens.
+
+The impact canvas now ends 24px after its lowest visible frame/caption; unused
+scroll-travel reserve no longer leaves a large gap before the definitions.

@@ -2719,7 +2719,8 @@
         "value": "Initial value.",
         "format": "Formats the live value, aria-valuetext and min/max captions, e.g. Indian rupees.",
         "disabled": "Native disabled state.",
-        "onInput": "Called with each new numeric value."
+        "onInput": "Called with each new numeric value.",
+        "variant": "default (label, output, endpoints) or media (compact white seek track with accessible label, no visible captions)."
       },
       "previewConfigurations": [
         {
@@ -2738,6 +2739,12 @@
           "id": "disabled",
           "name": "Disabled",
           "selector": "#disabled",
+          "interactionTarget": "slider"
+        },
+        {
+          "id": "media",
+          "name": "Media seek",
+          "selector": "#media",
           "interactionTarget": "slider"
         }
       ],
@@ -2775,7 +2782,7 @@
           }
         ],
         "ownership": "Slider owns its label row, 6px track, 24px thumb, 44px hit height and captions. Parent owns width and external gaps.",
-        "behavior": "Native range input: pointer drag, arrow keys, Page Up/Down, Home/End. setValue(v) and setRange(min,max) sync from other inputs (e.g. a Text field). Fluid width.",
+        "behavior": "Native range input: pointer drag, arrow keys, Page Up/Down, Home/End. setValue(v) and setRange(min,max) sync from other inputs (e.g. a Text field). Fluid width. Media variant owns a 24px high input, 4px white track, 10px thumb and hidden accessible captions.",
         "interactionOwnership": "Owns range semantics and aria-valuetext; caller owns the value, bounds and validation."
       },
       "interactions": {
@@ -3213,6 +3220,102 @@
       "variants": [
         "v1",
         "v2"
+      ]
+    },
+    {
+      "id": "turbo-prototype-player",
+      "name": "Prototype walkthrough player",
+      "class": "th-prototype-player",
+      "css": "components/prototype-player.css",
+      "module": "components/prototype-player.js",
+      "preview": "specimens/prototype-player.html",
+      "category": "Media",
+      "states": [
+        "paused",
+        "playing",
+        "loading",
+        "ended"
+      ],
+      "dependencies": [
+        "turbo-button",
+        "turbo-slider"
+      ],
+      "props": {
+        "steps": "Ordered labels and durations in milliseconds.",
+        "media": "Caller-owned preview element.",
+        "render": "Receives index, elapsed, step, playing. Return false while loading.",
+        "autoplay": "Start when visible unless reduced motion is enabled.",
+        "presentation": "toolbar (default) or overlay: video-style controls inside media, with elapsed/total time and fullscreen."
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Caption",
+            "selector": ".th-prototype-player__caption"
+          },
+          {
+            "name": "Actions row",
+            "selector": ".th-prototype-player__actions"
+          },
+          {
+            "name": "Counter",
+            "selector": ".th-prototype-player__counter"
+          },
+          {
+            "name": "Media viewport",
+            "selector": ".th-prototype-player__viewport"
+          },
+          {
+            "name": "Overlay panel",
+            "selector": ".th-prototype-player__panel"
+          },
+          {
+            "name": "Elapsed / duration",
+            "selector": ".th-prototype-player__time"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Stack gap",
+            "token": "--th-space-3",
+            "selector": ".th-prototype-player",
+            "property": "row-gap"
+          },
+          {
+            "label": "Action gap",
+            "token": "--th-space-2",
+            "selector": ".th-prototype-player__actions",
+            "property": "column-gap"
+          },
+          {
+            "label": "Overlay horizontal inset",
+            "token": "--th-space-3",
+            "selector": ".th-prototype-player__panel",
+            "property": "padding-left"
+          },
+          {
+            "label": "Overlay lower inset",
+            "token": "--th-space-2",
+            "selector": ".th-prototype-player__panel",
+            "property": "padding-bottom"
+          }
+        ],
+        "ownership": "Player owns control layout and timeline; caller owns media rendering and available width.",
+        "behavior": "Play/pause, previous/next screens, backward/forward seek, loading hold, Replay, visibility pause. Overlay presentation uses registered glass icon buttons, media Range slider and fullscreen; caption remains accessible.",
+        "interactionOwnership": "Timeline state belongs to the player. Registered Action buttons and Range slider own their native controls and input states. Caption/media/counter are internal noninteractive parts."
+      },
+      "usage": "TurboPrototypePlayer.create({steps,media,render,autoplay,presentation})",
+      "previewConfigurations": [
+        {
+          "id": "toolbar",
+          "name": "Toolbar",
+          "selector": "#toolbar"
+        },
+        {
+          "id": "overlay",
+          "name": "Video overlay",
+          "selector": "#overlay"
+        }
       ]
     }
   ],

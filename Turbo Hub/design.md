@@ -1,5 +1,107 @@
 # Case Study Design System
 
+## Floating reading navigation
+
+Two variants are preserved through `?nav=1|2`. Version 1 is the default.
+
+Visual thesis: a quiet white reading tray, soft blue feedback and a separate
+small control, with enough air to keep the navigation secondary to the story.
+Content plan: five short section labels, one current-section marker, then a
+separate icon control; no extra copy or decoration.
+Interaction thesis: the tray retracts and fades while its control glides to the
+viewport center; reopening reverses that same motion. Hover softly reveals a
+light blue highlight, while the current-section underline stays distinct.
+
+Version 1 has a 56px-high white tray with 22px corners and Helix utility text.
+The whole assembly is capped at 460px with viewport gutters. A separate 44px
+control with 16px corners sits to its right across a 10px gap, vertically centered.
+Its 20px Regular Phosphor icon points diagonally inward to collapse and outward
+to expand. The fine arrow geometry retains the same size in both states.
+`reading-collapse` and `reading-expand` resolve through the shared icon provider,
+with canonical Regular, Bold and Fill geometry available in Iconography.
+The control keeps its center-arrival spring bounce. Its icon has only a gentle
+velocity-driven 6% stretch and 8% squash rather than a thick resizing dash.
+All motion uses the existing single animation clock and honors reduced motion.
+
+The tray has 6px vertical and 10px horizontal padding, 44px link targets, 8px
+link insets and evenly distributed space between labels. Responsive insets
+reduce at 420px and 360px to preserve all labels without changing their font.
+
+Hover uses the existing light blue accent surface, inset 4px vertically with
+10px corners. Only the current section has the short blue underline. Keyboard
+focus remains outlined. The tray surface contracts horizontally and fades;
+labels fade without scaling. The separate control travels from the right edge
+to the exact horizontal center when collapsed, then returns on expansion.
+
+One requestAnimationFrame controller owns the complete spring: natural frequency
+20 rad/s and damping ratio 0.6. Its exact spring integration preserves velocity
+on reversal, preventing jumps during repeated clicks. Surface reveal, label opacity, icon deformation and control travel all derive
+from the same position. Hidden links become inert immediately and visibility
+changes only after the spring settles. The clock stops at rest, on page hide or
+when reduced motion is enabled. Reduced motion resolves immediately to the
+requested state. Escape minimizes and focuses the control; section selection
+leaves the tray expanded. Syntax, simulated state/rapid-reversal checks at
+30/60fps and the Impeccable detector passed. Browser review remains with the user.
+
+Version 2 retains a 44px × 120px right-edge Sections bookmark. Its 200px vertical
+index opens 8px to the left, uses five 44px links and a connected current-section
+dot rail, and closes on selection, Escape, outside click or focus leaving. Its
+220ms slide is disabled under reduced motion. Mobile places it 96px above the
+bottom safe area. Product components are unchanged.
+
+Both versions update the fragment and focus the destination heading without
+an extra scroll. Neither locks scrolling or traps focus.
+
+## What we chose to leave out
+
+A deliberately compact section after #flows: one short paragraph, two static
+screen concepts side by side, and one short description beneath. The screens
+reconstruct the all-at-once setup and generic app welcome left out of the final
+direction. They are illustrative alternatives inferred at the user’s request,
+not historical wireframes or tested screens. Source: create-flow and
+whatsapp-invite-flow in flow-story-data.js, with payment activation kept in the
+member profile. The invitation-led entry remains a proposed prototype direction.
+
+SVG screen concepts live in assets/tradeoffs/; they are page-owned illustrations,
+not new product screens or independently interactive components. Both use the
+existing blue chrome/light surface language. Captions and copy reuse editorial
+typography and spacing. No links, repeated subheadings, timeline diagrams or
+additional rationale blocks are added. They stay side by side on narrow screens,
+scale to their columns, and have descriptive alternative text. Browser review
+remains with the user.
+
+## Impact & future
+
+Reference-led composition: six thin colored selection frames with square corner
+handles, oversized colored numbers, overlapping white-text caption bubbles with
+tails, and two red highlighted text frames. Blue activation sits top-left, purple
+repeat usage top-right, orange payment activity bottom-left and green activation
+uplift bottom-right; red explanation frames sit above and below the central
+italic Larken statement. This follows the user-supplied image composition.
+
+All numbers remain explicitly illustrative assumptions: activation 40% → 70%,
+repeat use 25% → 45%, payments/active Hub/month 4 → 8, with activation uplift
++30 percentage points. These map to the three earlier success metrics; no
+measured results, shipping claims or fabricated testimonials are presented.
+
+The editorial stage uses a 70rem-wide composition. Lower frames anchor 32px
+below the measured central text, with 520px of canvas reserved after that anchor; mobile uses
+two side frames, a central text frame, central statement, two lower side frames
+and the final text frame with a 560px reserve below the same measured anchor. Overflow is visible, and both caption
+bubbles and frames are included in movement-bound measurements. Resize computes
+horizontal viewport and vertical canvas travel bounds before scroll transforms;
+scroll uses one passive, coalesced frame controller. Each note has its own
+viewport-relative progress, with linear 220px requested desktop travel and
+140px vertical travel on mobile. Bounds still cap horizontal travel at the
+viewport edges. Upper notes animate on their own viewport entry. Lower notes converge with
+the central statement, preventing ongoing downward travel from creating an
+empty band beneath it. Blue/purple frames are 180px tall (165px mobile), their
+smaller bubbles are lifted, and purple is widened. Red frames render just the
+highlighted paragraph, without a kind label or heading. Callouts stay inside those
+bounds while gathering, including the caption overhangs. Reduced motion settles
+the composition immediately. Layout and graphics are page-owned; no product
+control internals are overridden. Browser/visual review remains with the user.
+
 ## Standalone onboarding prototype
 
 The isolated `prototypes/onboarding/` app follows the supplied reference layout: top-left pagination, left-aligned headline and short copy, a single central illustration, and a bottom CTA. The background (`#e7efff`), blue buttons (`#356cdf`, hover `#2857c8`), and off-black text (`#3f4652`) reuse the case-study palette, with secondary text `#58677d`. Local Helix typography uses 2.05rem headings; both lines have the same semibold weight, size, tracking, and 1.2 line height for optical consistency. Body copy is 1.04rem with 1.55 line height and a 1rem gap below the heading. No logo, close/skip control, badges, counters, footer tagline, or simulated UI widgets are present.
@@ -458,3 +560,38 @@ Welcome benefits container (6 October 2026): the UPI, card and monthly-limit ite
 share a rounded outlined list, using the existing border, surface and radius tokens
 and a 16px inset. The What you get heading remains outside; child Avatar geometry
 and 12px row gaps are unchanged. Source review only; visual review remains manual.
+
+## Closing contact card
+
+The existing pink plaid contact card repeats after Impact & future. A single
+page-owned createContactSection(id) renderer supplies both #contact and
+#contact-end with identical text, LinkedIn action and existing .contact-* styles.
+The two instances have distinct IDs. No component styling or product controls
+are changed; visual review remains with the user.
+
+Impact canvas ending: the movement reserve is used only to calculate safe travel
+bounds on mount/resize. During scroll, the actual canvas height follows the
+lowest translated frame or caption plus 24px. Absolute frame destinations do
+not depend on that height, so the central statement stays anchored while the
+following definitions move with the composition. Once gathered, the bottom
+reserve disappears; reduced motion uses the same compact resting height.
+No per-frame child measurements are introduced; bounds and drift are cached.
+
+Removed the visible metric-definitions paragraph beneath the impact canvas at
+the user’s request. Definitions remain in the data for reference; the section
+now moves directly from the floating composition to “Where it goes next”.
+
+Impact top inset: removed 184px of unused top runway on desktop (128px on
+mobile) by shifting the first frames, upper red paragraph and central statement
+together. The first desktop frames now start at 40px/56px within the canvas,
+with a 24px introduction-to-canvas margin. Measured lower-frame anchors and
+caption-aware bounds continue to adapt to the updated composition.
+
+Red paragraph line spacing: set the note container to the same 14px/21px
+utility typography as its inline highlighted text. This removes the inherited
+20px/33px body line-box minimum that was creating gaps between wrapped lines.
+# Impact composition refinement
+
+The composition stays at its natural size, with the center at 360px and 40px before the lower group. Notes start hidden and displaced outward in depth; as the headline enters the reading area they fade in and gather with a small stagger. They remain visible once settled. Reverse scrolling reverses the arrival. No pinned scene or extra scroll runway is used. Reduced motion keeps every note visible. Browser review remains manual.
+
+The lower orange and green frames share a top edge and compact 180px desktop height. Their shorter captions overlap by 56px with smaller outward offsets. The middle red note uses a paragraph with an explicit 14px/21px line box to prevent inherited body leading from spreading its highlighted lines. Mobile keeps the two metrics together and places the red note below them. These remain page-owned editorial elements; no registered product component is overridden. Visual review remains with the user.

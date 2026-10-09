@@ -238,3 +238,5 @@
 /* Warning badge: an attention status (e.g. Add details), amber like the warning Action. Optional leading icon. */
 .th-badge--warning { display:inline-flex; align-items:center; gap:var(--th-space-1); padding:var(--th-space-1) var(--th-space-2); border-radius:8px; background:var(--color-warning-soft); color:var(--color-warning); font:var(--type-tag-label-weight) var(--type-tag-label-size)/var(--type-tag-label-leading) var(--font-label); }
 .th-badge > .th-icon { height:auto; color:inherit; }
+
+.th-button[hidden] { display:none; }

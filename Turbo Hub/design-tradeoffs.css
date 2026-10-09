@@ -1,0 +1,13 @@
+/* Two reconstructed screen concepts within the editorial narrative. */
+.design-tradeoffs__screens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-10);
+  max-width: 640px;
+  margin: var(--space-8) auto var(--space-6);
+}
+.design-tradeoffs__screen { min-width: 0; margin: 0; text-align: center; }
+.design-tradeoffs__screen img { display: block; width: 100%; max-width: 238px; height: auto; margin-inline: auto; }
+.design-tradeoffs__screen figcaption { margin-top: var(--space-3); font: var(--font-utility); color: var(--ink-soft); }
+.design-tradeoffs__description { margin: 0; font: var(--font-small-body); color: var(--ink-soft); }
+@media (max-width: 48rem) { .design-tradeoffs__screens { gap: var(--space-4); } }

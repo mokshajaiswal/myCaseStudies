@@ -360,12 +360,23 @@ h4 {
   text-align: center;
 }
 
-.asset-placeholder--hero {
-  width: 3.5rem;
-  height: 3.5rem;
-  border-radius: var(--radius-small);
-  background: rgb(247 251 255 / 0.94);
-  box-shadow: 0 14px 28px rgb(21 50 120 / 0.25);
+.hero__illustration {
+  display: block;
+  width: clamp(80px, 9vw, 104px);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__illustration {
+    animation: hero-icon-float 4s ease-in-out infinite;
+  }
+}
+
+@keyframes hero-icon-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-8px) rotate(1deg); }
 }
 
 .hero h1 {
@@ -460,6 +471,25 @@ h4 {
   align-items: end;
 }
 
+@media (prefers-reduced-motion: no-preference) {
+  .phone-stage > .phone {
+    animation: overview-phone-float 5.6s ease-in-out infinite;
+  }
+  .phone-stage > .phone:nth-child(2) {
+    animation-duration: 6.2s;
+    animation-delay: -2s;
+  }
+  .phone-stage > .phone:nth-child(3) {
+    animation-duration: 5.9s;
+    animation-delay: -3.8s;
+  }
+}
+
+@keyframes overview-phone-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
 .annotation-band {
   position: relative;
   left: 50%;
@@ -512,9 +542,10 @@ h4 {
 
 .closing-stage {
   display: grid;
-  width: min(100%, 18rem);
+  width: min(100%, 360px);
   margin-inline: auto;
 }
+.prototype-walkthrough { display: block; width: 100%; height: 840px; border: 0; background: transparent; }
 
 .phone {
   position: relative;
@@ -566,6 +597,16 @@ h4 {
   inset: 0;
   opacity: 0;
   pointer-events: none;
+}
+
+/* Page-owned placement; screens and device shells come from the prototype. */
+.overview-prototype {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: transparent;
 }
 
 .media-placeholder {

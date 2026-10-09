@@ -114,3 +114,8 @@
 .th-field.th-field--digit .th-field__surface { min-width:44px; padding:var(--th-space-2); }
 .th-field--digit .th-field__input { text-align:center; height:32px; font:var(--type-amount-summary-weight) var(--type-amount-summary-size)/var(--type-amount-summary-leading) var(--font-body); font-variant-numeric:tabular-nums; }
 .th-field--digit .th-field__body .th-field__input { line-height:32px; }
+
+/* Compact white seek control for media overlays; this variant owns its parts. */
+.th-slider--media { gap:0; --slider-track-height:4px; --slider-thumb-size:10px; --slider-track-color:rgb(255 255 255 / .35); --color-action:var(--th-white); --color-surface:var(--th-white); }
+.th-slider--media .th-slider__head, .th-slider--media .th-slider__range { position:absolute; width:1px; height:1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.th-slider--media .th-slider__control { height:24px; }

@@ -15,9 +15,9 @@ const caseStudy = {
     ],
   },
   media: [
-    { id: "phone-overview", label: "Overview screen" },
-    { id: "phone-manager", label: "Manager screen" },
-    { id: "phone-member", label: "Member screen" },
+    { id: "phone-overview", label: "PayZapp · Accounts & Cards", sceneId: "accounts-cards" },
+    { id: "phone-manager", label: "Turbo Hub home · family spending", sceneId: "hub-dashboard" },
+    { id: "phone-member", label: "Turbo Hub Members · family spending limits", sceneId: "members-family" },
   ],
   product: {
     title: "What exactly was Turbo Hub?",
@@ -403,6 +403,30 @@ const caseStudy = {
       "I started with low-fidelity wireframes to work through the structure of the manager and member journeys before moving into high-fidelity design.",
     continuation:
       "As the flows became clearer, I translated them into PayZapp’s existing design language, reusing familiar patterns and components so Turbo Hub felt like a natural extension of the product rather than a separate experience.",
+  },
+  tradeoffs: {
+    title: "What we chose to leave out",
+    intro: "We left out an all-in-one family setup and a generic app welcome. Both added steps before people reached what they came for: creating a Hub or joining their family.",
+    screens: [
+      { src: "assets/tradeoffs/all-in-one-setup.svg", label: "All-in-one setup", alt: "Reconstructed concept: Hub details, family members, limits and payment methods collected in one long setup screen." },
+      { src: "assets/tradeoffs/generic-app-welcome.svg", label: "Generic app welcome", alt: "Reconstructed concept: a general PayZapp introduction and account setup before reaching the family invitation." },
+    ],
+    description: "Create the Hub first, then add people and permissions. For members, carry the invitation into onboarding and keep payment activation in the profile.",
+  },
+  impactFuture: {
+    title: "Impact & future",
+    intro: "These illustrative baselines and targets show what success could look like against the three measures defined earlier. They are assumptions, not measured Turbo Hub results.",
+    statement: "More members joining. More families returning. More everyday spending.",
+    notes: [
+      { value: "40→70%", label: "Invited members joining and making their first payment.", kind: "Member activation", type: "metric" },
+      { label: "Invite → join → first payment. Track activation within 30 days of the invitation.", type: "quote" },
+      { value: "25→45%", label: "More family Hubs returning the following month.", kind: "Repeat family usage", type: "metric" },
+      { value: "4→8", label: "Monthly payments per active Hub. More everyday use.", kind: "Household payment activity", type: "metric" },
+      { label: "Pilot with families. Compare real usage with these targets, then improve the gaps.", type: "quote" },
+      { value: "+30 pp", label: "Assumed activation uplift: 40% → 70%.", kind: "Illustrative improvement", type: "metric" },
+    ],
+    definitions: "Activation: invited members who join and make a first payment within 30 days. Repeat usage: active Hubs returning the following month. Payment activity: monthly transactions per active Hub. Percentage-point changes compare each assumed baseline with its illustrative target.",
+    future: "Validate these targets with a family pilot, then compare real activation, repeat use and payment activity. Use the gaps to improve joining, limits and request recovery before expanding the experience.",
   },
   closing: {
     media: { id: "phone-closing", label: "Closing media" },
@@ -1158,9 +1182,23 @@ function createTimeline() {
   return card;
 }
 
-function createPhone({ id, label }) {
+function createPhone({ id, label, sceneId }) {
   const phone = createElement("article", "phone");
   phone.setAttribute("aria-label", label);
+
+  if (sceneId) {
+    const scene = window.TurboFamilyStory.scenes.find((item) => item.id === sceneId);
+    const frame = document.createElement("iframe");
+    frame.className = "overview-prototype";
+    frame.src = window.TurboFlowStory.sceneURL({ ...scene, interactive: false }).href;
+    frame.title = label;
+    frame.loading = "lazy";
+    frame.referrerPolicy = "same-origin";
+    frame.tabIndex = -1;
+    // The existing prototype owns its screen and device shell.
+    phone.append(frame);
+    return phone;
+  }
 
   const screen = createElement("div", "phone-screen");
   const slot = createElement("div", "media-slot");
@@ -1197,7 +1235,7 @@ function renderCaseStudy() {
   overview.append(overviewColumn);
 
   const phoneStage = createElement("div", "phone-stage");
-  phoneStage.setAttribute("aria-label", "Replaceable mobile product media");
+  phoneStage.setAttribute("aria-label", "PayZapp Accounts & Cards, Turbo Hub home, and family members");
   caseStudy.media.forEach((item) => phoneStage.append(createPhone(item)));
   overview.append(phoneStage);
   shell.append(overview);
@@ -1378,29 +1416,20 @@ function renderCaseStudy() {
   closing.id = "closing";
   const closingStage = createElement("div", "closing-stage");
   closingStage.setAttribute("aria-label", "Closing media");
-  closingStage.append(createPhone(caseStudy.closing.media));
+  const walkthrough = createElement("iframe", "prototype-walkthrough");
+  walkthrough.src = "prototypes/walkthrough/index.html?v=video-overlay-3";
+  walkthrough.title = "Full Turbo Hub prototype with play, pause, and draggable timeline";
+  walkthrough.loading = "lazy";
+  window.addEventListener("message", (event) => {
+    if (event.origin !== location.origin || event.source !== walkthrough.contentWindow || event.data?.type !== "turbo-walkthrough-size") return;
+    const height = Number(event.data.height);
+    if (Number.isFinite(height) && height >= 300 && height <= 1400) walkthrough.style.height = `${height}px`;
+  });
+  closingStage.append(walkthrough);
   closing.append(createAnnotationBand(closingStage, caseStudy.closing.annotation));
   shell.append(closing);
 
-  const contact = createElement("section", "case-section");
-  contact.id = "contact";
-  contact.setAttribute("aria-label", "Contact");
-  const contactCard = createElement("div", "contact-card");
-  contactCard.append(
-    createElement("h3", "contact-heading", caseStudy.contact.eyebrow),
-    createElement("p", "contact-message", caseStudy.contact.message),
-  );
-  const contactAction = createElement("a", "contact-button");
-  contactAction.href = caseStudy.contact.action.href;
-  contactAction.target = "_blank";
-  contactAction.rel = "noreferrer";
-  contactAction.append(
-    createLinkedInIcon(),
-    createElement("span", "", caseStudy.contact.action.label),
-  );
-  contactCard.append(contactAction);
-  contact.append(contactCard);
-  shell.append(contact);
+  shell.append(createContactSection("contact"));
 
   const timeline = createElement("section", "case-section");
   timeline.id = "timeline";
@@ -1417,9 +1446,136 @@ function renderCaseStudy() {
     relationship,
     artifacts,
     flows,
+    createDesignTradeoffs(),
+    TurboImpactFuture.create(caseStudy.impactFuture),
+    createContactSection("contact-end"),
+    createCaseStudyEnding(),
   );
 
   contentRoot.replaceChildren(shell);
+}
+
+function createCaseStudyEnding() {
+  const ending = createElement("section", "case-section case-ending");
+  ending.id = "learning";
+  const heading = createSectionHeading("Learning");
+  heading.id = "learning-heading";
+  ending.setAttribute("aria-labelledby", heading.id);
+  const column = createElement("div", "reading-column");
+  column.append(heading);
+  appendParagraphs(column, [
+    "Designing shared money meant designing two different kinds of confidence. Managers needed clear boundaries and visibility; members needed the freedom to spend without asking for help every time. Defining those roles first gave the screens a stronger foundation.",
+    "The flows also made the exceptions impossible to ignore. A pending invitation, a reached limit or a declined request needed as much clarity as a successful payment. I’d carry that forward: make the everyday path simple, and make the moments that interrupt it understandable.",
+  ]);
+  const separator = createElement("div", "case-ending__separator");
+  separator.setAttribute("aria-hidden", "true");
+  const flower = createElement("img", "");
+  flower.src = "assets/heading_flower.svg";
+  flower.alt = "";
+  separator.append(flower);
+  const composition = createElement("div", "case-ending__composition");
+  const sideFlower = createElement("div", "case-ending__flower");
+  const flowerArt = createElement("img", "case-ending__flower-art");
+  flowerArt.src = "assets/side purple flower.svg";
+  flowerArt.alt = "";
+  flowerArt.loading = "lazy";
+  sideFlower.append(flowerArt, createElement("p", "case-ending__flower-text", "A little reflection on designing shared money for families. Your note will go here."));
+  const card = createElement("a", "case-ending__card");
+  card.href = "#top";
+  card.setAttribute("aria-label", "Return to the beginning of the Turbo Hub case study");
+  const visual = createElement("div", "case-ending__visual");
+  const phone = createPhone({ id: "phone-ending", label: "Turbo Hub analytics overview" });
+  const screen = createElement("img", "case-ending__screen");
+  screen.src = "prototypes/shared/references/figma/analytics.png";
+  screen.alt = "Turbo Hub family spending analytics";
+  screen.loading = "lazy";
+  phone.querySelector(".media-slot").replaceChildren(screen);
+  const mockup = createElement("div", "case-ending__mockup");
+  mockup.append(phone);
+  visual.append(mockup);
+  const copy = createElement("div", "case-ending__card-copy");
+  copy.append(
+    createElement("h3", "", "Shaping a new family payments experience for PayZapp"),
+    createElement("p", "", "Helping PayZapp move beyond individual payments and create a shared-money experience for families."),
+  );
+  const meta = createElement("p", "case-ending__meta");
+  meta.append(createElement("strong", "", "ZETA"), document.createTextNode(" FINTECH · B2C · APP"));
+  const arrows = createElement("span", "case-ending__arrows");
+  arrows.setAttribute("aria-hidden", "true");
+  // Geometry from assets/Casestudy_arrows.svg; CSS owns cumulative opacity.
+  arrows.innerHTML = "<svg aria-hidden=\"true\" focusable=\"false\" width=\"54\" height=\"28\" viewBox=\"0 0 54 28\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\">\n<path class=\"case-ending__arrow\" d=\"M36.4712 0.770074C36.346 0.711209 36.2032 0.686322 36.0651 0.713552C35.927 0.740692 35.806 0.816281 35.7264 0.926887C35.6467 1.03749 35.6134 1.17623 35.6315 1.31577C35.6495 1.4554 35.7184 1.58296 35.8139 1.68305C35.8139 1.68305 35.8139 1.68305 35.8139 1.68305C36.2893 2.17933 36.7719 2.66547 37.2619 3.14147C39.2217 5.04544 41.2984 6.78712 43.492 8.36648C45.6499 9.92016 47.8203 11.4564 50.0033 12.9752C50.3143 13.1491 50.378 13.675 50.0662 13.9368C45.7598 17.463 41.5113 21.0635 37.3208 24.7382C36.8119 25.1845 36.3038 25.6319 35.7966 26.0803C35.6881 26.1764 35.6158 26.3093 35.5995 26.4547C35.5832 26.6001 35.6236 26.7453 35.7125 26.8593C35.8015 26.9733 35.9324 27.0479 36.0774 27.0674C36.2224 27.087 36.3689 27.0493 36.4885 26.9674C36.4885 26.9674 36.4885 26.9674 36.4885 26.9674C37.047 26.5846 37.6046 26.2008 38.1613 25.8159C42.7458 22.6461 47.2723 19.4021 51.7409 16.0838C53.5001 14.8484 53.4969 11.8879 51.6809 10.6453C49.5481 9.05669 47.4028 7.48556 45.2449 5.93188C43.0513 4.35251 40.7409 2.93546 38.3136 1.6807C37.7068 1.36702 37.0927 1.06347 36.4712 0.770074Z\" fill=\"white\"/>\n<path class=\"case-ending__arrow\" d=\"M24.606 0.0674377C24.4808 0.0085721 24.338 -0.0163147 24.1998 0.0109149C24.0618 0.038055 23.9408 0.113644 23.8611 0.22425C23.7815 0.334856 23.7482 0.473591 23.7662 0.613132C23.7842 0.752761 23.8531 0.880322 23.9487 0.980414C23.9487 0.980414 23.9487 0.980414 23.9487 0.980414C24.424 1.4767 24.9067 1.96284 25.3966 2.43883C27.3565 4.34281 29.4332 6.08448 31.6267 7.66384C33.7846 9.21752 35.9551 10.7538 38.1381 12.2725C38.449 12.4464 38.5128 12.9724 38.201 13.2341C33.8946 16.7604 29.6461 20.3608 25.4556 24.0356C24.9466 24.4819 24.4386 24.9292 23.9314 25.3777C23.8228 25.4737 23.7506 25.6067 23.7343 25.7521C23.718 25.8975 23.7583 26.0426 23.8473 26.1567C23.9362 26.2707 24.0672 26.3452 24.2122 26.3648C24.3572 26.3844 24.5037 26.3466 24.6233 26.2648C24.6233 26.2648 24.6233 26.2648 24.6233 26.2648C25.1818 25.882 25.7393 25.4982 26.2961 25.1132C30.8805 21.9435 35.4071 18.6995 39.8757 15.3812C41.6349 14.1458 41.6317 11.1853 39.8156 9.94264C37.6829 8.35405 35.5375 6.78292 33.3797 5.22924C31.1861 3.64988 28.8757 2.23282 26.4484 0.978068C25.8416 0.664381 25.2274 0.360837 24.606 0.0674377Z\" fill=\"white\"/>\n<path class=\"case-ending__arrow\" d=\"M12.7408 0.0674377C12.6156 0.0085721 12.4727 -0.0163147 12.3346 0.0109149C12.1965 0.038055 12.0755 0.113644 11.9959 0.22425C11.9163 0.334856 11.883 0.473591 11.901 0.613132C11.919 0.752761 11.9879 0.880322 12.0834 0.980414C12.0834 0.980414 12.0834 0.980414 12.0834 0.980414C12.5588 1.4767 13.0414 1.96284 13.5314 2.43883C15.4912 4.34281 17.5679 6.08448 19.7615 7.66384C21.9194 9.21752 24.0899 10.7538 26.2729 12.2725C26.5838 12.4464 26.6475 12.9724 26.3357 13.2341C22.0293 16.7604 17.7809 20.3608 13.5903 24.0356C13.0814 24.4819 12.5734 24.9292 12.0662 25.3777C11.9576 25.4737 11.8854 25.6067 11.8691 25.7521C11.8527 25.8975 11.8931 26.0426 11.982 26.1567C12.071 26.2707 12.202 26.3452 12.3469 26.3648C12.492 26.3844 12.6385 26.3466 12.7581 26.2648C12.7581 26.2648 12.7581 26.2648 12.7581 26.2648C13.3165 25.882 13.8741 25.4982 14.4309 25.1132C19.0153 21.9435 23.5418 18.6995 28.0104 15.3812C29.7697 14.1458 29.7664 11.1853 27.9504 9.94264C25.8176 8.35405 23.6723 6.78292 21.5144 5.22924C19.3209 3.64988 17.0104 2.23282 14.5832 0.978068C13.9763 0.664381 13.3622 0.360837 12.7408 0.0674377Z\" fill=\"white\"/>\n<path class=\"case-ending__arrow\" d=\"M0.875546 0.0674377C0.750318 0.0085721 0.607489 -0.0163147 0.469364 0.0109149C0.331303 0.038055 0.210295 0.113644 0.130659 0.22425C0.0510228 0.334856 0.0177172 0.473591 0.0357679 0.613132C0.0537542 0.752761 0.122658 0.880322 0.218204 0.980414C0.218204 0.980414 0.218204 0.980414 0.218204 0.980414C0.693556 1.4767 1.17621 1.96284 1.66617 2.43883C3.62601 4.34281 5.70271 6.08448 7.89627 7.66384C10.0542 9.21752 12.2246 10.7538 14.4076 12.2725C14.7186 12.4464 14.7823 12.9724 14.4705 13.2341C10.1641 16.7604 5.91564 20.3608 1.72508 24.0356C1.21617 24.4819 0.70812 24.9292 0.20092 25.3777C0.092381 25.4737 0.0201255 25.6067 0.00382483 25.7521C-0.0125106 25.8975 0.0278584 26.0426 0.116806 26.1567C0.205753 26.2707 0.336744 26.3452 0.481716 26.3648C0.626722 26.3844 0.773246 26.3466 0.89283 26.2648C0.89283 26.2648 0.89283 26.2648 0.89283 26.2648C1.45128 25.882 2.00888 25.4982 2.56563 25.1132C7.15008 21.9435 11.6766 18.6995 16.1452 15.3812C17.9044 14.1458 17.9012 11.1853 16.0852 9.94264C13.9524 8.35405 11.8071 6.78292 9.64919 5.22924C7.45563 3.64988 5.1452 2.23282 2.71792 0.978068C2.1111 0.664381 1.49697 0.360837 0.875546 0.0674377Z\" fill=\"white\"/>\n</svg>";
+  const footerRow = createElement("div", "case-ending__card-footer");
+  footerRow.append(meta, arrows);
+  copy.append(footerRow);
+  card.append(visual, copy);
+  composition.append(sideFlower, card);
+  const illustration = createElement("div", "case-ending__illustration");
+  illustration.id = "closing-illustration";
+  illustration.dataset.lottieSlot = "closing-garden";
+  illustration.setAttribute("aria-hidden", "true");
+  const still = createElement("img", "case-ending__flowers-still");
+  still.src = "assets/closing/flowers-still.svg";
+  still.alt = "";
+  illustration.append(still);
+  const wave = createElement("div", "case-ending__wave");
+  wave.setAttribute("aria-hidden", "true");
+  wave.innerHTML = '<svg viewBox="0 0 1440 22" preserveAspectRatio="none" focusable="false"><path d="M0 9 Q45 15 90 9 T180 9 T270 9 T360 9 T450 9 T540 9 T630 9 T720 9 T810 9 T900 9 T990 9 T1080 9 T1170 9 T1260 9 T1350 9 T1440 9 V22 H0Z" fill="currentColor"/></svg>';
+  const footer = createElement("footer", "case-ending__footer");
+  footer.append(illustration, wave);
+  ending.append(column, separator, composition, footer);
+  return ending;
+}
+
+function createContactSection(id) {
+  const contact = createElement("section", "case-section");
+  contact.id = id;
+  contact.setAttribute("aria-label", "Contact");
+  const contactCard = createElement("div", "contact-card");
+  contactCard.append(
+    createElement("h3", "contact-heading", caseStudy.contact.eyebrow),
+    createElement("p", "contact-message", caseStudy.contact.message),
+  );
+  const contactAction = createElement("a", "contact-button");
+  contactAction.href = caseStudy.contact.action.href;
+  contactAction.target = "_blank";
+  contactAction.rel = "noreferrer";
+  contactAction.append(
+    createLinkedInIcon(),
+    createElement("span", "", caseStudy.contact.action.label),
+  );
+  contactCard.append(contactAction);
+  contact.append(contactCard);
+  return contact;
+}
+
+function createDesignTradeoffs() {
+  const section = createElement("section", "case-section design-tradeoffs");
+  section.id = "design-tradeoffs";
+  const column = createElement("div", "reading-column");
+  const heading = createSectionHeading(caseStudy.tradeoffs.title);
+  heading.id = "design-tradeoffs-heading";
+  section.setAttribute("aria-labelledby", heading.id);
+  const screens = createElement("div", "design-tradeoffs__screens");
+  caseStudy.tradeoffs.screens.forEach(screen => {
+    const figure = createElement("figure", "design-tradeoffs__screen");
+    const image = document.createElement("img");
+    image.src = screen.src;
+    image.alt = screen.alt;
+    image.width = 280;
+    image.height = 520;
+    image.loading = "lazy";
+    image.decoding = "async";
+    figure.append(image, createElement("figcaption", "", screen.label));
+    screens.append(figure);
+  });
+  column.append(
+    heading,
+    createElement("p", "section-intro", caseStudy.tradeoffs.intro),
+    screens,
+    createElement("p", "design-tradeoffs__description", caseStudy.tradeoffs.description),
+  );
+  section.append(column);
+  return section;
 }
 
 function createAnnotationBand(content, annotation) {
