@@ -1602,6 +1602,7 @@ function createCaseStudyEnding() {
   const card = window.TurboCaseStudyCard({
     variant: "variant-2",
     hoverFlower: "purple",
+    href: "https://mokshadesigns.framer.website/casestudy3",
   });
   composition.append(sideFlower, card);
   const illustration = createElement("div", "case-ending__illustration");
