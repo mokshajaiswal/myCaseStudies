@@ -1287,7 +1287,8 @@
         "error",
         "disabled",
         "prominent amount",
-        "digit"
+        "digit",
+        "large amount"
       ],
       "dependencies": [],
       "previewConfigurations": [
@@ -1350,6 +1351,26 @@
           "id": "digit-disabled",
           "name": "Digit \u00b7 disabled",
           "selector": "#digit-disabled"
+        },
+        {
+          "id": "amount-large",
+          "name": "Large amount",
+          "selector": "#amount-large"
+        },
+        {
+          "id": "amount-large-empty",
+          "name": "Large amount \u00b7 empty",
+          "selector": "#amount-large-empty"
+        },
+        {
+          "id": "amount-large-error",
+          "name": "Large amount \u00b7 error",
+          "selector": "#amount-large-error"
+        },
+        {
+          "id": "amount-large-disabled",
+          "name": "Large amount \u00b7 disabled",
+          "selector": "#amount-large-disabled"
         }
       ],
       "anatomy": {
@@ -1392,10 +1413,10 @@
           }
         ],
         "ownership": "Component owns label, control, internal spacing and error feedback. Page owns grouping and external gaps.",
-        "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked. Validation message sits below the bordered field surface. prominent=true uses the shared 16px Medium field value and prefix with a 2px label gap; semantics and validation stay unchanged.",
+        "behavior": "Native accessible control. Caller supplies value/checked, disabled and callbacks. Field/select/check expose control and setError(text). Switch/check expose setChecked(boolean). Switch onChange emits proposed value; caller updates it with setChecked. Validation message sits below the bordered field surface. prominent=true uses the shared 16px Medium field value and prefix with a 4px label gap; semantics and validation stay unchanged.",
         "interactionOwnership": "Owns control semantics; caller owns application state and validation."
       },
-      "usage": "Use TurboUI.field({id, label, ...}). IDs must be unique. See Add Member for composed form usage. variant='placeholder' displays a vertically centered input prompt instead of the small visible label; the associated label stays available to assistive technology. Placeholder defaults to label and disappears when typing. Surface has 60px minimum height, 12px vertical and 16px horizontal insets; validation remains below it. variant='digit' uses a blank, centered 64px-high box with 8px insets and a hidden accessible label, intended for a 44px-or-wider allocation in a segmented OTP. It retains Text field focus, disabled and input ownership."
+      "usage": "Use TurboUI.field({id, label, ...}). IDs must be unique. See Add Member for composed form usage. variant='placeholder' displays a vertically centered input prompt instead of the small visible label; the associated label stays available to assistive technology. Placeholder defaults to label and disappears when typing. Surface has 60px minimum height, 12px vertical and 16px horizontal insets; validation remains below it. variant='digit' uses a blank, centered 64px-high box with 8px insets and a hidden accessible label, intended for a 44px-or-wider allocation in a segmented OTP. It retains Text field focus, disabled and input ownership. prominent=true with amountSize='large' selects 20px Medium amount and prefix with a shared 28px line box; the existing 64px field surface, caption and validation remain. Review payment opts into this configuration; other fields keep their existing sizes."
     },
     {
       "id": "turbo-select",
@@ -1690,11 +1711,11 @@
             "token": "--th-space-1"
           }
         ],
-        "behavior": "Presentational account identity composes registered Avatar and Action. Caller supplies name/account and action callback; disabled prevents account change. No private child interaction states. Compact density uses 16px inset, 8px identity gap, 4px copy gaps and 16px account name.",
+        "behavior": "Presentational account identity composes registered Avatar and Action. Caller supplies name/account and action callback; disabled prevents account change. No private child interaction states. Compact density uses 16px inset, 8px avatar-to-copy and action gaps, 4px name-to-number gap and 16px Semibold account name with 1.4 leading. Long names wrap.",
         "ownership": "Component owns internal geometry; screen owns external layout.",
         "interactionOwnership": "Action belongs to turbo-button; Avatar is presentational."
       },
-      "usage": "TurboUI.paymentAccount({name,account,onChange,disabled})"
+      "usage": "TurboUI.paymentAccount({name,account,onChange,disabled}) Hub image uses the registered 56px profile Avatar configuration."
     },
     {
       "id": "turbo-swipe-action",

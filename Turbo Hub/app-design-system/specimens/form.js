@@ -13,3 +13,5 @@ if(kind==='field'){add('digit',{variant:'digit',label:'Digit 1 of 6'});add('digi
 if(kind==='otp'){add('empty',{label:'6-digit code'});add('partial',{label:'6-digit code',value:'482'});add('complete',{label:'6-digit code',value:'482913'});add('error',{label:'6-digit code',value:'482',error:'Enter all 6 digits.'});add('disabled',{label:'6-digit code',value:'482913',disabled:true});}
 
 if(kind==='slider')add('media',{variant:'media',label:'Seek prototype',min:0,max:120,value:32,format:v=>'0:'+String(v).padStart(2,'0')});
+
+if(kind==='field'){add('amount-large',{label:'Amount',value:'2500',prefix:'₹',prominent:true,amountSize:'large'});add('amount-large-empty',{label:'Amount',prefix:'₹',prominent:true,amountSize:'large'});add('amount-large-error',{label:'Amount',value:'1000000',prefix:'₹',prominent:true,amountSize:'large',error:'Enter a valid amount.'});add('amount-large-disabled',{label:'Amount',value:'2500',prefix:'₹',prominent:true,amountSize:'large',disabled:true});}

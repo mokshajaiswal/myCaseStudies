@@ -1,7 +1,7 @@
 .th-payment-account { display:flex; align-items:flex-start; gap:var(--th-space-2); padding:var(--th-space-4); border:1px solid var(--color-border); border-radius:var(--th-radius); background:var(--color-surface); }
 .th-payment-account__copy { min-width:0; display:grid; gap:var(--th-space-2); }
-.th-payment-account__copy strong {overflow-wrap:anywhere;font:var(--type-item-title-weight) var(--type-item-title-size)/var(--type-item-title-leading) var(--font-body);}
-.th-payment-account__number {color:var(--color-text-secondary);font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body);}
+.th-payment-account__copy strong {overflow-wrap:anywhere;font:var(--type-item-title-weight) var(--type-field-value-size)/var(--type-item-title-leading) var(--font-body);}
+.th-payment-account__number {color:var(--color-text-secondary);font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body);}
 .th-payment-account .th-button { justify-self:start; }
 .th-swipe { height:56px; position:relative; border-radius:16px; background:var(--color-action); color:white; }
 .th-swipe__label {position:absolute;inset:0;display:grid;place-items:center;padding-left:28px;pointer-events:none;font:var(--type-action-weight) var(--type-action-size)/var(--type-action-leading) var(--font-label);}
