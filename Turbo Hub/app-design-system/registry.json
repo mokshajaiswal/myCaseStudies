@@ -3317,6 +3317,117 @@
           "selector": "#overlay"
         }
       ]
+    },
+    {
+      "id": "turbo-flow-checkpoint",
+      "name": "Flow checkpoint",
+      "class": "family-story__loop-step",
+      "category": "Navigation",
+      "css": "components/flow-checkpoint.css",
+      "module": "components/flow-checkpoint.js",
+      "preview": "specimens/flow-checkpoint.html",
+      "states": [
+        "upcoming",
+        "current",
+        "complete",
+        "hover",
+        "active",
+        "focus-visible"
+      ],
+      "dependencies": [],
+      "props": {
+        "number": "Displayed one-based step number.",
+        "label": "Step title; wraps within the available width.",
+        "last": "false (default) renders the outgoing connector; true omits it. Use in a contiguous vertical list.",
+        "state": "Caller-supplied upcoming (default), current or complete. setState(value) updates it.",
+        "onSelect": "Native button activation requests step selection; the caller updates the state.",
+        "progressElement": "Public decorative connector fill for the caller\u2019s timing animation. Apply scaleY(0..1); cancel held animations on pause or step changes."
+      },
+      "usage": "TurboFlowCheckpoint({number,label,last,state,onSelect}). Editorial navigation using the existing case-study styles.css tokens; not a mobile-product stepper. Place instances consecutively with zero list gap so connectors join. The caller owns playback, current index and connector progress; checkpoint owns its native button and internal geometry. No keyboard shortcuts or autoplay timers inside the renderer.",
+      "previewConfigurations": [
+        {
+          "id": "connected",
+          "name": "Connected path",
+          "selector": "#connected",
+          "interactionTarget": "connected"
+        },
+        {
+          "id": "last",
+          "name": "Final checkpoint",
+          "selector": "#last",
+          "interactionTarget": "last"
+        }
+      ],
+      "interactions": {
+        "preview": "specimens/flow-checkpoint.html",
+        "targets": [
+          {
+            "id": "connected",
+            "name": "Connected path",
+            "owner": "turbo-flow-checkpoint",
+            "states": [
+              "live",
+              "upcoming",
+              "current",
+              "complete"
+            ]
+          },
+          {
+            "id": "last",
+            "name": "Final checkpoint",
+            "owner": "turbo-flow-checkpoint",
+            "states": [
+              "live",
+              "upcoming",
+              "current",
+              "complete"
+            ]
+          }
+        ]
+      },
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Button",
+            "selector": ".family-story__loop-step"
+          },
+          {
+            "name": "Checkpoint",
+            "selector": ".family-story__step-checkpoint"
+          },
+          {
+            "name": "Label",
+            "selector": ".family-story__step-text"
+          },
+          {
+            "name": "Connector",
+            "selector": ".family-story__step-track"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Horizontal inset",
+            "selector": ".family-story__loop-step",
+            "property": "padding-left",
+            "token": "--flow-checkpoint-inset-inline"
+          },
+          {
+            "label": "Vertical inset",
+            "selector": ".family-story__loop-step",
+            "property": "padding-top",
+            "token": "--flow-checkpoint-inset-block"
+          },
+          {
+            "label": "Checkpoint to label",
+            "selector": ".family-story__loop-step",
+            "property": "column-gap",
+            "token": "--flow-checkpoint-gap"
+          }
+        ],
+        "ownership": "Owns 12px block / 16px inline padding, 16px marker-to-label gap, vertically centered label and marker, 32px circle and 2px connector halves. Parent owns list width, ordering and zero inter-item gap.",
+        "behavior": "Fluid native button with wrapping label and at least 56px height. Final item omits the outgoing connector. Upcoming shows a number; complete shows the existing registered Phosphor success check; current shows a filled blue number and soft halo. aria-current=step and aria-pressed reflect current; completed accessible label adds completed. Decorative markers/connectors are aria-hidden. Supplied state does not mutate on activation.",
+        "interactionOwnership": "Each instance is one independent registered checkpoint button. Number, check, label and connector are noninteractive internal parts. Caller owns state, playback timing and onSelect handling; direct hover/active/focus-visible belong to this button."
+      }
     }
   ],
   "compositions": [],
@@ -3633,7 +3744,8 @@
     "decisions/navigation-bar.md",
     "decisions/page-header.md",
     "decisions/chrome-backdrop.md",
-    "decisions/hub-promo.md"
+    "decisions/hub-promo.md",
+    "decisions/flow-checkpoints.md"
   ],
   "foundationPresentation": {
     "tokens": {

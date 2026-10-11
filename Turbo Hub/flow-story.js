@@ -67,7 +67,7 @@
     const controls=node('div','family-story__loop-controls');
     const progress=node('ol','family-story__loop-progress');progress.setAttribute('aria-label',scene.title+' steps');
     const caption=node('p','family-story__loop-caption');caption.setAttribute('aria-live','off');
-    const toggle=node('button','family-story__loop-toggle');toggle.type='button';
+    const toggle=node('button','family-story__loop-toggle family-story__playback-toggle');toggle.type='button';
     const reduced=root.matchMedia?.('(prefers-reduced-motion: reduce)');
     let index=0,timer=null,due=0,visible=false,paused=Boolean(reduced?.matches),playback=null,fillAnimation=null,transition=null,shown=false;
     const interval=Math.max(2500,scene.loopInterval||4200);
@@ -76,10 +76,9 @@
     const clear=()=>{if(timer!==null){remaining=Math.max(0,due-now());root.clearTimeout(timer);}timer=null;};
     const fills=[];
     const buttons=scene.sequence.map((screen,i)=>{
-      const button=node('button','family-story__loop-step');button.type='button';button.setAttribute('aria-label',`Step ${i+1} of ${previews.length}: ${screen.title}`);
-      const track=node('span','family-story__step-track'),fill=node('span','family-story__step-fill');track.setAttribute('aria-hidden','true');track.append(fill);fills.push(fill);
-      const text=node('span','family-story__step-text');text.append(node('strong','family-story__step-title',screen.title));button.append(track,text);
-      button.addEventListener('click',()=>{show(i);sync();});const item=node('li');item.append(button);progress.append(item);return button;
+      const button=root.TurboFlowCheckpoint({number:i+1,label:screen.title,last:i===previews.length-1,onSelect:()=>{show(i);sync();}});
+      fills.push(button.progressElement);
+      const item=node('li');item.append(button);progress.append(item);return button;
     });
     function paintTiming({index:step=index,elapsed=0,duration=interval,playing=false,ready=true}){
       if(step!==index)return;
@@ -100,7 +99,7 @@
       clear();const previous=shown?previews[index]:null;transition?.cancel();transition=null;
       index=next;remaining=interval;paintTiming({});
       playback?.activate(index);
-      previews.forEach((preview,i)=>{const active=i===index;preview.classList.toggle('is-current',active);preview.inert=!active;preview.setAttribute('aria-hidden','true');buttons[i].setAttribute('aria-current',active?'step':'false');buttons[i].setAttribute('aria-pressed',String(active));});
+      previews.forEach((preview,i)=>{const active=i===index;preview.classList.toggle('is-current',active);preview.inert=!active;preview.setAttribute('aria-hidden','true');buttons[i].setState(active?'current':i<index?'complete':'upcoming');});
       caption.textContent=`${index+1} of ${previews.length} · ${scene.sequence[index].title}`;
       if(previous&&previous!==previews[index])transition=pushScreens(previous,previews[index],reduced?.matches,()=>{transition=null;schedule();});
       shown=true;

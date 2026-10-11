@@ -269,6 +269,18 @@ Standalone allowance editing keeps its Save action. No component internals,
 spacing primitives or submission behavior changed. Syntax and 33 source tests
 pass; browser visual review remains with the user.
 
+### Hidden playback buttons — 10 October 2026
+
+Pause/Play buttons below the flow steps are visually hidden by default across
+loop presentations. A dedicated editorial class targets only those buttons;
+View all screens, Open full page and dialog Close remain unaffected. The control
+stays accessible to screen readers and appears on keyboard focus, preserving
+explicit playback under reduced motion. The hidden control occupies no layout
+row. Playback timing, step selection and product components are unchanged.
+This is app-owned presentation; no registered component internals are overridden.
+Source syntax and existing story/playback checks pass. Visual review remains
+with the user.
+
 
 ### Neha requests to pay playback
 

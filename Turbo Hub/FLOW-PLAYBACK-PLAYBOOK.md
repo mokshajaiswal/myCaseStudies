@@ -7,7 +7,8 @@ visible, and preserve the static version so any experiment can be reversed.
 **Working example:** [Arun invites Kavya](http://localhost:8020/app/index.html#scene-kavya-invite-flow).
 It demonstrates Add → member details → Next → payment methods → Send Invite →
 confirmation → Members. Creation, children’s invitations, Neha’s WhatsApp joining
-and her payment request also have scripted playback; see the checklist below.
+payment-method activation and her payment request also have scripted playback;
+see the checklist below.
 
 Unimplemented flow plans below are implementation briefs, not claims that those
 demonstrations already work. This document does not enable or change any flows.
@@ -37,7 +38,7 @@ Copy this prompt when opening the next task:
 | Part | Repeatable treatment |
 | --- | --- |
 | Phone | One active live preview, using the existing phone shell and proportional scaling. No generated screen UI or duplicate rendering. |
-| Step list | Vertical list left of the phone, with a short explanation and a filling timer for every screen. Click a step to restart its screen; preserve Pause/Play. On narrow screens the list stacks above the phone. No repeated labels beneath every screen. |
+| Step list | Connected vertical checkpoints beside the phone. Upcoming steps show numbers, preceding steps show checks, and the current step has a blue marker and subtle row highlight. The outgoing connector fills over the screen’s action queue. Click a checkpoint to restart its screen; preserve Pause/Play. On narrow screens the path stacks below the phone. No repeated labels beneath every screen. |
 | Touch dot | Translucent blue fill, visible outline, faint halo. Move to the actual control; avoid covering its text with an opaque cursor. |
 | Tap | A soft expanding ripple. Give it time to finish before the next action. |
 | Buttons | Reuse `TurboUI.pressButton(control)` for the 100% → 98% → 100% feedback. A visual press does not activate the button. |
@@ -45,7 +46,7 @@ Copy this prompt when opening the next task:
 | Portraits | Set the known person explicitly at the beginning. A name field being cleared or typed must not change the portrait. |
 | Pacing | Show intent, perform an action, briefly hold the result, then continue. Use a longer hold for confirmation and waiting states. |
 | Layout | Keep the existing narrative width, typography, character treatment and phone sizing. A playback task is not a layout redesign. |
-| Accessibility | Narrative remains readable without animation. Reduced motion starts paused and suppresses movement; Pause/Play and step selection remain usable. |
+| Accessibility | Narrative remains readable without animation. Reduced motion starts paused and suppresses movement; Pause/Play remains available to assistive technology and appears on keyboard focus. It is visually hidden below the steps by default. Step selection remains usable. |
 | Scroll | Dot choreography may reveal controls inside the child content viewport. It must not move the case-study page or its fixed header/footer. |
 
 Explain the **decision**, not every operation. A short form might demonstrate the
@@ -245,6 +246,7 @@ all at once.
 | Kavya finishes her card setup | Not implemented | Pending | [Card setup](#4-kavya-finishes-her-card-setup) |
 | Arun invites the children | Scripted five-screen loop | Source checks pass; visual review pending | [Children](#5-arun-invites-the-children) |
 | Neha joins from a WhatsApp invite | Implemented seven-screen loop; source tests pass | Pending with user | [WhatsApp joining](#6-the-invite-arrives-on-whatsapp) |
+| Neha activates her payment methods | Implemented seven-screen loop; source tests pass | Pending with user | [Payment activation](#6a-neha-activates-her-payment-methods) |
 | Neha requests to pay | Scripted three-screen loop | Source checks pass; visual review pending | [Request](#7-neha-asks-to-pay) |
 | Arun approves | Not implemented | Pending | [Approval](#8-arun-approves) |
 | Neha's payment goes through | Not implemented | Pending | [Completion](#9-nehas-payment-goes-through) |
@@ -381,6 +383,50 @@ View all screens with the existing horizontal screen overlay.
 source tests pass, including paused install progress, full loop/reset, terms,
 SMS autofill, native-timer suppression and standalone installation preservation.
 Browser, keyboard and visual review remain with the user.
+
+### 6a. Neha activates her payment methods
+
+**Flow:** `member-activation-flow` · [Preview](http://localhost:8020/app/index.html#scene-member-activation-flow)
+
+**Implemented (10 October 2026).** Uses `presentation:'loop', playback:'scripted'`
+and the original seven fixtures:
+`neha-profile` → `verify-pan` → `upi-pin` → `neha-upi-active` →
+`neha-delivery` → `neha-delivery-confirmed` → `neha-ready`.
+
+Hold the pending profile, then visually tap its UPI row. Type the fictional PAN
+`BXKPS4821L` and birth date `14/08/2007`, with Neha’s name already filled; check
+PAN consent and visually press Verify PAN. Enter and confirm the fictional
+four-digit PIN through the existing password fields, then visually press Set UPI
+PIN. Hold the active-UPI profile notice before tapping the pending Card row.
+
+On delivery, type `12, Garden Apartments` and `560001`; prefill Sample Road,
+Bengaluru, Karnataka and `9876543210`, leaving address line 3 empty. Check the
+delivery confirmation and visually press Proceed. These details match the next
+fixture’s independent story seed. Replay its existing Success indicator, hold
+the delivery estimate, visually press Done, then hold the ready profile before
+looping. The existing proposed flags remain on the profile/PAN/PIN fixtures.
+
+Targets come from the existing renderers: `#upi-row`, `#pan`, `#dob`,
+`#pan-consent`, `#pin`, `#confirm`, `#card-row`, `#line1`, `#pincode`,
+`#delivery-confirm`, the two forms’ submit buttons, and `#actions a`.
+No actual navigation, submit, PAN verification, PIN storage or card order runs.
+
+Reset PAN/date and consent, both PIN fields, address line 1/pincode and delivery
+confirmation on re-entry; restore incidental values and zero child scroll before
+reveal. Profile and delivery sections expose `#content` for the existing child-only
+scroll helper. Pause/Play, step fills, touch geometry, shared press feedback,
+screen transitions and reduced motion retain their shared implementations.
+Walkthrough snapshots use the same queues and resets for backward seeking.
+
+**Restore:** set `presentation:'static'` or remove this flow’s presentation/playback
+flags. Removing only `playback` retains the simple timed one-phone loop.
+Standalone screen behavior, original sequence, routes and narrative remain intact.
+
+**Recipes:** A, B, F. **Validation:** 45 source tests and changed JavaScript syntax
+checks pass, covering loop reset, consent, masked PIN inputs, paused typing,
+late frames, child scrolling, backward seeking and absence of link/submit activation.
+Browser and visual review remain with the user. See
+`app-design-system/decisions/member-activation-playback.md` for the ownership audit.
 
 ### 7. Neha asks to pay
 

@@ -115,20 +115,15 @@
 .family-story__screen-rail--loop > .family-story__preview.is-outgoing { z-index:1; }
 .family-story__screen-rail--loop > .family-story__preview.is-entering { z-index:2; }
 .family-story__screen-rail--loop > .family-story__preview::before { content:none !important; }
-/* Simple title-only step buttons beside the phone; timing remains in playback. */
+/* Parent arrangement for the registered connected checkpoints. */
 .family-story__stage.family-story__stage--loop { display:grid; grid-template-columns:minmax(0,300px) minmax(0,360px); justify-content:center; align-items:start; column-gap:var(--space-16); row-gap:var(--space-6); }
 .family-story__stage--loop > .family-story__screen-rail--loop { grid-column:1; grid-row:1; padding:0; }
 .family-story__loop-controls { display:grid; grid-column:2; grid-row:1; align-self:center; gap:var(--space-5); min-width:0; width:100%; margin:0; }
-.family-story__loop-progress { display:grid; gap:var(--space-3); padding:0; margin:0; list-style:none; }
-.family-story__loop-step { display:grid; grid-template-columns:minmax(0,1fr); width:100%; padding:var(--space-3) var(--space-4); border:1px solid var(--line); border-radius:var(--radius-small); background:var(--surface-raised); color:var(--ink); text-align:left; cursor:pointer; }
-.family-story__loop-step[aria-current=step] { background:color-mix(in srgb,var(--accent-soft) 60%,transparent); }
-.family-story__step-track { display:none; position:relative; align-self:stretch; overflow:hidden; border-radius:var(--space-1); background:var(--line); }
-.family-story__step-fill { position:absolute; inset:0; background:var(--accent); transform:scaleY(0); transform-origin:top; }
-.family-story__step-text { display:grid; gap:var(--space-1); min-width:0; overflow-wrap:anywhere; }
-.family-story__step-title { font:var(--font-small-body); font-weight:var(--card-heading-weight); }
-.family-story__loop-step[aria-current=step] .family-story__step-title { color:var(--accent); }
+.family-story__loop-progress { display:grid; gap:0; padding:0; margin:0; list-style:none; }
 .family-story__loop-caption { position:absolute; width:1px; height:1px; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 .family-story__loop-toggle { justify-self:start; padding:var(--space-2) var(--space-4); border:1px solid var(--line); border-radius:var(--radius-small); background:var(--surface-raised); color:var(--ink); font:var(--font-small-body); cursor:pointer; }
+/* Keep playback controls available to keyboard/screen-reader users without a visible row below the steps. */
+.family-story .family-story__playback-toggle:not(:focus-visible) { position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; border:0; }
 .family-story__dev-screens { text-decoration:none; }
 /* Development tooling: an unboxed horizontal screen strip over the backdrop. */
 .family-story__screens-dialog { width:calc(100% - var(--space-4) * 2); max-width:none; max-height:calc(100dvh - var(--space-4) * 2); padding:0; overflow-y:auto; overscroll-behavior:contain; border:0; border-radius:0; background:transparent; color:var(--ink); }
@@ -141,7 +136,7 @@
 .family-story__screen-rail.family-story__screen-rail--list { display:flex; flex-direction:row; flex-wrap:nowrap; align-items:flex-start; justify-content:safe center; gap:var(--space-6); width:100%; padding:var(--space-4); overflow-x:auto; overscroll-behavior-x:contain; }
 .family-story__screen-rail--list > .family-story__preview { flex:0 0 auto; width:min(300px,calc((100dvh - var(--space-24) - var(--space-16)) / 2.064),calc(100vw - var(--space-16))); }
 .family-story__screen-rail.family-story__screen-rail--list > .family-story__preview::before { content:none; }
-.family-story__loop-step:focus-visible,.family-story__loop-toggle:focus-visible { outline:2px solid var(--accent); outline-offset:var(--space-1); }
+.family-story__loop-toggle:focus-visible { outline:2px solid var(--accent); outline-offset:var(--space-1); }
 @media (max-width:760px) { .family-story__stage.family-story__stage--loop { column-gap:var(--space-8); } }
 @media (max-width:640px) {
   .family-story__stage.family-story__stage--loop { grid-template-columns:minmax(0,1fr); }

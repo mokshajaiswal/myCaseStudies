@@ -436,6 +436,17 @@ The interview quote stack is capped at 28rem (448px) and centred within its colu
 
 ## Family-flow playback presentation
 
+Connected checkpoint navigation (10 October 2026): all looping flow lists now
+use registered Flow checkpoint. A thin vertical path connects numbered upcoming
+steps and completed checks; the playing step has a blue marker, soft halo and
+subtle row highlight. The path’s outgoing segment fills over the actual action
+queue. Labels wrap, checkpoints remain clickable, and backwards selection and
+repeat reset both state and progress. The parent owns a zero-gap vertical list;
+the component owns its marker, connector, native button and internal spacing.
+Pause/Play is visually hidden below the list and appears on keyboard focus.
+Canonical specimens and the page consume the same renderer. See
+`app-design-system/decisions/flow-checkpoints.md`; visual review remains manual.
+
 Development screen access: `?dev=true` adds a **View all screens** button beneath
 Pause/Play beside each `presentation:'loop'` preview. It opens a native modal
 on the case study with a transparent surface, a Close control at the top right,

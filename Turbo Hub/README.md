@@ -44,7 +44,7 @@ After the blue rounded hero using `assets/bg.webp`, the page renders these areas
 16. “What we learned from other products”: a taped competitive-research collage with draggable images and unboxed product-to-Turbo-Hub comparisons.
 17. Relationship-definition context and the Hub Manager/Hub Member responsibility map.
 18. The former product-rule path is removed.
-19. “Designing the core flows” follows the four sketches with a fictional Sharma-family story and live prototype previews. Hub creation, Arun’s invitations to Kavya and the children, Neha’s WhatsApp joining sequence and her payment request use reversible single-phone touch playback with a clickable vertical step list and per-screen timer fills beside the phone; other groups retain their existing presentation. Use [FLOW-PLAYBACK-PLAYBOOK.md](FLOW-PLAYBACK-PLAYBOOK.md) to implement and review the other flows one at a time.
+19. “Designing the core flows” follows the four sketches with a fictional Sharma-family story and live prototype previews. Hub creation, Arun’s invitations to Kavya and the children, Neha’s WhatsApp joining sequence, payment-method activation and payment request use reversible single-phone touch playback with a clickable vertical step list and per-screen timer fills beside the phone; other groups retain their existing presentation. Use [FLOW-PLAYBACK-PLAYBOOK.md](FLOW-PLAYBACK-PLAYBOOK.md) to implement and review the other flows one at a time.
 
 The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 

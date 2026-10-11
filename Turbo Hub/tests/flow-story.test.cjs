@@ -70,6 +70,8 @@ test('the pending state cannot tick or expire in a locked story',()=>{
 test('scene frames lazy-mount, lock keyboard/pointer input and release offscreen documents',()=>{
   let observer;const window={TurboFamilyStory:story,IntersectionObserver:class{constructor(fn){this.fn=fn;this.targets=[];observer=this}observe(el){this.targets.push(el)}}};
   const document={baseURI:'http://localhost:8020/app/index.html',createElement:tag=>new Element(tag)};
+  window.document=document;window.TurboIcons={render:()=>'<svg></svg>'};
+  vm.runInNewContext(read('app-design-system/components/flow-checkpoint.js'),{window});
   vm.runInNewContext(read('flow-story.js'),{window,document,URL,IntersectionObserver:window.IntersectionObserver});
   window.TurboFlowStory.render();assert.equal(observer.targets.length,story.chapters.filter(c=>!c.hidden).flatMap(c=>c.scenes.flatMap(sc=>sc.sequence||[sc])).length);
   const slot=observer.targets[0];assert.equal(slot.children.filter(c=>c.tag==='iframe').length,0);
@@ -102,6 +104,8 @@ function loopHarness(reducedMotion=false){
   const timers=new Map(),observers=[],events={},documentEvents={};let timerID=0,motionChange;
   const document={baseURI:'http://localhost:8020/app/index.html',hidden:false,createElement:tag=>new Element(tag),addEventListener:(name,fn)=>{documentEvents[name]=fn}};
   const window={TurboFamilyStory:story,document,setTimeout:(fn,ms)=>{const id=++timerID;timers.set(id,{fn,ms});return id},clearTimeout:id=>timers.delete(id),addEventListener:(name,fn)=>{events[name]=fn},matchMedia:()=>({matches:reducedMotion,addEventListener:(name,fn)=>{motionChange=fn}}),IntersectionObserver:class{constructor(fn){this.fn=fn;this.targets=[];observers.push(this)}observe(el){this.targets.push(el)}}};
+  window.document=document;window.TurboIcons={render:()=>'<svg></svg>'};
+  vm.runInNewContext(read('app-design-system/components/flow-checkpoint.js'),{window});
   vm.runInNewContext(read('flow-story.js'),{window,document,URL,IntersectionObserver:window.IntersectionObserver});
   const scene=story.chapters.flatMap(c=>c.scenes).find(s=>s.id==='kavya-invite-flow'),previews=scene.sequence.map(()=>new Element('figure')),rail=new Element('div');
   const controls=window.TurboFlowStory.sequenceLoop(rail,previews,scene);
@@ -111,7 +115,7 @@ function loopHarness(reducedMotion=false){
 }
 test('only the scripted playback flows loop, and the static sequence remains reversible',()=>{
   const beats=story.chapters.flatMap(c=>c.scenes),loop=beats.filter(s=>s.presentation==='loop');
-  assert.deepEqual(loop.map(s=>s.id),['create-flow','kavya-invite-flow','children-invite-flow','whatsapp-invite-flow','request-flow']);
+  assert.deepEqual(loop.map(s=>s.id),['create-flow','kavya-invite-flow','children-invite-flow','whatsapp-invite-flow','member-activation-flow','request-flow']);
   assert.deepEqual(loop[0].sequence.map(s=>s.id),['hub-setup','hub-created']);
   assert.deepEqual(loop[1].sequence.map(s=>s.id),['members-owner','add-member','member-payment-methods','invite-sent','hub-members']);
   const h=loopHarness();h.window.TurboFamilyStory={...story,chapters:story.chapters.map(c=>({...c,scenes:c.scenes.map(s=>s.presentation==='loop'?{...s,presentation:'static'}:s)}))};

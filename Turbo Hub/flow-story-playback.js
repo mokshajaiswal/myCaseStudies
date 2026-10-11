@@ -9,10 +9,20 @@
   // Choreography is keyed by flow ID, then scene ID, so two flows that reuse a route never share actions or resets.
   // reload:true resets a scene by reloading its locked fixture on each repeat (for controls without an undo path).
   const FLOWS={
+    'member-activation-flow':{scenes:{
+      'neha-profile':[{kind:'hide',wait:1800},{kind:'enter',wait:600},move('#upi-row'),tap(),{kind:'hold',wait:450},next],
+      'verify-pan':[{kind:'enter',wait:600},move('#pan'),tap(),...type('#pan','BXKPS4821L'),move('#dob'),tap(),...type('#dob','14/08/2007'),move('#pan-consent'),tap(),set('#pan-consent',true),{kind:'hold',wait:500},move('#form button[type="submit"]'),tap(),{kind:'hold',wait:500},next],
+      'upi-pin':[{kind:'enter',wait:600},move('#pin'),tap(),...type('#pin','4821'),move('#confirm'),tap(),...type('#confirm','4821'),{kind:'hold',wait:650},move('#form button[type="submit"]'),tap(),{kind:'hold',wait:500},next],
+      'neha-upi-active':[{kind:'hide',wait:2600},{kind:'enter',wait:600},move('#card-row'),tap(),{kind:'hold',wait:450},next],
+      'neha-delivery':[{kind:'enter',wait:600},move('#line1'),tap(),...type('#line1','12, Garden Apartments'),move('#pincode'),tap(),...type('#pincode','560001'),move('#delivery-confirm'),tap(),set('#delivery-confirm',true),{kind:'hold',wait:500},move('#delivery-form button[type="submit"]'),tap(),{kind:'hold',wait:500},next],
+      'neha-delivery-confirmed':[{kind:'success',wait:3200},{kind:'enter',wait:600},move('#actions a'),tap(),{kind:'hold',wait:450},next],
+      'neha-ready':[{kind:'hide',wait:4200},next]
+    }},
     'whatsapp-invite-flow':{scenes:{
       'invite-notification':[{kind:'hide',wait:1800},{kind:'enter',wait:600},move('#notifications .th-payment-notification'),tap(),{kind:'hold',wait:450},next],
       'invitation':[{kind:'hide',wait:1800},{kind:'enter',wait:600},move('.wa-preview'),tap(),{kind:'hold',wait:450},next],
       'play-store':[{kind:'hide',wait:1000},{kind:'enter',wait:600},move('#install button'),tap(),{kind:'hide',wait:0},{kind:'store',state:'progress',value:0,wait:400},{kind:'store',state:'progress',value:35,wait:500},{kind:'store',state:'progress',value:75,wait:500},{kind:'store',state:'progress',value:100,wait:350},{kind:'store',state:'ready',wait:650},move('#install a'),tap(),{kind:'hold',wait:450},next],
+      'payzapp-onboarding':[{kind:'hide',wait:1600},{kind:'onboarding',slide:0,wait:4000},{kind:'onboarding',slide:1,wait:4000},{kind:'onboarding',slide:2,wait:4000},{kind:'enter',wait:600},move('#start-action button'),tap(),{kind:'hold',wait:450},next],
       'hub-welcome':[{kind:'hide',wait:2200},{kind:'enter',wait:600},move('#welcome-terms'),tap(),set('#welcome-terms',true),{kind:'hold',wait:500},move('.welcome-footer button'),tap(),{kind:'hold',wait:450},next],
       'verify-mobile':[{kind:'hide',wait:1400},set('#otp','482913'),{kind:'hold',wait:1000},{kind:'enter',wait:600},move('#form button[type="submit"]'),tap(),{kind:'hold',wait:450},next],
       'hub-joined':[{kind:'success',wait:2200},{kind:'enter',wait:600},move('#actions a'),tap(),{kind:'hold',wait:450},next],
@@ -58,8 +68,20 @@
     }
   }
   function prepare(doc,id,flow){
-    if(flow==='whatsapp-invite-flow'){
+    if(flow==='member-activation-flow'){
+      if(id==='verify-pan'){
+        setControl(doc,'#pan','');setControl(doc,'#name','Neha Sharma');setControl(doc,'#dob','');setControl(doc,'#pan-consent',false);
+      }
+      if(id==='upi-pin')for(const selector of ['#pin','#confirm'])setControl(doc,selector,'');
+      if(id==='neha-delivery'){
+        // Each fixture owns its own storage: match the following confirmation's seeded address.
+        for(const [field,value] of Object.entries({line1:'',line2:'Sample Road',line3:'',pincode:'',city:'Bengaluru',state:'Karnataka',contact:'9876543210'}))setControl(doc,'#'+field,value);
+        setControl(doc,'#delivery-confirm',false);
+      }
+      const content=doc.querySelector('#content');if(content)content.scrollTop=0;
+    }else if(flow==='whatsapp-invite-flow'){
       if(id==='play-store'){doc.querySelector('#install').setPlaybackState('idle');doc.querySelector('#store').scrollTop=0;}
+      if(id==='payzapp-onboarding')doc.defaultView.TurboPayzappPlayback?.reset();
       if(id==='hub-welcome'){setControl(doc,'#welcome-terms',false);doc.querySelector('#content').scrollTop=0;}
       if(id==='verify-mobile'){setControl(doc,'#otp','');doc.querySelector('#content').scrollTop=0;}
     }else if(id==='add-member'||id==='invite-son'){
@@ -132,7 +154,8 @@
           if(animation){presses.add(animation);animation.onfinish=()=>presses.delete(animation);}
         }
         if(action.kind==='set')setControl(doc,action.selector,action.value);
-        if(action.kind==='store')doc.querySelector('#install').setPlaybackState(action.state,action.value);
+        if(action.kind==='onboarding')doc.defaultView.TurboPayzappPlayback?.showSlide(action.slide);
+      if(action.kind==='store')doc.querySelector('#install').setPlaybackState(action.state,action.value);
         if(action.kind==='hide')hideDots();
         if(action.kind==='success'){hideDots();doc.querySelector('.th-success-indicator')?.play?.();}
         // Add, Next and Send Invite taps are visual only. The parent advances existing
@@ -155,12 +178,12 @@
       cancel();cancelPresses();running=false;revision++;index=next;queue=actions(scene.sequence[index].id,scene.id);position=0;readyDoc=null;preparedDoc=null;remaining=0;elapsed=0;lastTarget=null;hideDots();prepareIncoming();progress();
     }
     function pause(){
-      if(timer!==null){const rest=Math.max(0,due-now());if(readyDoc)elapsed+=remaining-rest;remaining=rest;}cancel();running=false;rail.dataset.playbackState='paused';progress();
+      if(timer!==null){const rest=Math.max(0,due-now());if(readyDoc)elapsed+=remaining-rest;remaining=rest;}cancel();running=false;readyDoc?.defaultView?.TurboPayzappPlayback?.pause();rail.dataset.playbackState='paused';progress();
       cursors.forEach(dot=>dot.getAnimations?.().forEach(animation=>animation.pause()));
       presses.forEach(animation=>animation.pause());
     }
     function resume(){
-      if(running)return;running=true;rail.dataset.playbackState='playing';
+      if(running)return;running=true;readyDoc?.defaultView?.TurboPayzappPlayback?.resume();rail.dataset.playbackState='playing';
       cursors.forEach(dot=>dot.getAnimations?.().forEach(animation=>animation.play()));presses.forEach(animation=>animation.play());arm(remaining);
     }
     if(root.ResizeObserver)new root.ResizeObserver(()=>{
@@ -182,6 +205,7 @@
     for(const action of actions(id,flow)){
       if(time>elapsed)break;
       if(action.kind==='set'||action.kind==='drag')setControl(doc,action.selector,action.value);
+      if(action.kind==='onboarding')doc.defaultView.TurboPayzappPlayback?.showSlide(action.slide);
       if(action.kind==='store')doc.querySelector('#install').setPlaybackState(action.state,action.value);
       if(action.kind==='move'||action.kind==='drag')lastTarget=action.selector;
       time+=action.wait;

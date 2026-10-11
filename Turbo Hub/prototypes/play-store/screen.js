@@ -18,10 +18,10 @@ store.innerHTML=`<header class="ps-bar"><a class="ps-icon-button" href="../invit
  <div class="ps-details-skeleton" aria-hidden="true"><span class="ps-skeleton"></span><span class="ps-skeleton"></span><span class="ps-skeleton ps-shot__line--short"></span></div>
 </section>`;
 const install=document.getElementById('install');
-// Install → a short progress → Open, which launches PayZapp straight into the invitation.
+// Install → a short progress → Open, which launches the PayZapp splash and onboarding before the invitation.
 const idle=()=>{const b=document.createElement('button');b.type='button';b.className='ps-button';b.textContent='Install';b.onclick=progress;install.replaceChildren(b);};
 const progress=()=>{if(window.TurboStoryContext?.locked)return;install.innerHTML='<div class="ps-progress" role="progressbar" aria-label="Installing PayZapp"><span></span></div><p class="ps-progress__label" role="status">Installing…</p>';setTimeout(ready,1600);};
-const ready=()=>{const a=document.createElement('a');a.className='ps-button';a.textContent='Open';a.href='../hub-welcome/index.html';install.replaceChildren(a);};
+const ready=()=>{const a=document.createElement('a');a.className='ps-button';a.textContent='Open';a.href='../payzapp-onboarding/index.html?next=hub-welcome';install.replaceChildren(a);};
 idle();
 // Visual adapter for the locked story only. The editorial queue owns progress and
 // timing; no native click, install timer or iframe navigation is triggered.

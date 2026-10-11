@@ -50,19 +50,39 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
       install.setPlaybackState=(state,value=0)=>{install.state=state;install.percent=value;delete controls['#install button'];delete controls['#install a'];if(state==='idle')control('#install button','button');if(state==='ready')control('#install a','a');};
       install.setPlaybackState('idle');
     }
+    if(screen.id==='payzapp-onboarding'){control('#start-action button','button');controls.onboarding={slides:[],resets:0};}
     if(screen.id==='hub-welcome'){control('#welcome-terms','input','checkbox');control('.welcome-footer button','button');}
     if(screen.id==='verify-mobile'){control('#otp','input','text');control('#form button[type="submit"]','button','submit');}
+    if(screen.id==='neha-profile')control('#upi-row','a');
+    if(screen.id==='neha-upi-active')control('#card-row','a');
+    if(screen.id==='verify-pan'){
+      for(const name of ['pan','name','dob'])control('#'+name,'input','text');
+      control('#pan-consent','input','checkbox');control('#form button[type="submit"]','button','submit');
+    }
+    if(screen.id==='upi-pin'){
+      for(const name of ['pin','confirm'])control('#'+name,'input','password');
+      control('#form button[type="submit"]','button','submit');
+    }
+    if(screen.id==='neha-delivery'){
+      for(const name of ['line1','line2','line3','pincode','city','state','contact'])control('#'+name,'input','text');
+      control('#delivery-confirm','input','checkbox');control('#delivery-form button[type="submit"]','button','submit');
+    }
+    if(screen.id==='neha-delivery-confirmed'){
+      control('#actions a','a');const success=control('.th-success-indicator','span');success.plays=0;success.play=()=>success.plays++;
+    }
     if(screen.id==='payment-review'){
       control('#amount','input','text');const swipe=control('#pay','input','range',false);swipe.min='0';swipe.max='100';swipe.classList.add('th-swipe__control');
     }
     controls['#content']=scroller;controls['#footer']=footer;
     class Event{constructor(type){this.type=type;}}
-    const doc={readyState:'complete',defaultView:{TurboStoryContext:{embedded:true,locked:true,scene:screen},Event,MouseEvent:Event,TurboUI:{pressButton:target=>{
+    const doc={readyState:'complete',defaultView:{TurboPayzappPlayback:screen.id==='payzapp-onboarding'?{reset(){controls.onboarding.resets++;controls.onboarding.slides=[];},showSlide(slide){controls.onboarding.slides.push(slide);},pause(){},resume(){}}:undefined,TurboStoryContext:{embedded:true,locked:true,scene:screen},Event,MouseEvent:Event,TurboUI:{pressButton:target=>{
       if(target?.tagName!=='A'&&target?.type!=='submit')return null;
       const press={target,paused:false,cancelled:false,pause(){this.paused=true;},play(){this.paused=false;},cancel(){this.cancelled=true;}};presses.push(press);return press;
     }}},querySelector:selector=>controls[selector]||null};
     frame.contentDocument=doc;controlsByScene.push(controls);return preview;
   });
+  window.TurboIcons={render:()=>'<svg></svg>'};
+  vm.runInNewContext(read('app-design-system/components/flow-checkpoint.js'),{window});
   vm.runInNewContext(read('flow-story-playback.js'),{window});
   // Include the real sequence controller: this catches timer handoff bugs between screens.
   const originalCreate=window.TurboStoryPlayback.create;
@@ -141,12 +161,19 @@ test('button tap feedback pauses with playback and cancels when the reader chang
   h.controls.children[2].listeners.click();assert.equal(h.presses[0].paused,true);h.controls.children[2].listeners.click();assert.equal(h.presses[0].paused,false);
   h.controls.children[2].listeners.click();h.steps[1].listeners.click();assert.equal(h.presses[0].cancelled,true);assert.equal(h.timers.size,0);
 });
-test('title-only step buttons identify one current screen, with internal timing preserved',()=>{
+test('connected checkpoints identify current, completed and upcoming screens and reset with the loop',()=>{
   const h=harness(),list=h.controls.children[0];assert.equal(list.tagName,'OL');assert.equal(h.steps.length,5);
   h.steps.forEach((button,i)=>{assert.equal(button.children[1].children[0].textContent,h.scene.sequence[i].title);assert.equal(button.children[1].children.length,1);assert.equal(button.getAttribute('aria-current'),i===0?'step':'false');});
+  assert.equal(h.steps.at(-1).children[0].hidden,true);
+  assert.equal(h.steps[0].children[2].children[0].textContent,'1');
   h.start();h.until(()=>h.current()===2);
+  assert.deepEqual(h.steps.map(step=>step.dataset.state),['complete','complete','current','upcoming','upcoming']);
+  assert.match(h.steps[0].getAttribute('aria-label'),/completed/);
   assert.equal(h.fills[0].style.transform,'scaleY(1)');assert.equal(h.fills[1].style.transform,'scaleY(1)');assert.equal(h.fills[2].style.transform,'scaleY(0)');assert.equal(h.fills[3].style.transform,'scaleY(0)');
   h.until(()=>h.current()===0);assert.ok(h.fills.every(fill=>fill.style.transform==='scaleY(0)'));
+  assert.deepEqual(h.steps.map(step=>step.dataset.state),['current','upcoming','upcoming','upcoming','upcoming']);
+  h.steps[3].listeners.click();h.steps[1].listeners.click();
+  assert.deepEqual(h.steps.map(step=>step.dataset.state),['complete','current','upcoming','upcoming','upcoming']);
 });
 test('step fill follows the complete screen action duration and preserves exact progress on pause',()=>{
   const h=harness();h.start();assert.equal(h.fills[0].animations.length,0);h.tick();
@@ -211,22 +238,23 @@ test('Neha request loop scans, types the amount and visually swipes without navi
   h.until(()=>h.current()===2);assert.equal(h.scene.sequence[2].id,'request-pending');h.until(()=>h.current()===0);assert.equal(h.errors(),0);
 });
 
-test('Neha joins through seven fixtures into the Hub with pausable install, terms acceptance, SMS autofill and full reset',()=>{
+test('Neha joins through eight fixtures into the Hub with pausable install, terms acceptance, SMS autofill and full reset',()=>{
   const h=harness({flowId:'whatsapp-invite-flow'});h.start();
-  assert.deepEqual(h.scene.sequence.map(s=>s.id),['invite-notification','invitation','play-store','hub-welcome','verify-mobile','hub-joined','neha-hub']);
+  assert.deepEqual(h.scene.sequence.map(s=>s.id),['invite-notification','invitation','play-store','payzapp-onboarding','hub-welcome','verify-mobile','hub-joined','neha-hub']);
   h.until(()=>h.current()===2);
   const install=h.controlsByScene[2]['#install'];assert.equal(install.state,'idle');
   h.until(()=>install.percent===35);h.controls.children[2].listeners.click();
   assert.equal(h.timers.size,0);assert.equal(install.state,'progress');assert.equal(install.percent,35);
   h.advanceClock(10000);h.controls.children[2].listeners.click();h.until(()=>install.state==='ready');
-  h.until(()=>h.current()===3);const terms=h.controlsByScene[3]['#welcome-terms'];assert.equal(terms.checked,false);
+  h.until(()=>h.current()===3);const onboarding=h.controlsByScene[3].onboarding;assert.equal(onboarding.resets,1);
+  h.until(()=>h.current()===4);assert.deepEqual(onboarding.slides,[0,1,2]);const terms=h.controlsByScene[4]['#welcome-terms'];assert.equal(terms.checked,false);
   h.until(()=>terms.checked);assert.deepEqual(terms.events,['change','change']);
-  h.until(()=>h.current()===4);const otp=h.controlsByScene[4]['#otp'];assert.equal(otp.value,'');
+  h.until(()=>h.current()===5);const otp=h.controlsByScene[5]['#otp'];assert.equal(otp.value,'');
   h.until(()=>otp.value==='482913');assert.deepEqual(otp.events,['input','input']);
-  h.until(()=>h.current()===5);h.until(()=>h.current()===6);assert.equal(h.scene.sequence[6].route,'hub-dashboard?state=joined&member=neha');h.until(()=>h.current()===0);h.until(()=>h.current()===2);
+  h.until(()=>h.current()===6);h.until(()=>h.current()===7);assert.equal(h.scene.sequence[7].route,'hub-dashboard?state=joined&member=neha');h.until(()=>h.current()===0);h.until(()=>h.current()===2);
   assert.equal(install.state,'idle');assert.equal(install.percent,0);
-  h.steps[3].listeners.click();assert.equal(terms.checked,false);
-  h.steps[4].listeners.click();assert.equal(otp.value,'');assert.equal(h.errors(),0);
+  h.steps[4].listeners.click();assert.equal(terms.checked,false);
+  h.steps[5].listeners.click();assert.equal(otp.value,'');assert.equal(h.errors(),0);
   for(const selectors of h.controlsByScene)for(const el of Object.values(selectors))if(el.tagName==='A'||el.tagName==='BUTTON')assert.deepEqual(el.events,[]);
 });
 
@@ -243,7 +271,53 @@ test('Play Store story adapter freezes native install timers while standalone in
       nodes.install.setPlaybackState('idle');assert.equal(nodes.install.children[0].textContent,'Install');
     }else{
       assert.equal(nodes.install.setPlaybackState,undefined);assert.equal(timers.length,1);assert.equal(timers[0].delay,1600);
-      timers[0].callback();assert.equal(nodes.install.children[0].textContent,'Open');assert.equal(nodes.install.children[0].href,'../hub-welcome/index.html');
+      timers[0].callback();assert.equal(nodes.install.children[0].textContent,'Open');assert.equal(nodes.install.children[0].href,'../payzapp-onboarding/index.html?next=hub-welcome');
     }
+  }
+});
+
+test('Neha activation traverses all seven fixtures with valid details, masked PINs and a repeatable reset',()=>{
+  const h=harness({flowId:'member-activation-flow'});h.start();
+  assert.deepEqual(h.scene.sequence.map(s=>s.id),['neha-profile','verify-pan','upi-pin','neha-upi-active','neha-delivery','neha-delivery-confirmed','neha-ready']);
+  h.until(()=>h.current()===1);const pan=h.controlsByScene[1];
+  assert.equal(pan['#pan'].value,'');assert.equal(pan['#dob'].value,'');assert.equal(pan['#name'].value,'Neha Sharma');assert.equal(pan['#pan-consent'].checked,false);
+  h.until(()=>h.current()===2);
+  assert.match(pan['#pan'].value,/^[A-Z]{5}\d{4}[A-Z]$/);assert.equal(pan['#dob'].value,'14/08/2007');assert.equal(pan['#pan-consent'].checked,true);
+  const pin=h.controlsByScene[2];assert.equal(pin['#pin'].value,'');assert.equal(pin['#confirm'].value,'');
+  h.until(()=>h.current()===3);assert.match(pin['#pin'].value,/^\d{4}$/);assert.equal(pin['#pin'].value,pin['#confirm'].value);assert.equal(pin['#pin'].type,'password');
+  h.until(()=>h.current()===4);const address=h.controlsByScene[4];
+  assert.equal(address['#line1'].value,'');assert.equal(address['#pincode'].value,'');assert.equal(address['#delivery-confirm'].checked,false);
+  assert.equal(address['#city'].value,'Bengaluru');assert.equal(address['#state'].value,'Karnataka');assert.equal(address['#contact'].value,'9876543210');
+  h.until(()=>h.current()===5);assert.equal(address['#line1'].value,'12, Garden Apartments');assert.equal(address['#pincode'].value,'560001');assert.equal(address['#delivery-confirm'].checked,true);
+  h.until(()=>h.current()===6);assert.equal(h.controlsByScene[5]['.th-success-indicator'].plays,1);
+  h.until(()=>h.current()===0);assert.ok(h.fills.every(fill=>fill.style.transform==='scaleY(0)'));
+  h.until(()=>h.current()===1);assert.equal(pan['#pan'].value,'');assert.equal(pan['#pan-consent'].checked,false);
+  h.steps[2].listeners.click();assert.equal(pin['#pin'].value,'');assert.equal(pin['#confirm'].value,'');
+  h.steps[4].listeners.click();assert.equal(address['#line1'].value,'');assert.equal(address['#delivery-confirm'].checked,false);assert.equal(h.errors(),0);
+  for(const selectors of h.controlsByScene)for(const el of Object.values(selectors))if(el.tagName==='A'||el.tagName==='BUTTON')assert.deepEqual(el.events,[]);
+});
+
+test('activation typing pauses exactly and hides offscreen; late delivery frames reset and scroll only their own content',()=>{
+  const h=harness({flowId:'member-activation-flow'});h.start();h.until(()=>h.current()===1);
+  const pan=h.controlsByScene[1]['#pan'];h.until(()=>pan.value==='BXK');h.advanceClock(30);h.controls.children[2].listeners.click();
+  assert.equal(h.timers.size,0);h.advanceClock(10000);h.controls.children[2].listeners.click();
+  assert.equal([...h.timers.values()][0].due-h.window.performance.now(),55);h.tick();assert.equal(pan.value,'BXKP');
+  h.document.hidden=true;h.documentEvents.visibilitychange();assert.equal(h.timers.size,0);
+  h.document.hidden=false;h.documentEvents.visibilitychange();assert.equal(h.timers.size,1);
+  const frame=h.previews[4].frame,doc=frame.contentDocument;frame.contentDocument=null;h.steps[4].listeners.click();h.tick();
+  assert.equal(h.fills[4].style.transform,'scaleY(0)');frame.contentDocument=doc;h.tick();
+  const fields=h.controlsByScene[4];assert.equal(fields['#line1'].value,'');
+  fields['#delivery-confirm'].rect.top=650;h.until(()=>fields['#delivery-confirm'].checked);
+  assert.ok(fields['#content'].scrollTop>0);assert.equal(h.controlsByScene[1]['#content'].scrollTop,0);assert.equal(h.errors(),0);
+});
+
+test('activation walkthrough snapshots restore PAN, PIN and address state when seeking backwards',()=>{
+  const h=harness({flowId:'member-activation-flow'}),snapshot=h.window.TurboStoryPlayback.snapshot;
+  for(const [index,id,field,expected,checkbox] of [[1,'verify-pan','#pan','BXKPS4821L','#pan-consent'],[2,'upi-pin','#pin','4821',null],[4,'neha-delivery','#line1','12, Garden Apartments','#delivery-confirm']]){
+    const doc=h.previews[index].frame.contentDocument,fields=h.controlsByScene[index];
+    snapshot(doc,id,'member-activation-flow',100000);assert.equal(fields[field].value,expected);if(checkbox)assert.equal(fields[checkbox].checked,true);
+    fields['#content'].scrollTop=200;snapshot(doc,id,'member-activation-flow',0);
+    assert.equal(fields[field].value,'');assert.equal(fields['#content'].scrollTop,0);if(checkbox)assert.equal(fields[checkbox].checked,false);
+    for(const el of Object.values(fields))if(el.type==='submit')assert.deepEqual(el.events,[]);
   }
 });
