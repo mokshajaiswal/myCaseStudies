@@ -5,10 +5,10 @@
 .request-body { flex:1; min-height:0; display:flex; flex-direction:column; align-items:center; padding:0 var(--th-space-6) var(--th-space-6); color:var(--th-white); }
 .request-hero { display:flex; flex-direction:column; align-items:center; gap:var(--th-space-6); margin-block:auto; text-align:center; }
 .request-hero__heading { display:flex; flex-direction:column; align-items:center; gap:var(--th-space-2); margin:0; }
-.request-hero__lead { text-wrap:balance; font:var(--type-field-value-weight) var(--type-status-heading-size)/var(--font-leading-relaxed) var(--font-body); }
+.request-hero__lead { text-wrap:balance; font:var(--font-weight-regular) var(--type-status-heading-size)/var(--font-leading-relaxed) var(--font-body); }
 /* Page-owned inline mark, sized to the text line and spaced on both sides; decorative because the text names Nykaa. */
 .request-hero__logo { width:20px; height:20px; margin:0 var(--th-space-2) 0 var(--th-space-1); border-radius:5px; object-fit:cover; vertical-align:-3px; }
-.request-hero__amount { font:var(--type-payment-amount-weight) var(--type-payment-amount-size)/var(--type-payment-amount-leading) var(--font-heading); }
+.request-hero__amount { font:var(--font-weight-semibold) var(--type-payment-amount-size)/var(--type-payment-amount-leading) var(--font-heading); letter-spacing:.02em; }
 .request-countdown { width:240px; max-width:100%; }
 
 /* Action sheet: rounded like the shared content surface, sized to its two actions.

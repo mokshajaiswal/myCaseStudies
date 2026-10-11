@@ -1,14 +1,66 @@
-/* Welcome: the invitation on the blue chrome (art, 'Arun Sharma has invited you to' the Hub, and its members), then a sheet with what Arun has set up
-   and a single Accept invite. PayZapp's first launch is this screen, with no generic onboarding before it. */
-.welcome-hero { flex:none; display:flex; flex-direction:column; align-items:center; padding:var(--th-space-8) var(--th-space-6) var(--th-space-8); color:var(--th-white); text-align:center; }
-.welcome-hero__art { width:96px; height:96px; margin-bottom:var(--th-space-5); border-radius:24px; object-fit:cover; box-shadow:0 0 0 4px rgb(255 255 255 / .28), 0 10px 28px rgb(20 24 80 / .22); }
-.welcome-hero__kicker { margin:0 0 var(--th-space-1); color:rgb(255 255 255 / .8); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
-.welcome-hero h1 { margin:0; font:var(--type-amount-summary-weight) var(--font-size-26)/var(--type-screen-heading-leading) var(--font-heading); }
-.welcome-hero__family { display:flex; margin-top:var(--th-space-5); padding-left:var(--th-space-3); }
-.welcome-hero__portrait { display:flex; margin-left:calc(var(--th-space-3) * -1); }
-.welcome-content { flex:1; display:flex; flex-direction:column; gap:var(--th-space-4); padding:var(--th-space-6); background:var(--th-white); }
-.welcome-content h2 { margin:0; color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
-.welcome-offer { display:grid; gap:var(--th-space-3); margin:0 0 var(--th-space-4); padding:var(--th-space-4); list-style:none; border:1px solid var(--color-border); border-radius:var(--th-radius); background:var(--color-surface); }
-.welcome-offer li { display:flex; align-items:center; gap:var(--th-space-3); font:var(--type-field-value-weight) var(--type-field-value-size)/var(--type-field-value-leading) var(--font-body); }
-.welcome-footer { display:grid; gap:var(--th-space-4); margin-top:auto; }
+/* Invitation content stays in one bounded dialog above the PayZapp home. */
+.invitation-layer { position:absolute; inset:0; z-index:5; display:grid; place-items:center; padding:84px var(--th-space-5) 44px; background:rgb(8 18 40 / .5); }
+.invitation-layer[hidden], .invitation-reopen[hidden] { display:none; }
+.invitation-modal { position:relative; width:100%; max-width:350px; max-height:100%; display:flex; flex-direction:column; overflow:hidden; border-radius:var(--th-space-6); background:var(--color-surface); color:var(--color-text); box-shadow:0 16px 48px rgb(8 18 40 / .3); outline-offset:-3px; }
+.invitation-close { position:absolute; top:var(--th-space-3); right:var(--th-space-3); z-index:1; }
+.invitation-reopen { position:absolute; bottom:var(--th-space-8); left:var(--th-space-6); right:var(--th-space-6); z-index:3; display:grid; }
+.welcome-hero { flex:none; display:flex; flex-direction:column; align-items:center; margin:var(--th-space-5) var(--th-space-5) 0; padding:var(--th-space-6) 0 var(--th-space-8); text-align:center; }
+.welcome-hero__art { display:flex; margin-bottom:var(--th-space-3); }
+.welcome-hero__kicker { margin:0 0 var(--th-space-1); color:var(--color-text-secondary); font:var(--type-supporting-text-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.welcome-hero h1 { margin:0; font:var(--type-identity-heading-weight) var(--type-identity-heading-size)/var(--type-identity-heading-leading) var(--font-heading); }
+.welcome-hero__family { display:flex; margin-top:var(--th-space-3); padding-left:var(--th-space-1); }
+.welcome-hero__portrait { display:flex; margin-left:calc(var(--th-space-1) * -1); }
+.welcome-content { flex:1; min-height:0; display:flex; flex-direction:column; gap:var(--th-space-5); padding:0 var(--th-space-5) var(--th-space-5); overflow-y:auto; overscroll-behavior-y:contain; scrollbar-width:none; }
+.welcome-benefits { min-width:0; margin:0; padding:var(--th-space-3); border:1px solid var(--color-border); border-radius:var(--th-radius); background:var(--color-surface); }
+.welcome-benefits legend { margin-inline:auto; padding:0; }
+.welcome-content h2 { margin:0; padding:calc(var(--th-space-1) / 2) var(--th-space-2); border:1px solid var(--color-border); border-radius:999px; background:var(--color-action-soft); color:var(--color-text-secondary); font:var(--type-caption-weight) var(--font-size-10)/var(--type-caption-leading) var(--font-body); text-transform:uppercase; }
+.welcome-offer { display:grid; gap:var(--th-space-2); margin:0; padding:0; list-style:none; }
+.welcome-offer li { display:flex; align-items:center; gap:var(--th-space-3); font:var(--type-field-value-weight) var(--type-supporting-text-size)/var(--type-supporting-text-leading) var(--font-body); }
+.welcome-footer { display:grid; gap:var(--th-space-3); }
+.welcome-terms { margin:0; text-align:center; color:var(--color-text-secondary); font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
 .welcome-screen .home-indicator { --home-surface:var(--th-white); }
+
+/* Source home geometry is a 360px canvas inside the existing 390px phone. */
+.welcome-screen > #statusbar { position:relative; z-index:1; }
+.payzapp-home { position:absolute; inset:0; overflow:hidden; }
+.payzapp-home__canvas { position:relative; width:360px; height:780px; --home-chrome-offset:calc(56px * 360 / 390); zoom:calc(390 / 360); color:var(--color-list-title); font:var(--font-weight-regular) var(--font-size-14)/var(--font-leading-normal) var(--font-body); }
+.payzapp-home__canvas p { margin:0; }
+.payzapp-home__header { position:absolute; inset:var(--home-chrome-offset) 0 auto; height:350px; overflow:hidden; color:var(--color-surface); }
+.payzapp-home__profile { position:absolute; left:24px; top:24px; width:34px; height:34px; }
+.payzapp-home__profile > img { width:34px; height:34px; border-radius:12px; object-fit:cover; }
+.payzapp-home__profile > span { position:absolute; left:26px; top:20px; display:grid; place-items:center; padding:2px; border:3px solid var(--color-action); border-radius:4px; background:var(--color-surface); }
+.payzapp-home__tabs { position:absolute; top:24px; left:119px; display:flex; background:rgb(255 255 255 / .2); border-radius:42px; font-weight:var(--font-weight-bold); }
+.payzapp-home__tabs > span { padding:7px 13px; }
+.payzapp-home__tabs > span:first-child { padding-inline:18px; border-radius:47px; background:var(--color-surface); color:var(--color-action); }
+.payzapp-home__bell { position:absolute; left:307px; top:29px; }
+.payzapp-home__scan { position:absolute; top:82px; left:110px; width:140px; display:grid; justify-items:center; gap:16px; text-align:center; }
+.payzapp-home__scan > img { width:52px; height:52px; padding:2px; border-radius:16px; background:rgb(255 255 255 / .2); }
+.payzapp-home__sheet { position:absolute; top:calc(195px + var(--home-chrome-offset)); width:360px; height:585px; border-radius:var(--th-space-6) var(--th-space-6) 0 0; background:linear-gradient(var(--color-surface),var(--color-action-soft)); }
+.payzapp-home__handle { position:absolute; left:164px; top:10px; width:31px; height:9px; background:var(--color-border); clip-path:polygon(0 0,50% 50%,100% 0,100% 50%,50% 100%,0 50%); }
+.payzapp-home__nudge { position:absolute; left:24px; top:36px; width:312px; height:100px; display:flex; align-items:center; gap:12px; padding:14px; border:2px solid #bcdfff; border-radius:14px; background:linear-gradient(105deg,#bee8ff, #95d9ff85); box-shadow:0 0 12px #0000000f; }
+.payzapp-home__nudge-texture { position:absolute; left:-10px; top:-2px; pointer-events:none; }
+.payzapp-home__nudge-paint { position:absolute; inset:0; overflow:hidden; border-radius:inherit; pointer-events:none; }
+.payzapp-home__biller, .payzapp-home__nudge > div { position:relative; }
+.payzapp-home__nudge > div { flex:none; width:196px; }
+.payzapp-home__nudge strong { display:flex; align-items:center; margin-top:8px; color:var(--color-action); font-weight:var(--font-weight-bold); }
+.payzapp-home__nudge-close { position:absolute; right:-8px; top:-6px; }
+.payzapp-home__anchors { position:absolute; left:24px; top:168px; width:312px; display:flex; justify-content:space-between; }
+.payzapp-home__anchors > div { position:relative; width:48px; }
+.payzapp-home__anchors p { position:relative; left:-12px; width:72px; margin-top:8px; text-align:center; color:var(--color-list-detail); font:var(--font-weight-medium) var(--font-size-12)/var(--font-leading-normal) var(--font-body); }
+.payzapp-home__tile { display:grid; place-items:center; width:48px; height:48px; overflow:hidden; border:4px solid #677fff; border-radius:14px; background:radial-gradient(circle at 77% 13%,#677fff,#2e84ff 60%,#4facff); }
+.payzapp-home__tile--send { position:relative; }
+.payzapp-home__tile--send > span { position:absolute; left:2px; top:2px; display:grid; place-items:center; width:36px; height:36px; border-radius:9px; background:var(--color-surface); }
+.payzapp-home__tile--send > span img { width:19.5px; height:16.875px; object-fit:contain; }
+.payzapp-home__wave { position:absolute; top:17px; left:-22.375px; }
+.payzapp-home__earn { position:absolute; top:-10px; left:-10px; z-index:1; padding:1px 6px; border-radius:16px; background:#ffcd51; font:var(--font-weight-medium) var(--font-size-10)/var(--font-leading-normal) var(--font-body); white-space:nowrap; }
+.payzapp-home__accounts { position:absolute; top:282px; width:360px; }
+.payzapp-home__accounts-heading { display:flex; justify-content:space-between; align-items:center; margin:0 24px 16px; }
+.payzapp-home__accounts-heading h2 { margin:0; font:var(--font-weight-semibold) var(--font-size-16)/var(--font-leading-normal) var(--font-heading); }
+.payzapp-home__accounts-heading > span { padding:4px; border-radius:7px; background:var(--color-action-soft); color:var(--color-text-secondary); font-size:var(--font-size-10); }
+.payzapp-home__account-strip { display:flex; gap:16px; padding-inline:24px; overflow-x:auto; scrollbar-width:none; }
+.payzapp-home__account-slot { flex:0 0 221px; }
+.payzapp-home__offers { position:absolute; top:464px; width:360px; height:160px; padding:24px; display:flex; justify-content:space-between; align-items:flex-start; overflow:hidden; background:linear-gradient(186deg,#276eba,#0d2b49); color:var(--color-surface); }
+.payzapp-home__offers > img { position:absolute; left:111.25px; top:-185.45px; transform:rotate(-35.74deg); }
+.payzapp-home__offers strong { position:relative; font:italic var(--font-weight-bold) var(--font-size-16)/var(--font-leading-normal) var(--font-body); }
+.payzapp-home__offers > span { position:relative; margin-top:6px; padding:7px 12px; border:1px solid var(--color-surface); border-radius:10px; font-size:var(--font-size-12); font-weight:var(--font-weight-bold); }
+.welcome-screen > .home-indicator { position:absolute; bottom:0; left:0; right:0; z-index:6; background:transparent; pointer-events:none; }

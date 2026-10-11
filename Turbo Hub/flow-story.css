@@ -109,7 +109,7 @@
 .family-story__screen-rail--loose > .family-story__preview::before { content:none !important; }
 
 /* Reversible editorial experiment: only scenes configured with presentation:'loop'. */
-.family-story__screen-rail.family-story__screen-rail--loop { display:grid; grid-template-columns:minmax(0,300px); justify-content:center; align-items:start; }
+.family-story__screen-rail.family-story__screen-rail--loop { position:relative; display:grid; grid-template-columns:minmax(0,300px); justify-content:center; align-items:start; }
 .family-story__screen-rail.family-story__screen-rail--loop > .family-story__preview { grid-row:1 !important; grid-column:1 !important; width:100%; opacity:0; pointer-events:none; }
 .family-story__screen-rail--loop > .family-story__preview.is-current,.family-story__screen-rail--loop > .family-story__preview.is-outgoing { opacity:1; }
 .family-story__screen-rail--loop > .family-story__preview.is-outgoing { z-index:1; }

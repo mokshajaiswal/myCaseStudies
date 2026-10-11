@@ -7,7 +7,7 @@ const H=TurboUI,actions=document.getElementById('actions');
 
 document.getElementById('statusbar').append(H.statusbar());
 document.getElementById('nav').append(H.navigation({title:'Payment request',left:{label:'Close payment request',icon:'close',href:'../hub-dashboard/index.html?tab=Spends'},right:{label:'Help',icon:'help',onClick:()=>{}}}));
-document.getElementById('identity').append(H.avatar({name:'Neha Sharma',large:true}));
+document.getElementById('identity').append(H.avatar({name:'Neha Sharma',size:'contact-medium',frame:true}));
 document.getElementById('amount').textContent=money(amount);
 
 const countdown=H.countdown({remaining:requestWindow-elapsed,total:requestWindow,variant:'inline'});

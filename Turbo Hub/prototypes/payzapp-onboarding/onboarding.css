@@ -29,9 +29,10 @@ body { background:var(--chrome-backdrop-base); font-family:var(--font-body); col
 .start-action { margin-inline:var(--th-space-6); display:grid; }
 .sr-only { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 
-.splash { position:absolute; inset:56px 0 0; display:grid; place-items:center; }
-.splash img { display:block; width:112px; height:112px; border-radius:var(--th-space-6); }
+.splash { position:absolute; inset:0; z-index:1; background:var(--color-surface); }
+.splash img { display:block; width:100%; height:100%; object-fit:contain; }
 .splash[hidden] { display:none; }
+.is-splash #statusbar { visibility:hidden; }
 .is-splash .carousel-area, .is-splash .start-action { visibility:hidden; }
 
 html[data-story-embed] .phone { position:relative; aspect-ratio:1006 / 2050; }

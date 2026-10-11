@@ -1,5 +1,22 @@
 # Isolated PayZapp onboarding — 10 October 2026
 
+## Original splash GIF — 11 October 2026
+
+Replaced the temporary Play Store icon splash with the original animated image
+from Figma file QNc5WWAGgH0PKr3z42BP3N, node 4:826. The local `assets/splash.gif`
+is 500 × 888, with 55 frames and 1.1 seconds of animation. The splash fills the
+screen with the existing white surface token, preserves the complete image's
+aspect ratio without cropping, and hides the parent status-bar slot while visible.
+The existing 1.6-second splash timing remains. Story resets assign a fresh local
+image URL to replay the GIF. Standalone onboarding, its device preview, Play Store
+Open and the WhatsApp story all consume this single implementation.
+
+This is page-owned branded artwork and splash layout; shared Status bar and Action
+internals are unchanged. Original GIF downloaded through Figma's raw-image asset
+instructions; no flattened export or temporary URL is used in product code.
+Source, asset metadata and Node checks cover the change. Browser animation,
+framing and visual review remain with the user.
+
 Figma selection identifies NTB walkthrough frames 11623:167259, 11623:167608,
 11623:167958. Implemented in prototypes/payzapp-onboarding, with no story routing
 or case-study placement. Existing family Hub onboarding stays in place.
@@ -96,3 +113,11 @@ pause and seeking for locked embeds; standalone previews retain their cyclic
 carousel. Story embeds reuse the existing phone-frame asset. Narrative copy now
 reflects the introduction before Hub welcome. Flow/story Node tests and syntax
 checks pass; browser review remains with the user.
+
+Flow pacing follow-up: the joining flow now shows only the first carousel slide
+for 1.8 seconds after the 1.6-second splash, then presses Let’s Get Started.
+The scripted onboarding checkpoint takes 5.5 seconds instead of 15.7 seconds.
+The standalone carousel and shared Action renderer are unchanged; this edit owns
+only flow timing and narrative copy. Playback tests cover first-slide-only
+progression and a total duration below six seconds. Visual timing review remains
+with the user.

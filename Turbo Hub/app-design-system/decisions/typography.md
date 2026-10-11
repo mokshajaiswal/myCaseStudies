@@ -1,5 +1,38 @@
 # Typography specifications
 
+## Authorization confirmation copy (11 October 2026)
+
+The page-owned confirmation heading reads “Request authorised” followed by
+“successfully!” on a second line, restored at user request. Its weight changes
+from Bold (700) to the existing Semibold
+(600) token. Inter, heading size and leading remain. Shared Success indicator
+and Action components retain their existing APIs and internals. Source and
+whitespace checks passed; visual review remains with the user.
+
+## Authorization request copy (11 October 2026)
+
+The page-owned “Neha Sharma wants to pay / at Nykaa” copy now uses the existing
+Regular (400) token instead of Medium (500), per user request. Inter, 18px size
+and relaxed leading remain. Only `.request-hero__lead` changes; shared component
+internals are not overridden. Whitespace checks passed; visual review remains
+with the user.
+
+## Authorization amount weight and tracking (11 October 2026)
+
+After trying Medium (500), the user requested a slightly heavier payment
+authorization amount with more letter spacing. The page-owned amount now uses the
+existing Semibold (600) token and .02em tracking (0.64px at its 32px size). Inter,
+size and payment amount leading remain. This change is confined to
+`.request-hero__amount`; no registered component internals are overridden. The
+avatar border retains its existing shared treatment. Source and whitespace checks
+pass; visual review remains with the user.
+
+## Font loading on Live Server (11 October 2026)
+
+Hub Details' shared font declaration previously used `../../app/fonts/Inter/InterVariable.woff2` from `tokens/primitives.css`. That resolved correctly in DS Studio, but a plain static server resolved it to the nonexistent `app-design-system/app/fonts/Inter/InterVariable.woff2`, causing Inter roles to render in their Arial fallback.
+
+The declaration now uses `../../fonts/Inter/InterVariable.woff2`, resolving to the existing app font on static servers and `/fonts/Inter/InterVariable.woff2` through DS Studio's root-relative app asset route. The existing variable font supports weights 100–900. Hub Details' summary, limit amounts/captions, tabs, member names, badges and actions keep their existing semantic font roles; no component internals or page overrides were added. Asset-path and HTTP checks cover loading; rendered-font and visual review remain with the user.
+
 Source: [Turbo Hub → Prototype_v1](https://www.figma.com/design/IJU02E1n5jSddJqd3SpkG7/Turbo-Hub?node-id=396-18145). Audited 1 October 2026 using Figma design context, including screenshots and named typography styles.
 
 Matched frames: Hub Details Spends 402:51668, Members 402:51353; Add Member details 402:50472 and payment methods 402:50163; Review payment 436:64799; approval pending 436:65448.

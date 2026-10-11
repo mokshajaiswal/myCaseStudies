@@ -12,6 +12,14 @@
   const delay = 4000;
   let splashVisible = true, splashTimer = null, openingCarousel = false;
   const splash = document.querySelector('.splash');
+  const splashArtwork = splash.querySelector('img');
+  const splashSource = splashArtwork.getAttribute('src');
+  let splashRun = 0;
+  function restartSplashArtwork() {
+    const source = new URL(splashSource, location.href);
+    source.searchParams.set('play', String(++splashRun));
+    splashArtwork.src = source.href;
+  }
   const carouselArea = document.querySelector('.carousel-area');
   const actionSlot = document.getElementById('start-action');
   function scheduleSplash() {
@@ -143,6 +151,7 @@
       request++; clearTimeout(timer); clearTimeout(splashTimer); clearTransition();
       initialized = false; current = 0; splashVisible = true; openingCarousel = false;
       splash.hidden = false; canvas.classList.add('is-splash');
+      restartSplashArtwork();
       for (const region of [carouselArea, actionSlot]) { region.inert = true; region.setAttribute('aria-hidden','true'); }
       active = true; scheduleSplash();
     },

@@ -32,15 +32,15 @@
          screen('invite-son','Invite Rohan','add-member','Arun gives Rohan member access for college expenses, without enabling Manager role.',{member:'son',avatarUser:'rohan'}),
          screen('spending-limit','Set the allowance and send the invite','spending-limit','Arun sets Neha’s monthly limit to ₹5,000, then sends the invitation.',{proposed:true,actor:'daughter'}),
          screen('children-invite-sent','Invitation sent','invite-sent?name=Neha%20Sharma','The animated confirmation marks the invitation as sent. Arun will be notified.',{actor:'daughter',confirmationHeading:'Invitation sent',confirmationCopy:'Arun will be notified.'}),
-         screen('members-children-invited','Invitations sent','hub-dashboard?tab=Members&roster=all-invited','Members now lists Neha and Rohan as yet to join, each with their limit already set.')],{presentation:'loop',playback:'scripted'})
+         screen('members-children-invited','Back to Hub','hub-dashboard?tab=Members&roster=all-invited','Members now lists Neha and Rohan as yet to join, each with their limit already set.')],{presentation:'loop',playback:'scripted'})
     ]},
     {id:'children',headerless:true,title:'The children join',intro:'Rohan and Neha both join.',scenes:[
-      flow('whatsapp-invite-flow','daughter','Neha joins from a WhatsApp invite','Neha has never used PayZapp. Arun’s invite reaches her on WhatsApp, the link takes her to the Play Store, and after a short PayZapp introduction it welcomes her into The Sharma’s Family Hub. One number check later, she’s in. Rohan joins the same way.',
+      flow('whatsapp-invite-flow','daughter','Neha joins from a WhatsApp invite','Neha has never used PayZapp. Arun’s invite reaches her on WhatsApp, the link takes her to the Play Store, and after a short PayZapp introduction it welcomes her into The Sharma’s. One number check later, she’s in. Rohan joins the same way.',
         {title:'PayZapp does the onboarding',copy:'A new user would normally face a generic app intro and a long sign-up before reaching anything family-related. Here the invite carries the context: PayZapp’s first launch shows a splash and short introduction before opening the Hub invitation, shows who invited her and exactly what Arun has set up, and needs only the OTP for the number he already entered. The invitation context is preserved through the app introduction and into joining the Hub.'},
         [screen('invite-notification','Neha’s lock screen','payment-notification?kind=invite','A WhatsApp notification from HDFC Bank tells Neha that Arun has invited her to the family Hub.'),
          screen('invitation','The invitation on WhatsApp','invitation','The chat shows the family Hub preview and a link to join on PayZapp.'),
          screen('play-store','Install PayZapp','play-store','New to PayZapp, Neha installs it from the Play Store, then taps Open.',{proposed:true}),
-         screen('payzapp-onboarding','Welcome to PayZapp','payzapp-onboarding?next=hub-welcome','A brief splash introduces PayZapp, followed by payments, statements and rewards before continuing to the family invitation.'),
+         screen('payzapp-onboarding','Welcome to PayZapp','payzapp-onboarding?next=hub-welcome','A brief splash and the first PayZapp introduction lead to Let’s Get Started and the family invitation.'),
          screen('hub-welcome','Welcomed into the Hub','hub-welcome','After the introduction, PayZapp opens the invitation: who invited her, who’s in the Hub, and the UPI, card and ₹5,000 limit Arun has set up.',{proposed:true}),
          screen('verify-mobile','Confirm her number','verify-mobile','The only account step: a code sent to the number Arun invited, filled in from SMS.',{proposed:true}),
          screen('hub-joined','Joined successfully','hub-joined','Neha’s membership is confirmed, then she opens the family Hub.',{proposed:true}),
@@ -75,9 +75,9 @@
         [screen('members-family','Who has joined','hub-dashboard?tab=Members&roster=family','The Members view shows the whole family with what each person has spent against their limit.'),
          screen('hub-dashboard','Recent spending','hub-dashboard?tab=Spends','Recent transactions sit alongside the family’s monthly spending total.'),
          screen('hub-analytics','Where the money goes','hub-dashboard?tab=Analytics','Analytics shows who is spending, on what, and through which payment methods.',{actor:'father'}),
-         screen('hubs','All Hubs','hubs','The family Hub is easy to tell apart from other spaces a parent manages or belongs to.',{actor:'father'})],{connected:false})
+         screen('hubs','All Hubs','hubs','The family Hub is easy to tell apart from other spaces a parent manages or belongs to.',{actor:'father'})],{presentation:'loop',playback:'scripted',roster:'family'})
     ]},
-    {id:'co-manager',title:'Kavya joins as co-manager',intro:'Arun and Kavya run the household together, so Kavya manages the Hub alongside him, with her own card and payment methods.',scenes:[
+    {id:'co-manager',hidden:true,title:'Kavya joins as co-manager',intro:'Arun and Kavya run the household together, so Kavya manages the Hub alongside him, with her own card and payment methods.',scenes:[
 flow('card-flow','mother','Kavya finishes her card setup','Kavya wants her physical card, so she checks her profile, sees her UPI access is already active and adds a delivery address for the card.',
         {title:'Show what works now',copy:'Kavya’s UPI access is live immediately, so her profile says so before asking for anything. The physical card is the one thing still pending, and its delivery form asks only for what the courier needs.'},
         [screen('member-profile','Check Kavya’s payment access','member-profile','Kavya sees her limit and active UPI access. Her physical card still needs delivery details.'),

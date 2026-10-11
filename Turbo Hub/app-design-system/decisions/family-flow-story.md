@@ -291,3 +291,13 @@ completion handler is never called. The pending countdown stays frozen, and the
 shared parent owns transitions and looping. No camera, payment or backend action
 is introduced. Static restoration remains available. Syntax and 34 source tests
 pass; browser visual review remains with the user.
+
+### Hide Kavya’s co-manager chapter — 11 October 2026
+
+The co-manager chapter now uses the existing `hidden:true` flag, hiding Kavya’s
+profile, delivery-details, delivery-confirmation and return-to-profile sequence
+from the case study. Source fixtures and standalone prototypes remain available.
+Arun’s invitation to Kavya and their shared spending-review flow remain visible.
+Only narrative visibility changed; no product component or screen was edited.
+Story checks and source whitespace/syntax checks pass. Browser review remains
+with the user.

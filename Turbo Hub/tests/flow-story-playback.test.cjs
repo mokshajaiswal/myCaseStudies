@@ -13,7 +13,7 @@ class Element{
   querySelector(selector){if(selector==='iframe')return this.frame||null;if(selector==='.family-story__phone-slot')return this.slot;return null;}
   getBoundingClientRect(){const {left,top,width,height}=this.rect;return {left,top,width,height,right:left+width,bottom:top+height};}
   dispatchEvent(event){this.events.push(event.type);this.listeners[event.type]?.(event);}
-  animate(frames,options){const animation={frames,options,cancelled:false,cancel(){this.cancelled=true;}};this.animations.push(animation);return animation;}
+  animate(frames,options){const animation={frames,options,cancelled:false,paused:false,pause(){this.paused=true;},play(){this.paused=false;},cancel(){this.cancelled=true;}};this.animations.push(animation);return animation;}
 }
 function harness({reduced=false,flowId='kavya-invite-flow'}={}){
   const scene=story.chapters.flatMap(c=>c.scenes).find(s=>s.id===flowId);
@@ -24,7 +24,7 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
     const preview=new Element('figure');preview.slot=new Element('div',{left:100,top:200,width:300,height:620});preview.append(preview.slot);
     const frame=new Element('iframe',{left:100,top:200,width:300,height:620});frame.clientWidth=300;frame.clientHeight=620;preview.frame=frame;preview.slot.append(frame);
     const controls={};
-    const scroller=new Element('div',{left:10,top:150,width:280,height:400});scroller.scrollTop=0;scroller.clientHeight=400;scroller.contains=target=>target.inContent;
+    const scroller=new Element('div',{left:10,top:150,width:280,height:400});scroller.scrollTop=0;scroller.clientHeight=400;scroller.scrollHeight=1400;scroller.contains=target=>target.inContent;
     const footer=new Element('footer',{left:10,top:550,width:280,height:60});
     const control=(selector,tag,type='',inContent=true)=>{
       const target=new Element(tag,{left:40,top:220,width:type==='checkbox'?20:200,height:30});target.type=type;target.value='prefilled';target.checked=true;target.inContent=inContent;controls[selector]=target;return target;
@@ -40,9 +40,12 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
       for(const name of ['physical','digital','upi'])control('#'+name,'input','checkbox');control('#footer button[type="submit"]','button','submit',false);
     }
     if(screen.id==='spending-limit'){
-      control('#limit-target','select');const range=control('#limit-amount','input','range');range.min='500';range.max='100000';control('#content button[type="submit"]','button','submit');
+      const range=control('#limit-amount','input','range');range.min='500';range.max='100000';control('#content button[type="submit"]','button','submit');
     }
     if(screen.id==='scan-qr')control('.scan-camera__target','button');
+    if(screen.id==='members-family')control('#hub-tab-0','button');
+    if(screen.id==='hub-dashboard')control('#hub-tab-2','button');
+    if(screen.id==='hub-analytics')control('#nav a[aria-label="Back to Hubs"]','a','',false);
     if(screen.id==='invite-notification')control('#notifications .th-payment-notification','a', '',false);
     if(screen.id==='invitation')control('.wa-preview','a');
     if(screen.id==='play-store'){
@@ -51,7 +54,7 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
       install.setPlaybackState('idle');
     }
     if(screen.id==='payzapp-onboarding'){control('#start-action button','button');controls.onboarding={slides:[],resets:0};}
-    if(screen.id==='hub-welcome'){control('#welcome-terms','input','checkbox');control('.welcome-footer button','button');}
+    if(screen.id==='hub-welcome'){control('.welcome-footer button','button');controls.welcome={resets:0,enters:0,shows:0,paused:false};}
     if(screen.id==='verify-mobile'){control('#otp','input','text');control('#form button[type="submit"]','button','submit');}
     if(screen.id==='neha-profile')control('#upi-row','a');
     if(screen.id==='neha-upi-active')control('#card-row','a');
@@ -73,9 +76,9 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
     if(screen.id==='payment-review'){
       control('#amount','input','text');const swipe=control('#pay','input','range',false);swipe.min='0';swipe.max='100';swipe.classList.add('th-swipe__control');
     }
-    controls['#content']=scroller;controls['#footer']=footer;
+    controls['#content']=scroller;controls['.phone-content']=scroller;controls['#footer']=footer;
     class Event{constructor(type){this.type=type;}}
-    const doc={readyState:'complete',defaultView:{TurboPayzappPlayback:screen.id==='payzapp-onboarding'?{reset(){controls.onboarding.resets++;controls.onboarding.slides=[];},showSlide(slide){controls.onboarding.slides.push(slide);},pause(){},resume(){}}:undefined,TurboStoryContext:{embedded:true,locked:true,scene:screen},Event,MouseEvent:Event,TurboUI:{pressButton:target=>{
+    const doc={readyState:'complete',defaultView:{TurboWelcomePlayback:screen.id==='hub-welcome'?{reset(){controls.welcome.resets++;},enter(){controls.welcome.enters++;},show(){controls.welcome.shows++;},pause(){controls.welcome.paused=true;},resume(){controls.welcome.paused=false;}}:undefined,TurboPayzappPlayback:screen.id==='payzapp-onboarding'?{reset(){controls.onboarding.resets++;controls.onboarding.slides=[];},showSlide(slide){controls.onboarding.slides.push(slide);},pause(){},resume(){}}:undefined,TurboStoryContext:{embedded:true,locked:true,scene:screen},Event,MouseEvent:Event,TurboUI:{pressButton:target=>{
       if(target?.tagName!=='A'&&target?.type!=='submit')return null;
       const press={target,paused:false,cancelled:false,pause(){this.paused=true;},play(){this.paused=false;},cancel(){this.cancelled=true;}};presses.push(press);return press;
     }}},querySelector:selector=>controls[selector]||null};
@@ -88,7 +91,7 @@ function harness({reduced=false,flowId='kavya-invite-flow'}={}){
   const originalCreate=window.TurboStoryPlayback.create;
   window.TurboStoryPlayback.create=options=>originalCreate({...options,onError:()=>{errors++;options.onError?.();}});
   vm.runInNewContext(read('flow-story.js'),{window,document,URL,IntersectionObserver:window.IntersectionObserver});
-  const rail=new Element('div'),controls=window.TurboFlowStory.sequenceLoop(rail,previews,scene);
+  const rail=new Element('div',{left:100,top:200,width:300,height:620}),controls=window.TurboFlowStory.sequenceLoop(rail,previews,scene);
   const current=()=>previews.findIndex(p=>p.classList.contains('is-current'));
   const tick=()=>{
     const entry=[...timers].sort((a,b)=>a[1].due-b[1].due)[0];assert.ok(entry,'Expected a pending playback action');
@@ -111,10 +114,10 @@ test('scrubbing backward restores input and role state without activating a subm
   doc.defaultView.TurboStoryContext.locked=false;
   assert.throws(()=>snapshot(doc,'add-member','kavya-invite-flow',0),/locked fixture/);
 });
-test('scripted touch enters from the side, reaches Add, and continues across all five screens',()=>{
+test('scripted touch waits for movement, reaches Add, and continues across all five screens',()=>{
   const h=harness();assert.equal(h.timers.size,0);h.start();h.tick();
-  const dot=h.previews[0].slot.children.at(-1);assert.equal(dot.style.left,'-16px');assert.ok(dot.classList.contains('is-visible'));
-  h.tick();assert.equal(dot.style.left,'140px');assert.equal(dot.style.top,'235px');h.tick();assert.ok(dot.classList.contains('is-tapping'));
+  const dot=h.rail.children.at(-1);assert.equal(dot.style.left,undefined);assert.ok(!dot.classList.contains('is-visible'));
+  h.tick();assert.equal(dot.style.left,'140px');assert.equal(dot.style.top,'235px');assert.ok(dot.classList.contains('is-visible'));h.tick();assert.ok(dot.classList.contains('is-tapping'));
   h.until(()=>h.current()===1);h.tick();
   const details=h.controlsByScene[1];assert.equal(details['#name'].value,'');assert.equal(details['#confirmed'].checked,false);assert.equal(details['#footer button[type="submit"]'].disabled,true);
   h.until(()=>details['#name'].value==='Kavya Sharma');assert.equal(details['#relation'].value,'Wife');
@@ -123,6 +126,38 @@ test('scripted touch enters from the side, reaches Add, and continues across all
   h.until(()=>h.current()===4);h.until(()=>h.current()===0);h.until(()=>h.current()===1);h.tick();assert.equal(details['#name'].value,'');assert.equal(h.errors(),0);
   // Cursor pulses do not invoke native navigation or form submission.
   for(const selectors of h.controlsByScene)for(const [selector,el] of Object.entries(selectors))if(selector.includes('submit')||selector.includes('section-top'))assert.deepEqual(el.events,[]);
+});
+test('one touch dot fades at handoffs and waits for movement while retaining its last position across all flows',()=>{
+  for(const flowId of ['kavya-invite-flow','children-invite-flow','whatsapp-invite-flow','member-activation-flow','request-flow','tracking-flow']){
+    const h=harness({flowId});h.start();const dot=h.rail.children.at(-1);
+    let before;
+    while(h.current()===0){before={left:dot.style.left,top:dot.style.top};h.tick();}
+    assert.equal(h.rail.children.at(-1),dot);assert.deepEqual({left:dot.style.left,top:dot.style.top},before,flowId);
+    assert.ok(!dot.classList.contains('is-visible'));assert.ok(!dot.classList.contains('is-tapping'));
+    const first=h.window.TurboStoryPlayback.actionsFor(h.scene.sequence[1].id,flowId)[0];
+    if(['enter','hide','success'].includes(first.kind)){h.tick();assert.deepEqual({left:dot.style.left,top:dot.style.top},before);assert.ok(!dot.classList.contains('is-visible'));}
+    const arrivals=dot.animations.length;
+    h.until(()=>dot.classList.contains('is-visible'));assert.equal(h.current(),1,'the first movement reveals the dot');
+    assert.equal(dot.animations.length,arrivals+1,'each screen gets an approach even when the next target is nearby');
+    const arrival=dot.animations.at(-1);assert.match(arrival.frames[0].transform,/translateX\(-?80px\)/);assert.equal(arrival.frames[0].opacity,0);assert.equal(arrival.frames[1].opacity,1);assert.equal(arrival.options.duration,550);
+    h.until(()=>h.current()===0);before={left:dot.style.left,top:dot.style.top};
+    assert.ok(!dot.classList.contains('is-visible'));
+    h.tick();assert.deepEqual({left:dot.style.left,top:dot.style.top},before);assert.ok(!dot.classList.contains('is-visible'));
+    assert.equal(h.errors(),0);assert.equal(h.rail.children.filter(el=>el.className==='family-story__touch-dot').length,1);
+  }
+});
+test('the shared dot targets the phone correctly when the rail has a different origin',()=>{
+  const h=harness();h.rail.rect.left=50;h.rail.rect.top=120;h.start();h.tick();h.tick();
+  const dot=h.rail.children.at(-1);assert.equal(dot.style.left,'190px');assert.equal(dot.style.top,'315px');
+});
+test('dot approaches from inside the phone, scales its travel and pauses or cancels with playback',()=>{
+  const h=harness(),frame=h.previews[0].frame,target=h.controlsByScene[0]['#hub-panel .section-top a'];
+  frame.rect.width=150;frame.rect.height=310;target.rect.left=250;target.rect.width=20;
+  h.start();h.tick();h.tick();const dot=h.rail.children.at(-1),arrival=dot.animations.at(-1);
+  assert.equal(dot.style.left,'130px');assert.match(arrival.frames[0].transform,/translateX\(-40px\)/);
+  h.controls.children[2].listeners.click();assert.equal(arrival.paused,true);
+  h.controls.children[2].listeners.click();assert.equal(arrival.paused,false);
+  h.steps[1].listeners.click();assert.equal(arrival.cancelled,true);assert.ok(!dot.classList.contains('is-visible'));
 });
 test('typing pauses mid-word, preserves the outstanding delay, and resumes without resetting',()=>{
   const h=harness();h.start();h.until(()=>h.current()===1);const name=h.controlsByScene[1]['#name'];h.until(()=>name.value==='Kav');
@@ -138,9 +173,9 @@ test('visibility and page lifecycle pause actions; step selection restarts playb
 });
 test('frames may mount late or reload without reusing a stale action document',()=>{
   const h=harness(),frame=h.previews[0].frame,doc=frame.contentDocument;frame.contentDocument=null;h.start();h.tick();assert.equal(h.errors(),0);assert.equal(h.timers.size,1);
-  frame.contentDocument=doc;doc.readyState='loading';h.tick();assert.equal(h.previews[0].slot.children.at(-1).classList.contains('is-visible'),false);
-  doc.readyState='complete';h.tick();assert.equal(h.previews[0].slot.children.at(-1).style.left,'-16px');
-  h.tick();frame.contentDocument={...doc};h.tick();assert.equal(h.previews[0].slot.children.at(-1).style.left,'-16px');
+  frame.contentDocument=doc;doc.readyState='loading';h.tick();assert.equal(h.rail.children.at(-1).classList.contains('is-visible'),false);
+  doc.readyState='complete';h.tick();assert.equal(h.rail.children.at(-1).style.left,undefined);assert.ok(!h.rail.children.at(-1).classList.contains('is-visible'));
+  h.tick();frame.contentDocument={...doc};h.tick();assert.equal(h.rail.children.at(-1).style.left,'140px');
 });
 test('playback refuses standalone, unlocked or unrelated frames and missing controls',()=>{
   for(const changes of [{embedded:false},{locked:false},{scene:{id:'wrong-scene'}}]){
@@ -151,15 +186,17 @@ test('playback refuses standalone, unlocked or unrelated frames and missing cont
 test('target positioning uses scaled live rectangles and scrolls only child content',()=>{
   const h=harness(),frame=h.previews[0].frame,target=h.controlsByScene[0]['#hub-panel .section-top a'],scroller=h.controlsByScene[0]['#content'];
   target.rect.top=590;frame.rect.width=150;frame.rect.height=310;h.start();h.tick();h.tick();
-  assert.equal(scroller.scrollTop,86);const dot=h.previews[0].slot.children.at(-1);assert.equal(dot.style.left,'70px');assert.equal(dot.style.top,'302.5px');assert.equal(h.errors(),0);
+  assert.equal(scroller.scrollTop,86);const dot=h.rail.children.at(-1);assert.equal(dot.style.left,'70px');assert.equal(dot.style.top,'302.5px');assert.equal(h.errors(),0);
 });
 test('reduced motion holds scripted actions until explicitly played',()=>{
-  const h=harness({reduced:true});h.start();assert.equal(h.timers.size,0);h.controls.children[2].listeners.click();h.tick();assert.ok(h.previews[0].slot.children.at(-1).classList.contains('is-visible'));
+  const h=harness({reduced:true});h.start();assert.equal(h.timers.size,0);h.controls.children[2].listeners.click();h.tick();assert.ok(!h.rail.children.at(-1).classList.contains('is-visible'));
+  h.tick();assert.ok(h.rail.children.at(-1).classList.contains('is-visible'));assert.equal(h.rail.children.at(-1).animations.length,0);
 });
 test('button tap feedback pauses with playback and cancels when the reader changes screens',()=>{
   const h=harness();h.start();h.tick();h.tick();h.tick();assert.equal(h.presses.length,1);assert.equal(h.presses[0].target,h.controlsByScene[0]['#hub-panel .section-top a']);
   h.controls.children[2].listeners.click();assert.equal(h.presses[0].paused,true);h.controls.children[2].listeners.click();assert.equal(h.presses[0].paused,false);
-  h.controls.children[2].listeners.click();h.steps[1].listeners.click();assert.equal(h.presses[0].cancelled,true);assert.equal(h.timers.size,0);
+  h.controls.children[2].listeners.click();const dot=h.rail.children.at(-1),before={left:dot.style.left,top:dot.style.top};h.steps[1].listeners.click();assert.equal(h.presses[0].cancelled,true);assert.equal(h.timers.size,0);
+  assert.ok(!dot.classList.contains('is-visible'));assert.deepEqual({left:dot.style.left,top:dot.style.top},before);
 });
 test('connected checkpoints identify current, completed and upcoming screens and reset with the loop',()=>{
   const h=harness(),list=h.controls.children[0];assert.equal(list.tagName,'OL');assert.equal(h.steps.length,5);
@@ -201,7 +238,7 @@ test('children invite flow types Rohan without manager rights, sets Neha allowan
   const son=h.controlsByScene[1];h.until(()=>son['#mobile'].value==='9876543211');
   assert.equal(son['#name'].value,'Rohan Sharma');assert.equal(son['#relation'].value,'Son');assert.equal(son['#manager'].getAttribute('aria-checked'),'false');
   h.until(()=>h.current()===2);assert.equal(son['#confirmed'].checked,true);
-  const limit=h.controlsByScene[2];h.until(()=>limit['#limit-amount'].value==='5000');assert.equal(limit['#limit-target'].value,'neha');
+  const limit=h.controlsByScene[2];h.until(()=>limit['#limit-amount'].value==='5000');assert.equal(limit['#limit-target'],undefined);
   h.until(()=>h.current()===3);assert.equal(h.scene.sequence[3].id,'children-invite-sent');h.until(()=>h.current()===4);assert.equal(h.scene.sequence[4].id,'members-children-invited');h.until(()=>h.current()===0);h.until(()=>h.current()===1);h.tick();
   assert.equal(son['#name'].value,'');assert.equal(son['#manager'].getAttribute('aria-checked'),'false');assert.equal(h.errors(),0);
 });
@@ -221,11 +258,11 @@ test('incoming fixture is reset before transition playback starts, including man
 
 test('children allowance visibly drags through intermediate amounts and pauses without losing its position',()=>{
   const h=harness({flowId:'children-invite-flow'});h.start();h.until(()=>h.current()===2);
-  const range=h.controlsByScene[2]['#limit-amount'],dot=h.previews[2].slot.children.at(-1);
+  const range=h.controlsByScene[2]['#limit-amount'],dot=h.rail.children.at(-1);
   assert.equal(range.value,'500');h.until(()=>range.value==='1500');const before=Number.parseFloat(dot.style.left);
   h.controls.children[2].listeners.click();assert.equal(range.value,'1500');assert.equal(h.timers.size,0);
   h.controls.children[2].listeners.click();h.until(()=>range.value==='3000');assert.ok(Number.parseFloat(dot.style.left)>before);
-  h.until(()=>range.value==='5000');assert.ok(range.events.filter(event=>event==='input').length>=10);assert.equal(dot.style.transitionDuration,'100ms');assert.equal(h.errors(),0);
+  h.until(()=>range.value==='5000');assert.ok(range.events.filter(event=>event==='input').length>=10);assert.equal(dot.style.transitionDuration,'100ms,100ms,180ms');assert.equal(h.errors(),0);
 });
 
 
@@ -233,12 +270,33 @@ test('Neha request loop scans, types the amount and visually swipes without navi
   const h=harness({flowId:'request-flow'});h.start();h.until(()=>h.current()===1);
   const review=h.controlsByScene[1];assert.equal(review['#amount'].value,'');assert.equal(review['#pay'].value,'0');
   h.until(()=>review['#amount'].value==='2500');h.until(()=>review['#pay'].value==='50');
-  const dot=h.previews[1].slot.children.at(-1),middle=Number.parseFloat(dot.style.left);
+  const dot=h.rail.children.at(-1),middle=Number.parseFloat(dot.style.left);
   h.until(()=>review['#pay'].value==='100');assert.ok(Number.parseFloat(dot.style.left)>middle);assert.equal(review['#pay'].events.includes('change'),false);
   h.until(()=>h.current()===2);assert.equal(h.scene.sequence[2].id,'request-pending');h.until(()=>h.current()===0);assert.equal(h.errors(),0);
 });
 
-test('Neha joins through eight fixtures into the Hub with pausable install, terms acceptance, SMS autofill and full reset',()=>{
+test('parents review Members, Spends and Analytics, scroll with pausable timing, then return to All Hubs',()=>{
+  const h=harness({flowId:'tracking-flow'});h.start();
+  assert.deepEqual(h.scene.sequence.map(s=>s.id),['members-family','hub-dashboard','hub-analytics','hubs']);
+  for(const id of ['members-family','hub-dashboard','hub-analytics'])assert.equal(story.scenes.find(s=>s.id===id).roster,'family');
+  h.until(()=>h.current()===1);h.until(()=>h.current()===2);
+  const scroller=h.controlsByScene[2]['.phone-content'],dot=h.rail.children.at(-1);
+  assert.equal(scroller.scrollTop,0);h.until(()=>scroller.scrollTop>=500);
+  assert.ok(!dot.classList.contains('is-visible'),'analytics reading has no tap dot');
+  const before=scroller.scrollTop;h.controls.children[2].listeners.click();h.advanceClock(10000);
+  assert.equal(scroller.scrollTop,before);assert.equal(h.timers.size,0);
+  h.controls.children[2].listeners.click();h.until(()=>scroller.scrollTop===1000);
+  h.until(()=>dot.classList.contains('is-tapping'));assert.equal(scroller.scrollTop,0);
+  h.until(()=>h.current()===3);h.until(()=>h.current()===0);
+  scroller.scrollTop=900;h.steps[2].listeners.click();assert.equal(scroller.scrollTop,0);
+  const doc=h.previews[2].frame.contentDocument;
+  h.window.TurboStoryPlayback.snapshot(doc,'hub-analytics','tracking-flow',2900);assert.ok(scroller.scrollTop>0&&scroller.scrollTop<1000);
+  h.window.TurboStoryPlayback.snapshot(doc,'hub-analytics','tracking-flow',0);assert.equal(scroller.scrollTop,0);
+  for(const controls of h.controlsByScene)for(const el of Object.values(controls))if(el.tagName==='A'||el.tagName==='BUTTON')assert.deepEqual(el.events,[]);
+  assert.equal(h.errors(),0);
+});
+
+test('Neha joins through eight fixtures into the Hub with pausable install, direct invite acceptance, SMS autofill and full reset',()=>{
   const h=harness({flowId:'whatsapp-invite-flow'});h.start();
   assert.deepEqual(h.scene.sequence.map(s=>s.id),['invite-notification','invitation','play-store','payzapp-onboarding','hub-welcome','verify-mobile','hub-joined','neha-hub']);
   h.until(()=>h.current()===2);
@@ -247,13 +305,14 @@ test('Neha joins through eight fixtures into the Hub with pausable install, term
   assert.equal(h.timers.size,0);assert.equal(install.state,'progress');assert.equal(install.percent,35);
   h.advanceClock(10000);h.controls.children[2].listeners.click();h.until(()=>install.state==='ready');
   h.until(()=>h.current()===3);const onboarding=h.controlsByScene[3].onboarding;assert.equal(onboarding.resets,1);
-  h.until(()=>h.current()===4);assert.deepEqual(onboarding.slides,[0,1,2]);const terms=h.controlsByScene[4]['#welcome-terms'];assert.equal(terms.checked,false);
-  h.until(()=>terms.checked);assert.deepEqual(terms.events,['change','change']);
+  const onboardingActions=h.window.TurboStoryPlayback.actionsFor('payzapp-onboarding','whatsapp-invite-flow');
+  assert.ok(onboardingActions.reduce((total,action)=>total+action.wait,0)<6000,'onboarding should continue within six seconds');
+  h.until(()=>h.current()===4);assert.deepEqual(onboarding.slides,[0]);assert.equal(h.controlsByScene[4]['#welcome-terms'],undefined);
   h.until(()=>h.current()===5);const otp=h.controlsByScene[5]['#otp'];assert.equal(otp.value,'');
   h.until(()=>otp.value==='482913');assert.deepEqual(otp.events,['input','input']);
   h.until(()=>h.current()===6);h.until(()=>h.current()===7);assert.equal(h.scene.sequence[7].route,'hub-dashboard?state=joined&member=neha');h.until(()=>h.current()===0);h.until(()=>h.current()===2);
   assert.equal(install.state,'idle');assert.equal(install.percent,0);
-  h.steps[4].listeners.click();assert.equal(terms.checked,false);
+  h.steps[4].listeners.click();assert.equal(h.controlsByScene[4]['#welcome-terms'],undefined);
   h.steps[5].listeners.click();assert.equal(otp.value,'');assert.equal(h.errors(),0);
   for(const selectors of h.controlsByScene)for(const el of Object.values(selectors))if(el.tagName==='A'||el.tagName==='BUTTON')assert.deepEqual(el.events,[]);
 });
@@ -320,4 +379,14 @@ test('activation walkthrough snapshots restore PAN, PIN and address state when s
     assert.equal(fields[field].value,'');assert.equal(fields['#content'].scrollTop,0);if(checkbox)assert.equal(fields[checkbox].checked,false);
     for(const el of Object.values(fields))if(el.type==='submit')assert.deepEqual(el.events,[]);
   }
+});
+
+test('Welcome entrance starts with playback after preparation and replays on return',()=>{
+ const h=harness({flowId:'whatsapp-invite-flow'});h.start();h.until(()=>h.current()===4);
+ const welcome=h.controlsByScene[4].welcome;assert.equal(welcome.resets,1);assert.equal(welcome.enters,0);
+ const dot=h.rail.children.at(-1);assert.ok(!dot.classList.contains('is-visible'));
+ h.tick();assert.equal(welcome.enters,1);assert.ok(!dot.classList.contains('is-visible'));
+ h.controls.children[2].listeners.click();assert.equal(welcome.paused,true);h.controls.children[2].listeners.click();assert.equal(welcome.paused,false);
+ h.steps[3].listeners.click();h.steps[4].listeners.click();assert.equal(welcome.resets,2);h.tick();assert.equal(welcome.enters,2);
+ h.window.TurboStoryPlayback.snapshot(h.previews[4].frame.contentDocument,'hub-welcome','whatsapp-invite-flow',0);assert.equal(welcome.shows,1);assert.equal(welcome.enters,2);
 });

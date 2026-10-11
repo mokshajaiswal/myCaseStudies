@@ -1,4 +1,5 @@
 :root{--color-action:var(--th-blue);--color-action-soft:var(--th-blue-light);--color-text:var(--th-ink);--color-text-secondary:var(--th-muted);--color-surface:var(--th-white);--color-border:var(--th-line);--control-height:44px;--button-height:56px;--component-inset:var(--th-space-5);--component-gap:var(--th-space-3)}
+:root { --avatar-frame-width:3px; --avatar-frame-color:color-mix(in srgb,var(--th-white) 55%,transparent); }
 :root { --color-success:#28af61; --success-indicator-size:81px; --type-payment-amount-size:var(--font-size-32); --type-payment-amount-weight:var(--font-weight-bold); --type-payment-amount-leading:var(--font-leading-normal); }
 :root { --color-success:#28af61; --success-indicator-size:81px; --type-payment-amount-size:var(--font-size-32); --type-payment-amount-weight:var(--font-weight-bold); --type-payment-amount-leading:var(--font-leading-normal); }
 

@@ -1,5 +1,21 @@
 # Payment entry screens
 
+## Notification app-name weight — 2026-10-11
+
+The shared renderer's app-name `strong` element previously had no author weight,
+so the browser's relative `bolder` default could raise the inherited 600 header
+weight to 900. The named brand part now explicitly uses
+`--type-item-title-weight` (600) and inherits the header's 14px Inter family and
+leading. This applies to the PayZapp and WhatsApp canonical specimens and both
+lock-screen consumers through the shared renderer, with no page overrides.
+
+Source reuse/spacing audit: both mark configurations retain 12px inset, 4px
+header/message gap and 8px header gap, all mapped in the inspector anatomy.
+Plain-message wrapping, native link activation and hover/focus/active treatment
+are unchanged. Registry anatomy now names the app text independently. Syntax,
+catalog and whitespace checks cover this change; browser typography and visual
+review remain with the user.
+
 ## Scanner camera actions — 2026-10-04
 
 The right-side flash/gallery tools use the registered Action `variant='camera'`: 44px circular targets, an 8px tokenized inset, 24px white Fill glyphs, translucent white surface and a subtle backdrop blur. Hover increases surface opacity; focus uses a white ring, active and disabled retain Action behavior. The shared renderer enforces icon-only semantics and an accessible label; no screen overrides target Action roots or internals. Page-owned tools positioning and 12px inter-tool gap remain unchanged. Callbacks remain visual prototype placeholders.

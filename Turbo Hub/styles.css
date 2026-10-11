@@ -2588,7 +2588,7 @@ h4 {
 
 
 /* Structured content can extend beyond the narrative column. */
-:is(.experience-grid, .outcome-grid, .measures-block) {
+:is(.outcome-grid, .measures-block) {
   width: min(var(--wide-content-width), calc(100vw - var(--layout-gutter) * 2));
   margin-inline: calc(
     (100% - min(var(--wide-content-width), calc(100vw - var(--layout-gutter) * 2))) / 2

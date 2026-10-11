@@ -104,6 +104,24 @@
           "id": "inverse-pill",
           "name": "Inverse pill (create on chrome)",
           "selector": "#inverse-pill"
+        },
+        {
+          "id": "plain-icon",
+          "name": "Plain / close",
+          "selector": "#plain-icon",
+          "interactionTarget": "plain-icon"
+        },
+        {
+          "id": "plain",
+          "name": "Plain / label",
+          "selector": "#plain",
+          "interactionTarget": "plain"
+        },
+        {
+          "id": "link",
+          "name": "Inline link",
+          "selector": "#link",
+          "interactionTarget": "link"
         }
       ],
       "anatomy": {
@@ -120,7 +138,7 @@
         "spacing": [
           {
             "label": "padding-left",
-            "selector": ".th-button:not(.th-button--compact):not(.th-button--icon)",
+            "selector": ".th-button:not(.th-button--compact):not(.th-button--icon):not(.th-button--link)",
             "property": "padding-left",
             "token": "--th-space-4"
           },
@@ -145,7 +163,7 @@
           {
             "label": "Default vertical inset",
             "token": "--button-inset-y",
-            "selector": ".th-button:not(.th-button--compact):not(.th-button--icon)",
+            "selector": ".th-button:not(.th-button--compact):not(.th-button--icon):not(.th-button--link)",
             "property": "padding-top"
           },
           {
@@ -159,7 +177,7 @@
         "behavior": "Native button/link activation. Enabled actions press to 98% scale and return over 120ms per phase; reduced motion suppresses the scale. TurboUI.pressButton(control) reuses this visual feedback without dispatching activation. Caller supplies disabled and action/href; icon-only actions require a label. Decorative icon wrappers use inline-flex with block SVG to remove baseline offset; 20px glyphs center inside 44px icon targets. Accepts native type (button by default, submit for form actions). size=compact uses a 32px minimum height, 6px vertical/12px horizontal padding, 14px Medium type and a 16px icon; default labeled actions use a 56px minimum height and 16px vertical inset; icon-only actions use 44px. Camera variant owns a 44px circle, 8px inset, centered 24px filled glyph and white focus ring; label names the native icon-only control.",
         "interactionOwnership": "Own control semantics and input handling; caller owns action/selected value."
       },
-      "usage": "Use TurboUI.button(); source and specimen use the same renderer. iconPosition=start (default) or end positions the decorative icon before/after the label. Default labeled actions use a 56px minimum height. There is no separate Tall variant; compact and icon-only configurations retain their own dimensions. variant='list' supplies a left-aligned 16px label and 44px icon well, 16px inset and 8px gap. Parent owns the grouped outline, rounded clipping and separate divider siblings; rows retain native link/button behavior. variant='danger' gives a reddish tint (--color-danger-soft) with red text (--color-danger) for declining or destructive actions; it combines with size='compact'. Prefer one danger action per screen, never the primary path. variant='camera' renders an icon-only 44px round translucent white action with a 24px Fill icon and white foreground, for camera/photo backdrops. It requires label and icon; quiet and compact options are ignored. Page owns backdrop, external placement and gaps. Disabled, hover, active and focus-visible retain native Action ownership. variant='glass' is a frosted translucent action with white text for blue chrome or full-blue screens. variant='warning' (amber tint, --color-warning / --color-warning-soft) marks a pending step that still needs the person, not an error. variant='inverse' is the primary action on full-blue Chrome screens (white fill, action-blue label), e.g. Done on Delivery confirmed; glass stays the secondary there. shape='pill' rounds it fully; a compact inverse pill puts its leading icon in a blue disc, available for a prominent create on chrome. New Hub uses the compact glass pill.",
+      "usage": "Use TurboUI.button(); source and specimen use the same renderer. iconPosition=start (default) or end positions the decorative icon before/after the label. Default labeled actions use a 56px minimum height. There is no separate Tall variant; compact and icon-only configurations retain their own dimensions. variant='list' supplies a left-aligned 16px label and 44px icon well, 16px inset and 8px gap. Parent owns the grouped outline, rounded clipping and separate divider siblings; rows retain native link/button behavior. variant='danger' gives a reddish tint (--color-danger-soft) with red text (--color-danger) for declining or destructive actions; it combines with size='compact'. Prefer one danger action per screen, never the primary path. variant='camera' renders an icon-only 44px round translucent white action with a 24px Fill icon and white foreground, for camera/photo backdrops. It requires label and icon; quiet and compact options are ignored. Page owns backdrop, external placement and gaps. Disabled, hover, active and focus-visible retain native Action ownership. variant='glass' is a frosted translucent action with white text for blue chrome or full-blue screens. variant='warning' (amber tint, --color-warning / --color-warning-soft) marks a pending step that still needs the person, not an error. variant='inverse' is the primary action on full-blue Chrome screens (white fill, action-blue label), e.g. Done on Delivery confirmed; glass stays the secondary there. shape='pill' rounds it fully; a compact inverse pill puts its leading icon in a blue disc, available for a prominent create on chrome. New Hub uses the compact glass pill. variant='plain' removes the visible background, border and shadow, retaining text color, shared sizing and accessible semantics. Combine with iconOnly=true for a 44px close action; otherwise retains the 56px default labeled action. Hover dims the foreground; focus, disabled and press feedback remain shared. variant='link' with href renders an inline text link, inheriting surrounding typography with no container, inset or minimum height. Label-only configuration; caller supplies destination and optional onClick. Hover underlines; shared keyboard focus and press behavior remain. Do not use native disabled on a link.",
       "interactions": {
         "preview": "specimens/component.html?component=button",
         "targets": [
@@ -306,6 +324,41 @@
               "active",
               "focus-visible"
             ]
+          },
+          {
+            "id": "plain-icon",
+            "name": "Plain / close",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "plain",
+            "name": "Plain / label",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "link",
+            "name": "Inline link",
+            "owner": "turbo-button",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible"
+            ]
           }
         ]
       },
@@ -333,7 +386,8 @@
         "image",
         "editable",
         "contact",
-        "contact-medium"
+        "contact-medium",
+        "framed"
       ],
       "dependencies": [
         "turbo-avatar-edit"
@@ -393,6 +447,36 @@
           "id": "stack",
           "name": "Stack (overlapping group)",
           "selector": "#stack"
+        },
+        {
+          "id": "framed-large",
+          "name": "Portrait / colorful background",
+          "selector": "#framed-large"
+        },
+        {
+          "id": "framed-hub",
+          "name": "Hub / colorful background",
+          "selector": "#framed-hub"
+        },
+        {
+          "id": "framed-initials",
+          "name": "Initials / colorful background",
+          "selector": "#framed-initials"
+        },
+        {
+          "id": "framed-editable",
+          "name": "Editable / colorful background",
+          "selector": "#framed-editable"
+        },
+        {
+          "id": "framed-badge-success",
+          "name": "Success badge / colorful background",
+          "selector": "#framed-badge-success"
+        },
+        {
+          "id": "framed-stack-large",
+          "name": "Round portrait / colorful background",
+          "selector": "#framed-stack-large"
         }
       ],
       "anatomy": {
@@ -408,10 +492,10 @@
         ],
         "spacing": [],
         "ownership": "Component owns internal spacing and content; page owns external placement and gaps.",
-        "behavior": "Caller supplies presentational content. editable=true composes the unchanged avatar with the registered Avatar edit action; wrapper owns lower-right placement.",
+        "behavior": "Caller supplies presentational content. editable=true composes the unchanged avatar with the registered Avatar edit action; wrapper owns lower-right placement. frame=true supplies a 3px translucent white border inside the selected fixed size, with no shadow; images, fallbacks, editable portraits and status-badged portraits retain the frame. The border is component-owned; parents supply colorful backgrounds.",
         "interactionOwnership": "Avatar is presentational; turbo-avatar-edit owns the optional edit button and focus. Caller owns onEdit behavior."
       },
-      "usage": "TurboUI.avatar({name,large,graphic,size}); default 44px, large 64px, merchant 40px and hub 100px. Family Hub graphic uses the centrally mapped colored house illustration, with the Phosphor house retained as an image-error fallback. profile size is 56px with a 12px radius. Optional src takes precedence and renders a decorative image within the existing size; failed images restore the graphic or initials. Without src, known family names (Arun, Kavya, Neha, Rohan, with optional Sharma surname) resolve through TurboUI.avatarArtwork.users. Generic Family graphics resolve through TurboUI.avatarArtwork.home. The central artwork folder is assets/family-avatars; unknown names retain initials. No screen-specific image mapping is needed. graphic accepts a semantic icon name or the existing boolean configuration. Image is content, not an independent appearance variant. editable=true adds the registered edit action. onEdit, editLabel and editDisabled configure that child without page styling. size=contact is a 100px contact portrait with 20px corners, 32px initials or 40px graphic, compatible with editable=true. size=contact-medium is 80px with 16px corners, 28px initials and 32px graphics; supports editable=true. frame=true adds a subtle translucent white ring for tiles on the blue header (used by Hub summary tone='chrome'). badge='success' adds a small green tick at the bottom-right corner (decorative; the row or caller names the status). size='stack' is a 32px round face with a white ring for overlapping member groups; the parent owns the overlap. size='stack-large' is the same ringed round face at 40px for a standalone group, such as the members on Welcome to the Hub."
+      "usage": "TurboUI.avatar({name,large,graphic,size}); default 44px, large 64px, merchant 40px and hub 100px. Family Hub graphic uses the centrally mapped colored house illustration, with the Phosphor house retained as an image-error fallback. profile size is 56px with a 12px radius. Optional src takes precedence and renders a decorative image within the existing size; failed images restore the graphic or initials. Without src, known family names (Arun, Kavya, Neha, Rohan, with optional Sharma surname) resolve through TurboUI.avatarArtwork.users. Generic Family graphics resolve through TurboUI.avatarArtwork.home. The central artwork folder is assets/family-avatars; unknown names retain initials. No screen-specific image mapping is needed. graphic accepts a semantic icon name or the existing boolean configuration. Image is content, not an independent appearance variant. editable=true adds the registered edit action. onEdit, editLabel and editDisabled configure that child without page styling. size=contact is a 100px contact portrait with 20px corners, 32px initials or 40px graphic, compatible with editable=true. size=contact-medium is 80px with 16px corners, 28px initials and 32px graphics; supports editable=true. frame=true adds a 3px, 55% white border via --avatar-frame-width and --avatar-frame-color, without a shadow or changing outer dimensions. Use it on colorful backgrounds (Hub summary tone='chrome' and Authorize payment). It also works with editable=true and badge='success'; fallbacks retain the border. badge='success' adds a small green tick at the bottom-right corner (decorative; the row or caller names the status). size='stack' is a 32px round face with a white ring for overlapping member groups; the parent owns the overlap. size='stack-large' is the same ringed round face at 40px for a standalone group, such as the members on Welcome to the Hub."
     },
     {
       "id": "turbo-badge",
@@ -2317,6 +2401,10 @@
             "selector": ".th-payment-notification__header"
           },
           {
+            "name": "App name",
+            "selector": ".th-payment-notification__brand"
+          },
+          {
             "name": "Timestamp",
             "selector": ".th-payment-notification__time"
           },
@@ -2349,7 +2437,7 @@
         "behavior": "Fluid link with wrapping plain text. Enter opens caller-supplied request. No live notification permission or delivery behavior.",
         "interactionOwnership": "Owns link hover/focus/active and native activation. Caller owns request data and destination."
       },
-      "usage": "Use on a dark lock-screen preview; all text belongs to the consuming screen. mark='whatsapp' with app='WhatsApp' shows an incoming invitation message on the lock screen.",
+      "usage": "Use on a dark lock-screen preview; all text belongs to the consuming screen. App name uses the Inter item-title role (14px, semibold 600), explicitly overriding the strong element's browser bolder default. mark='whatsapp' with app='WhatsApp' shows an incoming invitation message on the lock screen.",
       "previewConfigurations": [
         {
           "id": "default",
@@ -2409,6 +2497,16 @@
           "id": "long",
           "name": "Long account name",
           "selector": "#long"
+        },
+        {
+          "id": "home-wallet",
+          "name": "Home wallet \u00b7 zero balance",
+          "selector": "#home-wallet"
+        },
+        {
+          "id": "home-cashpoints",
+          "name": "Home cashpoints \u00b7 zero balance",
+          "selector": "#home-cashpoints"
         }
       ],
       "anatomy": {
@@ -2432,6 +2530,10 @@
           {
             "name": "Bank logo",
             "selector": ".th-account-cards__logo"
+          },
+          {
+            "name": "Branded artwork",
+            "selector": ".th-account-card__art"
           }
         ],
         "spacing": [
@@ -2482,17 +2584,24 @@
             "token": "--th-space-2",
             "selector": ".th-account-cards__chip",
             "property": "padding-left"
+          },
+          {
+            "label": "Home balance gap",
+            "token": "--th-space-1",
+            "selector": ".th-account-card--home .th-account-card__balance p",
+            "property": "margin-top"
           }
         ],
         "ownership": "Owns summary, surfaces and bank pills; parent owns placement and external gaps. Registered Account action owns its buttons.",
         "interactionOwnership": "No parent interaction. Add money and Add card are turbo-account-action children; caller owns callbacks and disabled input.",
-        "behavior": "Fluid width, 90px minimum summary, 56px decorative icon. Long names wrap; linked pills scroll horizontally in a keyboard-focusable strip. Summary/wallet/linked variants; optional detail and empty cards supported."
+        "behavior": "Fluid width, 90px minimum summary, 56px decorative icon. Long names wrap; linked pills scroll horizontally in a keyboard-focusable strip. Summary/wallet/linked variants; optional detail and empty cards supported. Home variant uses a 79px minimum summary, 44px artwork tile, 12px title and 20px balance; compact child action is at least 40px tall."
       },
-      "usage": "TurboUI.accountCard({name,detail,icon,variant,cards,actionLabel,disabled,onAction}). variant defaults to summary; wallet adds a labeled action; linked adds an icon action and bank pills. Content and disabled state are caller supplied. onAction is invoked by the child; no account operation is performed. Each cards item accepts {name,detail,initial,logo}; logo is an optional image URL, with initials restored if loading fails.",
+      "usage": "TurboUI.accountCard({name,detail,icon,variant,cards,actionLabel,disabled,onAction}). variant defaults to summary; wallet adds a labeled action; linked adds an icon action and bank pills. Content and disabled state are caller supplied. onAction is invoked by the child; no account operation is performed. Each cards item accepts {name,detail,initial,logo}; logo is an optional image URL, with initials restored if loading fails. variant='home' supplies the compact home-carousel summary and registered compact Account action; graphicSrc optionally supplies decorative branded artwork, and actionIcon selects an existing registered semantic icon. Home cards support zero balances through the caller's detail string.",
       "variants": [
         "summary",
         "wallet",
-        "linked"
+        "linked",
+        "home"
       ]
     },
     {
@@ -2520,6 +2629,12 @@
           "id": "icon",
           "name": "icon",
           "selector": "#icon"
+        },
+        {
+          "id": "compact",
+          "name": "Compact home action",
+          "selector": "#compact",
+          "interactionTarget": "compact"
         }
       ],
       "interactions": {
@@ -2540,6 +2655,18 @@
           {
             "id": "icon",
             "name": "icon",
+            "owner": "turbo-account-action",
+            "states": [
+              "live",
+              "hover",
+              "active",
+              "focus-visible",
+              "disabled"
+            ]
+          },
+          {
+            "id": "compact",
+            "name": "Compact home action",
             "owner": "turbo-account-action",
             "states": [
               "live",
@@ -2578,15 +2705,21 @@
           {
             "label": "Action vertical inset",
             "token": "--th-space-3",
-            "selector": ".th-account-action:not(.th-account-action--icon)",
+            "selector": ".th-account-action:not(.th-account-action--icon):not(.th-account-action--compact)",
+            "property": "padding-top"
+          },
+          {
+            "label": "Compact vertical inset",
+            "token": "--th-space-2",
+            "selector": ".th-account-action--compact",
             "property": "padding-top"
           }
         ],
         "ownership": "Owns hit area, plus, typography and button state; parent owns placement.",
         "interactionOwnership": "Native button owns click/keyboard activation; caller owns disabled and onClick.",
-        "behavior": "Label action is full-width with 60px minimum height; icon-only action is circular 44px. disabled defaults false, suppresses native activation. Hover, active and focus-visible belong to this control."
+        "behavior": "Label action is full-width with 60px minimum height; icon-only action is circular 44px. disabled defaults false, suppresses native activation. Hover, active and focus-visible belong to this control. Compact action is full-width with a 40px minimum height and a 24px icon tile."
       },
-      "usage": "TurboUI.accountAction({label,iconOnly,disabled,onClick}). iconOnly defaults false and requires an accessible label. Caller supplies disabled and callback; no persistent selection state."
+      "usage": "TurboUI.accountAction({label,iconOnly,disabled,onClick}). iconOnly defaults false and requires an accessible label. Caller supplies disabled and callback; no persistent selection state. variant='compact' supplies a 40px home-carousel action with 8px/16px padding and a 24px circular icon. icon selects an existing semantic icon (defaults to plus)."
     },
     {
       "id": "turbo-avatar-edit",
@@ -3755,7 +3888,7 @@
       "id": "hub-welcome",
       "name": "Member \u00b7 Welcome to the Hub",
       "preview": "../app/prototypes/hub-welcome/index.html",
-      "description": "Invite landing screen with family artwork, inviter, overlapping members and What you get (UPI, card and monthly limit), followed by terms and Accept invite."
+      "description": "White Hub invitation modal with an inset inviter and family hero over the PayZapp home, with Wallet \u20b90 and Cashpoints 0. Family artwork, inviter, members and benefits lead to terms and Accept invite. Close/Escape reveals the home; View Hub invitation reopens it. A terms notice precedes Accept invite, which proceeds directly to number verification. Locked story playback is preserved."
     },
     {
       "id": "verify-mobile",

@@ -26,6 +26,7 @@ if(kind==='button'){
     add(id,label,context);
   }
 }
+if(kind==='button'){add('plain-icon','Plain / close',H.button({label:'Close',icon:'close',iconOnly:true,variant:'plain',onClick:()=>{document.getElementById('result').textContent='Close activated'}}));add('plain','Plain / label',H.button({label:'Cancel',variant:'plain',onClick:()=>{document.getElementById('result').textContent='Cancel activated'}}));}
 if(kind==='button'&&state!=='live'){const target=main.querySelector('#'+(params.get('target')||'primary')+' .th-button');if(target){if(state==='disabled')target.disabled=true;else if(state==='focus-visible')target.focus();else target.dataset.previewState=state;}}
 
 
@@ -57,4 +58,16 @@ if(kind==='action-footer'){add('single','Single action',H.actionFooter({actions:
 
 if(kind==='avatar')add('contact-medium','Editable contact · medium',H.avatar({name:'Kavya Sharma',size:'contact-medium',editable:true,editLabel:'Edit member image',onEdit:()=>{}}));
 
+if(kind==='avatar'){
+  add('framed-large','Portrait / colorful background',backdrop(H.avatar({name:'Neha Sharma',large:true,frame:true})));
+  add('framed-hub','Hub / colorful background',backdrop(H.avatar({size:'hub',graphic:true,frame:true})));
+  add('framed-initials','Initials / colorful background',backdrop(H.avatar({name:'Sample Member',frame:true})));
+  add('framed-editable','Editable / colorful background',backdrop(H.avatar({name:'Kavya Sharma',size:'contact-medium',editable:true,frame:true,onEdit:()=>{}})));
+  add('framed-badge-success','Success badge / colorful background',backdrop(H.avatar({name:'Neha Sharma',frame:true,badge:'success'})));
+  add('framed-stack-large','Round portrait / colorful background',backdrop(H.avatar({name:'Arun Sharma',size:'stack-large',frame:true})));
+}
+
 if(kind==='action-footer'){const next=H.button({label:'Next',disabled:true});const acceptance=H.check({id:'footer-acceptance',label:'I accept the example conditions.',onChange:value=>{next.disabled=!value}});const footer=H.actionFooter({content:[acceptance]});footer.append(next);add('acceptance','Acceptance and action',footer);}
+
+if(kind==='button'){const copy=document.createElement('p');copy.append('By proceeding, you accept all ',H.button({label:'Terms & Conditions',href:'#terms',variant:'link',onClick:event=>event.preventDefault()}));add('link','Inline link',copy);}
+if(kind==='button'&&params.get('target')==='link'&&state!=='live'){const target=main.querySelector('#link .th-button');if(state==='focus-visible')target.focus();else target.dataset.previewState=state;}

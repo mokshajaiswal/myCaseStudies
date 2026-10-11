@@ -1,1 +1,42 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Turbo Hub · Welcome to the Hub</title><script src="../shared/ds.js" data-assets="tokens.css components.css icons/phosphor.js icons/turbo-icons.js components/hub.js components/chrome-backdrop.js components/forms.js"></script><link rel="stylesheet" href="../shared/phone-preview.css"><link rel="stylesheet" href="screen.css"><script src="screen.js" defer></script><script src="../shared/phone-preview.js" defer></script><script src="/framework/spacing-inspector.js" defer></script><script src="../shared/flow-navigation.js" defer></script><script src="../../flow-story-data.js"></script><script src="../shared/story-context.js"></script></head><body data-reference="hub-welcome"><main class="phone" aria-label="Turbo Hub phone preview"><div class="phone-viewport"><div class="phone-screen th-chrome-backdrop welcome-screen"><div id="statusbar"></div><section class="welcome-hero" id="hero" aria-labelledby="welcome-heading"></section><section class="phone-content welcome-content" id="content" aria-label="What you get"></section><div class="home-indicator" aria-hidden="true"></div></div></div><img class="phone-frame" src="../../assets/phone%20case%20clean.png" width="1006" height="2050" alt="" aria-hidden="true"></main></body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Turbo Hub · Welcome to the Hub</title><script src="../shared/ds.js" data-assets="tokens.css components.css icons/phosphor.js icons/turbo-icons.js components/hub.js components/chrome-backdrop.js components/account-card.js"></script><link rel="stylesheet" href="../shared/phone-preview.css"><link rel="stylesheet" href="screen.css"><script src="screen.js" defer></script><script src="../shared/phone-preview.js" defer></script><script src="/framework/spacing-inspector.js" defer></script><script src="../shared/flow-navigation.js" defer></script><script src="../../flow-story-data.js"></script><script src="../shared/story-context.js"></script></head><body data-reference="hub-welcome"><main class="phone" aria-label="Turbo Hub phone preview"><div class="phone-viewport"><div class="phone-screen welcome-screen" id="welcome-screen">
+  <div id="statusbar"></div>
+  <section class="payzapp-home" id="payzapp-home" aria-label="PayZapp home" inert aria-hidden="true">
+    <div class="payzapp-home__canvas">
+      <div class="payzapp-home__header">
+        <div class="payzapp-home__profile"><img src="assets/home/header-avatar.jpg" alt=""><span><img src="assets/home/header-menu.svg" alt=""></span></div>
+        <div class="payzapp-home__tabs"><span>Pay</span><span>Shop</span></div>
+        <img class="payzapp-home__bell" src="assets/home/header-bell.svg" alt="">
+        <div class="payzapp-home__scan"><img src="assets/home/scan.gif" alt=""><p>Welcome to PayZapp</p></div>
+      </div>
+      <div class="payzapp-home__sheet">
+        <div class="payzapp-home__handle" aria-hidden="true"></div>
+        <div class="payzapp-home__nudge">
+          <span class="payzapp-home__nudge-paint"><img class="payzapp-home__nudge-texture" src="assets/home/nudge-texture.svg" alt=""></span>
+          <img class="payzapp-home__biller" src="assets/home/nudge-billers.svg" alt="">
+          <div><p>Get your utility billers<br>linked to your mobile number.</p><strong>Link Billers <img src="assets/home/nudge-chevron.svg" alt=""></strong></div>
+          <img class="payzapp-home__nudge-close" src="assets/home/nudge-close.svg" alt="">
+        </div>
+        <div class="payzapp-home__anchors">
+          <div><span class="payzapp-home__tile payzapp-home__tile--send"><span><img src="assets/home/gpay.png" alt=""></span><img class="payzapp-home__wave" src="assets/home/send-money-wave.svg" alt=""></span><p>Send Money</p></div>
+          <div><span class="payzapp-home__earn">EARN ₹240</span><span class="payzapp-home__tile"><img src="assets/home/bills.svg" alt=""></span><p>Bills &amp;<br>Recharges</p></div>
+          <div><span class="payzapp-home__tile"><img src="assets/home/passbook.svg" alt=""></span><p>Passbook</p></div>
+          <div><span class="payzapp-home__tile"><img src="assets/home/bank.svg" alt=""></span><p>Accounts &amp;<br>Cards</p></div>
+        </div>
+        <section class="payzapp-home__accounts" aria-label="Accounts and cards">
+          <div class="payzapp-home__accounts-heading"><h2>Accounts &amp; Cards</h2><span>UPI ID: 9876543210@pz</span></div>
+          <div class="payzapp-home__account-strip" id="home-accounts"></div>
+        </section>
+        <div class="payzapp-home__offers"><img src="assets/home/offers-lines.svg" alt=""><strong>Explore Offers,<br>rewards &amp; more!</strong><span>View all</span></div>
+      </div>
+    </div>
+  </section>
+  <div class="invitation-reopen" id="invitation-reopen" hidden></div>
+  <div class="invitation-layer" id="invitation-layer">
+    <section class="invitation-modal" id="invitation-modal" role="dialog" aria-modal="true" aria-labelledby="welcome-heading" tabindex="-1">
+      <div class="invitation-close" id="invitation-close"></div>
+      <section class="welcome-hero" id="hero" aria-labelledby="welcome-heading"></section>
+      <section class="welcome-content" id="content" aria-label="What you get"></section>
+    </section>
+  </div>
+  <div class="home-indicator" aria-hidden="true"></div>
+</div></div><img class="phone-frame" src="../../assets/phone%20case%20clean.png" width="1006" height="2050" alt="" aria-hidden="true"></main></body></html>

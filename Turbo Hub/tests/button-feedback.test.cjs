@@ -20,7 +20,7 @@ function harness({reduced=false,scale='.98',duration='120ms'}={}){
 }
 test('all Action configurations and edit actions reuse a visual 98% press without invoking callbacks',()=>{
   const h=harness();let activations=0;
-  const variants=[{}, {size:'compact'}, {iconOnly:true}, {quiet:true}, {variant:'list'}, {variant:'danger'}, {variant:'camera'}, {variant:'glass'}, {href:'/somewhere'}];
+  const variants=[{}, {size:'compact'}, {iconOnly:true}, {quiet:true}, {variant:'list'}, {variant:'danger'}, {variant:'camera'}, {variant:'glass'}, {variant:'plain',iconOnly:true,icon:'close'}, {href:'/somewhere'}];
   for(const props of variants){
     const button=h.H.button({label:'Action',onClick:()=>activations++,...props}),animation=h.H.pressButton(button);
     assert.deepEqual(Array.from(animation.frames,f=>f.scale),['1','.98','1']);assert.equal(animation.options.duration,240);assert.equal(animation.frames[1].offset,.5);assert.equal(button.disabled,false);

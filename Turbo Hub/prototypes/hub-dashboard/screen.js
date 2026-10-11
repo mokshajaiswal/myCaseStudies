@@ -1,7 +1,7 @@
 const joinedMember=new URLSearchParams(location.search).get('state')==='joined'&&new URLSearchParams(location.search).get('member')==='neha';
 const H=TurboUI;let active=new URLSearchParams(location.search).get('tab')||'Spends';if(!(joinedMember?['Spends','Members']:['Spends','Members','Analytics']).includes(active))active='Spends';
 document.getElementById('statusbar').append(H.statusbar());
-const navBar=title=>H.navigation({title,left:{label:'Back to flow references',icon:'navigation-back',href:'../../flow-reference/index.html'},right:joinedMember?undefined:{label:'Hub options',icon:'more',onClick:()=>{}}});
+const navBar=title=>H.navigation({title,left:{label:'Back to Hubs',icon:'navigation-back',href:'../hubs/index.html'},right:joinedMember?undefined:{label:'Hub options',icon:'more',onClick:()=>{}}});
 document.getElementById('nav').append(navBar(''));
 
 let savedLimits={};try{savedLimits=JSON.parse(TurboStoryContext.storage.getItem('turbo-hub-spending-limits'))||{}}catch{}
@@ -15,7 +15,7 @@ function hubArtwork(){const artwork=E('div','hub-artwork');artwork.setAttribute(
 // ?roster= stages the Members list for the story: owner (Arun only), parents (Kavya joined),
 // children-invited (Neha and Rohan yet to join), all-invited (Kavya and both children yet to join) and family (everyone joined). Default keeps Kavya pending plus stored invites.
 function membersRoster(stageOverride){let invites=[];try{invites=JSON.parse(TurboStoryContext.storage.getItem('turbo-hub-members'))||[]}catch{}
-const stage=joinedMember?'family':stageOverride||new URLSearchParams(location.search).get('roster'),arun={name:'Arun Sharma',role:'Manager',spent:0,limit:savedLimits.arun??45000},kavya=stage&&stage!=='invited'?{name:'Kavya Sharma',role:'Manager',relation:'Wife',spent:1200,limit:savedLimits.kavya??45000}:{name:'Kavya Sharma',role:'Manager',relation:'Wife',pending:true};
+const stage=joinedMember?'family':stageOverride||new URLSearchParams(location.search).get('roster')||window.TurboStoryContext?.scene?.roster,arun={name:'Arun Sharma',role:'Manager',spent:0,limit:savedLimits.arun??45000},kavya=stage&&stage!=='invited'?{name:'Kavya Sharma',role:'Manager',relation:'Wife',spent:1200,limit:savedLimits.kavya??45000}:{name:'Kavya Sharma',role:'Manager',relation:'Wife',pending:true};
 const children=pending=>[{name:'Neha Sharma',relation:'Daughter',pending,spent:pending?0:500,limit:savedLimits.neha??5000},{name:'Rohan Sharma',relation:'Son',pending,spent:pending?0:2400,limit:savedLimits.rohan??10000}];
 if(joinedMember)return [arun,kavya,...children(false).map(member=>({...member,spent:member.name==='Neha Sharma'?0:member.spent}))];
 const roster=stage==='owner'?[arun]:stage==='invited'?[arun,kavya]:stage==='parents'?[arun,kavya]:stage==='children-invited'?[arun,kavya,...children(true)]:stage==='all-invited'?[arun,{name:'Kavya Sharma',role:'Manager',relation:'Wife',pending:true},...children(true)]:stage==='family'?[arun,kavya,...children(false)]:[arun,kavya,...invites];return roster;}

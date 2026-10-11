@@ -4,8 +4,10 @@ Standalone implementation of the selected Figma NTB walkthrough frames:
 11623:167259, 11623:167608 and 11623:167958 in DiQaOTv1JPam24uFN0GwTy.
 
 Open preview.html for a device preview or index.html for the embeddable flow.
-A 1.6-second splash shows the existing local PayZapp logo against the shared
-Chrome backdrop, with the shared status bar. The carousel begins on screen one
+A 1.6-second splash uses the original animated GIF from Figma file
+QNc5WWAGgH0PKr3z42BP3N, node 4:826, saved locally as assets/splash.gif.
+Its complete white-screen artwork scales without cropping, with the status bar
+hidden during the splash. Story resets restart the animation. The carousel begins on screen one
 after the splash. The three screens advance every four seconds and cycle back to the first. Dots,
 swipes and arrow keys select a screen and restart the interval. Each incoming
 illustration restarts its GIF playback as the screen begins sliding in, including

@@ -194,8 +194,8 @@
 .th-row__value { display:grid; justify-items:end; align-self:center; gap:var(--transaction-detail-gap); white-space:nowrap; }
 .th-row__by { color:var(--color-text-secondary); font:var(--type-caption-weight) var(--type-caption-size)/var(--type-caption-leading) var(--font-body); }
 .th-row__value > .th-row__amount { align-self:auto; }
-/* Framed avatar: a subtle translucent white ring, for tiles on the blue header. */
-.th-avatar.th-avatar--framed { box-shadow:0 0 0 4px rgb(255 255 255 / .28), 0 6px 18px rgb(20 24 80 / .18); }
+/* Light border for portraits on colorful chrome, contained within each size. */
+.th-avatar.th-avatar--framed { border:var(--avatar-frame-width) solid var(--avatar-frame-color); background-clip:padding-box; box-shadow:none; }
 /* Chrome-tone summary: the subtext steps down to the 12px caption size. */
 .th-hub-summary--centered.th-hub-summary--chrome p { font-size:var(--type-caption-size); line-height:var(--type-caption-leading); }
 /* Chrome-tone summary: a little more room between the framed tile and the name. */
@@ -244,3 +244,11 @@
 .th-page-header__members { display:flex; align-items:center; align-self:flex-start; flex:none; }
 .th-page-header__member { display:flex; position:relative; }
 .th-page-header__member + .th-page-header__member { margin-left:calc(var(--th-space-3) * -1); }
+
+/* Plain actions retain the shared hit area without a visible container. */
+.th-button.th-button--plain { background:transparent; border:0; box-shadow:none; color:var(--color-text); }
+.th-button--plain:not(:disabled):is(:hover,[data-preview-state=hover]) { opacity:.7; }
+
+/* Inline link actions sit within copy; the surrounding text supplies typography. */
+.th-button.th-button--link { display:inline; min-height:0; padding:0; border:0; border-radius:0; background:transparent; box-shadow:none; color:var(--color-action); font:inherit; }
+.th-button--link:is(:hover,[data-preview-state=hover]) { text-decoration:underline; text-underline-offset:2px; }

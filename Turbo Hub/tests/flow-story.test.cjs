@@ -115,7 +115,7 @@ function loopHarness(reducedMotion=false){
 }
 test('only the scripted playback flows loop, and the static sequence remains reversible',()=>{
   const beats=story.chapters.flatMap(c=>c.scenes),loop=beats.filter(s=>s.presentation==='loop');
-  assert.deepEqual(loop.map(s=>s.id),['create-flow','kavya-invite-flow','children-invite-flow','whatsapp-invite-flow','member-activation-flow','request-flow']);
+  assert.deepEqual(loop.map(s=>s.id),['create-flow','kavya-invite-flow','children-invite-flow','whatsapp-invite-flow','member-activation-flow','request-flow','tracking-flow']);
   assert.deepEqual(loop[0].sequence.map(s=>s.id),['hub-setup','hub-created']);
   assert.deepEqual(loop[1].sequence.map(s=>s.id),['members-owner','add-member','member-payment-methods','invite-sent','hub-members']);
   const h=loopHarness();h.window.TurboFamilyStory={...story,chapters:story.chapters.map(c=>({...c,scenes:c.scenes.map(s=>s.presentation==='loop'?{...s,presentation:'static'}:s)}))};
