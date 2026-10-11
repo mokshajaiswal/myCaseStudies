@@ -21,3 +21,7 @@ Replaced the temporary tablet SVG with the user’s assets/competitive_research/
 ## IG card adopted in the case study
 
 At the user’s request, the Turbo Hub ending now consumes Variant 2 with the supplied IG image and copy. Variant 1 remains available in the shared component and canonical specimen. No IG destination has been supplied, so the ending card uses the supported non-link article configuration instead of linking back to Turbo Hub. No page-owned internal overrides were introduced. Syntax and diff checks pass; visual review remains manual.
+
+## Flower hover assets
+
+The user supplied casestudy_hover_flower with blue, purple, pink and orange SVGs, all retaining the original 1039 × 1018 geometry. The shared renderer now accepts hoverFlower with those four allowed values. Blue remains the default, matching the previously used artwork. Both card layout variants support every colour without page CSS overrides. Existing reveal timing, arrow animation, white text transition and reduced-motion treatment remain shared. The canonical specimen includes all four flower configurations using the actual renderer. Asset paths support studio and ordinary static mounts. No random cycling or persistent colour changes were introduced. Source and catalog checks pass; browser review remains manual.

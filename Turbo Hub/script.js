@@ -1546,6 +1546,7 @@ function createCaseStudyEnding() {
   sideFlower.append(flowerArt, createElement("p", "case-ending__flower-text", "A little reflection on designing shared money for families. Your note will go here."));
   const card = window.TurboCaseStudyCard({
     variant: "variant-2",
+    hoverFlower: "purple",
   });
   composition.append(sideFlower, card);
   const illustration = createElement("div", "case-ending__illustration");

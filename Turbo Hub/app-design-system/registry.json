@@ -3477,15 +3477,30 @@
         },
         {
           "id": "variant-2",
-          "name": "Variant 2",
+          "name": "Variant 2 \u00b7 Blue flower",
           "selector": "#variant-2 .case-ending__card"
+        },
+        {
+          "id": "variant-2-purple",
+          "name": "Variant 2 \u00b7 Purple flower",
+          "selector": "#variant-2-purple .case-ending__card"
+        },
+        {
+          "id": "variant-2-pink",
+          "name": "Variant 2 \u00b7 Pink flower",
+          "selector": "#variant-2-pink .case-ending__card"
+        },
+        {
+          "id": "variant-2-orange",
+          "name": "Variant 2 \u00b7 Orange flower",
+          "selector": "#variant-2-orange .case-ending__card"
         }
       ],
       "previewLayout": {
         "columns": 1
       },
       "dependencies": [],
-      "usage": "TurboCaseStudyCard({variant:\"variant-1\"|\"variant-2\", href?, ariaLabel?, title?, description?, brand?, categories?, image?, imageAlt?}). Variant 1 preserves the PayZapp portrait-phone card. Variant 2 uses the supplied IG copy and landscape tablet image treatment. The IG image uses the supplied assets/competitive_research/1/ig_image.png within the shared tablet frame. Without href the renderer creates a non-link article; callers supply real navigation destinations. Uses editorial case-study tokens from styles.css, not product-screen typography.",
+      "usage": "TurboCaseStudyCard({variant:\"variant-1\"|\"variant-2\", hoverFlower:\"blue\"|\"purple\"|\"pink\"|\"orange\", href?, ariaLabel?, title?, description?, brand?, categories?, image?, imageAlt?}). Variant 1 preserves the PayZapp portrait-phone card. Variant 2 uses the supplied IG copy and landscape tablet image treatment. The IG image uses the supplied assets/competitive_research/1/ig_image.png within the shared tablet frame. Without href the renderer creates a non-link article; callers supply real navigation destinations. Uses editorial case-study tokens from styles.css, not product-screen typography. hoverFlower defaults to blue and selects an original SVG from assets/casestudy_hover_flower for either layout variant. Motion and text reveal are shared across colours.",
       "anatomy": {
         "parts": [
           {

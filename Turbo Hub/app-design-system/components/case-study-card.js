@@ -6,13 +6,16 @@
     'variant-1': { title: 'Shaping a new family payments experience for PayZapp', description: 'Helping PayZapp move beyond individual payments and create a shared-money experience for families.', brand: 'ZETA', categories: 'FINTECH · B2C · APP', image: new URL('prototypes/shared/references/figma/analytics.png', base).href, imageAlt: 'Turbo Hub family spending analytics' },
     'variant-2': { title: 'Rebuilding IG’s Global Design', description: "Redesigned IG's global platform across 7 markets, building a scalable design system with 150+ reusable components that reduced duplicated work by 60% and accelerated delivery across 500+ pages.", brand: 'IG', categories: 'B2C · SaaS · FINTECH', image: new URL('assets/competitive_research/1/ig_image.png', base).href, imageAlt: 'IG homepage showing Welcome to the IG Experience and platform discovery cards' },
   };
-  window.TurboCaseStudyCard = ({variant = 'variant-1', href, ariaLabel, ...content} = {}) => {
+  const flowers = new Set(['blue', 'purple', 'pink', 'orange']);
+  window.TurboCaseStudyCard = ({variant = 'variant-1', hoverFlower = 'blue', href, ariaLabel, ...content} = {}) => {
     if (!defaults[variant]) throw new Error('Unsupported case study card variant: ' + variant);
+    if (!flowers.has(hoverFlower)) throw new Error('Unsupported case study hover flower: ' + hoverFlower);
     const data = {...defaults[variant], ...content};
     const card = node(href ? 'a' : 'article', 'case-ending__card');
     card.dataset.inspectorVariant = variant;
     card.dataset.variant = variant;
-    card.style.setProperty('--case-card-flower-image', `url("${new URL('assets/casestudy_hover.svg?v=2', base).href}")`);
+    card.dataset.hoverFlower = hoverFlower;
+    card.style.setProperty('--case-card-flower-image', `url("${new URL(`assets/casestudy_hover_flower/f_${hoverFlower}.svg`, base).href}")`);
     if (href) { card.href = href; if (ariaLabel) card.setAttribute('aria-label', ariaLabel); }
     const visual = node('div', 'case-ending__visual');
     const mockup = node('div', 'case-ending__mockup');
