@@ -2000,10 +2000,6 @@ h4 {
   letter-spacing: var(--tracking-body);
 }
 
-.competitive-research-intro {
-  max-width: 64ch;
-}
-
 .competitive-board-component {
   margin-top: var(--narrative-media-gap);
 }
@@ -2014,7 +2010,8 @@ h4 {
   left: 50%;
   width: min(calc(120% + var(--canvas-edge-expansion) * 2), 100vw);
   max-width: none;
-  min-height: calc(clamp(29rem, 68vh, 40rem) + var(--canvas-edge-expansion) * 2);
+  aspect-ratio: 1.6;
+  min-height: 35rem;
   margin-left: max(calc(-60% - var(--canvas-edge-expansion)), -50vw);
   overflow: hidden;
   border: 1px solid var(--detail-border);
@@ -2027,11 +2024,25 @@ h4 {
   touch-action: pan-y;
 }
 
+.competitive-board-images,
+.competitive-board-tapes {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.competitive-board-tapes {
+  z-index: 2;
+}
+
 .competitive-board-item {
   position: absolute;
   margin: 0;
   cursor: grab;
-  filter: drop-shadow(0 0.75rem 0.75rem rgb(52 56 63 / 0.13));
+  pointer-events: auto;
+  /* The supplied PNGs already contain their own soft shadows. */
+  filter: none;
   transform: rotate(var(--collage-rotation));
   transform-origin: center;
   user-select: none;
@@ -2041,52 +2052,53 @@ h4 {
   touch-action: none;
 }
 
+.competitive-board-item.is-pointer-focused,
+.competitive-board-item.is-dragging {
+  outline: none;
+}
+
 .competitive-board-item.is-dragging {
   z-index: 30;
   cursor: grabbing;
-  filter: drop-shadow(0 1.25rem 1.25rem rgb(52 56 63 / 0.2));
+  filter: none;
   transform: rotate(var(--collage-rotation)) scale(1.025);
 }
 
 .competitive-image {
-  min-width: 8.5rem;
-  max-width: 22rem;
+  left: var(--research-x);
+  top: var(--research-y);
+  width: var(--research-width);
+  min-width: 0;
+  max-width: none;
 }
 
 .competitive-image img {
   display: block;
   width: 100%;
-  max-height: 22rem;
-  border: 0.35rem solid #fff;
+  height: auto;
+  border: 0;
   border-radius: var(--space-2);
-  background: #fff;
+  background: transparent;
   object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  filter: url("#competitive-image-clarity");
   pointer-events: none;
 }
 
 .competitive-image-tape {
-  position: absolute;
-  top: -0.55rem;
-  left: 50%;
-  z-index: 2;
-  width: clamp(3.5rem, 42%, 6rem);
-  height: 1.35rem;
-  background:
-    linear-gradient(90deg, rgb(255 255 255 / 0.12), transparent 20% 80%, rgb(255 255 255 / 0.12)),
-    #b98a58;
-  box-shadow: 0 0.125rem 0.25rem rgb(67 50 35 / 0.16);
-  opacity: 0.82;
-  transform: translateX(-50%) rotate(-2deg);
-  clip-path: polygon(2% 8%, 98% 0, 96% 92%, 3% 100%);
-  pointer-events: none;
+  aspect-ratio: var(--research-tape-ratio);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .competitive-board-title {
   position: absolute;
-  top: 43%;
+  top: 49%;
   left: 50%;
-  z-index: 1;
-  width: min(15rem, 34%);
+  z-index: 3;
+  pointer-events: none;
+  width: min(32rem, 48%);
   margin: 0;
   color: var(--heading-ink);
   text-align: center;
@@ -2098,16 +2110,28 @@ h4 {
   font-style: italic;
 }
 
-.competitive-board-title::after {
+.competitive-board-title > span {
+  display: block;
+}
+
+.competitive-board-highlight {
+  position: relative;
+  isolation: isolate;
+  width: fit-content;
+  max-width: 100%;
+  margin-inline: auto;
+}
+
+
+.competitive-board-highlight::before {
   position: absolute;
-  right: 8%;
-  bottom: -0.25rem;
-  left: 8%;
+  inset: -70% -5% -75%;
   z-index: -1;
-  height: 0.65rem;
-  background: rgb(238 190 103 / 0.48);
   content: "";
-  transform: rotate(-1deg);
+  background: url("assets/Tape_variations/HeadingTape.svg") center / 100% 100% no-repeat;
+  filter: sepia(1) saturate(1.5) brightness(1.55) contrast(1.25);
+  opacity: 0.65;
+  transform: rotate(-1.5deg);
 }
 
 .competitive-insights {
@@ -2736,35 +2760,20 @@ h4 {
   }
 
   .competitive-board {
-    min-height: 34rem;
+    aspect-ratio: auto;
+    height: clamp(47rem, 190vw, 65rem);
+    min-height: 0;
   }
 
   .competitive-image {
-    min-width: 0;
-    max-width: none;
-  }
-
-  .competitive-image:nth-of-type(1) {
-    top: 8% !important;
-    left: 4% !important;
-    width: 40% !important;
-  }
-
-  .competitive-image:nth-of-type(2) {
-    top: 9% !important;
-    left: 56% !important;
-    width: 39% !important;
-  }
-
-  .competitive-image:nth-of-type(3) {
-    top: 61% !important;
-    left: 28% !important;
-    width: 38% !important;
+    left: var(--research-mobile-x);
+    top: var(--research-mobile-y);
+    width: var(--research-mobile-width);
   }
 
   .competitive-board-title {
-    top: 49%;
-    width: 62%;
+    top: 35%;
+    width: 78%;
   }
 
   .competitive-insights {

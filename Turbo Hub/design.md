@@ -606,3 +606,56 @@ utility typography as its inline highlighted text. This removes the inherited
 The composition stays at its natural size, with the center at 360px and 40px before the lower group. Notes start hidden and displaced outward in depth; as the headline enters the reading area they fade in and gather with a small stagger. They remain visible once settled. Reverse scrolling reverses the arrival. No pinned scene or extra scroll runway is used. Reduced motion keeps every note visible. Browser review remains manual.
 
 The lower orange and green frames share a top edge and compact 180px desktop height. Their shorter captions overlap by 56px with smaller outward offsets. The middle red note uses a paragraph with an explicit 14px/21px line box to prevent inherited body leading from spreading its highlighted lines. Mobile keeps the two metrics together and places the red note below them. These remain page-owned editorial elements; no registered product component is overridden. Visual review remains with the user.
+
+
+## Competitive research collage
+
+Uses all nine PNGs in assets/Competitive_research directly, replacing the earlier three-image SVG collage. A page-owned arrangement distributes five tilted screens above and four below a central italic title. Sizes and tape angles vary, with soft shadows and slight overlaps following the supplied scrapbook references. Screens retain their full aspect ratios. Mobile positions form three staggered rows with room reserved for the heading. Dragging and keyboard movement use the existing renderer; initial coordinates use responsive custom properties so subsequent pointer/keyboard positions can override them. No registered product component internals change. All nine asset paths are checked and JS syntax/diff checks pass. Browser review remains with the user.
+
+Three collage anchors (parent wallet, the second Revolut screen, and first GoHenry top-up) are now larger, with adjusted desktop and mobile positions. The other six retain their scale to preserve variation. Asset references match the lowercase competitive_research directory for case-sensitive hosting. Frame.png is now included as a tenth taped item, showing the form-design notes. Desktop canvas ratio is 1.6 with a 35rem minimum; mobile height is reduced to 47–65rem. Upper images are redistributed to accommodate the notes, and lower images are tightened for the shorter canvas. This changes page-owned arrangement only; no shared component overrides. Source checks pass; visual review remains with the user.
+
+Collage clarity: original PNGs remain intact. A mild SVG edge-correction filter on the page-owned images improves text edge contrast; alpha is preserved. WebKit uses contrast-optimized downsampling. Removed the duplicate figure drop shadow because these PNGs already bake in shadows. This cannot restore missing source detail. Syntax and diff checks pass; browser appearance is for user review.
+
+Pointer dragging suppresses the collage item focus outline, including after release. Keyboard interaction restores the normal focus-visible indicator; leaving focus clears the pointer state. Source syntax/diff checks pass; manual review remains with the user.
+
+Competitive research intro now uses the full shared reading-column width, matching adjacent sections; removed its section-specific 64ch limit. CSS diff check passed; visual review remains with the user.
+
+All research images share a stacking layer beneath the collage heading. Dragging raises an image only within that layer, so the heading and highlight always stay above it. The heading allows pointer events through to the draggable images. Syntax and diff checks pass; visual review remains with the user.
+
+Added all three PNGs from competitive_research/1 as wide taped inserts: Family Hub banner in the upper-middle gap, member-limit card at the right-middle, and top-up request at the lower-middle. Each has separate mobile placement. They reuse the page-owned draggable image renderer, supplied tapes, and image layer beneath the heading. Asset existence, syntax and diff checks pass; user retains visual review.
+
+Top-up request insert (1/Nudge.png) omits tape via its image config; other collage tapes remain. Syntax and diff checks passed.
+
+Tape attachment positions now use each PNG’s visible opaque-card top, measured from alpha coverage, rather than the transparent file edge. Per-image percentage offsets accommodate portrait screenshots and wide inserts at all sizes. Nudge remains untaped. Syntax and diff checks pass; manual visual review remains with the user.
+
+Tapes now live in their own layer and drag independently with pointer or keyboard. Initial anchors use the visible image edge and account for rotation; after either object moves, the other stays put. Six tapes remain, with six additional tapes removed and Nudge still untaped. The heading stays above both layers, with a broad yellow textured strip behind the competitive research line using the supplied tape texture. Source checks pass; manual visual review remains with the user.
+
+Enlarged the two Everli screens, GoHenry £30 top-up screen, and GoHenry allowance screen by approximately 20–27% on desktop, with corresponding mobile increases and adjusted starting positions. Independent tape anchors follow the updated initial sizes; heading layering is unchanged. Syntax and diff checks pass; user retains visual review.
+
+Also enlarged the Revolut account-controls screen and pink GoHenry parent-balance screen by approximately 20%, with adjusted desktop/mobile positions. Existing independent tape and heading layers are preserved. Syntax and diff checks pass; visual review remains with the user.
+
+Heading highlight now uses one continuous tape texture instead of three repeated pieces, with increased vertical coverage behind competitive research. Diff check passed; user retains visual review.
+
+Added one independently draggable tape to the top-up request insert at its visible top edge, as requested. Syntax and diff checks passed.
+
+Moved the Revolut co-parent screen’s independent tape anchor to the lower card edge (89% of image height), matching the requested placement. Syntax and diff checks passed.
+
+Recreated the heading highlight with a continuous pale-yellow base and the supplied tape texture overlaid. It sizes to the full competitive research phrase with 7% horizontal overhang and increased height, eliminating transparent gaps from the tape asset. Diff check passed; manual visual review remains with the user.
+
+Removed the lower-edge Revolut tape that overlapped the Arun Sharma spending/monthly-limit insert. The Arun card itself remains untaped. Syntax and diff checks passed.
+
+Kept heading tape dimensions and added slightly irregular cut edges, a soft offset shadow, and stronger creased texture from the supplied Tape2 asset. Texture uses grayscale overlay blending to retain the yellow base without washing out the folds. Diff check passed; user retains visual review.
+
+Strengthened the tape crease contrast and reduced the yellow base opacity to 62%, with texture opacity at 70%. Dimensions remain unchanged. Diff check passed; visual review remains with the user.
+
+Removed the yellow heading tape and its texture, retaining the heading typography and position. Diff check passed.
+
+Restored the heading tape texture without the solid yellow backing. Uses one translucent supplied Tape2 asset at the previously approved size. Diff check passed; visual review remains with the user.
+
+Increased textured heading tape width and height: horizontal overhang is 18% per side and vertical bounds extend 45% above and 50% below the text line. Diff check passed; manual review remains with the user.
+
+Heading tape now uses a page-specific copy of Tape2 with preserveAspectRatio=none so the visible texture stretches across the full phrase instead of being letterboxed within its CSS bounds. Width extends 5% beyond each text edge; height is preserved. Original draggable tape assets remain unchanged. Diff check passed; manual review remains with the user.
+
+Increased heading tape height by approximately 26%, preserving its full-phrase width. Diff check passed.
+
+Tradeoffs section heading and intro now use first person: What I chose to leave out / I left out. Both reconstructed concepts use the existing page-owned createPhone renderer and clean physical phone frame, retaining their full screens through contain sizing. No registered product component internals change. Syntax and diff checks pass; visual review remains with the user.

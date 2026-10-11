@@ -326,30 +326,19 @@ const caseStudy = {
       "We compared Revolut, Greenlight, Monzo, and many others to understand how they handle the split between the person managing the money and the person spending it.",
     collageTitle: "Glimpse of some competitive research",
     images: [
-      {
-        src: "assets/TB1.svg",
-        alt: "Early competitive research notes",
-        x: 5,
-        y: 8,
-        width: 29,
-        rotation: -5,
-      },
-      {
-        src: "assets/TB2.svg",
-        alt: "Research notes exploring family money relationships",
-        x: 67,
-        y: 7,
-        width: 25,
-        rotation: 4,
-      },
-      {
-        src: "pen files/designs-assets/image-2.png",
-        alt: "Early Turbo Hub product screen",
-        x: 39,
-        y: 51,
-        width: 22,
-        rotation: -2,
-      },
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.17 1.png", "tapeTop": 7.54, "alt": "Parent wallet, autofunding, and family account shortcuts", "x": 2, "y": 4, "width": 20, "rotation": -9, "mobile": {"x": 2, "y": 4, "width": 30}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.18 1.png", "tape": false, "tapeTop": 7.33, "alt": "Family payments competitor screen: account management", "x": 21, "y": 2, "width": 15, "rotation": 6, "mobile": {"x": 36, "y": 6, "width": 29}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.18 2.png", "tape": false, "tapeTop": 7.37, "alt": "Family payments competitor screen: spending settings", "x": 35, "y": 5, "width": 14, "rotation": -4, "mobile": {"x": 68, "y": 3, "width": 31}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.27 1.png", "tapeTop": 6.44, "alt": "Revolut under 18: balance, goals, and allowance", "x": 64, "y": 4, "width": 14, "rotation": -7, "mobile": {"x": 3, "y": 46, "width": 26}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.27 2.png", "tape": false, "tapeTop": 89, "alt": "Revolut under 18 competitive research screen", "x": 80, "y": 4, "width": 19, "rotation": 8, "mobile": {"x": 36, "y": 48, "width": 29}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.30 1.png", "tape": false, "tapeTop": 6.07, "alt": "Family payments competitive research: account controls", "x": 3, "y": 49, "width": 18, "rotation": 7, "mobile": {"x": 68, "y": 42, "width": 30}},
+      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Topping up - Screenshot 2.png", "tapeTop": 6.89, "alt": "GoHenry top-up flow: first funding screen", "x": 23, "y": 49, "width": 20, "rotation": -8, "mobile": {"x": 1, "y": 68, "width": 34}},
+      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Topping up - Screenshot 3.png", "tape": false, "tapeTop": 6.89, "alt": "GoHenry top-up flow: subsequent funding screen", "x": 51, "y": 52, "width": 17, "rotation": 5, "mobile": {"x": 36, "y": 72, "width": 29}},
+      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Exploring Allowance and Tasks - Screenshot 12.png", "tapeTop": 6.89, "alt": "GoHenry: weekly allowance and allowance day", "x": 76, "y": 49, "width": 18, "rotation": -6, "mobile": {"x": 69, "y": 69, "width": 30}},
+      {"src": "assets/competitive_research/Frame.png", "tapeTop": 0.0, "alt": "Form design approach: one question at a time, condensed answers, interaction notes and analysis", "x": 49, "y": 3, "width": 13, "rotation": 3, "mobile": {"x": 67, "y": 26, "width": 24}},
+      {"src": "assets/competitive_research/1/Frame.png", "tape": false, "tapeTop": 22.22, "alt": "Family Hub banner for sharing household expenses with family members", "x": 23, "y": 33, "width": 24, "rotation": -6, "mobile": {"x": 3, "y": 29, "width": 39}},
+      {"src": "assets/competitive_research/1/Frame-1.png", "tape": false, "tapeTop": 16.38, "alt": "Arun Sharma manager card showing spending against his monthly limit", "x": 66, "y": 43, "width": 22, "rotation": 7, "mobile": {"x": 35, "y": 36, "width": 38}},
+      {"src": "assets/competitive_research/1/Nudge.png", "tapeTop": 28.48, "alt": "Kavya Sharma top-up request for ₹5,000 with an accept request action", "x": 40, "y": 80, "width": 30, "rotation": -5, "mobile": {"x": 15, "y": 66, "width": 55}}
     ],
     insights: [
       {
@@ -405,8 +394,8 @@ const caseStudy = {
       "As the flows became clearer, I translated them into PayZapp’s existing design language, reusing familiar patterns and components so Turbo Hub felt like a natural extension of the product rather than a separate experience.",
   },
   tradeoffs: {
-    title: "What we chose to leave out",
-    intro: "We left out an all-in-one family setup and a generic app welcome. Both added steps before people reached what they came for: creating a Hub or joining their family.",
+    title: "What I chose to leave out",
+    intro: "I left out an all-in-one family setup and a generic app welcome. Both added steps before people reached what they came for: creating a Hub or joining their family.",
     screens: [
       { src: "assets/tradeoffs/all-in-one-setup.svg", label: "All-in-one setup", alt: "Reconstructed concept: Hub details, family members, limits and payment methods collected in one long setup screen." },
       { src: "assets/tradeoffs/generic-app-welcome.svg", label: "Generic app welcome", alt: "Reconstructed concept: a general PayZapp introduction and account setup before reaching the family invitation." },
@@ -943,6 +932,31 @@ function createCompetitiveResearchBoard(config) {
   const component = createElement("div", "competitive-board-component");
   const board = createElement("div", "competitive-board");
   board.setAttribute("aria-label", "Interactive competitive research board");
+  // A light edge correction improves small screenshot text without changing assets.
+  const svgNamespace = "http://www.w3.org/2000/svg";
+  const imageEffects = document.createElementNS(svgNamespace, "svg");
+  imageEffects.setAttribute("width", "0");
+  imageEffects.setAttribute("height", "0");
+  imageEffects.setAttribute("aria-hidden", "true");
+  imageEffects.style.position = "absolute";
+  const definitions = document.createElementNS(svgNamespace, "defs");
+  const clarityFilter = document.createElementNS(svgNamespace, "filter");
+  clarityFilter.id = "competitive-image-clarity";
+  clarityFilter.setAttribute("color-interpolation-filters", "sRGB");
+  const sharpen = document.createElementNS(svgNamespace, "feConvolveMatrix");
+  sharpen.setAttribute("order", "3");
+  sharpen.setAttribute("kernelMatrix", "0 -0.15 0 -0.15 1.6 -0.15 0 -0.15 0");
+  sharpen.setAttribute("divisor", "1");
+  sharpen.setAttribute("edgeMode", "duplicate");
+  sharpen.setAttribute("preserveAlpha", "true");
+  clarityFilter.append(sharpen);
+  definitions.append(clarityFilter);
+  imageEffects.append(definitions);
+  board.append(imageEffects);
+  const imageLayer = createElement("div", "competitive-board-images");
+  board.append(imageLayer);
+  const tapeLayer = createElement("div", "competitive-board-tapes");
+  board.append(tapeLayer);
   let topLayer = 10;
 
   const boardOverhang = 0.6;
@@ -961,6 +975,7 @@ function createCompetitiveResearchBoard(config) {
 
     const moveBy = (deltaX, deltaY) => {
       const { minLeft, maxLeft, minTop, maxTop } = getBounds();
+      item.dataset.userMoved = "true";
       item.style.left = `${Math.min(maxLeft, Math.max(minLeft, item.offsetLeft + deltaX))}px`;
       item.style.top = `${Math.min(maxTop, Math.max(minTop, item.offsetTop + deltaY))}px`;
       item.style.zIndex = String(++topLayer);
@@ -969,6 +984,7 @@ function createCompetitiveResearchBoard(config) {
     item.addEventListener("pointerdown", (event) => {
       if (event.button !== 0) return;
       event.preventDefault();
+      item.classList.add("is-pointer-focused");
       item.focus({ preventScroll: true });
       const startX = event.clientX;
       const startY = event.clientY;
@@ -980,6 +996,7 @@ function createCompetitiveResearchBoard(config) {
       item.setAttribute("aria-grabbed", "true");
 
       const onMove = (moveEvent) => {
+        item.dataset.userMoved = "true";
         const { minLeft, maxLeft, minTop, maxTop } = getBounds();
         item.style.left = `${Math.min(maxLeft, Math.max(minLeft, startLeft + moveEvent.clientX - startX))}px`;
         item.style.top = `${Math.min(maxTop, Math.max(minTop, startTop + moveEvent.clientY - startY))}px`;
@@ -999,7 +1016,10 @@ function createCompetitiveResearchBoard(config) {
       item.addEventListener("pointercancel", onEnd);
     });
 
+    item.addEventListener("blur", () => item.classList.remove("is-pointer-focused"));
+
     item.addEventListener("keydown", (event) => {
+      item.classList.remove("is-pointer-focused");
       const moves = {
         ArrowLeft: [-8, 0],
         ArrowRight: [8, 0],
@@ -1015,28 +1035,74 @@ function createCompetitiveResearchBoard(config) {
   config.images.forEach((imageConfig, index) => {
     const item = createElement("figure", "competitive-board-item competitive-image");
     const image = document.createElement("img");
-    const tape = createElement("span", "competitive-image-tape");
-    tape.setAttribute("aria-hidden", "true");
+    const tape = createElement("span", "competitive-board-item competitive-image-tape");
+    tape.style.setProperty("--research-tape-top", `${imageConfig.tapeTop ?? 0}%`);
+    const tapeVariations = [
+      { file: "Tape1.svg", ratio: "86 / 53", rotation: -7 },
+      { file: "Tape2.svg", ratio: "97 / 43", rotation: 4 },
+      { file: "Tape3.svg", ratio: "64 / 67", rotation: -3 },
+      { file: "Tape4.svg", ratio: "71 / 61", rotation: 6 },
+    ];
+    const tapeAsset = tapeVariations[index % tapeVariations.length];
+    tape.style.backgroundImage = `url("assets/Tape_variations/${tapeAsset.file}")`;
+    tape.style.setProperty("--research-tape-ratio", tapeAsset.ratio);
+    tape.style.setProperty("--research-tape-rotation", `${tapeAsset.rotation}deg`);
     image.src = imageConfig.src;
     image.alt = imageConfig.alt;
     image.loading = "lazy";
     image.decoding = "async";
     image.draggable = false;
-    item.style.left = `${imageConfig.x}%`;
-    item.style.top = `${imageConfig.y}%`;
-    item.style.width = `${imageConfig.width}%`;
+    item.style.setProperty('--research-x', `${imageConfig.x}%`);
+    item.style.setProperty('--research-y', `${imageConfig.y}%`);
+    item.style.setProperty('--research-width', `${imageConfig.width}%`);
+    item.style.setProperty('--research-mobile-x', `${imageConfig.mobile.x}%`);
+    item.style.setProperty('--research-mobile-y', `${imageConfig.mobile.y}%`);
+    item.style.setProperty('--research-mobile-width', `${imageConfig.mobile.width}%`);
     item.style.setProperty("--collage-rotation", `${imageConfig.rotation}deg`);
     item.style.zIndex = String(++topLayer);
     item.tabIndex = 0;
     item.setAttribute("role", "button");
     item.setAttribute("aria-label", `Move research image ${index + 1}. Use arrow keys for precise movement.`);
     item.setAttribute("aria-grabbed", "false");
-    item.append(tape, image);
-    board.append(item);
+    item.append(image);
+    imageLayer.append(item);
     makeDraggable(item);
+    if (imageConfig.tape !== false) {
+      tape.tabIndex = 0;
+      tape.setAttribute("role", "button");
+      tape.setAttribute("aria-label", `Move tape ${index + 1}. Use arrow keys for precise movement.`);
+      tape.setAttribute("aria-grabbed", "false");
+      tape.style.setProperty("--collage-rotation", `${imageConfig.rotation + tapeAsset.rotation}deg`);
+      tapeLayer.append(tape);
+      makeDraggable(tape);
+      const positionTape = () => {
+        if (tape.dataset.userMoved === "true") return;
+        const mobile = window.matchMedia("(max-width: 48rem)").matches;
+        const layout = mobile ? imageConfig.mobile : imageConfig;
+        const width = board.clientWidth * layout.width / 100;
+        const height = item.offsetHeight;
+        const rotation = imageConfig.rotation * Math.PI / 180;
+        const edgeOffset = height * ((imageConfig.tapeTop ?? 0) / 100 - 0.5);
+        const centerX = board.clientWidth * layout.x / 100 + width / 2 - Math.sin(rotation) * edgeOffset;
+        const centerY = board.clientHeight * layout.y / 100 + height / 2 + Math.cos(rotation) * edgeOffset;
+        const tapeWidth = Math.max(44, Math.min(76, width * 0.36));
+        const [ratioWidth, ratioHeight] = tapeAsset.ratio.split(" / ").map(Number);
+        tape.style.width = `${tapeWidth}px`;
+        tape.style.left = `${centerX - tapeWidth / 2}px`;
+        tape.style.top = `${centerY - tapeWidth * ratioHeight / ratioWidth * 0.35}px`;
+      };
+      const tapeObserver = new ResizeObserver(positionTape);
+      tapeObserver.observe(board);
+      tapeObserver.observe(item);
+      image.addEventListener("load", positionTape, { once: true });
+    }
   });
 
-  const boardTitle = createElement("p", "competitive-board-title", config.collageTitle);
+  const boardTitle = createElement("p", "competitive-board-title");
+  boardTitle.append(
+    createElement("span", "", "Glimpse of some"),
+    createElement("span", "competitive-board-highlight", "competitive research"),
+  );
   board.append(boardTitle);
 
   const insights = createElement("div", "competitive-insights");
@@ -1565,7 +1631,10 @@ function createDesignTradeoffs() {
     image.height = 520;
     image.loading = "lazy";
     image.decoding = "async";
-    figure.append(image, createElement("figcaption", "", screen.label));
+    const phone = createPhone({ id: `tradeoff-${screens.children.length + 1}`, label: screen.label });
+    image.className = "design-tradeoffs__screen-image";
+    phone.querySelector(".media-slot").replaceChildren(image);
+    figure.append(phone, createElement("figcaption", "", screen.label));
     screens.append(figure);
   });
   column.append(
