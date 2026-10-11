@@ -240,3 +240,7 @@
 .th-badge > .th-icon { height:auto; color:inherit; }
 
 .th-button[hidden] { display:none; }
+
+.th-page-header__members { display:flex; align-items:center; align-self:flex-start; flex:none; }
+.th-page-header__member { display:flex; position:relative; }
+.th-page-header__member + .th-page-header__member { margin-left:calc(var(--th-space-3) * -1); }

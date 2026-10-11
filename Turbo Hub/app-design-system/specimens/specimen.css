@@ -14,3 +14,7 @@ body{margin:0;padding:20px;background:#f5f8fd;color:var(--color-text);font:16px/
 .editorial-specimen { background:var(--page); color:var(--ink); font:var(--font-small-body); }
 .th-hub-promo[data-preview-state=active] { box-shadow:var(--hub-promo-pressed-sheen); }
 .th-hub-promo[data-preview-state=focus-visible] { outline:3px solid var(--color-action); outline-offset:4px; }
+
+/* Editorial card previews retain their representative width in both catalog views. */
+.case-card-specimen main { max-width:768px; }
+.case-card-specimen .example { width:100%; box-sizing:border-box; }

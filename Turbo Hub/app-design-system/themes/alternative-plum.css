@@ -1,0 +1,10 @@
+:root {
+  --color-action:#85427f;
+  --color-action-soft:#f5eaf4;
+  --color-list-title:#754070;
+  --color-icon-soft:#f4e7f2;
+  --color-progress-track:#e2bddc;
+  --color-reference-border:#e8d2e4;
+  --chrome-backdrop-base:linear-gradient(115deg,#733869 0%,#945087 55%,#89557f 100%);
+  --chrome-backdrop-patch:radial-gradient(ellipse at 78% 18%,rgb(244 204 231 / .1) 0%,rgb(223 165 207 / .04) 34%,transparent 68%);
+}

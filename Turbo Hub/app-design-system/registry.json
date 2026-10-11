@@ -1789,10 +1789,12 @@
         "heading only",
         "with subtext and visual",
         "verified",
-        "long text"
+        "long text",
+        "with member avatars"
       ],
       "dependencies": [
-        "turbo-chrome-backdrop"
+        "turbo-chrome-backdrop",
+        "turbo-avatar"
       ],
       "previewConfigurations": [
         {
@@ -1814,6 +1816,11 @@
           "id": "action",
           "name": "Heading with action",
           "selector": "#action"
+        },
+        {
+          "id": "members",
+          "name": "Family heading with members",
+          "selector": "#members"
         }
       ],
       "anatomy": {
@@ -1837,6 +1844,14 @@
           {
             "name": "Verification",
             "selector": ".th-page-header__verified"
+          },
+          {
+            "name": "Member group",
+            "selector": ".th-page-header__members"
+          },
+          {
+            "name": "Member wrapper",
+            "selector": ".th-page-header__member"
           }
         ],
         "spacing": [
@@ -1869,13 +1884,19 @@
             "selector": ".th-page-header",
             "property": "column-gap",
             "token": "--th-space-4"
+          },
+          {
+            "label": "Member overlap",
+            "selector": ".th-page-header__member + .th-page-header__member",
+            "property": "margin-left",
+            "token": "--th-space-3"
           }
         ],
         "behavior": "20px Medium semantic screen heading with optional subtext, verified badge and decorative trailing icon or caller-provided visual. Long text wraps. Uses existing semantic icons; no actions.",
         "ownership": "Owns title/subtext alignment, visual slot and internal spacing; Chrome backdrop owns the visual background; page owns placement within shared chrome.",
-        "interactionOwnership": "Presentational only; no private controls."
+        "interactionOwnership": "Presentational only; no private controls. Member avatars are noninteractive registered Avatar children; names are exposed on the group."
       },
-      "usage": "TurboUI.pageHeader({heading,subtext,verified,icon,visual}). Supply only icon or visual and place inside turbo-chrome-backdrop. Trailing visual is decorative; meaningful information belongs in heading/subtext. action: an optional trailing control aligned with the heading, e.g. a compact glass pill 'New Hub' Action on the Hubs list."
+      "usage": "TurboUI.pageHeader({heading,subtext,verified,icon,visual}). Supply only icon or visual and place inside turbo-chrome-backdrop. Trailing visual is decorative; meaningful information belongs in heading/subtext. action: an optional trailing control aligned with the heading, e.g. a compact glass pill 'New Hub' Action on the Hubs list. members: an array of names renders registered stack Avatars as a meaningful group. Use this configuration without icon, visual or action."
     },
     {
       "id": "turbo-countdown",
@@ -3428,6 +3449,126 @@
         "behavior": "Fluid native button with wrapping label and at least 56px height. Final item omits the outgoing connector. Upcoming shows a number; complete shows the existing registered Phosphor success check; current shows a filled blue number and soft halo. aria-current=step and aria-pressed reflect current; completed accessible label adds completed. Decorative markers/connectors are aria-hidden. Supplied state does not mutate on activation.",
         "interactionOwnership": "Each instance is one independent registered checkpoint button. Number, check, label and connector are noninteractive internal parts. Caller owns state, playback timing and onSelect handling; direct hover/active/focus-visible belong to this button."
       }
+    },
+    {
+      "id": "case-study-card",
+      "name": "Case study card",
+      "class": "case-ending__card",
+      "css": "components/case-study-card.css",
+      "module": "components/case-study-card.js",
+      "preview": "specimens/case-study-card.html",
+      "category": "Case study",
+      "galleryWidth": 800,
+      "variants": [
+        "variant-1",
+        "variant-2"
+      ],
+      "states": [
+        "default",
+        "hover",
+        "focus-visible",
+        "reduced-motion"
+      ],
+      "previewConfigurations": [
+        {
+          "id": "variant-1",
+          "name": "Variant 1",
+          "selector": "#variant-1 .case-ending__card"
+        },
+        {
+          "id": "variant-2",
+          "name": "Variant 2",
+          "selector": "#variant-2 .case-ending__card"
+        }
+      ],
+      "previewLayout": {
+        "columns": 1
+      },
+      "dependencies": [],
+      "usage": "TurboCaseStudyCard({variant:\"variant-1\"|\"variant-2\", href?, ariaLabel?, title?, description?, brand?, categories?, image?, imageAlt?}). Variant 1 preserves the PayZapp portrait-phone card. Variant 2 uses the supplied IG copy and landscape tablet image treatment. The IG image uses the supplied assets/competitive_research/1/ig_image.png within the shared tablet frame. Without href the renderer creates a non-link article; callers supply real navigation destinations. Uses editorial case-study tokens from styles.css, not product-screen typography.",
+      "anatomy": {
+        "parts": [
+          {
+            "name": "Visual panel",
+            "selector": ".case-ending__visual"
+          },
+          {
+            "name": "Device mockup",
+            "selector": ".case-ending__mockup"
+          },
+          {
+            "name": "Title",
+            "selector": ".case-ending__card-copy h3"
+          },
+          {
+            "name": "Description",
+            "selector": ".case-ending__card-copy > p"
+          },
+          {
+            "name": "Footer",
+            "selector": ".case-ending__card-footer"
+          },
+          {
+            "name": "Brand and tags",
+            "selector": ".case-ending__meta"
+          },
+          {
+            "name": "Hover arrows",
+            "selector": ".case-ending__arrows"
+          },
+          {
+            "name": "Landscape tablet frame",
+            "selector": ".case-ending__tablet"
+          }
+        ],
+        "spacing": [
+          {
+            "label": "Card inset",
+            "selector": ".case-ending__card",
+            "property": "padding-top",
+            "token": "--case-card-inset"
+          },
+          {
+            "label": "Columns",
+            "selector": ".case-ending__card",
+            "property": "column-gap",
+            "token": "--case-card-gap"
+          },
+          {
+            "label": "Copy top inset",
+            "selector": ".case-ending__card-copy",
+            "property": "padding-top",
+            "token": "--case-card-inset"
+          },
+          {
+            "label": "Title to description",
+            "selector": ".case-ending__card-copy h3",
+            "property": "margin-bottom",
+            "token": "--case-card-title-gap"
+          },
+          {
+            "label": "Footer separation",
+            "selector": ".case-ending__card-footer",
+            "property": "padding-top",
+            "token": "--case-card-footer-inset"
+          },
+          {
+            "label": "Footer gap",
+            "selector": ".case-ending__card-footer",
+            "property": "column-gap",
+            "token": "--case-card-footer-gap"
+          },
+          {
+            "label": "Variant 2 image inset",
+            "selector": ".case-ending__card[data-variant='variant-2'] .case-ending__visual",
+            "property": "padding-left",
+            "token": "--case-card-image-inset"
+          }
+        ],
+        "ownership": "Card owns visual/device presentation, internal spacing, responsive columns and hover/focus motion. Page owns external placement and surrounding illustrations. Specimen wrappers own captions and comparison spacing.",
+        "behavior": "Up to 720px wide. Variant 1 retains portrait-device clipping; variant 2 centers a landscape image and stacks below 30rem. Text wraps; optional metadata remains noninteractive. Link activation follows caller href with native keyboard semantics. Hover and focus share the flower reveal, mockup lift and cumulative arrow cycle; reduced motion removes movement.",
+        "interactionOwnership": "The link root, when href is supplied, owns navigation and direct hover/focus states. Caller owns destination and content; image, text, metadata and arrows are noninteractive parts. Without href the root is an article, not a keyboard control."
+      }
     }
   ],
   "compositions": [],
@@ -3482,8 +3623,33 @@
       ]
     }
   ],
-  "visualizations": [],
-  "themes": [],
+  "visualizations": [
+    {
+      "id": "expense-breakdown",
+      "name": "Shared expense breakdown",
+      "class": "th-expense-breakdown",
+      "css": "components/expense-breakdown.css",
+      "module": "components/expense-breakdown.js",
+      "preview": "specimens/expense-breakdown.html",
+      "description": "Renderer-backed donut with shared total and labeled category amounts. Caller supplies nonnegative expense data. Default and empty examples use the same renderer. No interactions or child controls; legend and accessible summary carry values independently of color."
+    }
+  ],
+  "themes": [
+    {
+      "id": "alternative-plum",
+      "name": "Alternative \u00b7 Plum",
+      "file": "themes/alternative-plum.css",
+      "colorScheme": "light",
+      "description": "Opt-in palette for the alternative Pixel Tag case-study preview."
+    },
+    {
+      "id": "alternative-teal",
+      "name": "Alternative \u00b7 Teal",
+      "file": "themes/alternative-teal.css",
+      "colorScheme": "light",
+      "description": "Opt-in palette for the alternative shared-expenses case-study preview."
+    }
+  ],
   "screens": [
     {
       "id": "hub-dashboard",
@@ -3717,6 +3883,12 @@
       "name": "Member \u00b7 New-user entry",
       "preview": "../app/prototypes/invitation/index.html?audience=new",
       "description": "Single proposed invitation landing for new users; no onboarding carousel. Account creation is outside the prototype, with explicit after-setup preview navigation."
+    },
+    {
+      "id": "shared-expenses-alternative",
+      "name": "Alternative \u00b7 Separate accounts, shared expenses",
+      "preview": "../app/prototypes/shared-expenses/index.html",
+      "description": "Alternative concept, outside the selected Hub journey. Separate accounts with shared bills, equal shares and settlement balances. Reuses Status bar, Navigation, Page header, Tabs, Row and Action. Expenses/Balances tabs and an illustrative settlement review; no real transfers."
     }
   ],
   "icons": [
@@ -3731,7 +3903,8 @@
   "tokenFiles": [
     "tokens/primitives.css",
     "tokens/semantics.css",
-    "components/interview-stack.css"
+    "components/interview-stack.css",
+    "components/case-study-card.css"
   ],
   "knownGaps": [],
   "decisions": [
@@ -3745,7 +3918,9 @@
     "decisions/page-header.md",
     "decisions/chrome-backdrop.md",
     "decisions/hub-promo.md",
-    "decisions/flow-checkpoints.md"
+    "decisions/flow-checkpoints.md",
+    "decisions/shared-expenses-alternative.md",
+    "decisions/case-study-card.md"
   ],
   "foundationPresentation": {
     "tokens": {

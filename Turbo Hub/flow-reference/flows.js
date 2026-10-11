@@ -54,13 +54,15 @@ chapters.forEach((chapter,index)=>{
   const list=el('ol',group.screens.length===4?'screens screens--four':'screens');
   group.screens.forEach(([name,placement,status])=>{
    step++;const item=el('li',status==='new'?'proposed':'');const box=el('div','placeholder');
-   const meta=el('div','slot-meta');meta.append(el('span','slot',`${index+1}.${step}`));if(status)meta.append(el('span','status',status==='new'?'Create':'Prototype reference'));
+   const meta=el('div','slot-meta');meta.append(el('span','slot',`${index+1}.${step}`));if(status)meta.append(el('span','status',status==='new'?'Create':status==='concept'?'Alternative concept':'Prototype reference'));
    box.append(meta,el('strong','',name),el('p','',placement));item.append(box);
    const preview=el('div','screen-preview');const stage=el('div','screen-stage');preview.append(stage);item.append(preview);
    const asset=screenAssets[name];
    if(asset){const link=el('a','screen-reference');link.href=`source/${asset.id}.png`;link.target='_blank';link.rel='noopener';link.setAttribute('aria-label',`Open original reference: ${name}`);const img=el('img');img.src=link.href;img.alt=name+' — original Turbo Hub screen';img.loading='lazy';img.decoding='async';if(asset.ratio)link.style.aspectRatio=asset.ratio;if(asset.width){link.classList.add('screen-reference--crop');link.style.aspectRatio=`${asset.screenWidth} / ${asset.height}`;img.style.width=`${asset.width/asset.screenWidth*100}%`;img.style.left=`${-asset.x/asset.screenWidth*100}%`;}link.append(img);stage.append(link);box.classList.add('placeholder--caption');}
    if(prototypes[name]){const prototype=el('a','open-full-page','Open full page ↗');const [path,query]=prototypes[name].split('?');prototype.href='../prototypes/'+path+'/index.html'+(query?'?'+query:'');prototype.target='_blank';prototype.rel='noopener';prototype.setAttribute('aria-label',`Open ${name} full page in a new tab`);preview.append(prototype);}
-   if(!asset)stage.append(el('span','reserved-label',status==='new'?'Screen to create':'Screen reference pending'));list.append(item);
+   if(status==='concept'){
+    const frame=el('iframe','alternative-prototype');frame.src='../prototypes/shared-expenses/index.html?embed=story&scene=tradeoff-shared-expenses&interactive=false';frame.title='Separate accounts with shared expenses — alternative concept';frame.loading='lazy';stage.append(frame);
+   }else if(!asset)stage.append(el('span','reserved-label',status==='new'?'Screen to create':'Screen reference pending'));list.append(item);
   });block.append(header,list);section.append(block);
  });
  const details=el('details');details.append(el('summary','','References'));if(chapter.note)details.append(el('p','',chapter.note));

@@ -7,7 +7,7 @@
   const fit=()=>{const r=viewport.getBoundingClientRect();viewport.style.setProperty('--screen-scale',(r.width+0.5)/390);};
   fit();new ResizeObserver(fit).observe(viewport);
   // Story presentation keeps the existing phone, without comparison/inspection tooling.
-  if(window.TurboStoryContext?.embedded)return;
+  if(window.TurboStoryContext?.embedded || document.body.dataset.preview === "concept")return;
   const assets={
     invitation:['419:29279','Invitation · WhatsApp source'],
     'tag-added':['436:58199','Hub Members · Tag added'],

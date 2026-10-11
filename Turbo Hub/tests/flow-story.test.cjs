@@ -25,8 +25,8 @@ test('all catalog routes have scenes, valid files and unambiguous narrative iden
   assert.equal(story.chapters.length,5);assert.equal(new Set(story.scenes.map(s=>s.id)).size,story.scenes.length);
   const canonical=url=>{const u=new URL(url,'http://localhost:8020/design-system/');u.searchParams.delete('amount');return u.pathname+u.search};
   const routes=new Set(story.scenes.map(s=>canonical('/app/prototypes/'+s.route.replace('?', '/index.html?')+(s.route.includes('?')?'':'/index.html'))));
-  // Screens deliberately left out of the story (still in the prototype and registry).
-  const omitted=new Set(['hub-type','new-user-entry','request-declined','request-expired']);
+  // Screens deliberately left out of the selected story (including the rejected direction).
+  const omitted=new Set(['hub-type','new-user-entry','request-declined','request-expired','shared-expenses-alternative']);
   registry.screens.filter(screen=>!omitted.has(screen.id)).forEach(screen=>assert.ok(routes.has(canonical(screen.preview)),screen.id+' is missing'));
   story.scenes.forEach(scene=>{assert.equal(scene.interactive,false);assert.ok(story.cast[scene.actor]);assert.ok(scene.copy.length>40);const folder=scene.route.split('?')[0];assert.ok(fs.existsSync(path.join(app,'prototypes',folder,'index.html')));const html=read('prototypes/'+folder+'/index.html');assert.ok(html.includes('story-context.js'));assert.ok(html.includes('flow-story-data.js'))});
 });

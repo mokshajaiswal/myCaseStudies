@@ -1,4 +1,4 @@
-/* Two reconstructed screen concepts within the editorial narrative. */
+/* Two alternative directions within the editorial narrative. */
 .design-tradeoffs__screens {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -9,6 +9,8 @@
 .design-tradeoffs__screen { min-width: 0; margin: 0; text-align: center; }
 .design-tradeoffs__screen .phone { width: min(100%, 280px); margin-inline: auto; }
 .design-tradeoffs__screen .media-slot > .design-tradeoffs__screen-image { object-fit: contain; background: var(--surface-raised); }
-.design-tradeoffs__screen figcaption { margin-top: var(--space-3); font: var(--font-utility); color: var(--ink-soft); }
+.design-tradeoffs__screen figcaption { margin-top: var(--space-3); text-align: center; font: var(--font-utility); color: var(--ink-soft); }
 .design-tradeoffs__description { margin: 0; font: var(--font-small-body); color: var(--ink-soft); }
 @media (max-width: 48rem) { .design-tradeoffs__screens { gap: var(--space-4); } }
+
+.design-tradeoffs__screens:has(> :only-child) { grid-template-columns: minmax(0, 1fr); max-width: 320px; }

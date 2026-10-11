@@ -659,3 +659,32 @@ Heading tape now uses a page-specific copy of Tape2 with preserveAspectRatio=non
 Increased heading tape height by approximately 26%, preserving its full-phrase width. Diff check passed.
 
 Tradeoffs section heading and intro now use first person: What I chose to leave out / I left out. Both reconstructed concepts use the existing page-owned createPhone renderer and clean physical phone frame, retaining their full screens through contain sizing. No registered product component internals change. Syntax and diff checks pass; visual review remains with the user.
+
+Family Hub banner starts farther left, overlapping the lower edges of the upper screenshot group (12% left, 36% top), following the supplied placement reference. Size and rotation are unchanged. Syntax and diff checks passed; visual review remains with the user.
+
+Replaced the generic welcome concept in tradeoffs with the real existing Pixel Tag prototype, using its own shared device shell in embedded locked mode. Copy clarifies that mandatory tag setup is outside the core journey, while tags remain optional afterward. The other concept retains the page-owned phone mock. Syntax and diff checks pass; manual review remains with the user.
+
+## Alternative family-finance direction
+
+Renamed tradeoffs to “The direction we didn’t take” and replaced the setup concepts with
+one real separate-accounts/shared-expenses prototype. It presents shared bills, each
+person’s share and who owes whom rather than a shared balance. The narrative contrasts
+that alternative with the selected manager-led Hub. This screen is registered in the DS
+and added to its own alternative chapter of the flow reference, outside active playback.
+It reuses existing controls and phone geometry; verification and ownership notes are in
+app-design-system/decisions/shared-expenses-alternative.md. Browser review stays manual.
+
+Directions we didn’t take now shows both actual prototypes side by side: optional Pixel Tag setup and separate-accounts/shared-expenses. Copy distinguishes excluding mandatory tag setup from rejecting the expense-settlement model; tags remain an optional extension. Existing two-column phone layout and responsive behavior are reused. Syntax and diff checks passed; user retains visual review.
+
+Shared-expenses alternative now uses less copy and a renderer-backed expense donut:
+electricity ₹2,400 and groceries ₹1,200. Total and legend share the supplied bill data.
+Existing share/owed facts and tabs remain; labels and settlement review are shorter.
+Expense breakdown is registered with real populated and empty specimens.
+
+Directions copy rewritten after reviewing the full case-study narrative and connected flow rationales. It ties scope to control, visibility, access and independence, and explains each choice below its screen: tags remain optional after creation; expense splitting assumes members can fund purchases first. Conditional wording avoids claiming tag-first onboarding was implemented or tested. Existing prototypes/palettes are preserved. Source checks pass; user retains visual review.
+
+Restored small centered mockup labels for Directions we didn’t take. One main paragraph explains why Pixel Tag setup stays outside the core and why pay-first expense splitting does not address access to family funds. Removed per-mockup rationale blocks and the redundant closing paragraph. Syntax and diff checks passed; user retains visual review.
+
+Directions paragraph now explains the initial appeal of Pixel Tags and separate accounts/shared expenses, then connects the shift to research on access to family funds. It distinguishes device setup and pay-first assumptions from the chosen manager-funded Hub. Small mockup captions are preserved. Syntax and diff checks passed.
+
+Directions narrative now includes colour exploration, the Pixel Tag and separate-account paths, discussion with the team, and why the current manager-funded Hub better balances access, limits and member independence. User supplied the team-discussion context; no testing or measured impact claims were added. Syntax and diff checks passed.
