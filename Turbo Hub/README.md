@@ -1,5 +1,12 @@
 # Turbo Hub case study
 
+Public case study: https://mokshajaiswal.github.io/myCaseStudies/turbo-hub/
+
+GitHub Pages publishes changes from `main` through `.github/workflows/pages.yml`.
+`scripts/build-pages.py` retains the existing research archive at the site root
+and packages this case study under `turbo-hub/`, excluding development inspector
+scripts and project notes. Build locally with `python3 scripts/build-pages.py`.
+
 The final `#learning` section includes Turbo Hub reflections, a flower divider, a recap card and a pink wave at the end of the page. The wave scrolls with the footer. The decorative `#closing-illustration` slot plays the supplied `assets/closing/looped-flowers.json` behind the wave. `closing-flowers.js` loads the local Lottie player near the section and pauses offscreen or in hidden tabs; reduced motion shows a still frame. Closing layout lives in `case-ending.css`. Browser review remains manual.
 
 This repository contains a single-page product-design case study for Turbo Hub, a family-payments concept created within PayZapp. It is a custom static site built with plain HTML, CSS, and JavaScript—there is no framework, build step, package manager, or backend.
