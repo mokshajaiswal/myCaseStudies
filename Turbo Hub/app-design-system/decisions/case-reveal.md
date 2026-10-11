@@ -7,13 +7,13 @@ interaction as a reversible option, without significantly refactoring the page.
 
 case-reveal.js and case-reveal.css are separate, page-owned presentation modules.
 index.html loads them after the existing case-study renderer and navigation.
-The default is off; ?reveal=1 enables it and ?reveal=0 (or no parameter) disables
-it. This composes with ?nav=1, 2 or 3. Runtime switching uses
+The user subsequently requested default-on behavior. No parameter enables
+reveals; ?reveal=1 remains supported and ?reveal=0 disables them. This composes with ?nav=1, 2 or 3. Runtime switching uses
 CaseStudyReveal.setEnabled(true/false); enabled reports the requested preference
 and active reports whether animation is running under current capabilities.
 CaseStudyReveal.refresh() supports a deliberate editorial rerender.
 
-The default branch creates no observers, word spans or reveal attributes. CSS
+The explicit disabled branch creates no observers, word spans or reveal attributes. CSS
 only applies motion when JavaScript has explicitly activated the root flag.
 Disabling removes all owned attributes/styles/timers/observers and restores the
 original text nodes. No changes were made to script.js or shared component
@@ -57,7 +57,7 @@ gallery, relationship diagram, card grid, exploration direction, phone group,
 learning screen group and closing screen stage now reveals as one intact unit.
 Each enters without a stagger delay when its observer reports viewport entry.
 Nested headings, paragraphs, screens and controls receive no separate entrance
-or text splitting. Default-off and once-per-element behavior remain unchanged.
+or text splitting. The default-on option retains the explicit off switch and once-per-element behavior.
 
 The right-edge annotation flower and its adjacent full-product screen reveal
 through their common page-owned annotation-band, sharing the exact trigger,
@@ -90,7 +90,7 @@ targets, not just pending records.
 
 ## Verification
 
-Thirteen Node DOM-harness checks cover off-mode no-ops, runtime cleanup, measured
+Fourteen Node DOM-harness checks cover default activation, off-mode no-ops, runtime cleanup, measured
 line grouping and original-node restoration, component exclusion and intact
 links, capped staggering, font/resize regrouping, explicit section navigation,
 reduced motion/printing/missing observers, failure cleanup and whole-unit reveals

@@ -4,7 +4,7 @@ const fs = require('node:fs');
 const vm = require('node:vm');
 const source = fs.readFileSync(require.resolve('../case-reveal.js'), 'utf8');
 
-function harness({search = '?reveal=1', reducedMotion = false, observerAvailable = true, hash = ''} = {}) {
+function harness({search = '', reducedMotion = false, observerAvailable = true, hash = ''} = {}) {
   const timers = new Map(), frames = [], events = {}, observers = [];
   let timerID = 0, fontReady;
   const descendants = node => node.childNodes.flatMap(child => [child, ...descendants(child)]);
@@ -127,8 +127,17 @@ function harness({search = '?reveal=1', reducedMotion = false, observerAvailable
     candidates, Element, reduced, events, observers, timers, flushFrames, flushTimers, fontsReady: () => fontReady?.(), observer: () => observers.at(-1)};
 }
 
-test('default and reveal=0 do not mutate the document; a single runtime toggle activates and cleans up', () => {
-  for (const search of ['', '?reveal=0']) {
+test('reveals activate by default and explicit reveal=1 stays supported', () => {
+  for (const search of ['', '?nav=3', '?reveal=1']) {
+    const h = harness({search});
+    assert.equal(h.api.enabled, true);
+    assert.equal(h.api.active, true);
+    assert.equal(h.heading.getAttribute('data-case-reveal-state'), 'pending');
+  }
+});
+
+test('reveal=0 does not mutate the document; a single runtime toggle activates and cleans up', () => {
+  for (const search of ['?reveal=0', '?nav=3&reveal=0']) {
     const h = harness({search});
     assert.equal(h.api.active, false); assert.equal(h.observers.length, 0);
     assert.equal(h.heading.hasAttribute('data-case-reveal-state'), false);

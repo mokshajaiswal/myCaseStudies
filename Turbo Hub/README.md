@@ -67,7 +67,7 @@ With `?dev=true`, each autoplay family-flow preview includes **View all screens*
 | `styles.css` | Design tokens, typography, responsive layout, components, and progress indicator. |
 | `tokens.html` / `tokens.js` | Standalone visual token reference and live computed measurements; no build step. |
 | `script.js` | Case-study data, DOM rendering, media-slot API, hero depth and scroll progress behavior. |
-| `case-reveal.js` / `case-reveal.css` | Optional, reversible scroll entrances and paragraph line reveals; enabled with `?reveal=1`. |
+| `case-reveal.js` / `case-reveal.css` | Reversible scroll entrances and paragraph line reveals; enabled by default, disabled with `?reveal=0`. |
 | `flow-story-data.js` / `flow-story.js` / `flow-story.css` | Fictional family narrative, declared screen sequences and editorial preview presentation. |
 | `flow-story-playback.js` | Reversible scripted touch choreography over locked prototype embeds. |
 | `FLOW-PLAYBACK-PLAYBOOK.md` | Reusable execution recipes, per-flow implementation briefs, validation and static restoration. |
@@ -115,11 +115,11 @@ CaseStudy.setMedia("phone-overview", {
 
 Supported types are `image`, `video`, `iframe`, `html`, and `placeholder`. Keep the placeholder when final media has not been supplied.
 
-Every phone is created through `createPhone()`, which keeps the transparent casing above the clipped media slot. By default, phone screens and all other page content render immediately in their final positions.
+Every phone is created through `createPhone()`, which keeps the transparent casing above the clipped media slot. Phone groups participate in the default scroll entrances; `?reveal=0` renders all content immediately in its final position.
 
 ## Motion behavior
 
-By default, sections appear in their final state without general scroll entrances or paragraph line splitting. Add `?reveal=1` to enable the separate optional module; use `?reveal=0` or omit it to disable. Combine options as `?nav=3&reveal=1`. Headings, editorial cards and paragraph lines slide into position over 560ms, fading in only during the first 140ms, with no blur and short local staggers capped at 220ms. Blocks move 40px and words move 1em; paragraph lines prepare just before viewport entry and slide once 80px inside the viewport. Line groups adapt to font loading and resizing. The module excludes product components and existing animated compositions. Section navigation reveals its destination immediately, and reduced motion keeps original content visible.
+Scroll entrances and paragraph line reveals are enabled by default through the separate page-owned module. Use `?reveal=0` to disable them; `?reveal=1` remains supported. The reading dial works with `?nav=3` alone. Headings, editorial cards and paragraph lines slide into position over 560ms, fading in only during the first 140ms, with no blur and short local staggers capped at 220ms. Blocks move 40px and words move 1em; paragraph lines prepare just before viewport entry and slide once 80px inside the viewport. Line groups adapt to font loading and resizing. The module excludes product components and existing animated compositions. Section navigation reveals its destination immediately, and reduced motion keeps original content visible.
 
 Flows, persona groups, screen sets, card grids, research boards and artifact galleries enter as complete units without child staggering or text splitting. Their existing controls and playback remain intact.
 
@@ -165,7 +165,7 @@ When adding a section:
 2. Render it in `renderCaseStudy()` using semantic HTML.
 3. Add `.case-section` to a standard section.
 4. Use existing components and spacing tokens.
-5. Keep content visible by default. Configure optional entrances in `case-reveal.js`; do not add reveal classes or word splitting to the content renderer or product components.
+5. Keep content readable without JavaScript. Configure default entrances in `case-reveal.js`; do not add reveal classes or word splitting to the content renderer or product components.
 6. Add media through `createPhone()` and the media-slot API rather than hardcoding screen content.
 7. Verify desktop and mobile behavior, reduced motion, and JavaScript syntax.
 

@@ -29,7 +29,7 @@
   const headings = '.section-heading, .section-kicker, .subsection-heading, .design-question-title, .design-tradeoffs__direction-heading';
   const seen = new WeakSet();
   const seenWords = new WeakSet();
-  let requested = new URLSearchParams(location.search).get('reveal') === '1';
+  let requested = new URLSearchParams(location.search).get('reveal') !== '0';
   let active = false, printing = false, observer = null, preparationObserver = null, resizeFrame = null, generation = 0;
   const records = new Map(), paragraphs = new Set(), timers = new Set(), decorated = new Set(), waiting = new Set();
 
