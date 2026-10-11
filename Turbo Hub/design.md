@@ -2,7 +2,7 @@
 
 ## Floating reading navigation
 
-Two variants are preserved through `?nav=1|2`. Version 1 is the default.
+Three variants are preserved through `?nav=1|2|3`. Version 1 is the default.
 
 Visual thesis: a quiet white reading tray, soft blue feedback and a separate
 small control, with enough air to keep the navigation secondary to the story.
@@ -49,8 +49,44 @@ dot rail, and closes on selection, Escape, outside click or focus leaving. Its
 220ms slide is disabled under reduced motion. Mobile places it 96px above the
 bottom safe area. Product components are unchanged.
 
-Both versions update the fragment and focus the destination heading without
-an extra scroll. Neither locks scrolling or traps focus.
+Version 3 is a right-side reading dial made of bare horizontal ticks, with no
+outer pill, background, border or shadow. Fifteen section stops cover the hero
+and narrative through Learning. The first tick says “Back to top” on hover/focus
+and returns to the hero, separately from Overview. A transparent 64px hit region
+provides room for the ticks to extend left; the visible window contains roughly
+four rows, 80px tall with 20px fine-pointer spacing (`--space-5`) or 176px tall
+with 44px coarse-pointer spacing. The outer 18% fades at either vertical end.
+
+Ticks are equal neutral 18 × 2px marks at rest, at 35% opacity. There is no
+blue hover or current-section marker. The hovered/focused stop grows to 36 × 3.5px at full
+opacity. Nearby ticks expand less, using a 28px radial Gaussian influence capped
+at 78% of the selected stop. Growth is anchored on the right and eases over
+160ms. The tooltip sits 8px left of the fully extended tick, outside the masked
+window, and glides vertically with a 70ms time constant. A 3px selection tolerance
+prevents boundary flicker.
+
+Hover or keyboard focus expands the window to reveal all fifteen stops above
+and below, capped to the viewport with 40px edge clearance. Expansion preserves
+the screen position of existing ticks, so the hovered stop stays under the
+pointer. Reading position freezes during inspection; only clicking navigates.
+Short viewports support wheel scrolling through the expanded stops, eased over
+70ms. Leaving collapses back to four rows. Expansion uses a 90ms time constant,
+and the end fade reduces from 18% to 2% so first/last stops remain readable.
+
+At rest, fractional progress between adjacent section starts positions the
+reading stop in the central part of the window. Longer sections move the ruler
+more slowly; movement remains continuous at section boundaries. Critically damped motion
+(30 radians/second) preserves velocity when targets change; delayed frame steps
+are capped at 1/30 second. The current reading stop stays visible, bounded by the list’s start/end. One animation frame
+loop handles window movement, label movement and pointer feedback and stops
+when settled. Uniform row geometry avoids per-link layout reads after transform
+writes. Keyboard focus brings clipped destinations into view; Up/Down and
+Home/End move between links. Reduced motion resolves positions immediately and
+removes tick/label transitions. Both earlier variations retain their original
+sections, controls and animations. No product component internals change.
+
+All three versions update the fragment and focus the destination heading without
+an extra scroll. None locks scrolling or traps focus.
 
 ## Directions I explored and set aside
 
@@ -370,7 +406,15 @@ The fixed `.scroll-progress` component occupies the far-left viewport edge. Its 
 
 ## Motion behavior
 
-The page has no scroll-triggered reveal system. Sections, cards, and paragraphs render immediately in their final positions; paragraphs are not split or measured by JavaScript. The scroll-progress indicator updates directly from scroll position without interpolation. The hero alone has the scroll-linked depth effect described above. Remaining motion supports user interactions: the timeline dialog, draggable research images, quote and persona controls, and component hover/focus feedback. The quote and persona autoplay behaviors pause on hover and focus, run only while visible, and stop under `prefers-reduced-motion: reduce`.
+General scroll entrances are off by default. Sections, cards and paragraphs render immediately in their final positions, with no paragraph measurement or splitting. `?reveal=1` opts into the separate page-owned `case-reveal.js` / `case-reveal.css` modules; `?reveal=0` or no parameter keeps them inactive. `CaseStudyReveal.setEnabled(true/false)` switches the option live, restoring original text nodes and removing reveal attributes, styles, observers and timers when disabled.
+
+Optional entrances use a 560ms ease-out for independent translate, with a brief 140ms opacity fade at the start and no blur. The remaining 420ms of the slide stays fully visible. Editorial blocks rise by `--space-10` (40px); words rise 1em. A separate preparation observer splits paragraphs into temporary word spans 80px before viewport entry, preserving whitespace and inline markup, then groups by rendered line position so lines are ready before the slide is visible. The observer triggers at 1% intersection with its bottom edge inset 80px inside the viewport, so the slide plays within view instead of below the screen edge. Each batch staggers vertical bands by 55ms, capped at 220ms; it never queues across the whole page. Completed text unwraps to its original nodes. Fonts and resize events regroup unfinished lines without replaying read content. Section navigation and focus show destination content immediately.
+
+Page-owned flow scenes, persona groups, screen sets, card grids, research boards, artifact galleries, relationship diagrams and exploration directions enter once as complete units with no stagger delay or nested reveals. Registered controls and their internals retain their existing owners; flow playback, persona switching and draggable media behavior remain intact. Hero, Impact assembly artwork, quote-card animation and the closing illustration keep their existing motion. Reduced motion, printing, unavailable observer support and preparation failures leave readable original content. Source/syntax and Node behavior checks pass; browser review remains with the user. See `app-design-system/decisions/case-reveal.md` for the audit and checks.
+
+Headings start immediately on viewport entry. Each body paragraph follows its preceding eligible section heading, with at least 55ms of local delay. Body lines that intersect first wait and are observed again when that heading starts; unsplit paragraphs remain pending to prevent premature body-copy flashes. Previously read headings and explicit section navigation bypass this waiting.
+
+The scroll-progress indicator updates directly from scroll position without interpolation. The hero retains the scroll-linked depth effect described above, and Impact retains its own assembly animation. Remaining motion supports the timeline dialog, draggable research images, quote/persona controls and component feedback. Quote and persona autoplay pauses on hover and focus, runs only while visible, and stops under `prefers-reduced-motion: reduce`.
 
 ## Rule ownership and verification
 
@@ -420,7 +464,7 @@ The older-adult persona is labeled “Elderly member” in the map, profile, and
 
 Technology narrative and research bridge/conclusion copy use 100% of the shared narrative column, without the former 72ch container cap. Paragraphs wrap naturally at the column’s right edge.
 
-The persona family diagram, connectors, and original accent colors are restored; the selector-rail experiment is removed. Interview quotes retain their individual pastel backgrounds and accent borders, and use exactly four captions: user1, user2, user3, user4, without demographic labels or uppercase transformation.
+The persona family diagram, connectors, and original accent colors are restored; the selector-rail experiment is removed. Interview quotes retain their individual pastel backgrounds and accent borders, and use four arbitrary first-name captions: Priya, Ananya, Aditya, Meera, without demographic labels or uppercase transformation.
 
 The persona explorer uses the main narrative column width (58rem maximum) with its outer edges aligned to the body copy, without wide-container breakout margins.
 

@@ -14,13 +14,31 @@
       envelope * ((coefficient * wave - decay * offset) * cosine + (-offset * wave - decay * coefficient) * sine),
     ];
   }
-  const sections = [
+  const requestedVersion = new URLSearchParams(location.search).get('nav');
+  const version = ['2', '3'].includes(requestedVersion) ? requestedVersion : '1';
+  const sections = (version === '3' ? [
+    ['top', 'Back to top'],
+    ['overview', 'Overview'],
+    ['product', 'Product'],
+    ['opportunity', 'Opportunity'],
+    ['timeline', 'Timeline'],
+    ['technology', 'Success measures'],
+    ['research', 'Research'],
+    ['design-question', 'Design question'],
+    ['competitive-research', 'Learnings'],
+    ['relationship', 'Roles'],
+    ['artifacts', 'Exploration'],
+    ['flows', 'Flows'],
+    ['design-tradeoffs', 'Directions set aside'],
+    ['impact-future', 'Impact & future'],
+    ['learning', 'Learning'],
+  ] : [
     ['overview', 'Overview'],
     ['metrics', 'Metrics'],
     ['research', 'Research'],
     ['flows', 'Flow'],
     ['impact-future', 'Impact'],
-  ].filter(([id]) => document.getElementById(id));
+  ]).filter(([id]) => document.getElementById(id));
   if (!sections.length) return;
   const make = (tag, className, text) => {
     const element = document.createElement(tag);
@@ -30,7 +48,6 @@
   };
   const host = make('nav', 'case-navigation');
   host.setAttribute('aria-label', 'Jump to a case study section');
-  const version = new URLSearchParams(location.search).get('nav') === '2' ? '2' : '1';
   host.classList.add('case-navigation--v' + version);
   document.body.dataset.caseNavigation = version;
   const list = make('ul', 'case-navigation__list');
@@ -42,7 +59,7 @@
     list.append(item);
     return link;
   });
-  let toggle, panel;
+  let toggle, panel, updateDialWindow;
   function setOpen(open, restoreFocus = false) {
     if (!panel) return;
     const focusWasInside = panel.contains(document.activeElement);
@@ -51,7 +68,149 @@
     toggle.setAttribute('aria-label', open ? 'Close section navigation' : 'Open section navigation');
     if (restoreFocus || (!open && focusWasInside)) toggle.focus({preventScroll: true});
   }
-  if (version === '2') {
+  if (version === '3') {
+    const viewport = make('div', 'case-navigation__dial-window');
+    const label = make('span', 'case-navigation__dial-label');
+    label.setAttribute('aria-hidden', 'true');
+    const marks = links.map((link, index) => {
+      const section = document.getElementById(sections[index][0]);
+      const heading = section.querySelector('h2, h3, h4');
+      const title = sections[index][0] === 'top' ? 'Back to top'
+        : heading?.textContent.trim() || section.getAttribute('aria-label') || sections[index][1];
+      link.setAttribute('aria-label', title);
+      const mark = make('span', 'case-navigation__tick');
+      mark.setAttribute('aria-hidden', 'true');
+      link.replaceChildren(mark);
+      return mark;
+    });
+    viewport.append(list);
+    host.append(viewport, label);
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let pointer = null, focused = -1, frame = null;
+    let offset = 0, velocity = 0, targetOffset = 0, step = 0, previousTime = performance.now();
+    let preview = -1, labelY = null;
+    let readingProgress = 0, reveal = 0, revealTarget = 0, expandedOffset = 0, expandedTargetOffset = 0;
+    let closedHeight = 80, openHeight = 300;
+    function setWindowTarget() {
+      step = links[0].getBoundingClientRect().height;
+      closedHeight = Math.min(step * 4, Math.max(step, innerHeight - 80));
+      openHeight = Math.min(links.length * step, Math.max(step, innerHeight - 80));
+      const opening = pointer !== null || focused >= 0;
+      if (opening && !revealTarget) {
+        // Freeze the reading position while the remaining stops are uncovered.
+        targetOffset = offset; velocity = 0;
+        expandedOffset = expandedTargetOffset = Math.max(0, Math.min(links.length * step - openHeight, offset - (openHeight - closedHeight) / 2));
+      }
+      revealTarget = opening ? 1 : 0;
+      if (!opening) targetOffset = Math.max(0, Math.min(links.length * step - closedHeight,
+        (readingProgress + 0.5) * step - closedHeight * 0.625));
+      else if (focused >= 0) expandedTargetOffset = Math.max(0, Math.min(links.length * step - openHeight,
+        (focused + 0.5) * step - openHeight / 2));
+    }
+    function paintDial(time) {
+      frame = null;
+      // Resume gently after delayed frames instead of jumping across the window.
+      const seconds = Math.max(0, Math.min(1 / 30, (time - previousTime) / 1000));
+      previousTime = time;
+      reveal = reduced.matches ? revealTarget : reveal + (revealTarget - reveal) * (1 - Math.exp(-seconds / 0.09));
+      if (Math.abs(revealTarget - reveal) < 0.0001) reveal = revealTarget;
+      expandedOffset = reduced.matches ? expandedTargetOffset
+        : expandedOffset + (expandedTargetOffset - expandedOffset) * (1 - Math.exp(-seconds / 0.07));
+      if (Math.abs(expandedTargetOffset - expandedOffset) < 0.005) expandedOffset = expandedTargetOffset;
+      if (reduced.matches) { offset = targetOffset; velocity = 0; }
+      else {
+        // Critically damped motion preserves velocity when scroll/focus targets change.
+        const frequency = 30, displacement = offset - targetOffset;
+        const coefficient = velocity + frequency * displacement;
+        const decay = Math.exp(-frequency * seconds);
+        offset = targetOffset + (displacement + coefficient * seconds) * decay;
+        velocity = (velocity - frequency * coefficient * seconds) * decay;
+        if (Math.abs(targetOffset - offset) < 0.005 && Math.abs(velocity) < 0.05) {
+          offset = targetOffset; velocity = 0;
+        }
+      }
+      const height = closedHeight + (openHeight - closedHeight) * reveal;
+      const displayOffset = offset + (expandedOffset - offset) * reveal;
+      const wantedTop = innerHeight / 2 - closedHeight / 2 + displayOffset - offset;
+      const top = Math.max(40, Math.min(innerHeight - height - 40, wantedTop));
+      // Grow above/below the current ticks, preserving their screen positions.
+      viewport.style.height = height.toFixed(3) + 'px';
+      viewport.style.setProperty('--dial-fade', (18 - 16 * reveal).toFixed(3) + '%');
+      host.style.setProperty('--dial-shift', (top + height / 2 - innerHeight / 2).toFixed(3) + 'px');
+      const bounds = viewport.getBoundingClientRect();
+      // Uniform row geometry avoids reading every transformed link after each write.
+      const centers = links.map((link, index) => bounds.top + (index + 0.5) * step - displayOffset);
+      const origin = focused >= 0 ? {x: bounds.right - 12, y: centers[focused]} : pointer;
+      let closest = -1, distance = Infinity;
+      centers.forEach((y, index) => {
+        if (y < bounds.top || y > bounds.bottom) return;
+        const dy = origin ? Math.abs(y - origin.y) : Infinity;
+        if (dy < distance) { closest = index; distance = dy; }
+      });
+      if (focused >= 0) closest = focused;
+      else if (origin && preview >= 0 && centers[preview] >= bounds.top && centers[preview] <= bounds.bottom
+        && Math.abs(centers[preview] - origin.y) <= distance + 3) closest = preview;
+      list.style.setProperty('--dial-offset', displayOffset.toFixed(3) + 'px');
+      marks.forEach((mark, index) => {
+        const dx = origin ? origin.x - (bounds.right - 12) : Infinity;
+        const dy = origin ? origin.y - centers[index] : Infinity;
+        const influence = origin && closest >= 0 ? (index === closest ? 1
+          : 0.78 * Math.exp(-(dx * dx + dy * dy) / (2 * 28 * 28))) : 0;
+        mark.style.setProperty('--dial-influence', influence.toFixed(4));
+      });
+      host.classList.toggle('is-previewing', closest >= 0);
+      let labelMoving = false;
+      if (closest >= 0) {
+        if (closest !== preview) label.textContent = links[closest].getAttribute('aria-label');
+        const y = Math.max(bounds.top + step / 2, Math.min(bounds.bottom - step / 2, centers[closest]));
+        if (labelY === null || reduced.matches) labelY = y;
+        else labelY += (y - labelY) * (1 - Math.exp(-seconds / 0.07));
+        if (Math.abs(y - labelY) < 0.005) labelY = y;
+        labelMoving = labelY !== y;
+        label.style.top = (labelY - host.getBoundingClientRect().top).toFixed(3) + 'px';
+      }
+      preview = closest;
+      if (offset !== targetOffset || velocity !== 0 || labelMoving || reveal !== revealTarget
+        || expandedOffset !== expandedTargetOffset) frame = requestAnimationFrame(paintDial);
+    }
+    function scheduleDial() {
+      if (frame === null) { previousTime = performance.now(); frame = requestAnimationFrame(paintDial); }
+    }
+    updateDialWindow = progress => { readingProgress = progress; setWindowTarget(); scheduleDial(); };
+    host.addEventListener('pointerenter', event => {
+      if (event.pointerType === 'touch') return;
+      pointer = {x: event.clientX, y: event.clientY}; setWindowTarget(); scheduleDial();
+    });
+    host.addEventListener('pointermove', event => {
+      if (event.pointerType === 'touch') return;
+      pointer = {x: event.clientX, y: event.clientY};
+      focused = -1;
+      setWindowTarget();
+      scheduleDial();
+    });
+    host.addEventListener('pointerleave', () => { pointer = null; setWindowTarget(); scheduleDial(); });
+    host.addEventListener('wheel', event => {
+      const maxOffset = links.length * step - openHeight;
+      if (!revealTarget || maxOffset <= 0) return;
+      event.preventDefault();
+      const delta = event.deltaY * (event.deltaMode === 1 ? step : event.deltaMode === 2 ? openHeight : 1);
+      expandedTargetOffset = Math.max(0, Math.min(maxOffset, expandedTargetOffset + delta)); scheduleDial();
+    }, {passive: false});
+    host.addEventListener('focusin', event => { focused = links.indexOf(event.target); setWindowTarget(); scheduleDial(); });
+    host.addEventListener('focusout', event => {
+      if (!host.contains(event.relatedTarget)) { focused = -1; setWindowTarget(); scheduleDial(); }
+    });
+    host.addEventListener('keydown', event => {
+      const index = links.indexOf(document.activeElement);
+      if (index < 0) return;
+      const next = event.key === 'ArrowDown' ? (index + 1) % links.length
+        : event.key === 'ArrowUp' ? (index - 1 + links.length) % links.length
+        : event.key === 'Home' ? 0 : event.key === 'End' ? links.length - 1 : -1;
+      if (next >= 0) { event.preventDefault(); links[next].focus({preventScroll: true}); }
+    });
+    reduced.addEventListener('change', scheduleDial);
+    addEventListener('pagehide', () => { if (frame !== null) cancelAnimationFrame(frame); frame = null; });
+  } else if (version === '2') {
     toggle = make('button', 'case-navigation__tab');
     toggle.type = 'button';
     toggle.setAttribute('aria-label', 'Open section navigation');
@@ -165,7 +324,7 @@
     if (!target) return;
     event.preventDefault();
     setOpen(false);
-    const heading = target.querySelector('h2, h3, h4') || target;
+    const heading = target.querySelector('h1, h2, h3, h4') || target;
     if (!heading.hasAttribute('tabindex')) heading.tabIndex = -1;
     heading.focus({preventScroll: true});
     if (location.hash !== link.hash) history.pushState(null, '', link.hash);
@@ -184,6 +343,14 @@
       if (index === current) link.setAttribute('aria-current', 'location');
       else link.removeAttribute('aria-current');
     });
+    if (updateDialWindow) {
+      const index = Math.max(0, current);
+      const top = targets[index].getBoundingClientRect().top;
+      const next = targets[index + 1]?.getBoundingClientRect().top
+        ?? document.documentElement.scrollHeight - scrollY;
+      const fraction = Math.max(0, Math.min(1, (threshold - top) / Math.max(1, next - top)));
+      updateDialWindow(index + fraction);
+    }
   }
   function scheduleUpdate() {
     if (pending) return;

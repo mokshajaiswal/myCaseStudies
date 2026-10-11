@@ -3236,7 +3236,7 @@
           }
         ],
         "ownership": "Stack owns card positions, cycling, motion, internal geometry and the card action; parent owns width and surrounding placement.",
-        "behavior": "Persistent folded note shapes. Hover reinforces the front outline without changing card geometry. Activation animates all cards on one 440ms timeline; the front note sweeps sideways and settles behind the deck. Resting positions commit before animation holds release. Repeated clicks during motion are ignored. Reduced motion switches instantly. Manual activation moves focus and announces position; background cards are disabled and aria-hidden. No visible instructions or counter.",
+        "behavior": "Persistent folded note shapes. The SVG perimeter follows the CSS circular corner radius with a 1px inset to contain both default and hover strokes. Hover reinforces the front outline without changing card geometry. Activation animates all cards on one 440ms timeline; the front note sweeps sideways and settles behind the deck. Resting positions commit before animation holds release. Repeated clicks during motion are ignored. Reduced motion switches instantly. Manual activation moves focus and announces position; background cards are disabled and aria-hidden. No visible instructions or counter.",
         "interactionOwnership": "Owns the single card-cycling action. Footer cue and counter are noninteractive parts of that button."
       }
     },

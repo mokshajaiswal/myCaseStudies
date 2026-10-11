@@ -264,3 +264,85 @@ body[data-case-navigation='1'] #case-study { padding-bottom: 0; }
   .case-navigation--v1 .case-navigation__section::before,
   .case-navigation__minimize { transition: none; }
 }
+
+/* V3: a reading dial with a shared right anchor and radial pointer fall-off. */
+.case-navigation--v3 {
+  --dial-step: var(--space-5);
+  --dial-window-height: min(calc(var(--dial-step) * 4), calc(100dvh - 80px));
+  top: calc(50% + var(--dial-shift, 0px));
+  right: calc(var(--space-4) + env(safe-area-inset-right));
+  bottom: auto;
+  left: auto;
+  transform: translateY(-50%);
+  width: var(--space-16);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.case-navigation__dial-window {
+  height: var(--dial-window-height);
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent, black var(--dial-fade, 18%), black calc(100% - var(--dial-fade, 18%)), transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black var(--dial-fade, 18%), black calc(100% - var(--dial-fade, 18%)), transparent);
+}
+.case-navigation--v3 .case-navigation__list {
+  display: block;
+  transform: translate3d(0, calc(-1 * var(--dial-offset, 0px)), 0);
+  will-change: transform;
+}
+.case-navigation--v3 .case-navigation__section {
+  height: var(--dial-step);
+  min-height: var(--dial-step);
+  padding: 0;
+  border-radius: var(--space-1);
+  background: transparent;
+}
+.case-navigation--v3 .case-navigation__section::after { content: none; }
+.case-navigation__tick {
+  --dial-influence: 0;
+  position: absolute;
+  top: 50%;
+  right: var(--space-3);
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ink-soft);
+  opacity: calc(0.35 + 0.65 * var(--dial-influence));
+  transform-origin: right center;
+  transform: translateY(-50%) scale(calc(1 + var(--dial-influence)), calc(1 + 0.75 * var(--dial-influence)));
+  pointer-events: none;
+  transition: transform 160ms cubic-bezier(0.22, 1, 0.36, 1), opacity 100ms ease-out, background-color 100ms ease-out;
+}
+.case-navigation__dial-label {
+  position: absolute;
+  top: 50%;
+  right: calc(var(--space-3) + 36px + var(--space-2));
+  width: max-content;
+  max-width: min(280px, calc(100vw - 88px));
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-small);
+  background: var(--surface-raised);
+  color: var(--heading-ink);
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: right;
+  line-height: 1.4;
+  transform: translateY(-50%) translateX(4px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgb(43 73 133 / 0.1);
+  transition: opacity 100ms ease-out, transform 100ms ease-out, visibility 100ms;
+}
+.case-navigation--v3.is-previewing .case-navigation__dial-label {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%);
+}
+@media (hover: hover) { .case-navigation--v3 .case-navigation__section:hover { background: transparent; } }
+@media (pointer: coarse) { .case-navigation--v3 { --dial-step: 44px; } }
+@media (max-width: 360px) { .case-navigation--v3 { right: calc(var(--space-2) + env(safe-area-inset-right)); } }
+@media (prefers-reduced-motion: reduce) { .case-navigation--v3, .case-navigation__tick, .case-navigation__dial-label { transition: none; } }

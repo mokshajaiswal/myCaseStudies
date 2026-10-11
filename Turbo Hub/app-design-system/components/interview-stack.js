@@ -45,11 +45,17 @@
       card.updateOutline = () => {
         const w = card.offsetWidth, h = card.offsetHeight;
         if (!w || !h) return;
-        const r = parseFloat(getComputedStyle(card).borderTopLeftRadius) || 20;
-        const x = w - .5, y = h - .5;
-        const top = `H${x-34}Q${x-32} .5 ${x-30.6} 1.9L${x-1.4} 31.1Q${x} 32.5 ${x} 34.5`;
+        const style = getComputedStyle(card);
+        const r = Math.min(parseFloat(style.borderTopLeftRadius) || 20, w / 2, h / 2);
+        const foldSize = parseFloat(style.getPropertyValue('--interview-fold')) || 32;
+        // Circular arcs match the CSS clipping radius. Quadratic corners sit
+        // outside that circle and get cut away by overflow:hidden.
+        // Leave room for the 1.5px hover stroke, including scaled rear cards.
+        const inset = 1, arc = Math.max(0, r - inset);
+        const x = w - inset, y = h - inset;
+        const top = `H${x-foldSize-2}Q${x-foldSize} ${inset} ${x-foldSize+1.4} ${inset+1.4}L${x-1.4} ${foldSize+inset-1.4}Q${x} ${foldSize+inset} ${x} ${foldSize+inset+2}`;
         outline.setAttribute('viewBox', `0 0 ${w} ${h}`);
-        border.setAttribute('d', `M${r} .5${top}V${y-r}Q${x} ${y} ${x-r} ${y}H${r}Q.5 ${y} .5 ${y-r}V${r}Q.5 .5 ${r} .5Z`);
+        border.setAttribute('d', `M${r} ${inset}${top}V${h-r}A${arc} ${arc} 0 0 1 ${w-r} ${y}H${r}A${arc} ${arc} 0 0 1 ${inset} ${h-r}V${r}A${arc} ${arc} 0 0 1 ${r} ${inset}Z`);
       };
       if (typeof ResizeObserver === 'function') new ResizeObserver(card.updateOutline).observe(card);
       else requestAnimationFrame(card.updateOutline);

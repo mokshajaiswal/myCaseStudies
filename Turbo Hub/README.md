@@ -64,9 +64,10 @@ With `?dev=true`, each autoplay family-flow preview includes **View all screens*
 | File or folder | Purpose |
 | --- | --- |
 | `index.html` | Static document shell, accessibility landmarks, templates, preload hints, and script/style entry points. |
-| `styles.css` | Design tokens, typography, responsive layout, components, progress indicator, and reveal states. |
+| `styles.css` | Design tokens, typography, responsive layout, components, and progress indicator. |
 | `tokens.html` / `tokens.js` | Standalone visual token reference and live computed measurements; no build step. |
-| `script.js` | Case-study data, DOM rendering, media-slot API, reveal scheduler, and scroll progress behavior. |
+| `script.js` | Case-study data, DOM rendering, media-slot API, hero depth and scroll progress behavior. |
+| `case-reveal.js` / `case-reveal.css` | Optional, reversible scroll entrances and paragraph line reveals; enabled with `?reveal=1`. |
 | `flow-story-data.js` / `flow-story.js` / `flow-story.css` | Fictional family narrative, declared screen sequences and editorial preview presentation. |
 | `flow-story-playback.js` | Reversible scripted touch choreography over locked prototype embeds. |
 | `FLOW-PLAYBACK-PLAYBOOK.md` | Reusable execution recipes, per-flow implementation briefs, validation and static restoration. |
@@ -114,11 +115,19 @@ CaseStudy.setMedia("phone-overview", {
 
 Supported types are `image`, `video`, `iframe`, `html`, and `placeholder`. Keep the placeholder when final media has not been supplied.
 
-Every phone is created through `createPhone()`, which keeps the transparent casing above the clipped media slot. Phone screens and all other page content render immediately in their final positions.
+Every phone is created through `createPhone()`, which keeps the transparent casing above the clipped media slot. By default, phone screens and all other page content render immediately in their final positions.
 
 ## Motion behavior
 
-Sections appear in their final state without scroll-triggered reveal effects or paragraph line splitting. The scroll progress indicator updates directly from the current scroll position. The hero alone has a scroll-linked depth effect: it tilts back and shrinks during normal scrolling, with a small background parallax and no extra scroll space. Scrolling upward reverses it; reduced motion disables the effect. Other motion belongs to interactions:
+By default, sections appear in their final state without general scroll entrances or paragraph line splitting. Add `?reveal=1` to enable the separate optional module; use `?reveal=0` or omit it to disable. Combine options as `?nav=3&reveal=1`. Headings, editorial cards and paragraph lines slide into position over 560ms, fading in only during the first 140ms, with no blur and short local staggers capped at 220ms. Blocks move 40px and words move 1em; paragraph lines prepare just before viewport entry and slide once 80px inside the viewport. Line groups adapt to font loading and resizing. The module excludes product components and existing animated compositions. Section navigation reveals its destination immediately, and reduced motion keeps original content visible.
+
+Flows, persona groups, screen sets, card grids, research boards and artifact galleries enter as complete units without child staggering or text splitting. Their existing controls and playback remain intact.
+
+Main headings enter first; the body text beneath waits for its heading and follows with a short local delay. Unsplit paragraphs remain pending until their line reveals are ready.
+
+For a live switch, call `CaseStudyReveal.setEnabled(true)` or `CaseStudyReveal.setEnabled(false)` in the console. Disabling restores the original text nodes and removes all reveal effects. `CaseStudyReveal.refresh()` rescans after an intentional content rerender. See `app-design-system/decisions/case-reveal.md` for scope and validation.
+
+The scroll progress indicator updates directly from the current scroll position. The hero retains its scroll-linked depth effect: it tilts back and shrinks during normal scrolling, with a small background parallax and no extra scroll space. Scrolling upward reverses it; reduced motion disables the effect. The Impact artwork retains its separate scroll-driven assembly. Other motion belongs to interactions:
 
 - The timeline dialog opens and closes accessibly.
 - Competitive-research images can be dragged or moved by keyboard.
@@ -133,7 +142,7 @@ The left-edge scroll indicator has no empty rail. Its filled bar and percentage 
 ## Extending the case study
 
 Reading navigation has two preserved versions. The default (`?nav=1`) starts
-expanded, with Overview, Research, Learnings, Roles and Flows in a white tray.
+expanded, with Overview, Metrics, Research, Flow and Impact in a white tray.
 The 56px surface has 22px corners, even label spacing and soft blue hover
 highlights with 10px corners. Only the current section has a blue underline.
 A separate 44px control sits 10px to the right. Fine 20px Regular Phosphor
@@ -156,7 +165,7 @@ When adding a section:
 2. Render it in `renderCaseStudy()` using semantic HTML.
 3. Add `.case-section` to a standard section.
 4. Use existing components and spacing tokens.
-5. Keep content visible in its final position; do not add scroll-triggered reveal classes or line splitting.
+5. Keep content visible by default. Configure optional entrances in `case-reveal.js`; do not add reveal classes or word splitting to the content renderer or product components.
 6. Add media through `createPhone()` and the media-slot API rather than hardcoding screen content.
 7. Verify desktop and mobile behavior, reduced motion, and JavaScript syntax.
 
