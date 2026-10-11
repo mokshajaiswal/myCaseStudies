@@ -156,6 +156,7 @@
         // Stagger only this batch, capped at 220ms; fast scrolling never builds a backlog.
         if (entry.boundingClientRect.top > band + 12) {
           if (band !== -Infinity) delay = Math.min(220, delay + 55);
+          else if (record.lead) delay = 55;
           band = entry.boundingClientRect.top;
         }
         reveal(record, record.unit || record.heading ? 0 : record.lead ? Math.max(55, delay) : delay);
@@ -171,17 +172,20 @@
   }
   function revealSection(target) {
     if (!active || !target) return;
-    const section = target.closest('.case-section') || target;
+    // Keep a focused destination readable without bypassing all following body copy.
+    const destination = target.closest('.case-section') === target
+      ? target.querySelector(headings) || target : target;
+    const scope = destination.closest(units) || destination;
     for (const record of Array.from(records.values())) {
-      if (section.contains(record.target)) reveal(record, 0, true);
+      if (scope.contains(record.target) || record.target.contains(destination)) reveal(record, 0, true);
     }
     for (const paragraph of Array.from(paragraphs)) {
-      if (section.contains(paragraph.element)) {
+      if (scope.contains(paragraph.element) || paragraph.element.contains(destination)) {
         seen.add(paragraph.element); paragraph.words.forEach(clearState); restoreParagraph(paragraph);
       }
     }
-    // Clear transitions already running inside the requested section too.
-    section.querySelectorAll('[data-case-reveal-state]').forEach(clearState);
+    scope.querySelectorAll('[data-case-reveal-state]').forEach(clearState);
+    clearState(scope);
   }
   function hashTarget() {
     try { return document.getElementById(decodeURIComponent(location.hash.slice(1))); }

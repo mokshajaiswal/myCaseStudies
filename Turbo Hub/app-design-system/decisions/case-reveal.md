@@ -46,7 +46,10 @@ in their case-study section, and cannot start before it. Body lines in view are
 rechecked after the heading starts and use at least a 55ms local delay. Unsplit
 paragraphs stay pending until their words are ready, avoiding an early flash
 of body copy. Headings already above the viewport are considered read, so later
-body text does not wait for an offscreen trigger. Navigation bypasses this gate.
+body text does not wait for an offscreen trigger. Navigation shows its heading
+immediately while following text keeps its normal line reveals. The first
+body row starts at 55ms; subsequent rows in the same batch advance by 55ms,
+removing the former duplicate 55ms delay on the first two rows.
 
 Visual-group follow-up: each page-owned flow scene (copy, screens and controls),
 flow introduction/chapter header, persona explorer, research board, artifact
@@ -75,7 +78,9 @@ Paragraphs containing links or inputs reveal as intact blocks rather than
 altering interactive text nodes. Text styling inherits the existing typography.
 
 Fragment navigation, heading focus and in-page navigation clicks immediately
-show the destination section, including any partially revealed lines. Reduced
+show only the destination heading or focused group, preserving following body
+line reveals. Focus within a linked paragraph shows that paragraph without
+skipping adjacent copy. Reduced
 motion skips animation and splitting; a live preference change restores the
 original content. Printing restores the DOM and uses visible CSS fallback.
 Page hide cancels work, and page show resumes the requested mode. Missing
@@ -85,13 +90,15 @@ targets, not just pending records.
 
 ## Verification
 
-Eleven Node DOM-harness checks cover off-mode no-ops, runtime cleanup, measured
+Thirteen Node DOM-harness checks cover off-mode no-ops, runtime cleanup, measured
 line grouping and original-node restoration, component exclusion and intact
 links, capped staggering, font/resize regrouping, explicit section navigation,
 reduced motion/printing/missing observers, failure cleanup and whole-unit reveals
 without nested decoration, splitting, delay or replay, and heading-before-body
 ordering across independent observer batches, and the flower/screen shared
-entrance. The twelve
+entrance. Additional checks use selector matching with the real body-copy
+wrapper, exercise both actual Zeta technology paragraphs and verify focus does
+not bypass adjacent copy. The twelve
 existing navigation checks also pass. JavaScript syntax and diff checks pass.
 No browser testing or visual review was performed, per the repository policy.
 The user should review actual line wrapping, slide distance, stagger and scroll timing

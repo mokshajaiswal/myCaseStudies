@@ -123,7 +123,7 @@ By default, sections appear in their final state without general scroll entrance
 
 Flows, persona groups, screen sets, card grids, research boards and artifact galleries enter as complete units without child staggering or text splitting. Their existing controls and playback remain intact.
 
-Main headings enter first; the body text beneath waits for its heading and follows with a short local delay. Unsplit paragraphs remain pending until their line reveals are ready.
+Main headings enter first; the body text beneath waits for its heading and follows with a short local delay. Unsplit paragraphs remain pending until their line reveals are ready. Navigation reveals only the destination heading or focused group; the following body copy retains its line-by-line animation.
 
 For a live switch, call `CaseStudyReveal.setEnabled(true)` or `CaseStudyReveal.setEnabled(false)` in the console. Disabling restores the original text nodes and removes all reveal effects. `CaseStudyReveal.refresh()` rescans after an intentional content rerender. See `app-design-system/decisions/case-reveal.md` for scope and validation.
 

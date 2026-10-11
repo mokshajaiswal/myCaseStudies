@@ -10,6 +10,10 @@ function harness({search = '?reveal=1', reducedMotion = false, observerAvailable
   const descendants = node => node.childNodes.flatMap(child => [child, ...descendants(child)]);
   function matches(node, selector) {
     if (!node.tagName) return false;
+    if (selector.includes('>')) {
+      const [parent, child] = selector.split('>').map(part => part.trim());
+      return matches(node, child) && Boolean(node.parentElement && matches(node.parentElement, parent));
+    }
     if (selector.startsWith('.')) return node.className.split(' ').includes(selector.slice(1));
     if (selector.startsWith('[class')) return /(^|\s)th-/.test(node.className);
     if (selector.startsWith('[')) return node.hasAttribute(selector.slice(1, -1));
@@ -79,14 +83,15 @@ function harness({search = '?reveal=1', reducedMotion = false, observerAvailable
   const heading = new Element('h2', 'section-heading'); heading.textContent = 'Research';
   const paragraph = new Element('p'), original = new Text('A family '), emphasis = new Element('em');
   emphasis.append(new Text('shares money')); paragraph.append(original, emphasis, new Text(' every day with care and independence.'));
-  const card = new Element('article', 'info-card'), childCopy = new Element('p'); childCopy.textContent = 'A card child'; card.append(childCopy);
-  const stack = new Element('div', 'user-voice-stack'), componentCopy = new Element('p'); componentCopy.textContent = 'Registered content'; stack.append(componentCopy);
+  const card = new Element('article', 'info-card'), childCopy = new Element('p', 'research-interviews-intro'); childCopy.textContent = 'A card child'; card.append(childCopy);
+  const stack = new Element('div', 'user-voice-stack'), componentCopy = new Element('p', 'research-interviews-intro'); componentCopy.textContent = 'Registered content'; stack.append(componentCopy);
   const linked = new Element('p'), link = new Element('a'); link.href = 'https://example.com/'; link.textContent = 'Learn more'; linked.append(link);
-  section.append(heading, paragraph, card, stack, linked);
+  const copy = new Element('div', 'body-copy technology-copy'); copy.append(paragraph, linked);
+  section.append(heading, copy, card, stack);
   const candidates = [heading, paragraph, card, childCopy, componentCopy, linked];
   const document = {
     documentElement: html, body, activeElement: body,
-    querySelectorAll: () => candidates,
+    querySelectorAll: selector => candidates.filter(node => selector.split(',').some(part => matches(node, part.trim().replace(/^#dynamic-content\s+/, '')))),
     getElementById: id => id === section.id ? section : null,
     createElement: tag => new Element(tag), createTextNode: text => new Text(text),
     createDocumentFragment: () => new Node(11),
@@ -262,14 +267,61 @@ test('body lines wait for their preceding heading across independent observer ba
   assert.equal(word.style['--case-reveal-delay'], '55ms');
 });
 
-test('initial fragments and explicit section navigation show content immediately', () => {
+test('initial fragments and section navigation show the heading while preserving body line reveals', () => {
   const initial = harness({hash: '#research'});
   assert.equal(initial.heading.hasAttribute('data-case-reveal-state'), false);
+  assert.equal(initial.paragraph.getAttribute('data-case-reveal-state'), 'pending');
   const h = harness(); h.observer().enter([h.paragraph]);
   const anchor = new h.Element('a'); anchor.href = 'http://localhost/Turbo/index.html?reveal=1#research';
   h.events.click({target: anchor});
-  assert.equal(h.paragraph.childNodes[0], h.original);
+  const words = h.paragraph.querySelectorAll('[data-case-reveal-word]');
+  assert.ok(words.length > 6);
+  assert.equal(words[0].getAttribute('data-case-reveal-state'), 'pending');
   assert.equal(h.heading.hasAttribute('data-case-reveal-state'), false);
+  h.events.focusin({target: h.heading});
+  assert.equal(words[0].getAttribute('data-case-reveal-state'), 'pending');
+  h.observer().enter([words[0], words[3], words[6]]);
+  assert.equal(words[0].style['--case-reveal-delay'], '55ms');
+  assert.equal(words[3].style['--case-reveal-delay'], '110ms');
+  assert.equal(words[6].style['--case-reveal-delay'], '165ms');
+  assert.equal(words[9].getAttribute('data-case-reveal-state'), 'pending');
+});
+
+test('focusing a link reveals its paragraph without skipping adjacent body text', () => {
+  const h = harness();
+  h.events.focusin({target: h.link});
+  assert.equal(h.linked.hasAttribute('data-case-reveal-state'), false);
+  assert.equal(h.paragraph.getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(h.linked.childNodes[0], h.link);
+});
+
+test('both Zeta technology paragraphs are selected and reveal by measured line', () => {
+  const script = fs.readFileSync(require.resolve('../script.js'), 'utf8');
+  const block = script.match(/technology:\s*\{([\s\S]*?)\n\s*\},\n\s*artifacts:/)[1];
+  const data = block.match(/paragraphs:\s*\[([\s\S]*?)\]/)[1].replace(/,\s*$/, '');
+  const text = JSON.parse('[' + data + ']');
+  assert.equal(text.length, 2);
+  const h = harness(); h.paragraph.textContent = text[0];
+  const second = new h.Element('p'); second.textContent = text[1];
+  h.paragraph.parentElement.append(second); h.candidates.push(second);
+  h.paragraph.rect = {top: 1500, bottom: 1900, left: 0};
+  second.rect = {top: 1950, bottom: 2150, left: 0};
+  h.api.refresh();
+  assert.ok(h.observers.at(-2).targets.has(h.paragraph));
+  assert.ok(h.observers.at(-2).targets.has(second));
+  h.observers.at(-2).enter([h.paragraph, second]);
+  const firstWords = h.paragraph.querySelectorAll('[data-case-reveal-word]');
+  const secondWords = second.querySelectorAll('[data-case-reveal-word]');
+  assert.ok(firstWords.length > 30 && secondWords.length > 10);
+  h.observer().enter([h.heading]);
+  h.observer().enter([firstWords[0], firstWords[3]]);
+  assert.equal(firstWords[0].style['--case-reveal-delay'], '55ms');
+  assert.equal(firstWords[3].style['--case-reveal-delay'], '110ms');
+  assert.equal(secondWords[0].getAttribute('data-case-reveal-state'), 'pending');
+  h.observer().enter([secondWords[0]]);
+  assert.equal(secondWords[0].getAttribute('data-case-reveal-state'), 'shown');
+  assert.equal(secondWords[3].getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(h.paragraph.textContent, text[0]); assert.equal(second.textContent, text[1]);
 });
 
 test('reduced motion, printing and missing observers leave readable original content', () => {
