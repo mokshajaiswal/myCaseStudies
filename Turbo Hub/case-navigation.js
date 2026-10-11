@@ -16,10 +16,10 @@
   }
   const sections = [
     ['overview', 'Overview'],
+    ['metrics', 'Metrics'],
     ['research', 'Research'],
-    ['competitive-research', 'Learnings'],
-    ['relationship', 'Roles'],
-    ['flows', 'Flows'],
+    ['flows', 'Flow'],
+    ['impact-future', 'Impact'],
   ].filter(([id]) => document.getElementById(id));
   if (!sections.length) return;
   const make = (tag, className, text) => {

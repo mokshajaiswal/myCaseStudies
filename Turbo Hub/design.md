@@ -722,3 +722,51 @@ Directions narrative now includes colour exploration, the Pixel Tag and separate
 Impact caption pointers: the orange monthly-payment and green activation-uplift captions retain their original rounded, rotated arrow shape, with only the horizontal position corrected. Their horizontal tips are anchored to the measured center of each metric’s text rather than the caption’s outer left corner. Position updates with viewport resize and font readiness; existing note motion and layout remain page-owned. Syntax and diff checks pass; browser/visual review remains with the user.
 
 Caption pointer correction: moving the original shape to the middle of a rounded caption had merged its lower half into the caption background, making it appear square. The orange and green pointers now sit fully above their captions with a 6px gap, retain their original dimensions/radii, and rotate to face the metric. Horizontal positioning aligns the upward tip rather than the shape center. Browser review remains manual.
+
+## Section scroll entrances
+
+Added page-owned section-scroll-motion.js for every top-level narrative section. Reading sections have a gentle 14px / 560ms rise from already-visible 82% opacity; visual/mockup sections use 24px / 680ms, and the design question uses a restrained 10px movement. Entrances play once when the section is a quarter viewport in, with exponential ease-out and no new dependencies or permanent hidden CSS. The hero retains its existing scroll motion. Impact's stage and closing flower footer are excluded from these entrances; their own animation owners remain intact. Section wrappers own the motion, with no registered component internal overrides or duplicate renderers.
+
+Focus/pointer interaction immediately cancels movement to leave targets stationary. Deep links, missing IntersectionObserver/WAAPI, reduced-motion preference, hidden-tab state and page lifecycle retain readable content. No continuous frame loop is introduced. Source checks cover threshold, single play, media timing, exclusions, interruption, reduced motion and fallback; existing 61 tests pass. Browser testing and visual review remain with the user.
+
+Section entrances now trigger 10% into the viewport instead of 25%. Reading and media sections vary between left, right and upward entrances while keeping the restrained distance, easing, single-play and accessibility behavior. Impact lower notes have their own earlier, staggered three-direction arrival. Source checks pass; browser review remains manual.
+
+## Content-level scroll choreography
+
+The user reported that section entrances were not noticeable. The previous observer watched padded case-section roots: its animation could complete while only leading whitespace was visible. section-scroll-motion.js now observes actual headings, copy groups and visual containers at 88% viewport height. Each block owns a short native entrance instead of moving the entire section together. Heading reveal is 28px / 760ms; copy enters from alternating sides over 860ms; media uses 38px vertical and up to 48px lateral movement with a subtle 98%-to-100% settle over 1000ms. Mobile lateral travel is reduced to 22px. Opacity now starts at 15–25%, making arrival perceptible. Independent mockup/artefact figures have a bounded 80ms stagger.
+
+Only page-owned blocks are animated. Registered component roots, Impact's animated stage and the closing flower footer are excluded; those owners keep their existing motion. Parent animation preserves internal component styles and native hover transforms. Content remains visible without scripts/animation support; reduced motion, focus/pointer interruption, single-play and lifecycle cancellation remain supported. Hash navigation cancels active movement without permanently skipping every later block in a long section.
+
+Source checks confirm actual-content observation, independent copy/media timings, figure stagger, interaction cancellation and exclusions. All 61 existing tests pass. Visual review remains with the user.
+
+Section-motion direction correction: the user wanted smooth section-by-section motion rather than every block rising from below. Removed all vertical travel from generic section entrances. Headings, copy and visuals now alternate horizontal direction both across sections and between sibling blocks. Text fades are gentler; heading/copy/media durations are 800/900/1100ms with cubic-bezier(0.22,1,0.36,1), stagger capped at 120ms, and media settling from 99% scale. Actual-content observation, component exclusions, reduced motion and interaction cancellation remain unchanged. Source checks confirm every generic entrance has zero vertical displacement and adjacent copy/heading directions differ; browser review remains manual.
+
+## Repeat scroll entrances
+
+The user requested motion on returning while scrolling up or down. Content observers remain attached after an entrance. A second observer re-arms each block only after it fully leaves an expanded viewport, avoiding jitter/restarts while reading near the entry threshold. Returning to the block replays its original directional glide and fade. Impact similarly observes its actual fitted viewport wrapper and resets both staggered card groups when that composition leaves view. Re-entry preserves the original group triggers, native timing and direction. Reduced motion and input interruption remain intact. Source checks exercise repeated exit/re-entry for content and Impact; all 61 existing tests pass. Browser review remains manual.
+
+## Page-wide section entrances reverted
+
+At the user’s request, removed section-scroll-motion.js and its page import. Narrative sections return to their original static rendering, without added entry fades, horizontal glides or replay observers. Existing hero, walkthrough, component and Impact interactions remain independently owned and are preserved. Earlier section-motion notes above document the removed iteration. Source reference and diff checks pass; browser review remains manual.
+
+## Rectangles enter vertically from their own positions
+
+Upper rectangles now descend 48–72px into their existing columns; lower rectangles rise 48–72px as scrolling reaches them. Narrow screens use shorter travel. Each rectangle triggers from its own measured, fitted position rather than the stage boundary, with a 900ms ease-out and a small 70ms stagger. Lower entrances also wait until the central statement reaches 68% of viewport height. The composition stays in normal document flow and resets only after leaving the viewport, so returning to it replays the entrances without repeated wheel-triggered restarts.
+
+Source motion checks verify individual visibility triggers, opposing vertical directions, fitting, replay and reduced-motion cancellation. All 61 existing tests pass. Visual review remains with the user.
+
+## Mixed-direction fade entrances
+
+Upper rectangles approach from upper left, above and upper right; lower rectangles approach from lower left, below and lower right. Every entrance fades from 0 to 1 opacity with the existing 900ms easing and stagger, converging on the existing settled position. Compact screens shorten travel. Individual viewport triggers, normal document flow, replay after leaving the viewport and reduced-motion support remain. Source motion and syntax checks pass; visual review remains manual.
+
+## Slower, softer rectangle entrances
+
+Entrance duration is now 1150ms with a 90ms stagger and cubic-bezier(0.25,0.8,0.25,1), softening the initial acceleration and extending the settle. Mixed directions, full opacity fade, triggers and final positions are unchanged. Source motion, syntax and diff checks pass; visual review remains manual.
+
+## Replay on upward scrolling
+
+Each rectangle rearms after its full frame and caption leave the viewport, then fades in again on reentry in either scroll direction. Upward scrolling reverses the vertical approach while preserving the varied lateral directions, 1150ms easing and stagger. Upward triggers watch the returning rectangle’s lower edge; small reversals while a rectangle remains visible do not restart its animation. No pinning or continuous animation loop is introduced. Source checks cover upward replay, reversed travel, opacity endpoints and reduced motion; visual review remains manual.
+
+## Downward entrances only and reading navigation
+
+Impact rectangles now show immediately on upward reentry, settling any running entrance when scrolling reverses. Downward scrolling retains mixed-direction 0-to-1 opacity entrances, 1150ms timing and 90ms stagger. This supersedes the earlier upward replay design. The bottom collapsible navigation now lists Overview, Metrics, Research, Flow and Impact; Metrics targets the existing success-measures block, while Impact targets the rollout section. Navigation collapse behavior is retained. Changes are page-owned and do not override registered components. Source motion and syntax checks pass; visual review remains manual.

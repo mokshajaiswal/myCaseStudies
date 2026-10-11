@@ -1385,6 +1385,7 @@ function renderCaseStudy() {
   });
 
   const successMeasures = createElement("div", "measures-block");
+  successMeasures.id = "metrics";
   successMeasures.append(
     createElement("h3", "subsection-heading measures-heading", caseStudy.outcomes.measuresTitle),
     createOutcomeGrid(
