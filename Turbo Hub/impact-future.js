@@ -83,6 +83,17 @@
       const center = stage.querySelector('.impact-future__center').getBoundingClientRect();
       stage.style.setProperty('--impact-lower-start', (center.bottom - initialCanvas.top + 40) + 'px');
       const canvas = stage.getBoundingClientRect();
+      // Anchor these caption tails to the actual metric text, including after resizing.
+      notes.filter(note => ['3', '5'].includes(note.dataset.slot)).forEach(note => {
+        const value = note.querySelector('.impact-future__value');
+        const label = note.querySelector('.impact-future__label');
+        const range = document.createRange();
+        range.selectNodeContents(value);
+        const metric = range.getBoundingClientRect();
+        const caption = label.getBoundingClientRect();
+        const target = metric.left + metric.width / 2 - caption.left;
+        label.style.setProperty('--impact-pointer-x', Math.max(24, Math.min(caption.width - 24, target)) + 'px');
+      });
       const bounds = notes.map(note => {
         const frame = note.getBoundingClientRect();
         const caption = note.querySelector('.impact-future__label').getBoundingClientRect();
@@ -143,6 +154,10 @@
     addEventListener('pageshow', schedule);
     measureTravel();
     paint();
+    document.fonts?.ready.then(() => {
+      if (!stage.isConnected) return;
+      cancel(); measureTravel(); paint();
+    });
   }
   root.TurboImpactFuture = {create, mount};
   document.addEventListener('DOMContentLoaded', () => document.querySelectorAll('[data-impact-stage]').forEach(mount));

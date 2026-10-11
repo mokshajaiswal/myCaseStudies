@@ -77,7 +77,13 @@
   transform: rotate(-7deg);
 }
 .impact-future__note[data-slot='3'] .impact-future__label,
-.impact-future__note[data-slot='5'] .impact-future__label { top: calc(100% - 56px); left: -8%; width: 96%; padding: var(--space-3) var(--space-4); border-radius: 24px; }
+.impact-future__note[data-slot='5'] .impact-future__label { top: calc(100% - 50px); left: -8%; width: 96%; padding: var(--space-3) var(--space-4); border-radius: 24px; }
+.impact-future__note[data-slot='3'] .impact-future__label::before,
+.impact-future__note[data-slot='5'] .impact-future__label::before {
+  top: -18px;
+  left: calc(var(--impact-pointer-x, 50%) - 14px);
+  transform: rotate(53deg);
+}
 .impact-future__note[data-slot='0'] .impact-future__label,
 .impact-future__note[data-slot='2'] .impact-future__label { top: calc(100% - 60px); padding: var(--space-3) var(--space-4); }
 .impact-future__note[data-slot='2'] .impact-future__label { left: 18%; }
