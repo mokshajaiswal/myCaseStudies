@@ -97,20 +97,43 @@ IntersectionObserver or a preparation/measurement failure leaves original,
 readable content. Disabling during an animation also clears already-shown
 targets, not just pending records.
 
+## Reading-line revision
+
+11 October 2026. The user reported headings sometimes already visible while
+their body text then appeared. Causes: headings entered as instant whole blocks
+(140ms fade, no delay) while body text used a separate prepare-then-reveal path
+with heading waits; some headings, such as the Impact future title, matched no
+selector at all. The sections above describing the preparation observer,
+80px insets, 55ms/220ms stagger and heading waits are superseded.
+
+The module now uses one rule. A single IntersectionObserver defines a reading
+line 85% down the viewport; an element or line starts entering when its top
+crosses it. A 100000px top margin counts everything above the line too, so a
+fast jump cannot leave skipped content hidden; lines already above the viewport
+show instantly. Headings, subheadings and narrative paragraphs are split into
+words at startup (layout is read for all candidates before any writes) and
+grouped into lines by offsetTop, which ignores the pending translate. Each line
+is triggered by its first word. Text-free inline art, such as the heading
+flower, joins the first heading line. Lines crossing in the same frame cascade
+top to bottom in 60ms steps, capped at 360ms. No line waits on another element:
+headings lead because they sit above their body. At the page end, visible
+lines still below the reading line are revealed. Blocks unwrap 1060ms after
+their last line starts (maximum delay plus slide). The fade is now 320ms so
+headings slide in rather than pop. The TLDR heading and copy (#overview > .reading-column) are
+excluded and stay visible from the start. Units, other exclusions, navigation, reduced
+motion, printing, toggling and failure cleanup are unchanged.
+
 ## Verification
 
-Fifteen Node DOM-harness checks cover default activation, off-mode no-ops, runtime cleanup, measured
-line grouping and original-node restoration, component exclusion and intact
-links, capped staggering, font/resize regrouping, explicit section navigation,
-reduced motion/printing/missing observers, failure cleanup and whole-unit reveals
-without nested decoration, splitting, delay or replay, and heading-before-body
-ordering across independent observer batches, and the flower/screen shared
-entrance. Additional checks use selector matching with the real body-copy
-wrapper, exercise both actual Zeta technology paragraphs and verify focus does
-not bypass adjacent copy. Subsection coverage includes flow introductions,
-chapter leads, scene prose and exploration paragraphs, while screen groups
-and component descriptions remain intact. The twelve
-existing navigation checks also pass. JavaScript syntax and diff checks pass.
+Nineteen Node DOM-harness checks cover default activation, off-mode no-ops,
+runtime cleanup, the single reading-line observer and per-line triggers,
+heading/body cascades in one batch, independent body lines, the cascade cap and
+instant reveal of skipped lines, untouched content above the start position,
+component exclusion and intact links, whole units without replay, subsection
+heading and prose splitting, unwrapping without replay, the shared annotation
+entrance, resize/font regrouping, page-end reveal, section navigation, link
+focus, both Zeta technology paragraphs, reduced motion/printing/missing
+observers and measurement-failure cleanup. All 92 Node checks in tests/ pass.
 No browser testing or visual review was performed, per the repository policy.
-The user should review actual line wrapping, slide distance, stagger and scroll timing
-at wide/narrow sizes with reveal=1 and compare reveal=0.
+The user should review line wrapping, cascade timing and the reading-line
+position at wide and narrow sizes, and compare with reveal=0.

@@ -23,6 +23,7 @@ function harness({search = '', reducedMotion = false, observerAvailable = true, 
   class Node {
     constructor(type) { this.nodeType = type; this.childNodes = []; this.parentNode = null; }
     get parentElement() { return this.parentNode?.nodeType === 1 ? this.parentNode : null; }
+    get children() { return this.childNodes.filter(node => node.nodeType === 1); }
     append(...nodes) {
       for (const node of nodes) {
         if (node.nodeType === 11) { this.append(...Array.from(node.childNodes)); continue; }
@@ -63,24 +64,27 @@ function harness({search = '', reducedMotion = false, observerAvailable = true, 
     }
     querySelectorAll(selector) { return descendants(this).filter(node => selector.split(',').some(part => matches(node, part.trim()))); }
     querySelector(selector) { return this.querySelectorAll(selector)[0] || null; }
+    get offsetHeight() { return 24; }
     get offsetTop() {
       if (!this.hasAttribute('data-case-reveal-word')) return 0;
-      const paragraph = this.closest('p');
-      if (paragraph.failMeasure) throw Error('Layout unavailable');
-      const index = paragraph.querySelectorAll('[data-case-reveal-word]').indexOf(this);
-      return Math.floor(index / paragraph.wordsPerLine) * 24;
+      const block = this.closest('p, h2, h3, h4');
+      if (block.failMeasure) throw Error('Layout unavailable');
+      const index = block.querySelectorAll('[data-case-reveal-word]').indexOf(this);
+      return Math.floor(index / block.wordsPerLine) * 24;
     }
     getBoundingClientRect() {
       if (this.hasAttribute('data-case-reveal-word')) {
-        const top = this.closest('p').rect.top + this.offsetTop;
+        const top = this.closest('p, h2, h3, h4').rect.top + this.offsetTop;
         return {top, bottom: top + 24, left: 0};
       }
       return this.rect;
     }
   }
   const html = new Element('html'), body = new Element('body'), section = new Element('section', 'case-section');
+  html.scrollHeight = 6000;
   section.id = 'research'; html.append(body); body.append(section);
-  const heading = new Element('h2', 'section-heading'); heading.textContent = 'Research';
+  const heading = new Element('h2', 'section-heading'), flower = new Element('span', 'asset-placeholder asset-placeholder--icon');
+  heading.append(flower, new Text('Research')); heading.rect = {top: 1200, bottom: 1250, left: 0};
   const paragraph = new Element('p'), original = new Text('A family '), emphasis = new Element('em');
   emphasis.append(new Text('shares money')); paragraph.append(original, emphasis, new Text(' every day with care and independence.'));
   const card = new Element('article', 'info-card'), childCopy = new Element('p', 'research-interviews-intro'); childCopy.textContent = 'A card child'; card.append(childCopy);
@@ -114,25 +118,30 @@ function harness({search = '', reducedMotion = false, observerAvailable = true, 
   }
   const window = {};
   const context = {window, document, location: {search, hash, href: 'http://localhost/Turbo/index.html' + search + hash, origin: 'http://localhost', pathname: '/Turbo/index.html'},
-    matchMedia: () => reduced, URLSearchParams, URL, NodeFilter: {SHOW_TEXT: 4},
+    matchMedia: () => reduced, URLSearchParams, URL, NodeFilter: {SHOW_TEXT: 4}, innerHeight: 800, scrollY: 0,
     addEventListener: (name, fn) => { events[name] = fn; },
     setTimeout: (fn, delay) => { const id = ++timerID; timers.set(id, {fn, delay}); return id; }, clearTimeout: id => timers.delete(id),
     requestAnimationFrame: fn => { frames.push(fn); return frames.length; }, cancelAnimationFrame() {},
   };
   if (observerAvailable) context.IntersectionObserver = Observer;
-  vm.runInNewContext(source, context);
+  vm.createContext(context);
+  vm.runInContext(source, context);
   const flushFrames = () => { while (frames.length) frames.shift()(); };
   const flushTimers = () => { for (const [id, timer] of Array.from(timers)) { timers.delete(id); timer.fn(); } };
-  return {api: window.CaseStudyReveal, document, html, section, heading, paragraph, original, emphasis, card, childCopy, componentCopy, linked, link,
-    candidates, Element, reduced, events, observers, timers, flushFrames, flushTimers, fontsReady: () => fontReady?.(), observer: () => observers.at(-1)};
+  const words = node => node.querySelectorAll('[data-case-reveal-word]');
+  return {api: window.CaseStudyReveal, context, document, html, section, heading, flower, paragraph, original, emphasis, card, childCopy, componentCopy, linked, link,
+    candidates, Element, reduced, events, observers, timers, flushFrames, flushTimers, words, fontsReady: () => fontReady?.(), observer: () => observers.at(-1)};
 }
+const state = node => node.getAttribute('data-case-reveal-state');
 
 test('reveals activate by default and explicit reveal=1 stays supported', () => {
   for (const search of ['', '?nav=3', '?reveal=1']) {
     const h = harness({search});
     assert.equal(h.api.enabled, true);
     assert.equal(h.api.active, true);
-    assert.equal(h.heading.getAttribute('data-case-reveal-state'), 'pending');
+    assert.equal(state(h.words(h.heading)[0]), 'pending', 'headings split into lines like body copy');
+    assert.equal(h.heading.hasAttribute('data-case-reveal-state'), false);
+    assert.equal(state(h.flower), 'pending');
   }
 });
 
@@ -140,78 +149,110 @@ test('reveal=0 does not mutate the document; a single runtime toggle activates a
   for (const search of ['?reveal=0', '?nav=3&reveal=0']) {
     const h = harness({search});
     assert.equal(h.api.active, false); assert.equal(h.observers.length, 0);
-    assert.equal(h.heading.hasAttribute('data-case-reveal-state'), false);
+    assert.equal(h.words(h.heading).length, 0);
     assert.equal(h.paragraph.childNodes[0], h.original);
     h.api.setEnabled(true); assert.equal(h.api.active, true);
-    h.observer().enter([h.heading]);
+    h.observer().enter([h.words(h.heading)[0]]);
     h.api.setEnabled(false);
     assert.equal(h.html.hasAttribute('data-case-reveal'), false);
-    assert.equal(h.heading.hasAttribute('data-case-reveal-state'), false);
+    assert.equal(h.heading.textContent, 'Research'); assert.equal(h.words(h.heading).length, 0);
+    assert.equal(h.flower.hasAttribute('data-case-reveal-state'), false);
     assert.equal(h.timers.size, 0);
   }
 });
 
-test('paragraphs reveal by measured line and disabling restores original text/inline nodes', () => {
+test('one reading-line observer watches the first word of every measured line', () => {
   const h = harness(), text = h.paragraph.textContent;
-  assert.equal(h.paragraph.getAttribute('data-case-reveal-state'), 'pending', 'unsplit text must not flash before its heading');
-  assert.equal(h.observer().options.rootMargin, '0px 0px -80px 0px', 'text enters inside the viewport so its slide is visible');
-  const preparation = h.observers.at(-2);
-  assert.equal(preparation.options.rootMargin, '0px 0px 80px 0px');
-  assert.ok(preparation.targets.has(h.paragraph));
-  assert.equal(h.observer().targets.has(h.paragraph), false);
-  preparation.enter([h.paragraph]);
-  assert.equal(preparation.targets.has(h.paragraph), false);
-  const words = h.paragraph.querySelectorAll('[data-case-reveal-word]');
+  assert.equal(h.observers.length, 1);
+  assert.equal(h.observer().options.rootMargin, '100000px 0px -15% 0px');
+  const words = h.words(h.paragraph);
   assert.ok(words.length > 6); assert.equal(h.paragraph.textContent, text);
   assert.equal(h.paragraph.childNodes.includes(h.emphasis), true);
-  h.observer().enter([h.heading, words[0]]);
-  assert.equal(words[0].getAttribute('data-case-reveal-state'), 'shown');
-  assert.equal(words[2].getAttribute('data-case-reveal-state'), 'shown');
-  assert.equal(words[3].getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(h.paragraph.hasAttribute('data-case-reveal-state'), false, 'only words are decorated');
+  assert.ok(h.observer().targets.has(words[0]) && h.observer().targets.has(words[3]));
+  assert.equal(h.observer().targets.has(words[1]), false);
+  h.observer().enter([words[0]]);
+  assert.equal(state(words[0]), 'shown'); assert.equal(state(words[2]), 'shown');
+  assert.equal(state(words[3]), 'pending');
   h.api.setEnabled(false);
-  assert.equal(preparation.targets.size, 0);
   assert.equal(h.paragraph.textContent, text);
   assert.equal(h.paragraph.childNodes[0], h.original);
   assert.equal(h.paragraph.childNodes[1], h.emphasis);
-  assert.equal(h.paragraph.querySelectorAll('[data-case-reveal-word]').length, 0);
+  assert.equal(h.words(h.paragraph).length, 0);
+});
+
+test('headings and body lines crossing together cascade top to bottom', () => {
+  const h = harness(), body = h.words(h.paragraph), title = h.words(h.heading);
+  h.observer().enter([body[3], title[0], body[0]]);
+  assert.equal(title[0].style['--case-reveal-delay'], '0ms');
+  assert.equal(h.flower.style['--case-reveal-delay'], '0ms', 'heading flower joins the first heading line');
+  assert.equal(state(h.flower), 'shown');
+  assert.equal(body[0].style['--case-reveal-delay'], '60ms');
+  assert.equal(body[3].style['--case-reveal-delay'], '120ms');
+  assert.equal(state(body[6]), 'pending');
+});
+
+test('a body line can reveal on its own; nothing waits for another element', () => {
+  const h = harness(), body = h.words(h.paragraph);
+  h.observer().enter([body[0]]);
+  assert.equal(state(body[0]), 'shown');
+  assert.equal(body[0].style['--case-reveal-delay'], '0ms');
+  assert.equal(state(h.words(h.heading)[0]), 'pending');
+});
+
+test('the cascade is capped and lines already above the viewport show instantly', () => {
+  const h = harness(); h.paragraph.wordsPerLine = 1; h.api.refresh();
+  const body = h.words(h.paragraph);
+  h.observer().enter(body);
+  assert.equal(body.at(-1).style['--case-reveal-delay'], '360ms');
+  const skipped = harness(); skipped.linked.rect = {top: -600, bottom: -500, left: 0};
+  skipped.observer().enter([skipped.words(skipped.heading)[0], skipped.words(skipped.linked)[0]]);
+  assert.equal(skipped.words(skipped.linked).length, 0, 'skipped lines unwrap at once instead of animating offscreen');
+  assert.equal(skipped.linked.childNodes[0], skipped.link);
+  assert.equal(skipped.words(skipped.heading)[0].style['--case-reveal-delay'], '0ms', 'and do not use up the cascade');
+});
+
+test('content already scrolled past at start is left untouched', () => {
+  const h = harness(); h.api.setEnabled(false);
+  h.heading.rect = {top: -400, bottom: -350, left: 0}; h.paragraph.rect = {top: -300, bottom: -10, left: 0};
+  h.api.setEnabled(true);
+  assert.equal(h.words(h.heading).length, 0);
+  assert.equal(h.words(h.paragraph).length, 0);
+  assert.equal(state(h.words(h.linked)[0]), 'pending');
 });
 
 test('component content and nested card copy are excluded; linked prose preserves its anchor', () => {
   const h = harness();
   assert.equal(h.componentCopy.hasAttribute('data-case-reveal-state'), false);
+  assert.equal(h.words(h.componentCopy).length, 0);
   assert.equal(h.childCopy.hasAttribute('data-case-reveal-state'), false);
-  h.observers.at(-2).enter([h.linked]);
+  assert.equal(state(h.card), 'pending');
   assert.equal(h.linked.childNodes[0], h.link);
-  assert.equal(h.linked.querySelectorAll('[data-case-reveal-word]').length, 2);
+  assert.equal(h.words(h.linked).length, 2);
   h.api.setEnabled(false);
   assert.equal(h.link.textContent, 'Learn more');
   assert.equal(h.linked.childNodes[0], h.link);
 });
 
-test('flows, personas and visual groups reveal once as intact units without child reveals or delays', () => {
+test('flows, personas and visual groups reveal once as intact units', () => {
   const h = harness();
   const groups = [];
   for (const className of ['persona-explorer', 'artifact-stage', 'competitive-board-component', 'family-story__figure', 'experience-grid', 'phone-stage', 'case-ending__screens']) {
     const group = new h.Element('div', className);
     const copy = new h.Element('p'); copy.textContent = 'A complete visual group';
     const control = new h.Element('button', 'th-button'); control.textContent = 'Use control';
-    group.append(copy, control);
-    const parent = className === 'family-story__figure' ? new h.Element('div', 'family-story') : h.section;
-    if (parent !== h.section) h.section.append(parent);
-    parent.append(group);
+    group.append(copy, control); h.section.append(group);
     h.candidates.push(group, copy, control); groups.push({group, copy, control, original: copy.childNodes[0]});
   }
   h.api.refresh();
-  for (const {group, copy, control} of groups) {
-    assert.equal(group.getAttribute('data-case-reveal-state'), 'pending');
-    assert.equal(copy.hasAttribute('data-case-reveal-state'), false);
+  for (const {group, copy, control, original} of groups) {
+    assert.equal(state(group), 'pending');
+    assert.equal(copy.childNodes[0], original, 'unit copy is never split');
     assert.equal(control.hasAttribute('data-case-reveal-state'), false);
   }
-  h.observer().enter([h.heading, ...groups.map(({group}) => group)]);
-  for (const {group, copy, control, original} of groups) {
-    assert.equal(group.getAttribute('data-case-reveal-state'), 'shown');
-    assert.equal(group.style['--case-reveal-delay'], '0ms');
-    assert.equal(copy.childNodes[0], original);
+  h.observer().enter(groups.map(({group}) => group));
+  for (const {group, control} of groups) {
+    assert.equal(state(group), 'shown');
     assert.equal(group.childNodes[1], control);
   }
   h.api.setEnabled(false);
@@ -220,53 +261,42 @@ test('flows, personas and visual groups reveal once as intact units without chil
   for (const {group} of groups) assert.equal(group.hasAttribute('data-case-reveal-state'), false, 'completed units do not replay');
 });
 
-test('subsection prose reveals by line while flow screens and card descriptions stay grouped', () => {
+test('subsection headings and their prose both reveal line by line', () => {
   const h = harness();
-  const story = new h.Element('div', 'family-story'); h.section.append(story);
   const copies = [];
   for (const [wrapperClass, headingClass, paragraphClass] of [
     ['family-story__intro', 'family-story__heading', 'family-story__lead'],
-    ['family-story__chapter-header', 'family-story__heading', 'family-story__lead'],
     ['family-story__copy', 'family-story__scene-title', ''],
     ['design-tradeoffs__direction', 'design-tradeoffs__direction-heading', 'design-tradeoffs__description'],
+    ['reading-column impact-future__next', 'impact-future__future-title', 'body-copy'],
   ]) {
     const wrapper = new h.Element('div', wrapperClass);
-    const heading = new h.Element('h3', headingClass); heading.textContent = 'Subsection heading';
+    const heading = new h.Element('h3', headingClass); heading.textContent = 'A subsection heading that wraps';
     const paragraph = new h.Element('p', paragraphClass);
     paragraph.textContent = 'This subsection explains the family payment experience across several visible lines.';
-    wrapper.append(heading, paragraph); story.append(wrapper);
+    wrapper.append(heading, paragraph); h.section.append(wrapper);
     h.candidates.push(wrapper, heading, paragraph); copies.push({wrapper, heading, paragraph});
   }
-  const figure = new h.Element('div', 'family-story__figure'); story.append(figure); h.candidates.push(figure);
   h.api.refresh();
   for (const {wrapper, heading, paragraph} of copies) {
-    assert.equal(wrapper.hasAttribute('data-case-reveal-state'), false, 'prose must not be enclosed in a whole-block reveal');
-    assert.ok(h.observers.at(-2).targets.has(paragraph));
-    h.observers.at(-2).enter([paragraph]);
-    const words = paragraph.querySelectorAll('[data-case-reveal-word]');
-    assert.ok(words.length > 6);
-    h.observer().enter([heading]);
-    h.observer().enter([words[0]]);
-    assert.equal(words[0].getAttribute('data-case-reveal-state'), 'shown');
-    assert.equal(words[3].getAttribute('data-case-reveal-state'), 'pending');
+    assert.equal(wrapper.hasAttribute('data-case-reveal-state'), false, 'prose is never enclosed in a whole-block reveal');
+    const headingWords = h.words(heading), bodyWords = h.words(paragraph);
+    assert.ok(headingWords.length > 3 && bodyWords.length > 6);
+    assert.ok(h.observer().targets.has(headingWords[3]), 'second heading line has its own trigger');
+    h.observer().enter([headingWords[0]]);
+    assert.equal(state(headingWords[0]), 'shown'); assert.equal(state(headingWords[3]), 'pending');
   }
-  assert.equal(figure.getAttribute('data-case-reveal-state'), 'pending');
-  assert.equal(h.childCopy.hasAttribute('data-case-reveal-state'), false);
 });
 
-test('stagger is capped locally and finished lines unwrap without replaying on refresh', () => {
+test('finished blocks unwrap after settling and never replay', () => {
   const h = harness();
-  for (let i = 0; i < 30; i++) {
-    const block = new h.Element('div', 'meta-strip'); block.rect = {top: 1500 + i * 30, bottom: 1510 + i * 30, left: 0};
-    h.section.append(block); h.candidates.push(block);
-  }
-  h.api.refresh(); h.observer().enter(h.candidates.filter(node => node.tagName === 'H2' || node.className === 'meta-strip'));
-  assert.equal(h.candidates.at(-1).style['--case-reveal-delay'], '220ms');
-  h.observer().enter([h.paragraph]);
-  h.observer().enter(Array.from(h.observer().targets).filter(node => node.hasAttribute('data-case-reveal-word')));
+  h.observer().enter(h.words(h.paragraph).filter(word => h.observer().targets.has(word)));
+  assert.ok(Array.from(h.timers.values()).some(timer => timer.delay === 1060));
   h.flushTimers();
   assert.equal(h.paragraph.childNodes[0], h.original);
-  h.api.refresh(); assert.equal(h.paragraph.hasAttribute('data-case-reveal-state'), false);
+  h.api.refresh();
+  assert.equal(h.words(h.paragraph).length, 0);
+  assert.equal(state(h.words(h.linked)[0]), 'pending');
 });
 
 test('right-edge annotation flower shares the adjacent screen entrance', () => {
@@ -281,64 +311,61 @@ test('right-edge annotation flower shares the adjacent screen entrance', () => {
   assert.ok(h.observer().targets.has(band));
   assert.equal(h.observer().targets.has(screen), false);
   h.observer().enter([band]);
-  assert.equal(band.getAttribute('data-case-reveal-state'), 'shown');
-  assert.equal(band.style['--case-reveal-delay'], '0ms');
+  assert.equal(state(band), 'shown');
   assert.equal(flower.hasAttribute('data-case-reveal-state'), false, 'flower moves with its parent, without a separate trigger');
   assert.equal(band.childNodes[1].childNodes[0], art);
   h.api.setEnabled(false);
   assert.equal(band.hasAttribute('data-case-reveal-state'), false);
 });
 
-test('font and width changes regroup unfinished lines while completed words stay revealed', () => {
-  const h = harness(); h.observer().enter([h.paragraph]);
-  const words = h.paragraph.querySelectorAll('[data-case-reveal-word]'); h.observer().enter([h.heading, words[0]]);
+test('font and width changes regroup unfinished lines while read words stay revealed', () => {
+  const h = harness(), words = h.words(h.paragraph);
+  h.observer().enter([words[0]]);
   h.paragraph.wordsPerLine = 2; h.events.resize(); h.fontsReady(); h.flushFrames();
-  assert.equal(words[0].getAttribute('data-case-reveal-state'), 'shown');
-  assert.equal(words[3].hasAttribute('data-case-reveal-state'), false, 'new row touching a revealed word remains readable');
+  assert.equal(state(words[0]), 'shown');
+  assert.equal(words[3].hasAttribute('data-case-reveal-state'), false, 'new row touching a revealed word stays readable');
   assert.ok(h.observer().targets.has(words[4]));
+  assert.equal(h.observer().targets.has(words[3]), false, 'stale line triggers are dropped');
   h.api.setEnabled(false); assert.equal(h.paragraph.childNodes[0], h.original);
 });
 
-test('body lines wait for their preceding heading across independent observer batches', () => {
+test('reaching the page end reveals visible lines that sit below the reading line', () => {
   const h = harness();
-  h.observers.at(-2).enter([h.paragraph]);
-  const word = h.paragraph.querySelector('[data-case-reveal-word]');
-  h.observer().enter([word]);
-  assert.equal(word.getAttribute('data-case-reveal-state'), 'pending');
-  h.observer().enter([h.heading]);
-  assert.equal(h.heading.getAttribute('data-case-reveal-state'), 'shown');
-  assert.equal(h.heading.style['--case-reveal-delay'], '0ms');
-  h.observer().enter([word]);
-  assert.equal(word.getAttribute('data-case-reveal-state'), 'shown');
-  assert.equal(word.style['--case-reveal-delay'], '55ms');
+  h.linked.rect = {top: 760, bottom: 790, left: 0};
+  h.context.scrollY = 5200; h.events.scroll(); h.flushFrames();
+  assert.equal(state(h.words(h.linked)[0]), 'shown');
+  assert.equal(state(h.card), 'pending', 'content still below the fold waits');
+  const early = harness(); early.linked.rect = {top: 760, bottom: 790, left: 0};
+  early.events.scroll(); early.flushFrames();
+  assert.equal(state(early.words(early.linked)[0]), 'pending');
 });
 
-test('initial fragments and section navigation show the heading while preserving body line reveals', () => {
+test('initial fragments and section navigation show the heading while body lines keep their reveals', () => {
   const initial = harness({hash: '#research'});
-  assert.equal(initial.heading.hasAttribute('data-case-reveal-state'), false);
-  assert.equal(initial.paragraph.getAttribute('data-case-reveal-state'), 'pending');
-  const h = harness(); h.observer().enter([h.paragraph]);
+  assert.equal(initial.words(initial.heading).length, 0);
+  assert.equal(initial.flower.hasAttribute('data-case-reveal-state'), false);
+  assert.equal(state(initial.words(initial.paragraph)[0]), 'pending');
+  const h = harness();
   const anchor = new h.Element('a'); anchor.href = 'http://localhost/Turbo/index.html?reveal=1#research';
   h.events.click({target: anchor});
-  const words = h.paragraph.querySelectorAll('[data-case-reveal-word]');
-  assert.ok(words.length > 6);
-  assert.equal(words[0].getAttribute('data-case-reveal-state'), 'pending');
-  assert.equal(h.heading.hasAttribute('data-case-reveal-state'), false);
+  assert.equal(h.words(h.heading).length, 0);
+  const words = h.words(h.paragraph);
+  assert.equal(state(words[0]), 'pending');
   h.events.focusin({target: h.heading});
-  assert.equal(words[0].getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(state(words[0]), 'pending');
   h.observer().enter([words[0], words[3], words[6]]);
-  assert.equal(words[0].style['--case-reveal-delay'], '55ms');
-  assert.equal(words[3].style['--case-reveal-delay'], '110ms');
-  assert.equal(words[6].style['--case-reveal-delay'], '165ms');
-  assert.equal(words[9].getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(words[0].style['--case-reveal-delay'], '0ms');
+  assert.equal(words[3].style['--case-reveal-delay'], '60ms');
+  assert.equal(words[6].style['--case-reveal-delay'], '120ms');
 });
 
 test('focusing a link reveals its paragraph without skipping adjacent body text', () => {
   const h = harness();
   h.events.focusin({target: h.link});
-  assert.equal(h.linked.hasAttribute('data-case-reveal-state'), false);
-  assert.equal(h.paragraph.getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(h.words(h.linked).length, 0);
   assert.equal(h.linked.childNodes[0], h.link);
+  assert.equal(state(h.words(h.paragraph)[0]), 'pending');
+  assert.equal(Array.from(h.observer().targets).some(target => h.linked.contains(target)), false);
 });
 
 test('both Zeta technology paragraphs are selected and reveal by measured line', () => {
@@ -347,45 +374,44 @@ test('both Zeta technology paragraphs are selected and reveal by measured line',
   const data = block.match(/paragraphs:\s*\[([\s\S]*?)\]/)[1].replace(/,\s*$/, '');
   const text = JSON.parse('[' + data + ']');
   assert.equal(text.length, 2);
-  const h = harness(); h.paragraph.textContent = text[0];
+  const h = harness(); h.api.setEnabled(false); h.paragraph.textContent = text[0];
   const second = new h.Element('p'); second.textContent = text[1];
   h.paragraph.parentElement.append(second); h.candidates.push(second);
   h.paragraph.rect = {top: 1500, bottom: 1900, left: 0};
   second.rect = {top: 1950, bottom: 2150, left: 0};
-  h.api.refresh();
-  assert.ok(h.observers.at(-2).targets.has(h.paragraph));
-  assert.ok(h.observers.at(-2).targets.has(second));
-  h.observers.at(-2).enter([h.paragraph, second]);
-  const firstWords = h.paragraph.querySelectorAll('[data-case-reveal-word]');
-  const secondWords = second.querySelectorAll('[data-case-reveal-word]');
+  h.api.setEnabled(true);
+  const firstWords = h.words(h.paragraph), secondWords = h.words(second);
   assert.ok(firstWords.length > 30 && secondWords.length > 10);
-  h.observer().enter([h.heading]);
   h.observer().enter([firstWords[0], firstWords[3]]);
-  assert.equal(firstWords[0].style['--case-reveal-delay'], '55ms');
-  assert.equal(firstWords[3].style['--case-reveal-delay'], '110ms');
-  assert.equal(secondWords[0].getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(firstWords[0].style['--case-reveal-delay'], '0ms');
+  assert.equal(firstWords[3].style['--case-reveal-delay'], '60ms');
+  assert.equal(state(secondWords[0]), 'pending');
   h.observer().enter([secondWords[0]]);
-  assert.equal(secondWords[0].getAttribute('data-case-reveal-state'), 'shown');
-  assert.equal(secondWords[3].getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(state(secondWords[0]), 'shown');
+  assert.equal(state(secondWords[3]), 'pending');
   assert.equal(h.paragraph.textContent, text[0]); assert.equal(second.textContent, text[1]);
 });
 
 test('reduced motion, printing and missing observers leave readable original content', () => {
   const unsupported = harness({observerAvailable: false}); assert.equal(unsupported.api.active, false);
+  assert.equal(unsupported.paragraph.childNodes[0], unsupported.original);
   const h = harness({reducedMotion: true}); assert.equal(h.api.active, false);
   h.reduced.matches = false; h.events.motion(); assert.equal(h.api.active, true);
-  h.observer().enter([h.paragraph]);
   h.reduced.matches = true; h.events.motion(); assert.equal(h.paragraph.childNodes[0], h.original);
-  h.reduced.matches = false; h.events.motion(); h.observer().enter([h.paragraph]);
+  h.reduced.matches = false; h.events.motion();
   h.events.beforeprint(); assert.equal(h.api.active, false); assert.equal(h.paragraph.childNodes[0], h.original);
   assert.equal(h.api.enabled, true);
   h.events.afterprint(); assert.equal(h.api.active, true);
 });
 
 test('a measurement failure restores content instead of leaving it hidden', () => {
-  const h = harness(); h.paragraph.failMeasure = true; h.observer().enter([h.paragraph]);
+  const failing = harness(); failing.api.setEnabled(false); failing.paragraph.failMeasure = true; failing.api.setEnabled(true);
+  assert.equal(failing.api.active, false);
+  assert.equal(failing.paragraph.childNodes[0], failing.original);
+  const h = harness(); h.paragraph.failMeasure = true; h.events.resize(); h.flushFrames();
   assert.equal(h.api.active, false);
   assert.equal(h.paragraph.childNodes[0], h.original);
-  assert.equal(h.heading.hasAttribute('data-case-reveal-state'), false);
+  assert.equal(h.words(h.heading).length, 0);
+  assert.equal(h.card.hasAttribute('data-case-reveal-state'), false);
   assert.equal(h.html.hasAttribute('data-case-reveal'), false);
 });
