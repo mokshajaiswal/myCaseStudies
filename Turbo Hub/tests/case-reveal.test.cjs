@@ -176,24 +176,27 @@ test('paragraphs reveal by measured line and disabling restores original text/in
   assert.equal(h.paragraph.querySelectorAll('[data-case-reveal-word]').length, 0);
 });
 
-test('component content and nested card copy are excluded; linked paragraphs stay intact', () => {
+test('component content and nested card copy are excluded; linked prose preserves its anchor', () => {
   const h = harness();
   assert.equal(h.componentCopy.hasAttribute('data-case-reveal-state'), false);
   assert.equal(h.childCopy.hasAttribute('data-case-reveal-state'), false);
-  h.observer().enter([h.linked]);
+  h.observers.at(-2).enter([h.linked]);
   assert.equal(h.linked.childNodes[0], h.link);
-  assert.equal(h.linked.querySelectorAll('[data-case-reveal-word]').length, 0);
+  assert.equal(h.linked.querySelectorAll('[data-case-reveal-word]').length, 2);
+  h.api.setEnabled(false);
+  assert.equal(h.link.textContent, 'Learn more');
+  assert.equal(h.linked.childNodes[0], h.link);
 });
 
 test('flows, personas and visual groups reveal once as intact units without child reveals or delays', () => {
   const h = harness();
   const groups = [];
-  for (const className of ['persona-explorer', 'artifact-stage', 'competitive-board-component', 'family-story__scene', 'experience-grid', 'phone-stage', 'case-ending__screens']) {
+  for (const className of ['persona-explorer', 'artifact-stage', 'competitive-board-component', 'family-story__figure', 'experience-grid', 'phone-stage', 'case-ending__screens']) {
     const group = new h.Element('div', className);
     const copy = new h.Element('p'); copy.textContent = 'A complete visual group';
     const control = new h.Element('button', 'th-button'); control.textContent = 'Use control';
     group.append(copy, control);
-    const parent = className === 'family-story__scene' ? new h.Element('div', 'family-story') : h.section;
+    const parent = className === 'family-story__figure' ? new h.Element('div', 'family-story') : h.section;
     if (parent !== h.section) h.section.append(parent);
     parent.append(group);
     h.candidates.push(group, copy, control); groups.push({group, copy, control, original: copy.childNodes[0]});
@@ -215,6 +218,40 @@ test('flows, personas and visual groups reveal once as intact units without chil
   for (const {group} of groups) assert.equal(group.hasAttribute('data-case-reveal-state'), false);
   h.api.setEnabled(true);
   for (const {group} of groups) assert.equal(group.hasAttribute('data-case-reveal-state'), false, 'completed units do not replay');
+});
+
+test('subsection prose reveals by line while flow screens and card descriptions stay grouped', () => {
+  const h = harness();
+  const story = new h.Element('div', 'family-story'); h.section.append(story);
+  const copies = [];
+  for (const [wrapperClass, headingClass, paragraphClass] of [
+    ['family-story__intro', 'family-story__heading', 'family-story__lead'],
+    ['family-story__chapter-header', 'family-story__heading', 'family-story__lead'],
+    ['family-story__copy', 'family-story__scene-title', ''],
+    ['design-tradeoffs__direction', 'design-tradeoffs__direction-heading', 'design-tradeoffs__description'],
+  ]) {
+    const wrapper = new h.Element('div', wrapperClass);
+    const heading = new h.Element('h3', headingClass); heading.textContent = 'Subsection heading';
+    const paragraph = new h.Element('p', paragraphClass);
+    paragraph.textContent = 'This subsection explains the family payment experience across several visible lines.';
+    wrapper.append(heading, paragraph); story.append(wrapper);
+    h.candidates.push(wrapper, heading, paragraph); copies.push({wrapper, heading, paragraph});
+  }
+  const figure = new h.Element('div', 'family-story__figure'); story.append(figure); h.candidates.push(figure);
+  h.api.refresh();
+  for (const {wrapper, heading, paragraph} of copies) {
+    assert.equal(wrapper.hasAttribute('data-case-reveal-state'), false, 'prose must not be enclosed in a whole-block reveal');
+    assert.ok(h.observers.at(-2).targets.has(paragraph));
+    h.observers.at(-2).enter([paragraph]);
+    const words = paragraph.querySelectorAll('[data-case-reveal-word]');
+    assert.ok(words.length > 6);
+    h.observer().enter([heading]);
+    h.observer().enter([words[0]]);
+    assert.equal(words[0].getAttribute('data-case-reveal-state'), 'shown');
+    assert.equal(words[3].getAttribute('data-case-reveal-state'), 'pending');
+  }
+  assert.equal(figure.getAttribute('data-case-reveal-state'), 'pending');
+  assert.equal(h.childCopy.hasAttribute('data-case-reveal-state'), false);
 });
 
 test('stagger is capped locally and finished lines unwrap without replaying on refresh', () => {

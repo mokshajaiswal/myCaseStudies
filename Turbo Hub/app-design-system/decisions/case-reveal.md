@@ -51,13 +51,22 @@ immediately while following text keeps its normal line reveals. The first
 body row starts at 55ms; subsequent rows in the same batch advance by 55ms,
 removing the former duplicate 55ms delay on the first two rows.
 
-Visual-group follow-up: each page-owned flow scene (copy, screens and controls),
-flow introduction/chapter header, persona explorer, research board, artifact
-gallery, relationship diagram, card grid, exploration direction, phone group,
-learning screen group and closing screen stage now reveals as one intact unit.
-Each enters without a stagger delay when its observer reports viewport entry.
-Nested headings, paragraphs, screens and controls receive no separate entrance
-or text splitting. The default-on option retains the explicit off switch and once-per-element behavior.
+Visual groups reveal intact: family illustrations, flow screen/character figures,
+persona explorers, research boards, artifact galleries, relationship diagrams,
+card grids, exploration screen figures, phone groups, learning screen groups and
+closing screen stages enter without a stagger delay. Their nested controls,
+captions and card descriptions receive no separate entrance or text splitting.
+The default-on option retains its explicit off switch and once-per-element behavior.
+
+Subsection prose correction: flow introduction/chapter headers and complete
+scenes were previously grouped, causing the Meet the Sharmas paragraph and
+similar copy to bypass line splitting. Only their visual figures are now grouped.
+Flow subsection headings and the narrative paragraphs immediately below them
+reveal separately, heading first and then measured lines. Exploration direction
+headings and their following narrative paragraphs use the same sequence. This
+does not add line splitting to boxed rationale notes, bubbles, card descriptions
+or embedded product components. Inline links within eligible narrative text
+keep their original anchor nodes and can participate in line reveals.
 
 The right-edge annotation flower and its adjacent full-product screen reveal
 through their common page-owned annotation-band, sharing the exact trigger,
@@ -74,8 +83,8 @@ depth motion, Impact's assembly artwork and closing flower composition retain
 their own animation owners. Flow playback, persona switching and draggable
 research/artifact behavior remain owned by their existing implementations.
 Nested targets inside a selected page-owned card do not receive a second reveal.
-Paragraphs containing links or inputs reveal as intact blocks rather than
-altering interactive text nodes. Text styling inherits the existing typography.
+Paragraphs containing fields or actions reveal as intact blocks. Eligible prose
+with inline links preserves the anchor elements while splitting text nodes. Text styling inherits the existing typography.
 
 Fragment navigation, heading focus and in-page navigation clicks immediately
 show only the destination heading or focused group, preserving following body
@@ -90,7 +99,7 @@ targets, not just pending records.
 
 ## Verification
 
-Fourteen Node DOM-harness checks cover default activation, off-mode no-ops, runtime cleanup, measured
+Fifteen Node DOM-harness checks cover default activation, off-mode no-ops, runtime cleanup, measured
 line grouping and original-node restoration, component exclusion and intact
 links, capped staggering, font/resize regrouping, explicit section navigation,
 reduced motion/printing/missing observers, failure cleanup and whole-unit reveals
@@ -98,7 +107,9 @@ without nested decoration, splitting, delay or replay, and heading-before-body
 ordering across independent observer batches, and the flower/screen shared
 entrance. Additional checks use selector matching with the real body-copy
 wrapper, exercise both actual Zeta technology paragraphs and verify focus does
-not bypass adjacent copy. The twelve
+not bypass adjacent copy. Subsection coverage includes flow introductions,
+chapter leads, scene prose and exploration paragraphs, while screen groups
+and component descriptions remain intact. The twelve
 existing navigation checks also pass. JavaScript syntax and diff checks pass.
 No browser testing or visual review was performed, per the repository policy.
 The user should review actual line wrapping, slide distance, stagger and scroll timing

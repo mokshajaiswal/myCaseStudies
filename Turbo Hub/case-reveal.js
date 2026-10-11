@@ -4,8 +4,8 @@
   const units = [
     '.info-panel', '.experience-grid', '.outcome-grid', '.persona-explorer',
     '.competitive-board-component', '.artifact-stage', '.relationship-map',
-    '.family-story__intro', '.family-story__chapter-header', '.family-story__scene',
-    '.design-tradeoffs__direction', '.annotation-band', '.closing-stage', '.phone-stage', '.case-ending__screens',
+    '.family-story__home-figure', '.family-story__figure',
+    '.design-tradeoffs__screen', '.annotation-band', '.closing-stage', '.phone-stage', '.case-ending__screens',
   ].join(',');
   const selectors = [
     '.section-heading', '.section-kicker', '.subsection-heading', '.design-question-title',
@@ -14,6 +14,8 @@
     '.design-tradeoffs__description', '.info-card', '.experience-card', '.outcome-card',
     '.meta-strip', '.timeline-card', '.contact-card', '.case-ending__screens',
     '.design-tradeoffs__screen', '.phone-stage',
+    '.family-story__heading', '.family-story__scene-title', '.family-story__lead',
+    '.family-story__copy > p',
   ].concat(units.split(',')).map(selector => '#dynamic-content ' + selector.trim()).join(',');
   const protectedOwners = [
     '[class^="th-"]', '[class*=" th-"]', '.user-voice-stack', '.case-ending__card',
@@ -21,12 +23,12 @@
   ].join(',');
   const excluded = [
     '[class^="th-"]', '[class*=" th-"]', '.user-voice-stack', '.case-ending__card',
-    '.family-story', '.family-story__loop-step', '.persona-explorer',
+    '.family-story__loop-step', '.persona-explorer',
     '.competitive-board-component', '.artifact-stage', '.impact-future__stage',
     '.case-ending__composition', 'dialog', '[hidden]', '[data-case-reveal-skip]',
   ].join(',');
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const headings = '.section-heading, .section-kicker, .subsection-heading, .design-question-title, .design-tradeoffs__direction-heading';
+  const headings = '.section-heading, .section-kicker, .subsection-heading, .design-question-title, .design-tradeoffs__direction-heading, .family-story__heading, .family-story__scene-title';
   const seen = new WeakSet();
   const seenWords = new WeakSet();
   let requested = new URLSearchParams(location.search).get('reveal') !== '0';
@@ -215,8 +217,8 @@
         if (heading) sectionHeadings.set(section, target);
         if (seen.has(target)) return;
         if (target.getBoundingClientRect().bottom <= 0) { seen.add(target); return; }
-        // Linked/interactive paragraphs reveal as one intact block.
-        const prepare = target.tagName === 'P' && !target.querySelector('a, button, input, select, textarea, [contenteditable]');
+        // Preserve inline links while splitting prose; fields/actions stay intact.
+        const prepare = target.tagName === 'P' && !target.querySelector('button, input, select, textarea, [contenteditable]');
         target.setAttribute('data-case-reveal-state', 'pending');
         observe({target, nodes: [target], prepare, heading,
           lead: target.tagName === 'P' ? sectionHeadings.get(section) : null,

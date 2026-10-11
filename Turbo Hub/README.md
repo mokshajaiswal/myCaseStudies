@@ -121,9 +121,9 @@ Every phone is created through `createPhone()`, which keeps the transparent casi
 
 Scroll entrances and paragraph line reveals are enabled by default through the separate page-owned module. Use `?reveal=0` to disable them; `?reveal=1` remains supported. The reading dial works with `?nav=3` alone. Headings, editorial cards and paragraph lines slide into position over 560ms, fading in only during the first 140ms, with no blur and short local staggers capped at 220ms. Blocks move 40px and words move 1em; paragraph lines prepare just before viewport entry and slide once 80px inside the viewport. Line groups adapt to font loading and resizing. The module excludes product components and existing animated compositions. Section navigation reveals its destination immediately, and reduced motion keeps original content visible.
 
-Flows, persona groups, screen sets, card grids, research boards and artifact galleries enter as complete units without child staggering or text splitting. Their existing controls and playback remain intact.
+Flow screen figures, persona groups, screen sets, card grids, research boards and artifact galleries enter as complete units without child staggering or text splitting. Their existing controls and playback remain intact.
 
-Main headings enter first; the body text beneath waits for its heading and follows with a short local delay. Unsplit paragraphs remain pending until their line reveals are ready. Navigation reveals only the destination heading or focused group; the following body copy retains its line-by-line animation.
+Main and subsection headings enter first; the narrative text beneath waits for its heading and follows line by line with a short local delay. Flow introductions and chapter prose use this sequence too; card and component descriptions stay grouped. Unsplit paragraphs remain pending until their line reveals are ready. Navigation reveals only the destination heading or focused group; the following body copy retains its line-by-line animation.
 
 For a live switch, call `CaseStudyReveal.setEnabled(true)` or `CaseStudyReveal.setEnabled(false)` in the console. Disabling restores the original text nodes and removes all reveal effects. `CaseStudyReveal.refresh()` rescans after an intentional content rerender. See `app-design-system/decisions/case-reveal.md` for scope and validation.
 
