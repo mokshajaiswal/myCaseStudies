@@ -135,19 +135,19 @@ const caseStudy = {
         description: "Move prepaid beyond occasional use by connecting it to regular family expenses.",
       },
     ],
-    measuresTitle: "How we would measure success",
+    measuresTitle: "How we would measure success and find gaps",
     measures: [
       {
         title: "Member activation",
-        description: "How many invited family members successfully joined and became active PayZapp users.",
+        description: "Whether invitees joined and made a first payment, where they dropped off, and how long activation took.",
       },
       {
         title: "Repeat family usage",
-        description: "Whether households returned to use the Hub for ongoing needs rather than treating it as a one-off payment method.",
+        description: "Whether families paid again in later months, how many members participated, and why inactive households stopped.",
       },
       {
         title: "Household payment activity",
-        description: "How much everyday payment activity the Hub generated across its members.",
+        description: "Successful everyday payments, alongside failure reasons, approval delays and blocks caused by limits or available funds.",
       },
     ],
   },
@@ -395,26 +395,58 @@ const caseStudy = {
   },
   tradeoffs: {
     title: "Directions I explored and set aside",
-    intro: "I explored different colour palettes alongside two product directions: Pixel Tags as another way for family members to pay, and separate accounts with shared expense tracking. Discussing these ideas with the team helped clarify what suited the current proposition. Pixel Tags introduced device setup, while expense splitting assumed members could pay first and settle later. I chose to develop a manager-funded Hub: the manager provides access to funds and sets spending limits, while members use their own cards or UPI to pay within those boundaries. This better addressed the need for both family support and everyday independence.",
+    intro: "To roll out an MVP and validate the idea early, we left a few initial directions out of scope. The priority was to test whether manager-funded payments worked for families before expanding the experience.",
     screens: [
-      { route: "pixel-tag?theme=alternative-plum", label: "Pixel Tag setup", alt: "Pixel Tag screen with options to link an existing tag or buy a new tag." },
-      { route: "shared-expenses?theme=alternative-teal", label: "Separate accounts, shared expenses", alt: "Alternative family finance concept showing shared bills, individual shares and outstanding balances." },
+      {
+        heading: "NFC Pixel Tags",
+        route: "pixel-tag?theme=alternative-plum",
+        label: "Pixel Tag · Link or buy",
+        alt: "Pixel Tag screen with options to link an existing tag or buy a new tag.",
+        description: "The idea was to give members a physical NFC Pixel Tag linked to the Hub’s funds, so they could tap to pay without relying on their phone for every payment. It added convenience to the core experience. We left it out of the MVP to validate shared access to funds, spending limits and everyday payments before introducing an additional instrument.",
+      },
+      {
+        heading: "Shared expenses",
+        route: "shared-expenses?theme=alternative-teal",
+        label: "Shared expenses · Concept",
+        alt: "Alternative family finance concept showing shared bills, individual shares and outstanding balances.",
+        description: "We also explored a single panel for payments, shared bills and splitting expenses, similar to Splitwise. Members could track their share and settle balances in one place. We set this aside to first validate access to manager-provided funds, before adding shared-expense management.",
+      },
     ],
   },
   impactFuture: {
     title: "Impact & future",
-    intro: "These illustrative baselines and targets show what success could look like against the three measures defined earlier. They are assumptions, not measured Turbo Hub results.",
-    statement: "More members joining. More families returning. More everyday spending.",
+    intro: "We introduced Turbo Hub to existing PayZapp users whose payment patterns suggested a household-manager role. The segmented rollout was designed to test adoption and uncover friction in joining, funding and payment approvals before expanding the experience.",
+    eyebrow: "Segmented Rollout across three months",
+    notesLabel: "Pilot results for member activation, repeat family usage, household payments and new-user acquisition",
+    statement: "Approximately 10,000 selected PayZapp users.",
     notes: [
-      { value: "40→70%", label: "Invited members joining and making their first payment.", kind: "Member activation", type: "metric" },
-      { label: "Invite → join → first payment. Track activation within 30 days of the invitation.", type: "quote" },
-      { value: "25→45%", label: "More family Hubs returning the following month.", kind: "Repeat family usage", type: "metric" },
-      { value: "4→8", label: "Monthly payments per active Hub. More everyday use.", kind: "Household payment activity", type: "metric" },
-      { label: "Pilot with families. Compare real usage with these targets, then improve the gaps.", type: "quote" },
-      { value: "+30 pp", label: "Assumed activation uplift: 40% → 70%.", kind: "Illustrative improvement", type: "metric" },
+      { value: "64%", label: "Around 3,800 of roughly 6,000 invitees joined and paid within 30 days.", kind: "Member activation", type: "metric" },
+      { label: "Around 3,000 managers created Hubs, inviting roughly 6,000 family members.", type: "quote" },
+      { value: "58%", label: "Around 1,200 of roughly 2,000 eligible families paid again the next month.", kind: "Repeat family usage", type: "metric" },
+      { value: "80%", label: "Around 2,400 of roughly 3,000 created Hubs paid within 30 days.", kind: "Household payment activity", type: "metric" },
+      { label: "Around 4,800 invitees joined; about 3,800 went on to pay. The largest drop-off was before joining.", type: "quote" },
+      { value: "48%", label: "Nearly 1,900 activated invitees were new to PayZapp.", kind: "New-user acquisition", type: "metric" },
     ],
-    definitions: "Activation: invited members who join and make a first payment within 30 days. Repeat usage: active Hubs returning the following month. Payment activity: monthly transactions per active Hub. Percentage-point changes compare each assumed baseline with its illustrative target.",
-    future: "Validate these targets with a family pilot, then compare real activation, repeat use and payment activity. Use the gaps to improve joining, limits and request recovery before expanding the experience.",
+    definitions: "Rollout: approximately 10,000 selected existing PayZapp users; 3,000 created Hubs and invited 6,000 unique family members. Member activation: 3,840 of 6,000 invitees (64%) joined and made a first successful Hub payment within 30 days of invitation. Repeat usage: 1,160 of 2,000 activated Hubs with 60 days of follow-up (58%) paid again in days 31–60 after their first successful payment. Household payment activity: 2,400 of 3,000 created Hubs with 30 days of follow-up (80%) made at least one successful Hub payment within 30 days of enrollment. New-user acquisition: 1,860 of 3,840 activated invitees (48%, rounded) were new to PayZapp at invitation. Enrollment spans three months; only complete observation windows are counted. Percentages describe participation and composition, not uplift against a baseline.",
+    futureTitle: "What the rollout needed to uncover",
+    future: "Pair journey data with short user follow-ups to understand why people stopped. Compare new and existing users, member roles and approval needs, using cohorts with enough follow-up.",
+    diagnostics: [
+      { area: "Joining and activation", evidence: "Step conversion, drop-offs and time to first payment", question: "Where did setup or the invitation lose people?" },
+      { area: "Returning and participating", evidence: "Month-two/three payments and paying members per Hub", question: "What kept families coming back, or made them stop?" },
+      { area: "Paying with control", evidence: "Failure reasons, approval waits, expiry and limit blocks", question: "Were funds, spending rules or approvals getting in the way?" },
+    ],
+  },
+  learning: {
+    title: "Learning",
+    paragraphs: [
+      "Turbo Hub explored delegated family payments before NPCI launched UPI Circle in 2024. UPI Circle lets a primary user authorise trusted secondary users to pay from their UPI account. Our learnings on invitations, spending limits and payment approvals carried forward into PayZapp’s UPI Circle, built on NPCI’s framework. The lesson was to transfer the underlying needs while using rollout evidence to challenge where the experience fell short.",
+    ],
+    source: { label: "NPCI · UPI Circle", href: "https://www.npci.org.in/product/upi-circle" },
+    screens: [
+      { src: "assets/upi-circle/home-invitation.png", alt: "PayZapp home screen inviting Nirmal to join Anoop’s UPI Circle.", width: 360, height: 800 },
+      { src: "assets/upi-circle/accept-invitation.png", alt: "PayZapp UPI Circle acceptance modal over the home screen, with inviter details, terms and Accept Invite action.", width: 360, height: 800 },
+    ],
+    screensCaption: "PayZapp’s UPI Circle: the home-screen invitation and acceptance modal.",
   },
   closing: {
     media: { id: "phone-closing", label: "Closing media" },
@@ -1523,14 +1555,36 @@ function renderCaseStudy() {
 function createCaseStudyEnding() {
   const ending = createElement("section", "case-section case-ending");
   ending.id = "learning";
-  const heading = createSectionHeading("Learning");
+  const heading = createSectionHeading(caseStudy.learning.title);
   heading.id = "learning-heading";
   ending.setAttribute("aria-labelledby", heading.id);
   const column = createElement("div", "reading-column");
   column.append(heading);
-  appendParagraphs(column, [
-    "This project sharpened my judgment about where to focus design effort. Exploring alternatives and challenging them with the team helped me weigh their value against the complexity they introduced. I learned to hold ideas lightly, make trade-offs explicit and build agreement around the reasoning behind a decision. The clarity of the final experience came as much from what we chose to leave out as from what we designed.",
-  ]);
+  appendParagraphs(column, caseStudy.learning.paragraphs);
+  const source = createElement("p", "case-ending__source");
+  const sourceLink = createElement("a", "", caseStudy.learning.source.label);
+  sourceLink.href = caseStudy.learning.source.href;
+  sourceLink.target = "_blank";
+  sourceLink.rel = "noopener noreferrer";
+  source.append(sourceLink);
+  column.append(source);
+  const learningScreens = createElement("figure", "case-ending__screens");
+  const screenImages = createElement("div", "case-ending__screen-images");
+  caseStudy.learning.screens.forEach((screen, index) => {
+    const phone = createPhone({ id: `upi-circle-${index + 1}`, label: screen.alt });
+    const image = document.createElement("img");
+    image.className = "case-ending__screen-image";
+    image.src = screen.src;
+    image.alt = screen.alt;
+    image.width = screen.width;
+    image.height = screen.height;
+    image.loading = "lazy";
+    image.decoding = "async";
+    phone.querySelector(".media-slot").replaceChildren(image);
+    screenImages.append(phone);
+  });
+  learningScreens.append(screenImages, createElement("figcaption", "", caseStudy.learning.screensCaption));
+  column.append(learningScreens);
   const separator = createElement("div", "case-ending__separator");
   separator.setAttribute("aria-hidden", "true");
   const flower = createElement("img", "");
@@ -1597,34 +1651,36 @@ function createDesignTradeoffs() {
   section.setAttribute("aria-labelledby", heading.id);
   const screens = createElement("div", "design-tradeoffs__screens");
   caseStudy.tradeoffs.screens.forEach(screen => {
+    const direction = createElement("article", "design-tradeoffs__direction");
+    const directionHeading = createElement("h3", "design-tradeoffs__direction-heading", screen.heading);
+    directionHeading.id = `tradeoff-${screen.route ? screen.route.split("?")[0] : screens.children.length + 1}-heading`;
+    direction.setAttribute("aria-labelledby", directionHeading.id);
     const figure = createElement("figure", "design-tradeoffs__screen");
-    const caption = createElement("figcaption", "", screen.label);
     if (screen.route) {
       figure.append(
         createPhone({ id: `tradeoff-${screen.route.split("?")[0]}`, label: screen.alt, route: screen.route }),
-        caption,
       );
-      screens.append(figure);
-      return;
+    } else {
+      const image = document.createElement("img");
+      image.src = screen.src;
+      image.alt = screen.alt;
+      image.width = 280;
+      image.height = 520;
+      image.loading = "lazy";
+      image.decoding = "async";
+      const phone = createPhone({ id: `tradeoff-${screens.children.length + 1}`, label: screen.label });
+      image.className = "design-tradeoffs__screen-image";
+      phone.querySelector(".media-slot").replaceChildren(image);
+      figure.append(phone);
     }
-    const image = document.createElement("img");
-    image.src = screen.src;
-    image.alt = screen.alt;
-    image.width = 280;
-    image.height = 520;
-    image.loading = "lazy";
-    image.decoding = "async";
-    const phone = createPhone({ id: `tradeoff-${screens.children.length + 1}`, label: screen.label });
-    image.className = "design-tradeoffs__screen-image";
-    phone.querySelector(".media-slot").replaceChildren(image);
-    figure.append(phone, caption);
-    screens.append(figure);
+    direction.append(
+      directionHeading,
+      createElement("p", "design-tradeoffs__description", screen.description),
+      figure,
+    );
+    screens.append(direction);
   });
-  column.append(
-    heading,
-    createElement("p", "section-intro", caseStudy.tradeoffs.intro),
-    screens,
-  );
+  column.append(heading, createElement("p", "section-intro", caseStudy.tradeoffs.intro), screens);
   section.append(column);
   return section;
 }

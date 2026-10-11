@@ -162,12 +162,13 @@ body {
 .preview-reference a { color:#bdc5d4; text-decoration:underline; text-underline-offset:3px; font-size:12px; }
 .preview-prototype { flex:none; color:#e8eaed; }
 .preview-prototype .phone { width:min(433.333px,calc(100vw - 32px),calc((100svh - 92px) * 100 / 206.4)); }
-.preview-prototype__toolbar { position:relative; display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; font:400 14px/20px var(--th-font); }
+.preview-prototype__toolbar { position:relative; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:12px; margin-bottom:12px; font:400 14px/20px var(--th-font); }
+.preview-prototype__actions { display:flex; align-items:center; gap:8px; margin-left:auto; }
 .preview-reference figcaption > a { flex:none; }
-.preview-copy-reference { display:inline-flex; align-items:center; gap:6px; min-height:32px; padding:4px 8px; border:1px solid #ffffff30; border-radius:6px; background:transparent; color:inherit; font:inherit; font-size:12px; cursor:pointer; }
-.preview-copy-reference:hover { background:#ffffff12; }
-.preview-copy-reference:focus-visible { outline:2px solid #bdc5d4; outline-offset:3px; }
-.preview-copy-reference svg { flex:none; }
+.preview-copy-reference, .preview-ds-link { display:inline-flex; align-items:center; gap:6px; min-height:32px; padding:4px 8px; border:1px solid #ffffff30; border-radius:6px; background:transparent; color:inherit; font:inherit; font-size:12px; cursor:pointer; text-decoration:none; white-space:nowrap; }
+.preview-copy-reference:hover, .preview-ds-link:hover { background:#ffffff12; }
+.preview-copy-reference:focus-visible, .preview-ds-link:focus-visible { outline:2px solid #bdc5d4; outline-offset:3px; }
+.preview-copy-reference svg, .preview-ds-link svg { flex:none; }
 .preview-copy-feedback { position:absolute; top:100%; left:0; margin:8px 0 0; padding:6px 10px; border-radius:6px; background:#252730; font:400 12px/20px var(--th-font); z-index:1; }
 .preview-copy-feedback:empty { display:none; }
 .preview-flow-navigation { margin-top:12px; }

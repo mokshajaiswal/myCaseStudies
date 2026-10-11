@@ -452,6 +452,13 @@ h4 {
   color: var(--ink-soft);
 }
 
+.case-ending__source { margin: var(--space-3) 0 0; font: var(--font-utility); color: var(--ink-soft); }
+.case-ending__screens { margin: var(--space-8) 0 0; }
+.case-ending__screen-images { display: flex; flex-wrap: wrap; justify-content: center; align-items: flex-start; gap: var(--space-8); }
+.case-ending__screen-images > .phone { width: min(100%, 280px); }
+.media-slot > .case-ending__screen-image { object-fit: contain; background: var(--surface-raised); }
+.case-ending__screens figcaption { margin-top: var(--space-4); text-align: center; font: var(--font-utility); color: var(--ink-soft); }
+
 .body-copy p {
   max-width: none;
   margin: 0 0 var(--paragraph-gap);

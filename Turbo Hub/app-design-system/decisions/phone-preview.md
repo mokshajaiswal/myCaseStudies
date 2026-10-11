@@ -52,3 +52,19 @@ details, Geofence, Spending limit, Pixel Tag, Tag scanner, payment outcome and n
 Visual review pending with the user.
 
 - Prototypes load the design system through `prototypes/shared/ds.js` instead of hard-coded `/design-system/` paths. One synchronous check picks `../../app-design-system/` on any plain static server (Live Server, GitHub Pages) or `/design-system/` in the DS studio, which does not serve the content folder by relative path. Avatar artwork resolves relative to `components/hub.js`. The studio-only spacing inspector (`/framework/…`) is simply absent off-studio.
+
+
+## Inspector preview link — 11 October 2026
+
+The shared standalone toolbar now groups Copy reference and Preview with DS
+side by side. The new native link uses the registered Phosphor open-external
+icon, opens a new tab and preserves the current page query/state with ds=true.
+Live Server/file paths map to the configured studio’s /app/ route on port 8020;
+studio-hosted previews retain their current origin and port. State mutations
+and activation refresh the URL. Story/concept previews omit this toolbar.
+
+This is existing preview tooling, not a product Action variant or new catalog
+component. Shared toolbar styling owns both controls and their 8px external gap;
+no product component internals or tokens change. The pair stays together when
+the toolbar wraps. Source syntax, URL mapping and whitespace checks pass. Browser
+layout, link activation and visual review remain with the user.

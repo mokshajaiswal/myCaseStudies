@@ -8,6 +8,8 @@
   fit();new ResizeObserver(fit).observe(viewport);
   // Story presentation keeps the existing phone, without comparison/inspection tooling.
   if(window.TurboStoryContext?.embedded || document.body.dataset.preview === "concept")return;
+  const appPath=new URL('../../',document.currentScript.src).pathname;
+  const studioOrigin=window.TurboDesignSystemBase==='/design-system/'?location.origin:'http://127.0.0.1:8020';
   const assets={
     invitation:['419:29279','Invitation · WhatsApp source'],
     'tag-added':['436:58199','Hub Members · Tag added'],
@@ -45,7 +47,14 @@
   const toolbar=document.createElement('div');toolbar.className='preview-prototype__toolbar';const label=document.createElement('span');label.textContent='Prototype';toolbar.append(label);phone.before(toolbar);
   const copy=document.createElement('button');copy.type='button';copy.className='preview-copy-reference';copy.title='Copy page reference';copy.setAttribute('aria-label','Copy page reference');
   copy.innerHTML='<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="5" y="5" width="9" height="9" rx="1.5" stroke="currentColor"/><path d="M10 3V2H2v8h1" stroke="currentColor" stroke-linejoin="round"/></svg><span>Copy reference</span>';
-  toolbar.append(copy);
+  const inspector=document.createElement('a');inspector.className='preview-ds-link';inspector.target='_blank';inspector.rel='noopener';inspector.title='Open this screen with the DS inspector';
+  inspector.innerHTML=TurboIcons.render('open-external',{size:16})+'<span>Preview with DS</span>';
+  const refreshInspector=()=>{
+    const page=new URL(location.href),url=new URL('/app/'+page.pathname.slice(appPath.length),studioOrigin);
+    url.search=page.search;url.searchParams.set('ds','true');url.hash=page.hash;inspector.href=url.href;
+  };
+  refreshInspector();inspector.addEventListener('click',refreshInspector);
+  const actions=document.createElement('div');actions.className='preview-prototype__actions';actions.append(copy,inspector);toolbar.append(actions);
   const feedback=document.createElement('p');feedback.className='preview-copy-feedback';feedback.setAttribute('role','status');feedback.setAttribute('aria-live','polite');toolbar.append(feedback);
   let feedbackTimer;
   copy.addEventListener('click',async()=>{
@@ -63,7 +72,7 @@
     clearTimeout(feedbackTimer);feedback.textContent=copied?'Page reference copied':'Could not copy page reference';
     feedbackTimer=setTimeout(()=>{feedback.textContent='';},2600);
   });
-  function update(){const key=document.body.dataset.reference,asset=assets[key];if(!asset)return;const [id,label]=asset;img.src='../shared/references/figma/'+key+'.png';img.alt='Figma reference · '+label;title.textContent=label+' · Figma';link.textContent='Open in Figma';link.href='https://www.figma.com/design/IJU02E1n5jSddJqd3SpkG7/Turbo-Hub?node-id='+id.replace(':','-');img.classList.remove('is-composite');img.style.setProperty('--reference-offset','0%');stage.scrollTop=0;}
+  function update(){refreshInspector();const key=document.body.dataset.reference,asset=assets[key];if(!asset)return;const [id,label]=asset;img.src='../shared/references/figma/'+key+'.png';img.alt='Figma reference · '+label;title.textContent=label+' · Figma';link.textContent='Open in Figma';link.href='https://www.figma.com/design/IJU02E1n5jSddJqd3SpkG7/Turbo-Hub?node-id='+id.replace(':','-');img.classList.remove('is-composite');img.style.setProperty('--reference-offset','0%');stage.scrollTop=0;}
   update();
   if(document.body.dataset.reference==='pixel-tag'){
     img.src='../../flow-reference/source/L9fO641kjt3My4tVM92GN606kQ0.png';img.alt='Pixel Tag choices · original flow reference';

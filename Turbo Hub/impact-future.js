@@ -17,9 +17,9 @@
     const stage = node('div', 'impact-future__stage');
     stage.dataset.impactStage = '';
     const center = node('div', 'impact-future__center');
-    center.append(node('span', 'impact-future__eyebrow', 'An illustrative success scenario'), node('h3', 'impact-future__statement', data.statement));
+    center.append(node('span', 'impact-future__eyebrow', data.eyebrow), node('h3', 'impact-future__statement', data.statement));
     const notes = node('ul', 'impact-future__notes');
-    notes.setAttribute('aria-label', 'Assumed baselines and illustrative targets for the success metrics');
+    notes.setAttribute('aria-label', data.notesLabel);
     data.notes.forEach((item, index) => {
       const note = node('li', 'impact-future__note');
       note.dataset.slot = String(index);
@@ -47,13 +47,33 @@
     artwork.append(center, notes);
     stage.append(artwork);
     const future = node('div', 'reading-column impact-future__next');
-    future.append(node('h3', 'impact-future__future-title', 'Where it goes next'), node('p', 'body-copy', data.future));
+    future.append(node('h3', 'impact-future__future-title', data.futureTitle), node('p', 'body-copy', data.future));
+    const matrix = node('table', 'impact-future__diagnostics');
+    matrix.append(node('caption', '', 'Diagnostic measures for the segmented rollout'));
+    const head = node('thead', '');
+    const headings = node('tr', '');
+    ['Journey', 'Evidence to extract', 'Question to investigate'].forEach(label => {
+      const cell = node('th', '', label);
+      cell.scope = 'col';
+      headings.append(cell);
+    });
+    head.append(headings);
+    const body = node('tbody', '');
+    data.diagnostics.forEach(item => {
+      const row = node('tr', '');
+      const area = node('th', '', item.area);
+      area.scope = 'row';
+      row.append(area, node('td', '', item.evidence), node('td', '', item.question));
+      body.append(row);
+    });
+    matrix.append(head, body);
+    future.append(matrix);
     section.append(copy, stage, future);
     return section;
   }
   function mount(stage) {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-    let visible = true, frame = null, travel = [], centerOffset = 0, restingHeight = 0;
+    let visible = true, frame = null, travel = [], restingHeight = 0;
     const notes = Array.from(stage.querySelectorAll('.impact-future__note'));
     function measureTravel() {
       // Measure the final composition, including captions that extend past their frames.
@@ -61,7 +81,6 @@
       stage.style.setProperty('--impact-stage-height', 'calc(var(--impact-lower-start) + var(--impact-motion-room))');
       const initialCanvas = stage.getBoundingClientRect();
       const center = stage.querySelector('.impact-future__center').getBoundingClientRect();
-      centerOffset = center.top - initialCanvas.top;
       stage.style.setProperty('--impact-lower-start', (center.bottom - initialCanvas.top + 40) + 'px');
       const canvas = stage.getBoundingClientRect();
       const bounds = notes.map(note => {
@@ -91,8 +110,8 @@
       const top = stage.getBoundingClientRect().top;
       const clamp = value => Math.max(0, Math.min(1, value));
       const smooth = value => { const t = clamp(value); return t * t * (3 - 2 * t); };
-      // Hidden outside the composition → appear and gather around the headline.
-      const progress = clamp((innerHeight * 0.95 - (top + centerOffset)) / (innerHeight * 0.6));
+      // Gather on the upper cards' entry; settle by the viewport midpoint.
+      const progress = clamp((innerHeight * 0.95 - top) / (innerHeight * 0.45));
       travel.forEach(({note}, index) => {
         const delay = [0, 0.06, 0.02, 0.04, 0.08, 0.06][index] || 0;
         const arrival = clamp((progress - delay) / (1 - delay));

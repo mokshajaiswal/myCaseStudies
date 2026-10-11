@@ -52,37 +52,67 @@ bottom safe area. Product components are unchanged.
 Both versions update the fragment and focus the destination heading without
 an extra scroll. Neither locks scrolling or traps focus.
 
-## What we chose to leave out
+## Directions I explored and set aside
 
-A deliberately compact section after #flows: one short paragraph, two static
-screen concepts side by side, and one short description beneath. The screens
-reconstruct the all-at-once setup and generic app welcome left out of the final
-direction. They are illustrative alternatives inferred at the user’s request,
-not historical wireframes or tested screens. Source: create-flow and
-whatsapp-invite-flow in flow-story-data.js, with payment activation kept in the
-member profile. The invitation-led entry remains a proposed prototype direction.
+A short introduction explains leaving initial directions out to validate the MVP
+early. Two vertically stacked directions, “NFC Pixel Tags” and “Shared expenses”,
+each have a mini heading and one paragraph before their existing illustrative
+phone. Pixel Tags are framed as an optional convenience to add after validating
+the core experience. Shared expenses would add payments, splitting and settlement
+in one place. There is no extra conclusion or screen caption.
 
-SVG screen concepts live in assets/tradeoffs/; they are page-owned illustrations,
-not new product screens or independently interactive components. Both use the
-existing blue chrome/light surface language. Captions and copy reuse editorial
-typography and spacing. No links, repeated subheadings, timeline diagrams or
-additional rationale blocks are added. They stay side by side on narrow screens,
-scale to their columns, and have descriptive alternative text. Browser review
-remains with the user.
+The existing Pixel Tag link/buy prototype uses the plum palette; the existing
+shared-expenses prototype uses teal. Neither screen or hidden flow is changed.
+Pixel Tag copy reflects the user-provided NFC external-instrument concept and
+the existing hidden payment/tracking branch. Shared expenses describes one place
+for payments, shared bills, splitting and settlement, with personal accounts.
+
+The page-owned arrangement uses a single column at every viewport size; phones
+retain their existing 280px maximum. Headings use --font-small-heading and
+paragraphs use --font-small-body. External gaps
+use existing spacing tokens. No registered product component is overridden.
+Browser and visual review remain with the user.
 
 ## Impact & future
 
 Reference-led composition: six thin colored selection frames with square corner
 handles, oversized colored numbers, overlapping white-text caption bubbles with
 tails, and two red highlighted text frames. Blue activation sits top-left, purple
-repeat usage top-right, orange payment activity bottom-left and green activation
-uplift bottom-right; red explanation frames sit above and below the central
+repeat usage top-right, orange payment activity bottom-left and green new-user
+acquisition bottom-right; red explanation frames sit above and below the central
 italic Larken statement. This follows the user-supplied image composition.
 
-All numbers remain explicitly illustrative assumptions: activation 40% → 70%,
-repeat use 25% → 45%, payments/active Hub/month 4 → 8, with activation uplift
-+30 percentage points. These map to the three earlier success metrics; no
-measured results, shipping claims or fabricated testimonials are presented.
+The user confirmed rollout to approximately 10,000 selected existing PayZapp
+users likely to take a household-manager role. Downstream numbers remain working
+assumptions, pending replacement with MoEngage and transaction exports: 3,000
+created Hubs and 6,000 family invitees; 64% member activation (3,840/6,000), 58%
+repeat family usage (1,160/2,000 eligible Hubs), 80% household payment participation
+(2,400/3,000), and 48% of activated invitees new to PayZapp (1,860/3,840, rounded).
+Percentages remain the headline values; rounded counts and approximate
+denominators appear in explanation bubbles using “around”, “roughly” and “nearly”.
+Percentages use the unrounded underlying counts, retained for reference.
+The central highlight reads “Approximately 10,000 selected
+PayZapp users.” beneath “Segmented Rollout across three months”; the introduction explains
+the household-manager selection rationale without repeating the count. The payment card now
+shows household participation rather than transaction frequency, making all four
+headlines percentages. At the user's request, the visible copy and accessibility
+labels preview the final presentation without placeholder markers. Fictional
+provenance remains documented here for later replacement. No baseline or causal
+uplift is claimed. Source counts and observation windows are documented in
+app-design-system/decisions/impact-mock-pilot.md; copy stays in script.js.
+
+Success measures also track drop-offs, return patterns and payment/control friction.
+Impact's “What the rollout needed to uncover” adds a compact three-row diagnostic
+matrix pairing journey evidence with follow-up questions. Learning is a short
+paragraph connecting the earlier Turbo Hub work to PayZapp's UPI Circle, with an
+official NPCI source link. Project chronology and transfer of learnings come from
+the user; the public source supports the delegated-payment mechanism. No failure
+causes are invented. Two screenshots exported from the user-supplied Figma frame
+2099:26186 illustrate PayZapp’s UPI Circle home-screen invitation and acceptance
+modal below Learning. Both reuse the existing createPhone casing, keep the full
+screenshots visible with object-fit: contain, wrap on narrow widths, and have one
+short shared caption. Extraction definitions and ownership
+are recorded in app-design-system/decisions/upi-circle-learning.md.
 
 The editorial stage uses a 70rem-wide composition. Lower frames anchor 32px
 below the measured central text, with 520px of canvas reserved after that anchor; mobile uses
@@ -603,7 +633,7 @@ utility typography as its inline highlighted text. This removes the inherited
 20px/33px body line-box minimum that was creating gaps between wrapped lines.
 # Impact composition refinement
 
-The composition stays at its natural size, with the center at 360px and 40px before the lower group. Notes start hidden and displaced outward in depth; as the headline enters the reading area they fade in and gather with a small stagger. They remain visible once settled. Reverse scrolling reverses the arrival. No pinned scene or extra scroll runway is used. Reduced motion keeps every note visible. Browser review remains manual.
+The composition stays at its natural size, with the center at 360px and 40px before the lower group. Notes start hidden and displaced outward in depth; as the top of the artwork reaches 95% of the viewport height they fade in and gather with a small stagger. Assembly finishes when that top reaches 50% of the viewport height, giving the upper cards time to settle while still in view. The scroll trigger uses the artwork's top rather than the later central headline. They remain visible once settled. Reverse scrolling reverses the arrival. No pinned scene or extra scroll runway is used. Reduced motion keeps every note visible. Browser review remains manual.
 
 The lower orange and green frames share a top edge and compact 180px desktop height. Their shorter captions overlap by 56px with smaller outward offsets. The middle red note uses a paragraph with an explicit 14px/21px line box to prevent inherited body leading from spreading its highlighted lines. Mobile keeps the two metrics together and places the red note below them. These remain page-owned editorial elements; no registered product component is overridden. Visual review remains with the user.
 
