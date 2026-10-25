@@ -1,4 +1,4 @@
-/* Page-owned reading navigation; product prototypes remain independent. */
+/* Shared reading navigation; product prototypes remain independent. */
 (() => {
   // Exact damped-spring step: preserve position and velocity when direction changes.
   function advanceNavigationSpring(position, velocity, target, seconds) {
@@ -16,29 +16,10 @@
   }
   const requestedVersion = new URLSearchParams(location.search).get('nav');
   const version = ['2', '3'].includes(requestedVersion) ? requestedVersion : '1';
-  const sections = (version === '3' ? [
-    ['top', 'Back to top'],
-    ['overview', 'Overview'],
-    ['product', 'Product'],
-    ['opportunity', 'Opportunity'],
-    ['timeline', 'Timeline'],
-    ['technology', 'Success measures'],
-    ['research', 'Research'],
-    ['design-question', 'Design question'],
-    ['competitive-research', 'Learnings'],
-    ['relationship', 'Roles'],
-    ['artifacts', 'Exploration'],
-    ['flows', 'Flows'],
-    ['design-tradeoffs', 'Directions set aside'],
-    ['impact-future', 'Impact & future'],
-    ['learning', 'Learning'],
-  ] : [
-    ['overview', 'Overview'],
-    ['metrics', 'Metrics'],
-    ['research', 'Research'],
-    ['flows', 'Flow'],
-    ['impact-future', 'Impact'],
-  ]).filter(([id]) => document.getElementById(id));
+  // Each case study lists its sections in content.js: `sections` for the tray, `dial` for ?nav=3.
+  const navigation = window.CaseStudy?.data?.navigation || {};
+  const sections = ((version === '3' ? navigation.dial : navigation.sections) || [])
+    .filter(([id]) => document.getElementById(id));
   if (!sections.length) return;
   const make = (tag, className, text) => {
     const element = document.createElement(tag);

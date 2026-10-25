@@ -2,7 +2,7 @@
 
 Playback uses the locally vendored lottie-web light SVG player, version 5.13.0, distributed under MIT: https://github.com/airbnb/lottie-web. The footer expands the rendering canvas to 2200px wide and frames its flower bed with `0 400 1374.81 500`. The SVG fills the footer bounds without letterboxing, with its baseline behind the pink wave. The supplied source file remains unchanged. `flowers-still.svg` is a frame-180 render from that same animation and displays until playback is ready.
 
-The player and license are in `assets/lottie/`. `looped-flowers.js` exports the unchanged JSON as `window.TurboClosingFlowers` for the local Studio, whose public routes exclude JSON and folders named `vendor`. Regenerate this wrapper when changing the source animation.
+The player and license are in `../case-study-kit/lottie/`, shared by every case study. `looped-flowers.js` exports the unchanged JSON as `window.TurboClosingFlowers` for the local Studio, whose public routes exclude JSON and folders named `vendor`. Regenerate this wrapper when changing the source animation.
 
 A single canvas repeats one original flower period at the authored 4644.38-unit spacing. The authored growth sequence is stretched to 1.65 times its duration, and playback runs at 3×. This spreads the individual growth events across the moving bed. Layer indices and parents are remapped; the supplied asset remains unchanged. Visual review remains manual.
 

@@ -5,7 +5,7 @@ interaction as a reversible option, without significantly refactoring the page.
 
 ## Switch and ownership
 
-case-reveal.js and case-reveal.css are separate, page-owned presentation modules.
+case-study-kit/case-reveal.js and case-reveal.css are separate, page-owned presentation modules shared by every case study.
 index.html loads them after the existing case-study renderer and navigation.
 The user subsequently requested default-on behavior. No parameter enables
 reveals; ?reveal=1 remains supported and ?reveal=0 disables them. This composes with ?nav=1, 2 or 3. Runtime switching uses

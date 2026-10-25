@@ -8,7 +8,7 @@ requested preserving both previous navigation versions.
 
 ## Routing and ownership
 
-The existing page-owned case-navigation.js/css implement version 3 under ?nav=3.
+The shared case-study-kit/case-navigation.js/css implement version 3 under ?nav=3.
 ?nav=1 remains the default bottom tray; ?nav=2 retains its edge bookmark and panel.
 URL selection never rewrites or removes either version. Product Navigation and
 Action catalog entries serve mobile product chrome, not this reading control;

@@ -5,6 +5,8 @@ on:
     branches: [main]
     paths:
       - 'Turbo Hub/**'
+      - 'Balance Explorer/**'
+      - 'case-study-kit/**'
       - 'docs/**'
       - 'scripts/build-pages.py'
       - '.github/workflows/pages.yml'

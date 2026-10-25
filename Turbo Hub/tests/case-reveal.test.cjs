@@ -2,7 +2,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const vm = require('node:vm');
-const source = fs.readFileSync(require.resolve('../case-reveal.js'), 'utf8');
+const source = fs.readFileSync(require.resolve('../../case-study-kit/case-reveal.js'), 'utf8');
 
 function harness({search = '', reducedMotion = false, observerAvailable = true, hash = ''} = {}) {
   const timers = new Map(), frames = [], events = {}, observers = [];
@@ -369,7 +369,7 @@ test('focusing a link reveals its paragraph without skipping adjacent body text'
 });
 
 test('both Zeta technology paragraphs are selected and reveal by measured line', () => {
-  const script = fs.readFileSync(require.resolve('../script.js'), 'utf8');
+  const script = fs.readFileSync(require.resolve('../content.js'), 'utf8');
   const block = script.match(/technology:\s*\{([\s\S]*?)\n\s*\},\n\s*artifacts:/)[1];
   const data = block.match(/paragraphs:\s*\[([\s\S]*?)\]/)[1].replace(/,\s*$/, '');
   const text = JSON.parse('[' + data + ']');

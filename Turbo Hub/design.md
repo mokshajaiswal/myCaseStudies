@@ -182,9 +182,9 @@ This page uses a small token system so spacing can be changed globally instead o
 
 ### Visual reference
 
-`tokens.html` provides live specimens of the six content roles and the two utility exceptions, actual-length spacing bars, semantic rhythm diagrams, and a searchable inventory of all shared root tokens. Measurements read computed styles from the same `styles.css` used by the case study, including the mobile overrides; resize below 48rem to inspect them. `tokens.js` lists token names without duplicating their values. When adding or removing a root token, synchronize that name list. The reference has its own utility layout styles and does not load the case-study renderer.
+`tokens.html` provides live specimens of the six content roles and the two utility exceptions, actual-length spacing bars, semantic rhythm diagrams, and a searchable inventory of all shared root tokens. Measurements read computed styles from the same `../case-study-kit/kit.css`, `theme.css` and `styles.css` used by the case study, including the mobile overrides; resize below 48rem to inspect them. `tokens.js` lists token names without duplicating their values. When adding or removing a root token, synchronize that name list. The reference has its own utility layout styles and does not load the case-study renderer.
 
-The master spacing token is at the top of `styles.css`:
+The master spacing token is at the top of `../case-study-kit/kit.css`:
 
 ```css
 --space-unit: 0.25rem;
@@ -301,7 +301,7 @@ Reusable content-card titles use `--card-heading-weight: 600` so their labels re
 
 Content beneath the hero uses the shared `--content-width` container without editorial indentation. Standard `.body-copy` paragraphs have no extra width cap; selected introductions, relationship descriptions, and flow copy retain component-specific reading-width limits.
 
-The font families are also centralized in `styles.css`:
+The font families are also centralized in `../case-study-kit/kit.css`:
 
 ```css
 --font-display: "Larken", Georgia, serif;
@@ -418,7 +418,7 @@ The scroll-progress indicator updates directly from scroll position without inte
 
 ## Rule ownership and verification
 
-`styles.css` is the authority for token values and responsive overrides. This document defines where each role applies. `tokens.html` is the visual reference and reads live computed values through `tokens.js`; the inventory lists all root token names. All three must be updated together when the system changes. Content spacing uses semantic aliases; raw scale tokens are reserved for component geometry, decorative offsets, and interaction targets. The standalone onboarding prototype describes product UI and keeps its own documented typography rather than inheriting case-study editorial roles.
+`../case-study-kit/kit.css` is the authority for shared token values and responsive overrides; `theme.css` owns Turbo Hub's color tokens. This document defines where each role applies. `tokens.html` is the visual reference and reads live computed values through `tokens.js`; the inventory lists all root token names. All three must be updated together when the system changes. Content spacing uses semantic aliases; raw scale tokens are reserved for component geometry, decorative offsets, and interaction targets. The standalone onboarding prototype describes product UI and keeps its own documented typography rather than inheriting case-study editorial roles.
 ## Standalone flow placement guide
 
 The separate flow-reference page uses local Helix, a white surface, off-black text, and cardless chapter headers. Screen placeholders are neutral gray; suggested additions use pale amber with dashed borders and explicit text labels. Desktop uses three columns, tablet two, and small mobile one. Source notes use native details elements. No entrance or scroll animations are added. The companion does not change main-page tokens or components.

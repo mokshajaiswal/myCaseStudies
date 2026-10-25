@@ -1,0 +1,44 @@
+/* Balance Explorer theme: colors and artwork layered over case-study-kit/kit.css.
+   Palette follows the Balance Explorer prototype: cool canvas, violet-blue accent, teal secondary. */
+:root {
+  --page: #f7f8fc;
+  --surface: #fbfbfe;
+  --surface-raised: #ffffff;
+  --ink: #343c55;
+  --ink-soft: #626d85;
+  --heading-ink: #202842;
+  --line: #e7eaf2;
+  --accent: #555feb;
+  --accent-strong: #3f48d4;
+  --accent-soft: #f1f2ff;
+  --detail-surface: #f3f4fd;
+  --detail-border: #dfe2f6;
+  --detail-raised: #fbfbff;
+  --detail-shadow:
+    inset -8px -8px 4px rgb(221 224 245 / 0.25),
+    inset 8px 8px 4px rgb(221 224 245 / 0.21);
+  --hero-a: #5b63ef;
+  --hero-b: #3b3db5;
+  --hero-ink: #f7f8ff;
+  --hero-ink-soft: rgb(247 248 255 / 0.88);
+  --secondary: #2f8f7f;
+  --secondary-soft: #e2f3ef;
+  --secondary-strong: #237364;
+  --secondary-glow-rgb: 65 149 130;
+  --secondary-shade-rgb: 8 62 52;
+  --secondary-ink-shadow-rgb: 6 48 40;
+  --ending-wave: #3aa58c;
+  --shadow-rgb: 56 62 150;
+  --phone-shadow: drop-shadow(0 24px 30px rgb(56 62 150 / 0.18));
+}
+
+.asset-placeholder--icon,
+.design-question::before {
+  background: url("assets/heading_flower.svg") center / contain no-repeat;
+}
+
+.hero::after {
+  background:
+    radial-gradient(circle at 50% 115%, rgb(85 95 235 / 0.7), transparent 54%),
+    url("assets/bg.webp") center / cover no-repeat;
+}

@@ -53,6 +53,9 @@ function createClosingFlowerField(source) {
   return data;
 }
 
+// The player ships with the kit; each case study supplies assets/closing/looped-flowers.js.
+const closingFlowersPlayer = new URL('lottie/lottie-light.min.js', document.currentScript.src).href;
+
 (() => {
   const container = document.querySelector('#closing-illustration');
   if (!container) return;
@@ -74,7 +77,7 @@ function createClosingFlowerField(source) {
     });
   }
   const player = document.createElement('script');
-  player.src = 'assets/lottie/lottie-light.min.js';
+  player.src = closingFlowersPlayer;
   player.onload = () => {
     const data = document.createElement('script');
     data.src = 'assets/closing/looped-flowers.js';
@@ -87,7 +90,7 @@ function createClosingFlowerField(source) {
         const animation = window.lottie.loadAnimation({
           container: panel,
           renderer: 'svg', loop: true, autoplay: false,
-          animationData: createClosingFlowerField(window.TurboClosingFlowers),
+          animationData: createClosingFlowerField(window.CaseStudyClosingFlowers || window.TurboClosingFlowers),
           rendererSettings: { preserveAspectRatio: 'none', viewBoxSize: '0 400 1374.81 500', progressiveLoad: false },
         });
         animations.push(animation);

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <meta
+      name="description"
+      content="Balance Explorer case study: making account balances readable for bank finance teams."
+    />
+    <title>Balance Explorer | Product Case Study</title>
+    <link rel="preload" as="image" href="assets/bg.webp" type="image/webp" />
+    <link rel="stylesheet" href="../case-study-kit/kit.css?v=1" />
+    <link rel="stylesheet" href="theme.css?v=1" />
+    <link rel="stylesheet" href="../case-study-kit/case-navigation.css?v=35" />
+    <link rel="stylesheet" href="../case-study-kit/case-ending.css?v=45" />
+    <link rel="stylesheet" href="../case-study-kit/case-reveal.css?v=5" />
+    <!-- Reading icons and the recap card come from the Turbo Hub design system. -->
+    <script src="../Turbo Hub/prototypes/shared/ds.js" data-assets="icons/phosphor.js?v=reading-icons-1 icons/turbo-icons.js?v=reading-icons-1 components/case-study-card.css components/case-study-card.js?v=flower-options-2"></script>
+    <script src="content.js?v=1" defer></script>
+    <script src="../case-study-kit/kit.js?v=1" defer></script>
+    <script src="script.js?v=1" defer></script>
+    <script src="../case-study-kit/closing-flowers.js?v=27" defer></script>
+    <script src="../case-study-kit/case-navigation.js?v=36" defer></script>
+    <script src="../case-study-kit/case-reveal.js?v=10" defer></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#case-study">Skip to case study</a>
+
+    <div
+      class="scroll-progress"
+      role="progressbar"
+      aria-label="Page scroll progress"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="0"
+    >
+      <span class="scroll-progress-fill" aria-hidden="true"></span>
+      <span class="scroll-progress-value" aria-hidden="true">0%</span>
+    </div>
+
+    <main id="case-study">
+      <div class="hero-scroll-stage">
+      <section class="hero" id="top" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <h1 id="hero-title"></h1>
+          <p id="hero-summary"></p>
+        </div>
+      </section>
+      </div>
+
+      <div id="dynamic-content"></div>
+    </main>
+
+    <template id="media-placeholder-template">
+      <div class="media-placeholder"></div>
+    </template>
+  </body>
+</html>

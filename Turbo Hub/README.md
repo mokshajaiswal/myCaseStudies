@@ -7,7 +7,7 @@ GitHub Pages publishes changes from `main` through `.github/workflows/pages.yml`
 and packages this case study under `turbo-hub/`, excluding development inspector
 scripts and project notes. Build locally with `python3 scripts/build-pages.py`.
 
-The final `#learning` section includes Turbo Hub reflections, a flower divider, a recap card and a pink wave at the end of the page. The wave scrolls with the footer. The decorative `#closing-illustration` slot plays the supplied `assets/closing/looped-flowers.json` behind the wave. `closing-flowers.js` loads the local Lottie player near the section and pauses offscreen or in hidden tabs; reduced motion shows a still frame. Closing layout lives in `case-ending.css`. Browser review remains manual.
+The final `#learning` section includes Turbo Hub reflections, a flower divider, a recap card and a pink wave at the end of the page. The wave scrolls with the footer. The decorative `#closing-illustration` slot plays the supplied `assets/closing/looped-flowers.json` behind the wave. `../case-study-kit/closing-flowers.js` loads the shared Lottie player near the section and pauses offscreen or in hidden tabs; reduced motion shows a still frame. Closing layout lives in `../case-study-kit/case-ending.css`. Browser review remains manual.
 
 This repository contains a single-page product-design case study for Turbo Hub, a family-payments concept created within PayZapp. It is a custom static site built with plain HTML, CSS, and JavaScript—there is no framework, build step, package manager, or backend.
 
@@ -55,7 +55,7 @@ After the blue rounded hero using `assets/bg.webp`, the page renders these areas
 
 The project-timeline box opens an accessible native dialog with the two-month project phases. It supports Escape, its close control, backdrop dismissal, and returns focus to the Open button.
 
-All page content is defined in the `caseStudy` object near the top of `script.js` and rendered by `renderCaseStudy()`.
+All page content is defined in the `caseStudy` object in `content.js` and rendered by `renderCaseStudy()` in `script.js`. Shared page chrome and section builders (hero, progress bar, headings, info panels, timeline, contact, ending, media slots, navigation, reveals and closing flowers) live in [`../case-study-kit/`](../case-study-kit/README.md), which other case studies such as Balance Explorer reuse. Colors and theme artwork are in `theme.css`.
 
 With `?dev=true`, each autoplay family-flow preview includes **View all screens** beside its playback controls. It opens an unboxed overlay on the case study, showing that flow’s unchanged phone fixtures side by side without flow playback or repeated narrative text. The strip scrolls horizontally when needed. Every preview has an **Open full page** button underneath for editing and inspecting its standalone prototype. Close, Escape or backdrop dismissal returns to the same case-study position. The overlay reads the same ordered sequence from `flow-story-data.js`, so newly autoplayed flows get this access automatically.
 
@@ -64,18 +64,21 @@ With `?dev=true`, each autoplay family-flow preview includes **View all screens*
 | File or folder | Purpose |
 | --- | --- |
 | `index.html` | Static document shell, accessibility landmarks, templates, preload hints, and script/style entry points. |
-| `styles.css` | Design tokens, typography, responsive layout, components, and progress indicator. |
+| `../case-study-kit/kit.css` | Shared design tokens (except colors), typography, responsive layout, shared components and progress indicator. |
+| `theme.css` | Turbo Hub color tokens, hero background and heading-flower artwork. |
+| `styles.css` | Turbo Hub-only sections: personas, relationship map, competitive board, product rules, flows and the phone stage. |
 | `tokens.html` / `tokens.js` | Standalone visual token reference and live computed measurements; no build step. |
-| `script.js` | Case-study data, DOM rendering, media-slot API, hero depth and scroll progress behavior. |
-| `case-reveal.js` / `case-reveal.css` | Reversible scroll entrances and paragraph line reveals; enabled by default, disabled with `?reveal=0`. |
+| `content.js` | Case-study copy, section navigation lists and ending artwork paths. |
+| `script.js` | Turbo Hub section rendering. The media-slot API, hero depth and scroll progress come from `../case-study-kit/kit.js`. |
+| `../case-study-kit/case-reveal.js` / `.css` | Reversible scroll entrances and paragraph line reveals; enabled by default, disabled with `?reveal=0`. |
 | `flow-story-data.js` / `flow-story.js` / `flow-story.css` | Fictional family narrative, declared screen sequences and editorial preview presentation. |
 | `flow-story-playback.js` | Reversible scripted touch choreography over locked prototype embeds. |
 | `FLOW-PLAYBACK-PLAYBOOK.md` | Reusable execution recipes, per-flow implementation briefs, validation and static restoration. |
 | `design.md` | Canonical detailed design-system and behavior specification. |
 | `README.md` | Fast project handoff and current-state summary for humans and new LLM chats. |
 | `assets/` | Hero background, transparent phone casing, annotation art, and future case-study media. |
-| `fonts/Helix/` | Local body and non-hero heading family. |
-| `fonts/Larken/` | Local hero-heading family. |
+| `fonts/Helix/` | Local body and non-hero heading family (the case study page loads the kit's copy). |
+| `fonts/Larken/` | Local hero-heading family (the case study page loads the kit's copy). |
 
 ## Established design decisions
 
@@ -155,7 +158,7 @@ clicks reverse from the current position and velocity instead of restarting.
 Text stays at its normal size throughout. Escape minimizes and focuses the
 control; section selection leaves the bar open. Reduced motion settles instantly.
 `?nav=2` retains the right-edge bookmark and chapter index. Both keep scrolling
-available. `case-navigation.js` owns links, versions and motion;
+available. `../case-study-kit/case-navigation.js` owns links, versions and motion;
 `case-navigation.css` uses editorial tokens. Source-level state/rapid-reversal
 checks and the Impeccable detector passed; visual review remains with the user.
 
@@ -165,7 +168,7 @@ When adding a section:
 2. Render it in `renderCaseStudy()` using semantic HTML.
 3. Add `.case-section` to a standard section.
 4. Use existing components and spacing tokens.
-5. Keep content readable without JavaScript. Configure default entrances in `case-reveal.js`; do not add reveal classes or word splitting to the content renderer or product components.
+5. Keep content readable without JavaScript. Configure default entrances in `../case-study-kit/case-reveal.js`; do not add reveal classes or word splitting to the content renderer or product components.
 6. Add media through `createPhone()` and the media-slot API rather than hardcoding screen content.
 7. Verify desktop and mobile behavior, reduced motion, and JavaScript syntax.
 

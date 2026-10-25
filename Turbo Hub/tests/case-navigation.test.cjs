@@ -4,7 +4,8 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const rowStep = 20, windowHeight = rowStep * 4, availableTravel = 15 * rowStep - windowHeight;
-const source = fs.readFileSync(path.join(__dirname, '../case-navigation.js'), 'utf8');
+const source = fs.readFileSync(path.join(__dirname, '../../case-study-kit/case-navigation.js'), 'utf8');
+const content = vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../content.js'), 'utf8') + ';caseStudy', {});
 function harness(version = '3', reduceMotion = true) {
   const ids = ['top','overview','product','opportunity','timeline','technology','research','design-question','competitive-research','relationship','artifacts','flows','design-tradeoffs','impact-future','learning'];
   const frames = [], listeners = {}, jumps = [], history = [];
@@ -62,7 +63,7 @@ function harness(version = '3', reduceMotion = true) {
     addEventListener: (name, fn) => { listeners[name] = fn; }};
   const reduced = {matches: reduceMotion, addEventListener() {}};
   const context = {document, location: {search: '?nav=' + version, hash: ''}, URLSearchParams,
-    window: {TurboIcons: true}, TurboIcons: {render: () => '<svg/>'}, innerHeight: 800, scrollY: 0,
+    window: {TurboIcons: true, CaseStudy: {data: content}}, TurboIcons: {render: () => '<svg/>'}, innerHeight: 800, scrollY: 0,
     history: {pushState: (...args) => history.push(args)}, matchMedia: () => reduced,
     requestAnimationFrame: fn => { frames.push(fn); return frames.length; }, cancelAnimationFrame() {},
     addEventListener: (name, fn) => { listeners[name] = fn; }, performance: {now: () => clock}};

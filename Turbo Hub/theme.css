@@ -1,0 +1,43 @@
+/* Turbo Hub theme: colors and artwork layered over case-study-kit/kit.css. */
+:root {
+  --page: #fffef8;
+  --surface: #fbfcf8;
+  --surface-raised: #fdfefe;
+  --ink: #3f4652;
+  --ink-soft: #536076;
+  --heading-ink: #34383f;
+  --line: #d9dfec;
+  --accent: #356cdf;
+  --accent-strong: #2857c8;
+  --accent-soft: #e7efff;
+  --detail-surface: #f8f6ed;
+  --detail-border: #eee5bd;
+  --detail-raised: #fffef8;
+  --detail-shadow:
+    inset -8px -8px 4px rgb(233 225 225 / 0.25),
+    inset 8px 8px 4px rgb(232 225 225 / 0.21);
+  --hero-a: #2d7be2;
+  --hero-b: #4a57d5;
+  --hero-ink: #f8fbff;
+  --hero-ink-soft: rgb(248 251 255 / 0.88);
+  --secondary: #dc4778;
+  --secondary-soft: #fde8ef;
+  --secondary-strong: #c94070;
+  --secondary-glow-rgb: 230 60 116;
+  --secondary-shade-rgb: 122 6 62;
+  --secondary-ink-shadow-rgb: 93 0 42;
+  --ending-wave: #ef3980;
+  --shadow-rgb: 43 73 133;
+  --phone-shadow: drop-shadow(0 24px 30px rgb(43 73 133 / 0.18));
+}
+
+.asset-placeholder--icon,
+.design-question::before {
+  background: url("assets/heading_flower.svg") center / contain no-repeat;
+}
+
+.hero::after {
+  background:
+    radial-gradient(circle at 50% 115%, rgb(29 105 211 / 0.7), transparent 54%),
+    url("assets/bg.webp") center / cover no-repeat;
+}

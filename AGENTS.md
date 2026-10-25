@@ -20,3 +20,9 @@ to confirm the configured attachment and server responses.
 
 For Turbo Hub UI changes, follow Turbo Hub/app-design-system/AGENTS.md and its
 linked workflow. Reuse existing components, tokens, and registered icons.
+
+## Case study kit
+
+Case studies share `case-study-kit/` (layout, typography, progress bar, hero,
+navigation, reveals and ending). Each case study folder owns its `content.js`,
+`theme.css`, `script.js` and assets. See `case-study-kit/README.md`.
