@@ -1,0 +1,5 @@
+node_modules/
+.venv/
+takes/
+out/
+package-lock.json

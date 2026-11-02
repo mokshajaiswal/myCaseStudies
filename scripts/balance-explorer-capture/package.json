@@ -1,0 +1,8 @@
+{
+  "name": "balance-explorer-capture",
+  "private": true,
+  "description": "Records the Balance Explorer case study videos from the prototype.",
+  "dependencies": {
+    "playwright-core": "1.47.2"
+  }
+}
