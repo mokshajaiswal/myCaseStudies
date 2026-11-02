@@ -163,6 +163,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* No rubber-band past the top, so the hero stays flush with the top of the window. */
+  overscroll-behavior-y: none;
 }
 
 body {

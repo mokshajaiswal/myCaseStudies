@@ -10,6 +10,6 @@
   window.TurboDesignSystemBase=base;
   for(const asset of (me.dataset.assets||'').split(/\s+/).filter(Boolean)){
     const url=new URL(asset,new URL(base,location.href)).href;
-    document.write(asset.endsWith('.css')?`<link rel="stylesheet" href="${url}">`:`<script src="${url}" defer><\/script>`);
+    document.write(asset.split('?')[0].endsWith('.css')?`<link rel="stylesheet" href="${url}">`:`<script src="${url}" defer><\/script>`);
   }
 })();
