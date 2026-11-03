@@ -3,7 +3,8 @@
 const { chromium } = require('playwright-core');
 const fs = require('fs');
 
-const BASE = 'http://127.0.0.1:4173/variant-02/index.html';
+// The case study's own copy of the prototype (Balance Explorer/prototype), served by the case-studies preview.
+const BASE = 'http://localhost:8000/Balance%20Explorer/prototype/index.html';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const easeInOut = k => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2);
 
@@ -185,7 +186,7 @@ const scenes = {
 
   const browser = await chromium.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, args: ['--window-size=1440,987', '--force-device-scale-factor=2', '--hide-scrollbars'] });
   const context = await browser.newContext({ viewport: null });
-  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: 'http://127.0.0.1:4173' });
+  await context.grantPermissions(['clipboard-read', 'clipboard-write'], { origin: 'http://localhost:8000' });
   const page = await context.newPage();
   const cdp = await context.newCDPSession(page);
   const log = { frames: [], cursor: [], clicks: [], cam: [] };

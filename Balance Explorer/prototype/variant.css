@@ -1,0 +1,300 @@
+@font-face{font-family:'IBM Plex Sans';src:url('fonts/IBMPlexSans-Regular.woff2') format('woff2');font-style:normal;font-weight:400;font-display:swap}
+@font-face{font-family:'IBM Plex Sans';src:url('fonts/IBMPlexSans-Medium.woff2') format('woff2');font-style:normal;font-weight:500;font-display:swap}
+@font-face{font-family:'IBM Plex Sans';src:url('fonts/IBMPlexSans-SemiBold.woff2') format('woff2');font-style:normal;font-weight:600;font-display:swap}
+@font-face{font-family:'IBM Plex Sans';src:url('fonts/IBMPlexSans-Bold.woff2') format('woff2');font-style:normal;font-weight:700;font-display:swap}
+
+:root{font-family:'IBM Plex Sans',Arial,sans-serif;--ink:#202b3e;--muted:#617087;--line:#dfe5ee;--blue:#3158c7;--blue-dark:#2549ad;--surface:#fff;--sidebar:#11245a;background:#fff;color:var(--ink)}
+html,body{font-family:'IBM Plex Sans',Arial,sans-serif;background:#fff}
+body{font-size:13px}
+.app-shell,.main-shell,.workspace{background:#fff}
+.sidebar{width:244px;flex:none;color:#dce7ff;border-right:0;background:#11245a}
+.brand strong{color:#fff;font-size:14px;font-weight:600;letter-spacing:0}
+.sidebar .nav-item,.sidebar .nav-details summary{font-family:'IBM Plex Sans',Arial,sans-serif}
+.view-select strong,.panel-head h2,.settings-intro h3{font-family:'IBM Plex Sans',Arial,sans-serif}
+::selection{background:#cfdbfb;color:#173568}
+
+/* The page has one framed content surface: the balance table. */
+.workspace{max-width:none;margin:0;padding:18px 22px}
+.workbench{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 322px;align-items:stretch;gap:24px;min-height:calc(100dvh - 102px);padding:0;border:0;border-radius:0;background:transparent;box-shadow:none;overflow:visible}
+.workbench.panel-hidden{grid-template-columns:minmax(0,1fr) 28px;gap:0}
+.workbench.panel-hidden .settings-panel{display:none}
+.workbench.panel-hidden::after{content:"";position:absolute;top:0;bottom:0;right:14px;width:1px;background:#e7ebf1;pointer-events:none}
+.data-pane{min-width:0;height:calc(100dvh - 102px);min-height:520px;display:flex;flex-direction:column;background:transparent;border:0;overflow:visible}
+.settings-panel{min-width:0;min-height:calc(100dvh - 102px);display:flex;flex-direction:column;padding-left:23px;background:transparent;border:0;border-left:1px solid #e7ebf1;overflow:visible}
+.viewbar,.toolbar{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 20px;border:0;background:transparent}
+.viewbar{height:76px;flex:none}
+.toolbar{height:48px;flex:none}
+.view-select-wrap{position:relative}
+.view-select{display:flex;align-items:center;gap:0;padding:5px 3px 5px 0;border:0;background:transparent;color:var(--ink);text-align:left}
+.view-select:hover{background:transparent;color:#3158c7}
+.view-select-copy{display:flex;flex-direction:column;align-items:flex-start}
+.view-title-line{display:flex;align-items:center;gap:9px}
+.view-select strong{font-size:19px;font-weight:600;letter-spacing:-.03em;line-height:1.25}
+.view-select small{display:block;margin-top:3px;color:#68778c;font-size:12px;line-height:1.2}
+.view-title-line .select-chevron{width:13px;height:13px;margin:0;color:#8a9ab7}
+.view-actions,.toolbar-right,.toolbar-left{display:flex;align-items:center}
+.view-actions{position:relative;gap:5px}
+.view-actions .icon-button{width:30px;height:30px;border:1px solid #ced8e8;border-radius:5px;background:transparent;color:#7181a1}
+.view-actions .icon-button svg{width:15px;height:15px}
+.view-actions .icon-button:hover{background:#fff;border-color:#aebedb;color:#3158c7}
+.actions-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:30;width:210px;padding:6px;border:1px solid #dde4ee;border-radius:8px;background:#fff;box-shadow:0 12px 30px rgba(25,43,75,.12)}
+.actions-menu[hidden]{display:none}
+.menu-action{width:100%;min-height:38px;display:flex;align-items:center;gap:11px;padding:0 10px;border:0;border-radius:5px;background:transparent;color:#344762;font-size:12px;font-weight:500;text-align:left}
+.menu-action svg{width:16px;height:16px;color:#7485a2}
+.menu-action:hover,.menu-action:focus-visible{background:#f2f5fb;color:#2449ac}
+.toolbar-left{gap:13px;min-width:0;position:relative}
+.toolbar-right{gap:13px;margin-left:auto}
+.control-button.filter-button{height:32px;padding:0;border:0;border-radius:0;background:transparent;color:#3158c7;font-size:12px;font-weight:600}
+.control-button.filter-button:hover{background:transparent;color:#2449ac}
+.control-button.filter-button svg{width:15px;height:15px}
+.control-button.filter-button .tiny-chevron{width:11px;height:11px;color:#8595b0}
+.toolbar-divider{width:1px;height:16px;background:#dbe3ef}
+.table-context{font-size:12px;color:#6b798e;white-space:nowrap}
+.expand-control{display:flex;align-items:center;gap:5px;padding:5px 0;border:0;background:transparent;color:#3158c7;font-size:12px;font-weight:600;white-space:nowrap}
+.expand-control svg{width:12px;height:12px}
+.settings-gear{width:28px;height:28px;color:#7b8ba8;background:transparent}
+.settings-gear[aria-expanded="true"],.settings-gear:hover{color:#3158c7;background:transparent}
+.settings-gear svg{width:16px;height:16px;stroke-width:1.65}
+.panel-edge-toggle{position:absolute;z-index:9;top:84px;right:322px;transform:translateX(50%);width:27px;height:27px;display:grid;place-items:center;border:1px solid #d9e2ef;border-radius:50%;background:#fff;color:#7b8cab;box-shadow:0 2px 7px rgba(28,47,85,.09)}
+.panel-edge-toggle svg{width:12px;height:12px}
+.panel-edge-toggle:hover{border-color:#adc0e2;color:#3158c7}
+.workbench.panel-hidden .panel-edge-toggle{right:14px;transform:translateX(50%)}
+.workbench.panel-hidden .panel-edge-toggle svg{transform:rotate(180deg)}
+
+/* One continuous table surface with stable, aligned measure columns. */
+.table-surface{display:flex;flex-direction:column;flex:1;min-height:0;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:#fff}
+.table-scroll{flex:1;min-height:0;min-width:0;overflow:auto}
+.balance-table{width:100%;min-width:992px;table-layout:fixed;border-collapse:separate;border-spacing:0}
+.balance-table th,.balance-table td{box-sizing:border-box}
+.balance-table .account-col{width:320px;min-width:320px;position:sticky;left:0;text-align:left!important;padding-left:20px!important;box-shadow:1px 0 0 #e8ecf2}
+.balance-table .period-row{height:44px;background:#f8f9fb}
+.balance-table .period-row th{position:sticky;top:0;z-index:5;padding:0 18px;border-top:0;border-bottom:1px solid #e5e9ef;background:#f8f9fb;color:#36445b;font-size:12px;font-weight:600;letter-spacing:0;text-align:center}
+.balance-table .period-row .account-col{z-index:7;color:#68778c;font-size:11px;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.balance-table .period-row th[data-period-header="two"]{border-left:1px solid #e6ebf3}
+.period-index{display:block;margin-bottom:2px;color:#8491a4;font-size:10px;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.balance-table .metric-row{height:42px;background:#fcfcfd}
+.balance-table .metric-row th{position:sticky;top:44px;z-index:5;padding:0 18px;border-bottom:1px solid #e1e6ed;background:#fcfcfd;color:#606f83;font-size:12px;font-weight:500;white-space:nowrap;text-align:right}
+.balance-table .metric-row th.period-start{border-left:1px solid #edf0f5}
+.balance-table td{height:52px;padding:0 18px;border-bottom:1px solid #eef1f5;background:#fff;color:#2e3a4e;font-size:13px;font-weight:400;white-space:nowrap;font-variant-numeric:tabular-nums}
+.balance-table td.account-cell{position:sticky;left:0;z-index:2;padding-left:18px!important;background:#fff;box-shadow:1px 0 0 #e6ebf3}
+.balance-table td.amount{text-align:right;padding-right:18px;font-weight:500}
+.balance-table td.period-start{border-left:1px solid #f0f2f6}
+.balance-table tr:hover td,.balance-table tr:hover td.account-cell{background:#f8faff}
+.account-indent{display:flex;align-items:center;min-width:0;padding-left:calc(var(--depth) * 21px)}
+.account-type-dot{width:8px;height:8px;flex:none;margin-right:10px;border-radius:50%;background:#7185bc}
+.account-type-dot.income,.account-type-dot.expenses,.account-type-dot.liabilities{background:#7185bc}
+.attribute-dot{width:5px;height:5px;flex:none;margin-right:10px;border-radius:1px;background:#a3aed0;transform:rotate(45deg)}
+.row-toggle,.row-label{min-width:0;display:flex;align-items:center;gap:8px;padding:0;border:0;background:transparent;color:#2e3a4e;font-size:13px;font-weight:400;text-align:left;white-space:nowrap}
+.row-toggle:hover{color:#3158c7}
+.row-toggle>span,.row-label>span:last-child{overflow:hidden;text-overflow:ellipsis}
+.row-chevron,.row-chevron-spacer{width:13px;height:13px;flex:none;color:#9aabc2}
+.row-toggle[aria-expanded="true"] .row-chevron{transform:rotate(90deg)}
+.kind-group td,.kind-group td.account-cell{font-weight:600;color:#28364b}
+.kind-group .row-toggle{font-weight:600}
+.kind-account .row-toggle,.kind-account .row-label{font-weight:500}
+.expanded-account td,.expanded-account td.account-cell{background:#f4f6fa!important}
+.expanded-account:hover td,.expanded-account:hover td.account-cell{background:#eff3f8!important}
+.kind-attribute td,.kind-attribute td.account-cell{height:44px;background:#fcfdff;color:#61708b;font-size:12px}
+.kind-attribute .row-label{color:#64738b;font-size:12px;font-style:normal}
+.table-footer{height:39px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:0 20px;border-top:1px solid #e9edf2;background:#fff;color:#68778b;font-size:11px}
+.table-footer span:first-child{display:flex;align-items:center;gap:7px}
+.footer-dot{width:5px;height:5px;background:#a6b4c9}
+.table-footer #visibleCount{display:none}
+
+/* Settings use spacing and type, with borders only on editable controls. */
+.panel-head{padding:18px 0 17px}
+.panel-head h2{color:#253247;font-size:17px;font-weight:600;letter-spacing:-.025em}
+.panel-head p{margin-top:6px;color:#69788c;font-size:12px;line-height:1.45}
+.panel-tabs{display:flex;gap:18px;padding:0;border-bottom:1px solid #dfe6f0}
+.tab{height:42px;padding:0;border:0;border-bottom:2px solid transparent;background:transparent;color:#69788c;font-size:12px;font-weight:400;white-space:nowrap}
+.tab.active{border-color:#3158c7;color:#3158c7;font-weight:600}
+.panel-body{flex:1;display:block;min-height:0;padding:23px 0 0}
+.settings-intro{margin-bottom:20px}
+.settings-intro h3{color:#34435a;font-size:13px;font-weight:600}
+.settings-intro p{margin-top:6px;color:#6c7a8e;font-size:12px;line-height:1.5}
+.field{display:block;margin-bottom:24px}
+.field>span{margin-bottom:8px;color:#4d5e75;font-size:12px;font-weight:500}
+.field select{height:40px;border:1px solid #d8dfe8;border-radius:6px;background-color:#fff;color:#28384e;font-size:13px}
+.field select:focus{outline:2px solid #a9bdf0;border-color:#839fdf}
+.check-row{padding:12px 0;border-bottom:1px solid #e8edf5}
+.check-row strong{color:#34435a;font-size:13px;font-weight:500}
+.check-row small{color:#718096;font-size:12px}
+.setting-note{padding:0;margin-top:24px;border:0;background:transparent;color:#687992;font-size:11px}
+.panel-footer{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0 0;border:0;background:transparent}
+.text-button{color:#61718c;font-size:12px;font-weight:500}
+.apply-button{height:36px;padding:0 14px;border-radius:6px;background:#3158c7;box-shadow:none;font-size:12px;font-weight:600}
+.apply-button:hover{background:#2549ad;transform:none}
+
+/* Navigation, menus, and small-screen adaptation. */
+.view-menu,.filter-popover{border-radius:7px}
+.view-option{border-radius:5px}
+.toast{border-radius:6px;background:#172b5c}
+@media(min-width:851px) and (max-width:1350px){
+  .sidebar{width:218px}
+  .workspace{padding:16px}
+  .workbench{grid-template-columns:minmax(0,1fr) 300px;gap:20px;min-height:calc(100dvh - 98px)}
+  .data-pane{height:calc(100dvh - 98px)}
+  .settings-panel{min-height:calc(100dvh - 98px)}
+  .panel-edge-toggle{right:300px}
+}
+@media(max-width:850px){
+  .workspace{padding:12px}
+  .workbench{grid-template-columns:minmax(0,1fr);gap:24px;min-height:0}
+  .workbench.panel-hidden{grid-template-columns:minmax(0,1fr)}
+  .workbench.panel-hidden::after{display:none}
+  .data-pane{height:min(700px,calc(100dvh - 80px));min-height:480px}
+  .settings-panel{min-height:0;padding-left:0;border:0}
+  .panel-edge-toggle{display:none}
+  .panel-footer{padding-bottom:14px}
+}
+@media(max-width:570px){
+  .workspace{padding:10px}
+  .viewbar{height:64px}
+  .toolbar{height:49px}
+  .view-select strong{font-size:14px}
+  .view-actions{gap:3px}
+  .view-actions .icon-button{width:27px;height:27px}
+  .table-context,.toolbar-divider{display:none}
+  .balance-table .account-col{width:280px;min-width:280px}
+  .balance-table .account-col{padding-left:14px!important}
+  .balance-table td.account-cell{padding-left:12px!important}
+}
+
+/* Credit Card CoA navigation and global top bar retained from the approved reference. */
+.sidebar{background:#11245a}
+.brand{height:67px;padding:0 20px;background:#16295e;border-bottom:1px solid #2b4074}
+.brand strong{font-size:14px;letter-spacing:0;font-weight:600;color:#fff}
+.sidebar nav{padding:10px 8px}
+.nav-group-title{height:37px;padding:0 14px;gap:11px;font-size:13px;background:#1b3271;color:#fff;border-radius:3px}
+.nav-group-title .group-icon{width:15px;height:15px;color:#dbe4ff;margin-left:0}
+.nav-group-title .group-chevron{width:13px;height:13px;margin-left:auto;color:#b8c9ee}
+.nav-item{height:39px;padding:0 14px;gap:11px;font-size:13px;color:#c5d1ec;font-weight:400;border-radius:3px}
+.nav-item svg{width:15px;height:15px;color:#cbd7f2}
+.nav-item.nested{height:38px;padding-left:39px}
+.nav-item.active{background:#415895;color:#fff;font-weight:600}
+.nav-item:hover{background:#29427d;color:#fff}
+.nav-divider{height:1px;background:#2a3d70;margin:10px -8px 10px}
+@media(max-width:850px){.sidebar{background:#11245a}}
+
+/* Global navigation spans the full product; the sidebar owns CoA tasks. */
+.topbar{height:66px;position:sticky;top:0;z-index:40;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 22px;background:#fff;border-bottom:1px solid #d9e1ee}
+.topbar-left,.topbar-right{height:100%;display:flex;align-items:center;min-width:0}
+.topbar-left{gap:7px}
+.topbar-right{gap:14px;flex:none}
+.app-switcher{width:30px;height:32px;color:#697999;margin-right:2px}
+.app-switcher svg{width:17px;height:17px}
+.product-brand{height:100%;display:flex;align-items:center;gap:10px;padding:0 14px 0 3px;white-space:nowrap;color:#243a6b}
+.product-brand strong{font-size:12px;letter-spacing:.14em;font-weight:700}
+.product-mark{width:24px;height:25px;position:relative;display:block}
+.product-mark span:first-child{position:absolute;left:6px;top:0;width:13px;height:10px;background:#ee80c7;clip-path:polygon(50% 0,100% 100%,0 100%)}
+.product-mark span:last-child{position:absolute;left:1px;right:1px;bottom:0;height:16px;background:#213a80;border-radius:2px}
+.global-nav{height:100%;display:flex;align-items:center;gap:2px;margin-left:10px}
+.global-nav a{height:35px;padding:0 13px;display:flex;align-items:center;gap:7px;color:#485a7c;font-size:13px;font-weight:500;border-radius:4px;white-space:nowrap}
+.global-nav a:hover{background:#f3f6fc;color:#1e3f91}
+.global-nav a.current{background:#ecf1ff;color:#2a55ce;font-weight:600}
+.global-nav svg,.language-button svg{width:12px;height:12px;stroke-width:2}
+.language-button{border:0;background:transparent;display:flex;align-items:center;gap:7px;height:34px;padding:0 7px;border-radius:4px;color:#405278;font-size:12px}
+.language-button:hover{background:#f2f5fb}
+.bank-name{display:flex;align-items:center;gap:7px;padding:5px 8px;border:1px solid #dbe2ed;border-radius:3px;color:#154781;font-size:14px;font-weight:700;letter-spacing:.015em;white-space:nowrap}
+.bank-mark{height:19px;width:19px;display:grid;grid-template-columns:repeat(2,1fr);gap:3px;flex:none}
+.bank-mark i{background:#e43a4a;display:block}
+.bank-mark i:nth-child(2),.bank-mark i:nth-child(3){background:#154781}
+.avatar{height:30px;width:30px;border-radius:50%;background:#e9e3f0;color:#5a4b79;border-color:#d9d1e3}
+.app-shell{min-height:calc(100vh - 66px);min-height:calc(100dvh - 66px)}
+.sidebar{min-height:calc(100vh - 66px);min-height:calc(100dvh - 66px);top:66px}
+.mobile-menu{display:none!important}
+@media(max-width:1000px){.topbar{padding:0 15px;gap:12px}.product-brand{padding-right:5px}.global-nav{margin-left:2px}.global-nav a{padding:0 9px}.topbar-right{gap:7px}.bank-name{font-size:12px}}
+@media(max-width:850px){.topbar{height:56px}.app-switcher{display:none}.mobile-menu{display:grid!important;margin:0}.product-brand{gap:7px;padding:0 5px}.product-brand strong{font-size:10px}.global-nav a:not(.current){display:none}.global-nav a.current{height:31px}.language-button{display:none}.bank-name{font-size:10px;padding:4px 5px}.bank-mark{width:14px;height:14px;gap:2px}.app-shell{min-height:calc(100dvh - 56px)}.sidebar{top:56px;min-height:calc(100dvh - 56px);height:calc(100dvh - 56px)}}
+@media(max-width:570px){.topbar{padding:0 12px;gap:5px}.product-brand strong{display:none}.product-mark{width:22px}.global-nav{margin-left:0}.global-nav a.current{padding:0 7px;font-size:11px}.topbar-right{gap:5px}.bank-name{font-size:9px}.avatar{width:27px;height:27px;font-size:9px}}
+
+/* Disclosure arrows use a separate gutter; labels retain a shared alignment. */
+.sidebar .nav-item{padding-left:18px}
+.sidebar .nav-item.nested{padding-left:39px}
+.sidebar .nav-disclosure{width:100%;position:relative;justify-content:flex-start;padding:0 18px;gap:11px;border:0;text-align:left;font-family:'IBM Plex Sans',Arial,sans-serif;cursor:pointer}
+.sidebar .nav-disclosure .group-icon{width:15px;height:15px;margin-left:0}
+.sidebar .nav-disclosure .nav-arrow{position:absolute;left:5px;width:10px;height:10px;margin:0;color:#c4d3f4;transform:rotate(0);transition:transform .18s ease}
+.sidebar .nav-disclosure[aria-expanded="true"] .nav-arrow{transform:rotate(90deg)}
+.sidebar .nav-disclosure:hover{background:#29427d}
+.sidebar .nav-submenu[hidden]{display:none}
+.sidebar .nav-submenu{padding:1px 0 4px}
+.sidebar .nav-details{margin:0}
+.sidebar .nav-details summary{height:39px;position:relative;display:flex;align-items:center;gap:11px;padding:0 18px;color:#c5d1ec;font-size:13px;font-weight:400;border-radius:3px;cursor:pointer;list-style:none;background:transparent}
+.sidebar .nav-details summary::-webkit-details-marker{display:none}
+.sidebar .nav-details summary::marker{content:""}
+.sidebar .nav-details summary:hover{color:#fff;background:rgba(255,255,255,.045)}
+.sidebar .nav-details summary .group-icon{width:15px;height:15px;margin:0;color:#cbd7f2}
+.sidebar .nav-details summary .nav-arrow{position:absolute;left:5px;width:10px;height:10px;margin:0;color:#c4d3f4;transform:rotate(0);transition:transform .18s ease}
+.sidebar .nav-details[open] summary .nav-arrow{transform:rotate(90deg)}
+.sidebar .nav-details .nav-submenu{padding:1px 0 4px}
+.sidebar .nav-item.active{background:#415587;color:#fff;font-weight:500}
+.sidebar .nav-item.active:hover{background:#475d93;color:#fff}
+
+/* Interaction states belong to the table and its settings, without extra cards. */
+.account-type-dot,.attribute-dot{display:none}
+.row-toggle,.row-label{min-height:32px}
+.row-toggle{width:100%}
+.row-toggle:focus-visible{outline:2px solid #829ee0;outline-offset:2px;border-radius:3px}
+.row-chevron,.row-chevron-spacer{width:16px;height:16px}
+.kind-attribute .row-chevron-spacer{position:relative}
+.kind-attribute .row-chevron-spacer::after{content:"";position:absolute;left:6px;top:6px;width:4px;height:4px;border-radius:50%;background:#a6b2c5}
+.active-filter{display:inline-flex;align-items:center;gap:8px;height:28px;padding:0 9px;border:0;border-radius:5px;background:#eff3fa;color:#415574;font-size:12px}
+.active-filter[hidden]{display:none}
+.active-filter svg{width:12px;height:12px}
+.active-filter:hover{background:#e7edf8}
+.apply-button:disabled{background:#edf0f5;color:#8290a5;opacity:1;transform:none;cursor:default}
+.text-button:disabled{color:#98a2b3;opacity:1;cursor:default}
+.table-scroll{scrollbar-width:thin;scrollbar-color:#c6cfdd transparent}
+.table-scroll::-webkit-scrollbar{width:8px;height:8px}
+.table-scroll::-webkit-scrollbar-thumb{background:#c6cfdd;border:2px solid #fff;border-radius:8px}
+button:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid #829ee0;outline-offset:3px}
+@media(max-width:570px){.toolbar-left{gap:8px}.active-filter{max-width:100px}.active-filter span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}}
+
+/* Account group identity: two colour families. What the bank holds or earns reads green;
+   what it spends or owes reads orange. The icon tells the pair apart. */
+[data-tone="assets"],[data-tone="income"]{--tone:#2e8f58;--tone-soft:#e6f4eb}
+[data-tone="expenses"],[data-tone="liabilities"]{--tone:#d0702b;--tone-soft:#fdeee2}
+.acct-icon{width:20px;height:20px;flex:none;display:grid;place-items:center;color:var(--tone);transition:transform .28s cubic-bezier(.34,1.56,.64,1)}
+.acct-icon svg{width:20px;height:20px;overflow:visible;stroke-width:1.7}
+.acct-icon .gi-soft{fill:currentColor;fill-opacity:.16;transition:fill-opacity .2s ease}
+.acct-icon .gi-part{transform-box:fill-box;transform-origin:center;transition:transform .32s cubic-bezier(.34,1.56,.64,1)}
+.acct-icon .gi-flap{transform-origin:0% 100%}
+.acct-icon .gi-bag{transform-origin:50% 100%}
+.kind-group .row-toggle:hover{color:var(--tone)}
+.kind-group:hover .acct-icon{transform:translateY(-1px) scale(1.08)}
+.kind-group:hover .gi-bag{animation:gi-wiggle .5s ease}
+.kind-group:hover .gi-arrow{transform:translateY(2px)}
+.kind-group:hover .gi-note{transform:translateX(-1px)}
+.kind-group:hover .gi-flap{transform:rotate(-16deg)}
+.kind-group:hover .gi-coin{transform:translateY(-2px)}
+/* Open groups fill their icon in, so the hierarchy shows which colour is in play. */
+.kind-group.is-open .acct-icon .gi-soft{fill-opacity:.42}
+.balance-table tr[data-tone] td.account-cell{box-shadow:inset 3px 0 0 var(--rail,transparent),1px 0 0 #e6ebf3;transition:box-shadow .2s ease,background-color .16s ease}
+.balance-table tr.kind-group.is-open td.account-cell{--rail:var(--tone)}
+.balance-table tr[data-tone]:not(.kind-group) td.account-cell{--rail:color-mix(in srgb,var(--tone) 38%,transparent)}
+.balance-table tr[data-tone]:not(.kind-group):hover td.account-cell{--rail:var(--tone)}
+tr.just-toggled .acct-icon{animation:gi-pop .42s cubic-bezier(.34,1.56,.64,1)}
+.icons-intro .acct-icon{animation:gi-in .5s cubic-bezier(.34,1.56,.64,1) both}
+.icons-intro tr:nth-child(2) .acct-icon{animation-delay:.06s}
+.icons-intro tr:nth-child(3) .acct-icon{animation-delay:.12s}
+.icons-intro tr:nth-child(4) .acct-icon{animation-delay:.18s}
+@keyframes gi-wiggle{0%,100%{transform:rotate(0)}30%{transform:rotate(-9deg)}65%{transform:rotate(6deg)}}
+@keyframes gi-pop{0%{transform:scale(1)}40%{transform:scale(.86)}100%{transform:scale(1)}}
+@keyframes gi-in{from{opacity:0;transform:scale(.6) rotate(-12deg)}to{opacity:1;transform:scale(1) rotate(0)}}
+@media(prefers-reduced-motion:reduce){.acct-icon,.acct-icon .gi-part{transition:none!important;animation:none!important}.kind-group:hover .acct-icon,.kind-group:hover .gi-part{transform:none!important}}
+
+/* Main navigation folds to a slim rail. Width glides on the shared curve; labels fade out first and back in last. */
+@media(min-width:851px){
+  .sidebar{z-index:5;min-width:0;transition:width .3s cubic-bezier(.22,1,.36,1)}
+  .sidebar>.brand,.sidebar>nav{overflow:hidden;white-space:nowrap;transition:opacity .18s ease .1s}
+  .sidebar.is-collapsed{width:24px}
+  .sidebar.is-collapsed>.brand,.sidebar.is-collapsed>nav{opacity:0;pointer-events:none;transition:opacity .1s ease}
+  .sidebar-toggle{position:absolute;top:20px;right:-14px;z-index:6;width:28px;height:28px;padding:0;display:grid;place-items:center;border:2px solid #fff;border-radius:50%;background:#3158c7;color:#fff;box-shadow:0 2px 8px rgba(17,36,90,.28);cursor:pointer;transition:background-color .15s ease,transform .15s ease}
+  .sidebar-toggle svg{width:14px;height:14px;stroke-width:2.4;transform:rotate(180deg);transition:transform .3s cubic-bezier(.22,1,.36,1)}
+  .sidebar.is-collapsed .sidebar-toggle svg{transform:rotate(0)}
+  .sidebar-toggle:hover{background:#2449ad}
+  .sidebar-toggle:active{transform:scale(.92)}
+  .sidebar-toggle:focus-visible{outline:2px solid #8eabeb;outline-offset:2px}
+  .sidebar.no-glide,.sidebar.no-glide *{transition:none!important}
+}
+@media(max-width:850px){.sidebar-toggle{display:none}}
+@media(prefers-reduced-motion:reduce){.sidebar,.sidebar>.brand,.sidebar>nav,.sidebar-toggle svg{transition:none!important}}

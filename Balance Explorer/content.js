@@ -11,7 +11,7 @@ const caseStudy = {
     paragraphs: [
       "A new module, built from scratch. Shipped to HDFC Bank.",
       "Balance Explorer lets HDFC Bank's credit-card finance and operations teams explore their chart of accounts, shape the view they need, and save it for the next day, the next month and the next person.",
-      "I was the only designer, working with product managers and engineers over four months. Daily balancing got about 80% faster, the month-end trend report went from about two days to under half a day, and custom report requests to Zeta fell by about 65%.",
+      "I was the only designer, working with product managers and engineers over four months. Daily balancing got 78.6% faster, the month-end trend report went from about two days to under half a day, and custom report requests to Zeta fell by about 65%.",
     ],
   },
   // Kept plain and laid out like the TLDR. The flow follows one card payment from swipe to books.
@@ -34,9 +34,9 @@ const caseStudy = {
       "The balances were all there, but nobody could really look at them. To check whether yesterday's numbers matched, someone on the ops team would export the data, paste it into Excel and build the same pivot they'd built the day before.",
     ],
     costs: [
-      { number: "01", title: "It was slow", description: "Balancing took around three hours every morning, and the month-end trend report took about two days." },
-      { number: "02", title: "It depended on us", description: "Anything outside the usual exports became a report request to us at Zeta, and the team waited for it." },
-      { number: "03", title: "It was easy to get wrong", description: "Every export, paste and pivot was another chance for a number to slip before it reached the books." },
+      { title: "It was slow", description: "Balancing took around three hours every morning, and the month-end trend report took about two days." },
+      { title: "It depended on us", description: "Anything outside the usual exports became a report request to us at Zeta, and the team waited for it." },
+      { title: "It was easy to get wrong", description: "Every export, paste and pivot was another chance for a number to slip before it reached the books." },
     ],
     meta: [
       ["Category", "B2B · Fintech · Banking"],
@@ -76,10 +76,9 @@ const caseStudy = {
   decisions: [
     {
       id: "decision-ledger",
-      label: "The table",
       title: "Where is this balance coming from?",
       paragraphs: [
-        "The tree goes Assets, Revolving Credit, Credit Card, Platinum Credit Card, and every account has its own posting codes underneath. The ops team needed to reach one number quickly without losing track of where it came from.",
+        "The balance table is a tree that goes Assets, Revolving Credit, Credit Card, Platinum Credit Card, and every account has its own posting codes underneath. The ops team needed to reach one number quickly without losing track of where it came from.",
       ],
       beats: [
         { lead: "I gave each top-level group a colour.", aside: "Green for assets and income, orange for expense and liability, so you can tell where you are at a glance." },
@@ -93,15 +92,14 @@ const caseStudy = {
         { number: "C", title: "Putting the codes in boxed panels.", description: "The codes started to look like extra rows." },
       ],
       shots: [
-        { id: "shot-table-detail", kind: "Loop", wide: true, video: "assets/screens/shot-table-detail.mp4", src: "assets/screens/shot-table-detail.webp", width: 1920, height: 1200, caption: "Moving down the tree, hiding and showing an account’s codes, then opening Income." },
+        { id: "shot-table-detail", kind: "Loop", wide: true, video: "assets/screens/shot-table-detail.mp4?v=q3", src: "assets/screens/shot-table-detail.webp?v=q3", width: 1920, height: 1200, caption: "Moving down the tree, hiding and showing an account’s codes, then opening Income." },
       ],
     },
     {
       id: "decision-shape",
-      label: "The settings panel",
       title: "Can I see it my way, without asking Zeta?",
       paragraphs: [
-        "Most report requests to Zeta came down to four choices: which accounts, which periods, what goes in the rows and what goes in the columns. I put those choices in a panel next to the table.",
+        "Most report requests to Zeta came down to four choices: which accounts, which periods, what goes in the rows and what goes in the columns. I put those choices in a settings panel next to the table.",
       ],
       beats: [
         { lead: "Three tabs: Basic parameters, Rows, Columns.", aside: "Roughly the order people think in: when, then what to list, then what to measure." },
@@ -115,15 +113,14 @@ const caseStudy = {
         { number: "C", title: "A floating window.", description: "It covered the numbers you were changing." },
       ],
       shots: [
-        { id: "shot-shape-detail", kind: "Loop", wide: true, video: "assets/screens/shot-shape-detail.mp4", src: "assets/screens/shot-shape-detail.webp?v=2", width: 1920, height: 1200, caption: "Changing the cycle, adding posting codes and a column, then applying." },
+        { id: "shot-shape-detail", kind: "Loop", wide: true, video: "assets/screens/shot-shape-detail.mp4?v=q3", src: "assets/screens/shot-shape-detail.webp?v=q3", width: 1920, height: 1200, caption: "Changing the cycle, adding posting codes and a column, then applying." },
       ],
     },
     {
       id: "decision-views",
-      label: "Saved views",
       title: "Do I have to build this again tomorrow?",
       paragraphs: [
-        "The controller was rebuilding the same month-end report every month, which is a big part of why it took two days. Once a view was set up, it needed to stay set up.",
+        "The controller was rebuilding the same month-end report every month, which is a big part of why it took two days. Once a view was set up, it needed to stay set up, so I let people save it.",
       ],
       beats: [
         { lead: "Every view has a name and a code.", aside: "You can find it again, and point someone else to it." },
@@ -135,13 +132,12 @@ const caseStudy = {
         { number: "A", title: "Opening on the All views page.", description: "Most people start from the default view, so it only added a click." },
       ],
       shots: [
-        { id: "shot-save-detail", kind: "Loop", wide: true, video: "assets/screens/shot-save-detail.mp4", src: "assets/screens/shot-save-detail.webp", width: 1920, height: 1200, caption: "Opening a saved view, changing it, then saving it." },
-        { id: "shot-views-detail", kind: "Loop", wide: true, video: "assets/screens/shot-views-detail.mp4", src: "assets/screens/shot-views-detail.webp?v=2", width: 1920, height: 1200, caption: "Switching views from the title, then browsing All views." },
+        { id: "shot-save-detail", kind: "Loop", wide: true, video: "assets/screens/shot-save-detail.mp4?v=q3", src: "assets/screens/shot-save-detail.webp?v=q3", width: 1920, height: 1200, caption: "Opening a saved view, changing it, then saving it." },
+        { id: "shot-views-detail", kind: "Loop", wide: true, video: "assets/screens/shot-views-detail.mp4?v=q3", src: "assets/screens/shot-views-detail.webp?v=q3", width: 1920, height: 1200, caption: "Switching views from the title, then browsing All views." },
       ],
     },
     {
       id: "decision-sharing",
-      label: "Sharing",
       title: "Will my colleague be able to open this?",
       paragraphs: [
         "Sharing a view usually means \"can you check this for me?\". If the other person can't open the link, it turns into a back-and-forth.",
@@ -156,7 +152,7 @@ const caseStudy = {
         { number: "A", title: "Letting people copy a private link, with a warning.", description: "People skip warnings, and their colleague still couldn't open it." },
       ],
       shots: [
-        { id: "shot-sharing-detail", kind: "Loop", wide: true, video: "assets/screens/shot-sharing-detail.mp4", src: "assets/screens/shot-sharing-detail.webp?v=2", width: 1920, height: 1200, caption: "Share on a view everyone can see, then on a private one." },
+        { id: "shot-sharing-detail", kind: "Loop", wide: true, video: "assets/screens/shot-sharing-detail.mp4?v=q3", src: "assets/screens/shot-sharing-detail.webp?v=q3", width: 1920, height: 1200, caption: "Share on a view everyone can see, then on a private one." },
       ],
     },
   ],
@@ -167,7 +163,7 @@ const caseStudy = {
       "Everything uses Zeta's Galaxy Design System. Where I needed to break from it, I worked it out with the GDS designer and engineers during the audit. Changes glide into place instead of jumping, and updated numbers flash briefly so you notice them.",
     ],
     shots: [
-      { id: "shot-trust-states", kind: "Loop", wide: true, video: "assets/screens/shot-trust-states.mp4", src: "assets/screens/shot-trust-states-poster.webp", width: 1920, height: 1200, caption: "Loading, a failed load, a failed Apply and an empty library." },
+      { id: "shot-trust-states", kind: "Loop", wide: true, video: "assets/screens/shot-trust-states.mp4?v=q3", src: "assets/screens/shot-trust-states-poster.webp?v=q3", width: 1920, height: 1200, caption: "Loading, a failed load, a failed Apply and an empty library." },
     ],
   },
   // Same layout as Turbo Hub's "Impact & future" (its impact-future.js): selection frames around each number,
@@ -179,12 +175,12 @@ const caseStudy = {
     statement: "Shipped to HDFC Bank's card finance teams.",
     notesLabel: "Results for daily balancing, the month-end report, report requests and weekly use",
     notes: [
-      { value: "~80%", label: "Faster daily balancing: from about 3 hours to about 35 minutes.", kind: "Daily balancing", type: "metric" },
+      { value: "78.6%", label: "Faster daily balancing: from about 3 hours to about 35 minutes.", kind: "Daily balancing", type: "metric" },
       { label: "The most-used saved views were reopened every working day.", type: "quote" },
       { value: "< ½ day", label: "For the month-end trend report, down from about two days.", kind: "Month-end report", type: "metric" },
       { value: "~65%", label: "Fewer custom report requests to Zeta after launch.", kind: "Report requests", type: "metric" },
       { label: "Saved views were shared across teams, not kept by the person who built them.", type: "quote" },
-      { value: "~80%", label: "Of target users were using it every week after launch.", kind: "Weekly use", type: "metric" },
+      { value: "82%", label: "Of target users were using it every week after launch.", kind: "Weekly use", type: "metric" },
     ],
     futureTitle: "What I'd look at next",
     future: "People kept coming back, which was the point. Next, I'd want to know which saved views each team relies on, and where people still export to Excel.",
@@ -193,7 +189,8 @@ const caseStudy = {
   },
   // Shots outside the decisions: the hero screen. The context flow is drawn from product.diagram.
   screens: {
-    hero: { id: "shot-hero", kind: "Loop", frame: "browser", address: "Finance Center · Balance Explorer", video: "assets/screens/explorer-tour.mp4?v=2", src: "assets/screens/explorer.webp", width: 2880, height: 1800, caption: "A glimpse of Balance Explorer, built with Zeta's Galaxy Design System." },
+    // The working prototype, driven by product-demo.js, instead of a recorded video.
+    hero: { id: "shot-hero", kind: "Loop", frame: "browser", address: "Finance Center · Balance Explorer", demo: "prototype/index.html#explorer", src: "assets/screens/explorer.webp?v=q3", width: 2880, height: 1800, caption: "A glimpse of Balance Explorer, built with Zeta's Galaxy Design System." },
   },
   // Same layout as Turbo Hub's Learning: one paragraph.
   learning: {

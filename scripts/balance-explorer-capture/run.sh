@@ -1,6 +1,7 @@
 #!/bin/sh
 # Re-records the Balance Explorer case study's videos from the prototype and copies them into the case study.
-# Needs the prototype served at http://127.0.0.1:4173/variant-02/ and Google Chrome installed.
+# Needs the case study served at http://localhost:8000 (the "case-studies" preview), so its copy of the
+# prototype is at /Balance Explorer/prototype/, and Google Chrome installed.
 # Usage: ./run.sh setup | tour | table | tabs | save | views | share | states | all
 set -e
 cd "$(dirname "$0")"

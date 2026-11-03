@@ -46,13 +46,12 @@ function createFlowDiagram(steps) {
   return figure;
 }
 
-// Three numbered cards in a row.
+// Three cards in a row.
 function createTrio(items) {
   const list = createElement("ol", "trio");
   items.forEach((item) => {
     const card = createElement("li", "trio-card");
     card.append(
-      createElement("span", "trio-number", item.number),
       createElement("h3", "", item.title),
       createElement("p", "", item.description),
     );
@@ -158,6 +157,8 @@ function createBrowserShot(shot) {
 }
 
 function createBrowserMockup(shot) {
+  // The TLDR runs the prototype on a desktop monitor instead (product-demo.js).
+  if (shot.demo) return createProductDemo(shot);
   const stage = createElement("figure", "mockup-stage");
   stage.setAttribute("aria-label", shot.caption);
   const browser = createElement("div", "browser-mock");
@@ -171,12 +172,11 @@ function createBrowserMockup(shot) {
   return stage;
 }
 
-// A decision, in one calm rhythm: label and question, a short setup, three beats in a row,
+// A decision, in one calm rhythm: the question, a short setup, three beats in a row,
 // the main loop at full width, the other screens, then what I tried first.
 function createDecision(decision) {
   const { section, column } = createCopySection(decision.id, decision.title, decision.paragraphs);
   section.classList.add("decision");
-  column.prepend(createElement("p", "decision-label", decision.label));
   column.append(createBeats(decision.beats, "story-beats--row"));
   section.append(createShotGrid(decision.shots), createTried(decision.triedTitle, decision.tried));
   return section;

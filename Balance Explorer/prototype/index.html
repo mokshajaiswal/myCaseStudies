@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>Balance Explorer — Finance Center</title>
+  <link rel="stylesheet" href="styles.css?v=59">
+  <link rel="stylesheet" href="variant.css?v=59">
+  <link rel="stylesheet" href="design-system.css?v=59">
+</head>
+<body>
+  <svg class="svg-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></symbol><symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol><symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7"/></symbol><symbol id="i-pencil" viewBox="0 0 24 24"><path d="M4 20h4L19 9a2.8 2.8 0 0 0-4-4L4 16v4Z"/><path d="m13.5 6.5 4 4"/></symbol><symbol id="i-chevron-end" viewBox="0 0 24 24"><path d="m7 18 6-6-6-6M17 6v12"/></symbol>
+    <symbol id="i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h9m4 0h3M4 17h3m4 0h9"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></symbol>
+    <symbol id="i-filter" viewBox="0 0 24 24"><path d="M4 5h16l-6.5 7.5V19l-3 1v-7.5z"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M4 18v3h16v-3"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="2"/><circle cx="6" cy="12" r="2"/><circle cx="18" cy="19" r="2"/><path d="m8 11 8-5M8 13l8 5"/></symbol>
+    <symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+    <symbol id="i-panel" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M15 4v16"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-undo" viewBox="0 0 24 24"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-eye-off" viewBox="0 0 24 24"><path d="M9.9 5.2A10 10 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-2.4 3.3M6.6 6.6C3.7 8.5 2 12 2 12s3.6 7 10 7a9.6 9.6 0 0 0 5.4-1.6"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2M3 3l18 18"/></symbol>
+    <symbol id="i-file-pdf" viewBox="0 0 24 24"><path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5"/><text x="12" y="18.5" text-anchor="middle" font-size="5" font-family="IBM Plex Sans,Arial" font-weight="700" fill="currentColor" stroke="none">PDF</text></symbol>
+    <symbol id="i-file-xls" viewBox="0 0 24 24"><path d="M6 2.5h8l4.5 4.5v14.5H6z"/><path d="M14 2.5V7h4.5"/><text x="12" y="18.5" text-anchor="middle" font-size="5" font-family="IBM Plex Sans,Arial" font-weight="700" fill="currentColor" stroke="none">XLS</text></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 2.6 21.4 12 12 21.4 2.6 12Z" fill="currentColor" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 7.6v5.2" stroke="#fff" stroke-width="2.2"/><circle cx="12" cy="16.2" r="1.25" fill="#fff" stroke="none"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.6 2.6 3.8 5.6 3.8 9s-1.2 6.4-3.8 9c-2.6-2.6-3.8-5.6-3.8-9S9.4 5.6 12 3Z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.7-3.2 3-5 6-5s5.3 1.8 6 5M16 5.3a3 3 0 0 1 0 5.4M18 14.4c1.6.7 2.6 2.2 3 4.6"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8.5 10.5V7.8a3.5 3.5 0 0 1 7 0v2.7"/></symbol>
+    <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-map" viewBox="0 0 24 24"><path d="M3 6.5 9 4l6 2.5L21 4v13.5L15 20l-6-2.5L3 20Z"/><path d="M9 4v13.5M15 6.5V20"/></symbol>
+    <symbol id="i-cash" viewBox="0 0 24 24"><rect x="2.5" y="6" width="19" height="12" rx="2"/><circle cx="12" cy="12" r="2.6"/><path d="M6 9.5v5M18 9.5v5"/></symbol>
+    <symbol id="i-bank" viewBox="0 0 24 24"><path d="M3 9.5 12 4l9 5.5M5 10v8M9.5 10v8M14.5 10v8M19 10v8M3 20.5h18"/></symbol>
+    <symbol id="i-currency" viewBox="0 0 24 24"><path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v3.7h-3.7M6 21v-3.7h3.7"/><path d="M14 9.5c-.4-.8-1.2-1.2-2.2-1.2-1.3 0-2.2.7-2.2 1.6 0 2.2 4.6 1.2 4.6 3.6 0 1-1 1.7-2.4 1.7-1 0-1.9-.5-2.3-1.2M12 7v1.3M12 15.2v1.3"/></symbol>
+    <symbol id="i-dollar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.6 9.2c-.5-.9-1.4-1.4-2.6-1.4-1.5 0-2.6.8-2.6 1.9 0 2.6 5.4 1.4 5.4 4.2 0 1.2-1.2 2-2.8 2-1.2 0-2.2-.6-2.7-1.4M12 6.2v1.6M12 16.2v1.6"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><rect x="7" y="3" width="13" height="16" rx="2"/><path d="M4 7v12a2 2 0 0 0 2 2h10M10 8h7M10 11.5h7M10 15h4"/></symbol>
+    <symbol id="i-cards" viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="1.6"/><rect x="13" y="4" width="7" height="7" rx="1.6"/><rect x="4" y="13" width="7" height="7" rx="1.6"/><rect x="13" y="13" width="7" height="7" rx="1.6"/></symbol>
+    <symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11"/><circle cx="4.8" cy="6.5" r="1" fill="currentColor"/><circle cx="4.8" cy="12" r="1" fill="currentColor"/><circle cx="4.8" cy="17.5" r="1" fill="currentColor"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.6"/><path d="M5 20c.9-3.6 3.6-5.6 7-5.6s6.1 2 7 5.6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7h.01"/></symbol>
+    <symbol id="i-columns" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M11 4v16"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4M17 3v4M3 10h18"/><circle cx="13" cy="15" r="3"/><path d="M13 13.5V15l1 1"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><path d="M10 2.5h4l.5 2 1.5.6 1.8-1 2.8 2.8-1 1.8.6 1.5 2 .5v4l-2 .5-.6 1.5 1 1.8-2.8 2.8-1.8-1-1.5.6-.5 2h-4l-.5-2-1.5-.6-1.8 1-2.8-2.8 1-1.8-.6-1.5-2-.5v-4l2-.5.6-1.5-1-1.8 2.8-2.8 1.8 1 1.5-.6z"/><circle cx="12" cy="12.5" r="2.6"/></symbol>
+    <symbol id="i-balance" viewBox="0 0 24 24"><path d="M12 3v17M5 7h14M7 7l-3 6h6L7 7Zm10 0-3 6h6l-3-6ZM7 20h10"/></symbol>
+    <symbol id="i-tree" viewBox="0 0 24 24"><path d="M5 4v16m0-12h8m-8 8h8"/><rect x="13" y="5" width="6" height="6" rx="1"/><rect x="13" y="13" width="6" height="6" rx="1"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+    <symbol id="i-folder-open" viewBox="0 0 24 24"><path d="M3 18V7a2 2 0 0 1 2-2h5l2 2h6a2 2 0 0 1 2 2v1.5"/><path d="M3 18 5.6 11.4A2 2 0 0 1 7.5 10H21l-2.7 7.3a2 2 0 0 1-1.9 1.2H3Z"/></symbol>
+    <symbol id="i-stack" viewBox="0 0 24 24"><path d="m12 3 9 4.5-9 4.5-9-4.5L12 3Z"/><path d="m3 12 9 4.5 9-4.5M3 16.5 12 21l9-4.5"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12.2V4.5A1.5 1.5 0 0 1 4.5 3h7.7l8.8 8.8-9.2 9.2L3 12.2Z"/><circle cx="7.8" cy="7.8" r="1.6"/></symbol>
+    <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M5 3h14v18l-2.3-1.5L14.3 21 12 19.5 9.7 21l-2.4-1.5L5 21V3Z"/><path d="M9 8h6M9 12h6M9 16h3"/></symbol>
+    <symbol id="i-clipboard" viewBox="0 0 24 24"><rect x="5" y="4.5" width="14" height="16.5" rx="2"/><path d="M9 3h6v3H9zM9 11h6M9 15h4"/></symbol>
+    <symbol id="i-sigma" viewBox="0 0 24 24"><path d="M18 6.5V4H6l6.5 8L6 20h12v-2.5"/></symbol>
+    <symbol id="i-classes" viewBox="0 0 24 24"><path d="M14.7 6.3a4 4 0 0 0-5.2 5.2L4 17l3 3 5.5-5.5a4 4 0 0 0 5.2-5.2l-2.4 2.4-2.6-.8-.8-2.6 2.4-2.4Z"/><path d="m5 4 5.5 5.5M4 5l1-1M14.5 14.5 20 20"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6zM14 3v5h4M9 12h6M9 16h6"/></symbol>
+  </svg>
+
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="app-switcher icon-button" id="appSwitcher" aria-label="Open app switcher"><svg><use href="#i-grid"/></svg></button>
+      <button class="mobile-menu icon-button" id="menuButton" aria-label="Open navigation"><svg><use href="#i-grid"/></svg></button>
+      <div class="product-brand" aria-label="Finance Center"><span class="product-mark"><span></span><span></span></span><strong>FINANCE CENTER</strong></div>
+      <nav class="global-nav" aria-label="Global navigation">
+        <a href="#" data-nav="Dashboard">Dashboard</a>
+        <a href="#" data-nav="Calendars">Calendars <svg><use href="#i-down"/></svg></a>
+        <a href="#" class="current" aria-current="page">CoAs <svg><use href="#i-down"/></svg></a>
+      </nav>
+    </div>
+    <div class="topbar-right"><button class="language-button" id="languageButton">English <svg><use href="#i-down"/></svg></button><span class="bank-name"><span class="bank-mark"><i></i><i></i><i></i><i></i></span>HDFC BANK</span><button class="avatar" aria-label="User profile">MJ</button></div>
+  </header>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-controls="sidebar" aria-expanded="true" aria-label="Collapse navigation" title="Collapse navigation"><svg><use href="#i-chevron"/></svg></button>
+      <div class="brand"><strong>Credit Card CoA</strong></div>
+      <nav aria-label="Main navigation">
+        <details class="nav-details" open><summary><svg class="nav-arrow"><use href="#i-chevron"/></svg><svg class="group-icon"><use href="#i-balance"/></svg><span>Balances</span></summary>
+          <div class="nav-submenu"><a class="nav-item active nested" href="#explorer" data-route="explorer" aria-current="page">Explorer</a><a class="nav-item nested" href="#views" data-route="views">Views</a></div>
+        </details>
+        <a class="nav-item" href="#" data-nav="CoA Nodes"><svg><use href="#i-tree"/></svg>CoA Nodes</a>
+        <a class="nav-item" href="#" data-nav="Parent CoA Connector"><svg><use href="#i-grid"/></svg>Parent CoA Connector</a>
+        <details class="nav-details"><summary><svg class="nav-arrow"><use href="#i-chevron"/></svg><svg class="group-icon"><use href="#i-folder"/></svg><span>Ledgers</span></summary><div class="nav-submenu"><a class="nav-item nested" href="#" data-nav="Browse ledgers">Browse ledgers</a></div></details>
+        <details class="nav-details"><summary><svg class="nav-arrow"><use href="#i-chevron"/></svg><svg class="group-icon"><use href="#i-file"/></svg><span>Journal</span></summary><div class="nav-submenu"><a class="nav-item nested" href="#" data-nav="Journal entries">Journal entries</a></div></details>
+        <a class="nav-item" href="#" data-nav="Transaction Policies"><svg><use href="#i-file"/></svg>Transaction Policies</a>
+        <div class="nav-divider"></div>
+        <a class="nav-item" href="#" data-nav="CoA Settings"><svg><use href="#i-sliders"/></svg>CoA Settings</a>
+      </nav>
+    </aside>
+
+    <div class="main-shell">
+      <main class="workspace" id="explorerPage">
+        <div class="workbench" id="workbench">
+          <section class="data-pane" aria-label="Balance data">
+            <div class="viewbar"><div class="view-select-wrap"><button class="view-select" id="viewSelect" aria-expanded="false" aria-haspopup="true"><span class="view-select-copy"><span class="view-title-line"><strong>Q3 FY24 Card Balances</strong><span class="dirty-mark" aria-hidden="true">*</span><span class="sr-only" id="dirtyText"></span><svg class="select-chevron"><use href="#i-down"/></svg></span><small>Code · ABCIN00005</small></span></button><button type="button" class="reset-changes" id="resetChanges"><svg><use href="#i-undo"/></svg>Reset changes</button><div class="view-menu" id="viewMenu" hidden><div class="view-tabs" role="tablist" aria-label="View groups"><button type="button" role="tab" data-view-tab="builtin">Out of the box views</button><button type="button" role="tab" data-view-tab="mine">Your views</button></div><label class="rows-search view-search"><svg><use href="#i-search"/></svg><input id="viewSearch" type="search" placeholder="Search views" aria-label="Search views" autocomplete="off"></label><div id="viewList" role="listbox" aria-label="Views"></div><div class="view-menu-foot"><button type="button" class="ds-primary-action" id="allViews">All views <svg><use href="#i-arrow-right"/></svg></button></div></div></div><div class="view-actions"><div class="save-group" id="saveGroup"><button type="button" class="save-button" id="saveMore" aria-haspopup="menu" aria-expanded="false" aria-controls="saveMenu">Save <svg><use href="#i-down"/></svg></button><div class="actions-menu save-menu" id="saveMenu" role="menu" aria-label="Save options" hidden><button class="menu-action" role="menuitem" id="saveView"><span>Save view</span><span class="menu-hint" id="saveViewHint" data-tip="Default views can’t be changed. Use Save as a new view to keep your changes." data-tip-pos="right" aria-hidden="true"><svg><use href="#i-info"/></svg></span></button><span class="sr-only" id="saveViewHintText">Default views can’t be changed. Use Save as a new view to keep your changes.</span><button class="menu-action" role="menuitem" id="saveAsNew"><span>Save as a new view</span></button></div></div><button class="icon-button" id="infoButton" aria-label="About this view" aria-haspopup="dialog" aria-expanded="false" aria-controls="infoPopover" data-tip="About this view"><svg><use href="#i-info"/></svg></button><button class="icon-button" id="scheduleButton" aria-label="Schedule this view" data-tip="Schedule"><svg><use href="#i-calendar"/></svg></button><button class="icon-button" id="shareButton" aria-label="Share this view" aria-haspopup="dialog" aria-expanded="false" aria-controls="sharePopover" data-tip="Share"><svg><use href="#i-share"/></svg></button><button class="icon-button" id="exportButton" aria-label="Download" aria-haspopup="menu" aria-expanded="false" aria-controls="exportMenu" data-tip="Download"><svg><use href="#i-download"/></svg></button><div class="view-popover" id="infoPopover" role="dialog" aria-labelledby="infoPopoverLabel" hidden><span class="popover-label" id="infoPopoverLabel">Description</span><p id="viewDescription">Helps you analyze balances, track trends, and gain insights into financial data with ease.</p></div><div class="view-popover share-popover" id="sharePopover" role="dialog" aria-labelledby="sharePopoverLabel" hidden></div><div class="actions-menu export-menu" id="exportMenu" role="menu" aria-label="Download as" hidden><button class="menu-action" role="menuitem" id="exportPdf"><svg class="file-icon"><use href="#i-file-pdf"/></svg><span>PDF</span></button><button class="menu-action" role="menuitem" id="exportExcel"><svg class="file-icon"><use href="#i-file-xls"/></svg><span>Excel</span></button></div></div></div>
+
+            <div class="toolbar"><div class="toolbar-left"><button class="control-button filter-button" id="filterButton" aria-expanded="false" aria-controls="filterPopover"><svg><use href="#i-filter"/></svg> Add filter <svg class="tiny-chevron"><use href="#i-down"/></svg></button><div class="filter-popover" id="filterPopover" hidden><label for="filterType">Show accounts matching</label><select id="filterType"><option value="all">All account types</option><option value="assets">Assets</option><option value="liabilities">Liabilities</option><option value="income">Income</option><option value="expenses">Expenses</option></select><p>Filters update the table immediately.</p></div><button class="active-filter" id="clearFilter" hidden aria-label="Clear account filter"><span></span><svg><use href="#i-close"/></svg></button><span class="toolbar-divider"></span><span class="table-context" id="tableContext">4 account groups · 2 periods</span></div><div class="toolbar-right"><button class="expand-control" id="expandAll">Expand all <svg><use href="#i-down"/></svg></button><button class="icon-button settings-gear" id="settingsButton" title="Close view settings" aria-label="Close view settings" aria-controls="settingsPanel" aria-expanded="true"><svg><use href="#i-settings"/></svg></button></div></div>
+
+            <div class="table-surface"><div class="table-scroll"><table class="balance-table"><thead><tr class="period-row"><th scope="col" rowspan="2" class="account-col">Account hierarchy</th><th scope="colgroup" colspan="2" data-period-header="one"><span class="period-index">Period 1</span><span id="periodOneLabel">05 Oct 2023 – 12 Oct 2023</span></th><th scope="colgroup" colspan="2" data-period-header="two"><span class="period-index">Period 2</span><span id="periodTwoLabel">13 Oct 2023 – 20 Oct 2023</span></th></tr><tr class="metric-row"><th scope="col" data-metric="opening" data-period="one">Opening balance</th><th scope="col" data-metric="closing" data-period="one">Closing balance</th><th scope="col" data-metric="opening" data-period="two">Opening balance</th><th scope="col" data-metric="closing" data-period="two">Closing balance</th></tr></thead><tbody id="balanceRows"></tbody></table><div class="table-state" id="tableState" role="status" aria-live="polite" hidden></div></div>
+            <div class="table-footer"><span><span class="footer-dot"></span> Values shown in INR · Illustrative data</span><span id="visibleCount">4 account groups</span></div></div>
+          </section>
+
+          <button class="panel-edge-toggle" id="togglePanelTop" aria-label="Close view settings" aria-controls="settingsPanel" aria-expanded="true" title="Close view settings"><svg><use href="#i-chevron"/></svg></button>
+          <aside class="settings-panel" id="settingsPanel" aria-label="View settings"><div class="panel-head"><div><h2>View settings</h2><p>Set the period and table structure for this view.</p></div></div><div class="panel-tabs" role="tablist" aria-label="Settings sections"><button class="tab active" role="tab" id="settings-tab-parameters" aria-controls="tab-parameters" tabindex="0" aria-selected="true" data-tab="parameters">Basic Parameters</button><button class="tab" role="tab" id="settings-tab-rows" aria-controls="tab-rows" tabindex="-1" aria-selected="false" data-tab="rows">Rows</button><button class="tab" role="tab" id="settings-tab-columns" aria-controls="tab-columns" tabindex="-1" aria-selected="false" data-tab="columns">Columns</button></div>
+            <div class="panel-body">
+              <section class="tab-content active" id="tab-parameters" role="tabpanel" aria-labelledby="settings-tab-parameters">
+                <div class="settings-intro"><h3>Time & source</h3></div>
+                <div class="ds-field"><span class="ds-label" id="clockLabel">Clock <button class="field-help" title="The accounting source for this view" aria-label="About clock"><svg><use href="#i-info"/></svg></button></span><input id="clock" type="hidden" value="Book"><div class="ds-dropdown"><button class="ds-trigger" id="clockTrigger" aria-labelledby="clockLabel clockValue" aria-expanded="false" aria-controls="clockMenu"><span id="clockValue">Book</span><svg><use href="#i-down"/></svg></button><div class="ds-menu" id="clockMenu" hidden></div></div></div>
+                <div class="ds-field"><span class="ds-label" id="cycleLabel">Cycle</span><input id="cycle" type="hidden" value="monthly"><div class="ds-dropdown"><button class="ds-trigger" id="cycleTrigger" aria-labelledby="cycleLabel cycleValue" aria-expanded="false" aria-controls="cycleMenu"><span id="cycleValue">Monthly -1</span><svg><use href="#i-down"/></svg></button><div class="ds-menu" id="cycleMenu" hidden></div></div></div>
+                <div class="ds-field"><span class="ds-label" id="periodLabel">Period <span class="ds-label-meta">Choose two</span></span><input id="period" type="hidden" value="p1,p2"><div class="ds-dropdown"><div class="ds-multiselect"><div class="ds-chips" id="periodChips"></div><button class="ds-disclosure" id="periodTrigger" aria-label="Choose periods" aria-expanded="false" aria-controls="periodMenu"><svg><use href="#i-down"/></svg></button></div><div class="ds-menu ds-period-menu" id="periodMenu" hidden><div class="ds-menu-heading">Compare two periods</div><div id="periodOptions"></div><div class="ds-menu-footer"><span id="periodCount">2 of 2 selected</span><div><button class="ds-text-action" id="periodCancel">Cancel</button><button class="ds-primary-action" id="periodSelect">Select</button></div></div></div></div></div>
+              </section>
+              <section class="tab-content" id="tab-rows" role="tabpanel" aria-labelledby="settings-tab-rows"><div class="attr-panel rows-settings" id="rowsSettings"></div></section>
+              <section class="tab-content" id="tab-columns" role="tabpanel" aria-labelledby="settings-tab-columns"><div class="rows-settings attr-panel" id="columnsSettings"></div></section>
+            </div><div class="panel-footer"><button class="text-button" id="resetSettings" disabled>Discard</button><button class="apply-button" id="applyButton" disabled>Apply changes <svg><use href="#i-chevron"/></svg></button></div>
+          </aside>
+        </div>
+      </main>
+      <section class="workspace views-page" id="viewsPage" aria-labelledby="viewsTitle" hidden></section>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="components.js?v=59"></script>
+  <script src="script.js?v=59"></script>
+  <script src="rows.js?v=59"></script>
+  <script src="views.js?v=59"></script>
+</body>
+</html>

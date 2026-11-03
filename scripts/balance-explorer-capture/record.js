@@ -15,7 +15,7 @@ const easeInOut = k => (k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 
   const browser = await chromium.launch({ executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome', headless: true, args: ['--window-size=1440,987', '--force-device-scale-factor=2', '--hide-scrollbars'] });
   const context = await browser.newContext({ viewport: null, acceptDownloads: true });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:4173/variant-02/index.html#explorer');
+  await page.goto('http://localhost:8000/Balance%20Explorer/prototype/index.html#explorer');
   await page.waitForTimeout(1800);
   const size = await page.evaluate(() => [innerWidth, innerHeight, devicePixelRatio]);
   if (size.join() !== '1440,900,2') throw new Error('Viewport is ' + size);

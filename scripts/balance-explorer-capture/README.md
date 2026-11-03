@@ -1,8 +1,8 @@
 # Balance Explorer capture
 
-Records the videos in the Balance Explorer case study from the working prototype
-in `~/Balance Explorer/variant-02`, and copies them into
-`Balance Explorer/assets/screens/`. This folder isn't published with the site.
+Records the videos in the Balance Explorer case study from the case study's own copy
+of the prototype (`Balance Explorer/prototype/`, copied from `~/Balance Explorer/variant-02`),
+and copies them into `Balance Explorer/assets/screens/`. This folder isn't published with the site.
 
 ## How it works
 
@@ -16,7 +16,7 @@ in `~/Balance Explorer/variant-02`, and copies them into
 
 ## Use
 
-Serve the prototype on port 4173 first (the "balance-explorer" preview), then:
+Serve the case study on port 8000 first (the "case-studies" preview), then:
 
 ```sh
 ./run.sh setup     # once: installs playwright-core, Pillow and ffmpeg locally
@@ -26,7 +26,7 @@ Serve the prototype on port 4173 first (the "balance-explorer" preview), then:
 
 | Step | Case study file | Shows |
 | --- | --- | --- |
-| `tour` | `explorer-tour.mp4` | The TLDR tour, the full window |
+| `tour` | `explorer-tour.mp4` | The TLDR tour, the full window. The page no longer uses it: the TLDR now runs the prototype live (`Balance Explorer/product-demo.js`, same steps) |
 | `table` | `shot-table-detail` | Moving down the tree, the eye icon, opening Income |
 | `tabs` | `shot-shape-detail` | The three settings tabs, then Apply |
 | `save` | `shot-save-detail` | Opening a saved view, changing it, saving it |

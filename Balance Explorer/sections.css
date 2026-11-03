@@ -1,15 +1,5 @@
 /* Balance Explorer's own section pieces, layered over case-study-kit/kit.css and theme.css. */
 
-/* "Decision 1 · Reading the ledger" above each decision's heading. */
-.decision-label {
-  margin: 0 0 var(--space-3);
-  color: var(--accent);
-  text-transform: uppercase;
-
-  font: var(--font-utility);
-  letter-spacing: var(--tracking-label);
-}
-
 /* A screen slot and its caption; the caption lines up with the wide frame above it.
    A quiet italic aside, lighter than body text (#6b7385 still clears 4.5:1 on the cream page). */
 .screen-caption {
@@ -67,7 +57,25 @@
   gap: var(--space-2);
   align-content: start;
   padding-top: var(--space-5);
-  border-top: 1px solid var(--line);
+}
+
+/* A short pink wave above each beat and problem column, in place of a full-width rule. */
+.story-beats--row .story-beat,
+.trio-card {
+  position: relative;
+}
+
+.story-beats--row .story-beat::before,
+.trio-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 6px;
+  background: #cc3a8c;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='6' viewBox='0 0 32 6'%3E%3Cpath d='M1 3Q3.5.5 6 3t5 0 5 0 5 0 5 0 5 0' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='6' viewBox='0 0 32 6'%3E%3Cpath d='M1 3Q3.5.5 6 3t5 0 5 0 5 0 5 0 5 0' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  content: "";
 }
 
 .story-beats--row dt {
@@ -242,14 +250,6 @@
   gap: var(--space-2);
   align-content: start;
   padding-top: var(--space-5);
-  border-top: 1px solid var(--line);
-}
-
-/* Pink like the flower's centre, deepened just enough to read as small text (4.6:1 on the cream page). */
-.trio-number {
-  color: #cc3a8c;
-
-  font: var(--font-utility);
 }
 
 .trio-card h3 {
@@ -548,6 +548,130 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+/* The TLDR showcase (product-demo.js): the prototype at its own 1440 × 900 size on a laptop, inside a
+   1760 × 1110 scene that the camera scales and moves. The stage is the camera's window. */
+.mockup-stage--device {
+  padding: 0;
+}
+
+.device-showcase {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1760 / 1110;
+}
+
+.device-showcase__scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1760px;
+  height: 1110px;
+  transform-origin: 0 0;
+}
+
+/* The lid: a black glass border inside a thin aluminium rim, like a MacBook seen face on. */
+.laptop__lid {
+  position: absolute;
+  top: 56px;
+  left: 138px;
+  width: 1484px;
+  height: 944px;
+  padding: 22px;
+  border-radius: 28px 28px 10px 10px;
+  background: #0d0f14;
+  box-shadow:
+    inset 0 0 0 2px #2a2d36,
+    0 0 0 3px #c9ccd6,
+    0 0 0 4px #a9adb9;
+}
+
+.laptop__camera {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #23262f;
+  box-shadow: inset 0 0 0 1.5px #343845;
+  transform: translateX(-50%);
+}
+
+.device__screen {
+  position: relative;
+  width: 1440px;
+  height: 900px;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #fff;
+}
+
+/* The base: a slim aluminium deck, wider than the lid, with the opening notch in the middle. */
+.laptop__base {
+  position: absolute;
+  top: 1000px;
+  left: 50px;
+  width: 1660px;
+  height: 30px;
+  border-radius: 4px 4px 22px 22px / 4px 4px 30px 30px;
+  background: linear-gradient(180deg, #f1f2f6 0%, #d9dce5 45%, #aeb2bf 100%);
+  box-shadow: inset 0 1.5px 0 rgb(255 255 255 / 0.9), inset 0 -2px 3px rgb(80 86 110 / 0.25);
+}
+
+.laptop__notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 220px;
+  height: 11px;
+  border-radius: 0 0 12px 12px;
+  background: linear-gradient(180deg, #b7bbc7, #d3d6df);
+  transform: translateX(-50%);
+}
+
+.laptop__shadow {
+  position: absolute;
+  top: 1012px;
+  left: 120px;
+  width: 1520px;
+  height: 46px;
+  border-radius: 50%;
+  background: rgb(30 43 111 / 0.28);
+  filter: blur(22px);
+}
+
+.device__app,
+.device__poster {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 1440px;
+  height: 900px;
+  border: 0;
+}
+
+/* The two pages crossfade while the camera is pulled back. */
+.device__app {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.device__screen[data-page="explorer"] .device__app[data-page="explorer"],
+.device__screen[data-page="views"] .device__app[data-page="views"] {
+  opacity: 1;
+}
+
+.device__poster {
+  z-index: 1;
+  object-fit: cover;
+  transition: opacity 0.6s ease;
+}
+
+.mockup-stage--device[data-state="ready"] .device__poster {
+  opacity: 0;
 }
 
 @media (max-width: 40rem) {
