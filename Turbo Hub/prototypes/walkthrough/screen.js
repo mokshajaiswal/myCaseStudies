@@ -21,7 +21,7 @@
         if(frame!==incoming)return;
         try{TurboStoryPlayback.snapshot(incoming.contentDocument,step.id,step.flow,requestedElapsed);}catch(error){loadError=error;return;}
         loaded=true;
-        incoming.style.visibility='visible';displayed=incoming;
+        incoming.style.visibility='visible';displayed=incoming;if(!media.classList.contains('is-ready')){media.classList.add('is-ready');parent.postMessage({type:'turbo-walkthrough-ready'},location.origin);}
         // Removing old frames is safe; reinserting the live iframe reloads it.
         for(const child of [...media.children])if(child!==incoming)child.remove();
       });

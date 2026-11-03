@@ -40,6 +40,8 @@
   margin-inline: auto;
 }
 .prototype-walkthrough { display: block; width: 100%; height: 840px; border: 0; background: transparent; }
+/* Until the walkthrough's first screen has drawn, its still sits where the phone will be (the frame pads 12px a side, up to 360px). */
+.prototype-walkthrough:not(.is-ready) { background: url("prototypes/walkthrough/poster.webp?v=1") center top / min(360px, calc(100% - 24px)) auto no-repeat; }
 
 /* Page-owned placement; screens and device shells come from the prototype. */
 .overview-prototype {

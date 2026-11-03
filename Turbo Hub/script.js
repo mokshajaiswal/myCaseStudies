@@ -844,11 +844,13 @@ function renderCaseStudy() {
   const closingStage = createElement("div", "closing-stage");
   closingStage.setAttribute("aria-label", "Closing media");
   const walkthrough = createElement("iframe", "prototype-walkthrough");
-  walkthrough.src = "prototypes/walkthrough/index.html?v=video-overlay-3";
+  walkthrough.src = "prototypes/walkthrough/index.html?v=poster-2";
   walkthrough.title = "Full Turbo Hub prototype with play, pause, and draggable timeline";
   walkthrough.loading = "lazy";
   window.addEventListener("message", (event) => {
-    if (event.origin !== location.origin || event.source !== walkthrough.contentWindow || event.data?.type !== "turbo-walkthrough-size") return;
+    if (event.origin !== location.origin || event.source !== walkthrough.contentWindow) return;
+    if (event.data?.type === "turbo-walkthrough-ready") walkthrough.classList.add("is-ready");
+    if (event.data?.type !== "turbo-walkthrough-size") return;
     const height = Number(event.data.height);
     if (Number.isFinite(height) && height >= 300 && height <= 1400) walkthrough.style.height = `${height}px`;
   });
