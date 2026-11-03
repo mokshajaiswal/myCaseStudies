@@ -1,7 +1,7 @@
 (() => {
   const H=TurboUI;
-  const artwork=new URL('../../assets/hub-promo/family-wallet.png',document.currentScript.src).href;
-  const familyArtwork=new URL('../../assets/hub-promo/family-shared-fund-3d.png',document.currentScript.src).href;
+  const artwork=new URL('../../assets/hub-promo/family-wallet.webp',document.currentScript.src).href;
+  const familyArtwork=new URL('../../assets/hub-promo/family-shared-fund-3d.webp',document.currentScript.src).href;
   const el=(tag,cls,text)=>{const e=document.createElement(tag);e.className=cls;if(text)e.textContent=text;return e;};
   H.hubPromo=({href,title='Turbo Hub',intro='Introducing',description='A new way to share money with family.',label='Open Turbo Hub',variant='v1'}={})=>{
     const version=variant==='v2'?'v2':'v1';

@@ -125,7 +125,7 @@
     if(!flowId){
     const intro=node('div','family-story__intro');
     intro.append(node('h3','family-story__heading','Meet the Sharmas'),node('p','family-story__lead','To walk through the flows, I’ll follow one fictional family. Arun and Kavya want to support their children’s spending with clear boundaries; Neha and Rohan want to pay on their own. Each section below picks up a moment in their journey, with the screens and the reasoning behind them.'));
-    const home=node('img','family-story__home');home.src=asset+'family.png';home.alt='The Sharma family, Arun, Kavya, Neha and Rohan, together at home, each with a phone.';home.width=1536;home.height=1024;home.loading='lazy';
+    const home=node('img','family-story__home');home.src=asset+'family.webp';home.alt='The Sharma family, Arun, Kavya, Neha and Rohan, together at home, each with a phone.';home.width=1536;home.height=1024;home.loading='lazy';
     const homeFigure=node('div','family-story__home-figure');homeFigure.append(home);
     // Bubble x/y are % of the illustration: x centres the tail, y is where the tail tip sits (just above each head).
     Object.entries(story.cast).forEach(([key,person])=>{if(!person.bubble)return;const bubble=node('span','family-story__home-bubble'+(person.bubble.tail?' family-story__home-bubble--tail-'+person.bubble.tail:''));bubble.setAttribute('aria-hidden','true');bubble.style.left=person.bubble.x+'%';bubble.style.bottom=(100-person.bubble.y)+'%';bubble.dataset.cast=key;bubble.append(node('strong','',person.name),node('span','family-story__home-bubble-role',person.bubble.text));homeFigure.append(bubble);});

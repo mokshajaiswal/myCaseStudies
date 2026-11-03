@@ -167,7 +167,7 @@ const caseStudy = {
     personas: [
       {
         relation: "Father",
-        image: "assets/Father.png",
+        image: "assets/Father.webp",
         tier: "manager",
         label: "Hub Manager",
         tags: ["35", "Salaried"],
@@ -188,7 +188,7 @@ const caseStudy = {
       },
       {
         relation: "Mother",
-        image: "assets/Mother.png",
+        image: "assets/Mother.webp",
         tier: "manager",
         label: "Hub Manager",
         tags: ["33", "Salaried"],
@@ -209,7 +209,7 @@ const caseStudy = {
       },
       {
         relation: "Daughter",
-        image: "assets/Daughter.png",
+        image: "assets/Daughter.webp",
         tier: "member",
         label: "Hub Member",
         tags: ["16", "Student"],
@@ -230,7 +230,7 @@ const caseStudy = {
       },
       {
         relation: "Son",
-        image: "assets/Son.png",
+        image: "assets/Son.webp",
         tier: "member",
         label: "Hub Member",
         tags: ["22", "College Student"],
@@ -251,7 +251,7 @@ const caseStudy = {
       },
       {
         relation: "Elderly member",
-        image: "assets/grandmother.png",
+        image: "assets/grandmother.webp",
         tier: "member",
         label: "Hub Member",
         tags: ["68", "Retired"],
@@ -299,7 +299,7 @@ const caseStudy = {
       {
         number: "1",
         title: "Hub Manager",
-        portraits: [{ src: "assets/Father.png", alt: "Father" }],
+        portraits: [{ src: "assets/Father.webp", alt: "Father" }],
         label: "Responsibility",
         description:
           "Funds the Hub, defines boundaries, manages access and steps in when a decision is required.",
@@ -308,10 +308,10 @@ const caseStudy = {
         number: "2",
         title: "Hub Member",
         portraits: [
-          { src: "assets/Mother.png", alt: "Mother" },
-          { src: "assets/Daughter.png", alt: "Daughter" },
-          { src: "assets/Son.png", alt: "Son" },
-          { src: "assets/grandmother.png", alt: "Elderly member" },
+          { src: "assets/Mother.webp", alt: "Mother" },
+          { src: "assets/Daughter.webp", alt: "Daughter" },
+          { src: "assets/Son.webp", alt: "Son" },
+          { src: "assets/grandmother.webp", alt: "Elderly member" },
         ],
         label: "Responsibility",
         description:
@@ -325,19 +325,19 @@ const caseStudy = {
       "We compared Revolut, Greenlight, Monzo, and many others to understand how they handle the split between the person managing the money and the person spending it.",
     collageTitle: "Glimpse of some competitive research",
     images: [
-      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.17 1.png", "tapeTop": 7.54, "alt": "Parent wallet, autofunding, and family account shortcuts", "x": 2, "y": 4, "width": 20, "rotation": -9, "mobile": {"x": 2, "y": 4, "width": 30}},
-      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.18 1.png", "tape": false, "tapeTop": 7.33, "alt": "Family payments competitor screen: account management", "x": 21, "y": 2, "width": 15, "rotation": 6, "mobile": {"x": 36, "y": 6, "width": 29}},
-      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.18 2.png", "tape": false, "tapeTop": 7.37, "alt": "Family payments competitor screen: spending settings", "x": 35, "y": 5, "width": 14, "rotation": -4, "mobile": {"x": 68, "y": 3, "width": 31}},
-      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.27 1.png", "tapeTop": 6.44, "alt": "Revolut under 18: balance, goals, and allowance", "x": 64, "y": 4, "width": 14, "rotation": -7, "mobile": {"x": 3, "y": 46, "width": 26}},
-      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.27 2.png", "tape": false, "tapeTop": 89, "alt": "Revolut under 18 competitive research screen", "x": 80, "y": 4, "width": 19, "rotation": 8, "mobile": {"x": 36, "y": 48, "width": 29}},
-      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.30 1.png", "tape": false, "tapeTop": 6.07, "alt": "Family payments competitive research: account controls", "x": 3, "y": 49, "width": 18, "rotation": 7, "mobile": {"x": 68, "y": 42, "width": 30}},
-      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Topping up - Screenshot 2.png", "tapeTop": 6.89, "alt": "GoHenry top-up flow: first funding screen", "x": 23, "y": 49, "width": 20, "rotation": -8, "mobile": {"x": 1, "y": 68, "width": 34}},
-      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Topping up - Screenshot 3.png", "tape": false, "tapeTop": 6.89, "alt": "GoHenry top-up flow: subsequent funding screen", "x": 51, "y": 52, "width": 17, "rotation": 5, "mobile": {"x": 36, "y": 72, "width": 29}},
-      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Exploring Allowance and Tasks - Screenshot 12.png", "tapeTop": 6.89, "alt": "GoHenry: weekly allowance and allowance day", "x": 76, "y": 49, "width": 18, "rotation": -6, "mobile": {"x": 69, "y": 69, "width": 30}},
-      {"src": "assets/competitive_research/Frame.png", "tapeTop": 0.0, "alt": "Form design approach: one question at a time, condensed answers, interaction notes and analysis", "x": 49, "y": 3, "width": 13, "rotation": 3, "mobile": {"x": 67, "y": 26, "width": 24}},
-      {"src": "assets/competitive_research/1/Frame.png", "tape": false, "tapeTop": 22.22, "alt": "Family Hub banner for sharing household expenses with family members", "x": 12, "y": 36, "width": 24, "rotation": -6, "mobile": {"x": 3, "y": 29, "width": 39}},
-      {"src": "assets/competitive_research/1/Frame-1.png", "tape": false, "tapeTop": 16.38, "alt": "Arun Sharma manager card showing spending against his monthly limit", "x": 66, "y": 43, "width": 22, "rotation": 7, "mobile": {"x": 35, "y": 36, "width": 38}},
-      {"src": "assets/competitive_research/1/Nudge.png", "tapeTop": 28.48, "alt": "Kavya Sharma top-up request for ₹5,000 with an accept request action", "x": 40, "y": 80, "width": 30, "rotation": -5, "mobile": {"x": 15, "y": 66, "width": 55}}
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.17 1.webp", "tapeTop": 7.54, "alt": "Parent wallet, autofunding, and family account shortcuts", "x": 2, "y": 4, "width": 20, "rotation": -9, "mobile": {"x": 2, "y": 4, "width": 30}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.18 1.webp", "tape": false, "tapeTop": 7.33, "alt": "Family payments competitor screen: account management", "x": 21, "y": 2, "width": 15, "rotation": 6, "mobile": {"x": 36, "y": 6, "width": 29}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 1.18 2.webp", "tape": false, "tapeTop": 7.37, "alt": "Family payments competitor screen: spending settings", "x": 35, "y": 5, "width": 14, "rotation": -4, "mobile": {"x": 68, "y": 3, "width": 31}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.27 1.webp", "tapeTop": 6.44, "alt": "Revolut under 18: balance, goals, and allowance", "x": 64, "y": 4, "width": 14, "rotation": -7, "mobile": {"x": 3, "y": 46, "width": 26}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.27 2.webp", "tape": false, "tapeTop": 89, "alt": "Revolut under 18 competitive research screen", "x": 80, "y": 4, "width": 19, "rotation": 8, "mobile": {"x": 36, "y": 48, "width": 29}},
+      {"src": "assets/competitive_research/Screenshot 2023-12-02 at 2.30 1.webp", "tape": false, "tapeTop": 6.07, "alt": "Family payments competitive research: account controls", "x": 3, "y": 49, "width": 18, "rotation": 7, "mobile": {"x": 68, "y": 42, "width": 30}},
+      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Topping up - Screenshot 2.webp", "tapeTop": 6.89, "alt": "GoHenry top-up flow: first funding screen", "x": 23, "y": 49, "width": 20, "rotation": -8, "mobile": {"x": 1, "y": 68, "width": 34}},
+      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Topping up - Screenshot 3.webp", "tape": false, "tapeTop": 6.89, "alt": "GoHenry top-up flow: subsequent funding screen", "x": 51, "y": 52, "width": 17, "rotation": 5, "mobile": {"x": 36, "y": 72, "width": 29}},
+      {"src": "assets/competitive_research/[11FS Pulse] GoHenry - Exploring Allowance and Tasks - Screenshot 12.webp", "tapeTop": 6.89, "alt": "GoHenry: weekly allowance and allowance day", "x": 76, "y": 49, "width": 18, "rotation": -6, "mobile": {"x": 69, "y": 69, "width": 30}},
+      {"src": "assets/competitive_research/Frame.webp", "tapeTop": 0.0, "alt": "Form design approach: one question at a time, condensed answers, interaction notes and analysis", "x": 49, "y": 3, "width": 13, "rotation": 3, "mobile": {"x": 67, "y": 26, "width": 24}},
+      {"src": "assets/competitive_research/1/Frame.webp", "tape": false, "tapeTop": 22.22, "alt": "Family Hub banner for sharing household expenses with family members", "x": 12, "y": 36, "width": 24, "rotation": -6, "mobile": {"x": 3, "y": 29, "width": 39}},
+      {"src": "assets/competitive_research/1/Frame-1.webp", "tape": false, "tapeTop": 16.38, "alt": "Arun Sharma manager card showing spending against his monthly limit", "x": 66, "y": 43, "width": 22, "rotation": 7, "mobile": {"x": 35, "y": 36, "width": 38}},
+      {"src": "assets/competitive_research/1/Nudge.webp", "tapeTop": 28.48, "alt": "Kavya Sharma top-up request for ₹5,000 with an accept request action", "x": 40, "y": 80, "width": 30, "rotation": -5, "mobile": {"x": 15, "y": 66, "width": 55}}
     ],
     insights: [
       {
@@ -442,8 +442,8 @@ const caseStudy = {
     ],
     source: { label: "NPCI · UPI Circle", href: "https://www.npci.org.in/product/upi-circle" },
     screens: [
-      { src: "assets/upi-circle/home-invitation.png", alt: "PayZapp home screen inviting Nirmal to join Anoop’s UPI Circle.", width: 360, height: 800 },
-      { src: "assets/upi-circle/accept-invitation.png", alt: "PayZapp UPI Circle acceptance modal over the home screen, with inviter details, terms and Accept Invite action.", width: 360, height: 800 },
+      { src: "assets/upi-circle/home-invitation.webp", alt: "PayZapp home screen inviting Nirmal to join Anoop’s UPI Circle.", width: 360, height: 800 },
+      { src: "assets/upi-circle/accept-invitation.webp", alt: "PayZapp UPI Circle acceptance modal over the home screen, with inviter details, terms and Accept Invite action.", width: 360, height: 800 },
     ],
     screensCaption: "PayZapp’s UPI Circle: the home-screen invitation and acceptance modal.",
   },

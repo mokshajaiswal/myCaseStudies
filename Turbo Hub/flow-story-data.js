@@ -1,10 +1,10 @@
 /* Narrative fixtures: fictional family, separate from the research personas. */
 (function (root) {
   const cast = {
-    father: {name:'Arun',role:'Father · Hub manager',description:'Starts the shared space and sets the boundaries.',image:'father.png',bubble:{x:22.9,y:35,text:'Father · 52'}},
-    mother: {name:'Kavya',role:'Mother · Co-manager',description:'Shares responsibility for the household’s money.',image:'mother.png',bubble:{x:47.1,y:35.3,tail:'right',text:'Mother · 48'}},
-    daughter: {name:'Neha',role:'Daughter · 19 · Hub member',description:'Wants an allowance she can use independently.',image:'daughter.png',bubble:{x:59.2,y:36.7,tail:'left',text:'Daughter · 19'}},
-    son: {name:'Rohan',role:'Son · 22 · Hub member',description:'Manages college expenses with family support.',image:'son.png',bubble:{x:80.7,y:16.6,text:'Son · 22'}}
+    father: {name:'Arun',role:'Father · Hub manager',description:'Starts the shared space and sets the boundaries.',image:'father.webp',bubble:{x:22.9,y:35,text:'Father · 52'}},
+    mother: {name:'Kavya',role:'Mother · Co-manager',description:'Shares responsibility for the household’s money.',image:'mother.webp',bubble:{x:47.1,y:35.3,tail:'right',text:'Mother · 48'}},
+    daughter: {name:'Neha',role:'Daughter · 19 · Hub member',description:'Wants an allowance she can use independently.',image:'daughter.webp',bubble:{x:59.2,y:36.7,tail:'left',text:'Daughter · 19'}},
+    son: {name:'Rohan',role:'Son · 22 · Hub member',description:'Manages college expenses with family support.',image:'son.webp',bubble:{x:80.7,y:16.6,text:'Son · 22'}}
   };
   const scene = (id,actor,title,copy,route,options={}) => ({id,actor,title,copy,route,interactive:false,placement:'lower-corner',...options});
   // A flow groups consecutive screens into one story beat: the beat, a carousel of its
