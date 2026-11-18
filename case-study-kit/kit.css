@@ -464,9 +464,21 @@ h4 {
   transform: translateY(-50%);
 }
 
+/* On the left edge the side flower is mirrored, so its stem leaves the page and the note sits in the bubble. */
 .annotation-figure--left {
+  top: 72%;
   right: auto;
   left: 0;
+  width: clamp(12rem, 26vw, 26rem);
+}
+
+.annotation-figure--left .annotation-mark {
+  transform: scaleX(-1);
+}
+
+.annotation-figure--left .annotation-copy {
+  right: 5%;
+  left: auto;
 }
 
 .annotation-mark {

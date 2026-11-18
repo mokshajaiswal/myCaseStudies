@@ -26,16 +26,25 @@
   margin-top: var(--narrative-media-gap);
 }
 
+/* In-section headings follow Turbo Hub and Balance Explorer: the kit's 22px Helix subsection heading in
+   sentence case, 12px above the copy it introduces. */
 .tr-subheading {
-  margin-bottom: var(--heading-copy-gap);
-}
-
-.tr-caps {
-  text-transform: uppercase;
-  letter-spacing: var(--tracking-label);
+  margin-bottom: var(--paragraph-gap);
 }
 
 /* Phones from the kit that play a video. */
+/* The frame's screen opening is 4.7–5% in from the sides, so the kit's 5% screen left a white sliver on the
+   right and at the corners. The screen now runs a little under the bezel, on a dark fill. */
+#case-study .phone {
+  --phone-screen-inset-inline: 4.2%;
+  --phone-screen-inset-block: 1.7%;
+}
+
+#case-study .phone-screen,
+#case-study .phone .media-slot {
+  background: #111;
+}
+
 .tr-phone-video {
   display: block;
   width: 100%;
@@ -73,6 +82,10 @@
 
   font: var(--font-utility);
   letter-spacing: var(--tracking-label);
+}
+
+.tr-sum__title strong {
+  font-weight: 600;
 }
 
 .tr-sum__title em {
@@ -129,17 +142,116 @@
 }
 
 /* ---------- Validating the idea ---------- */
-.tr-collage {
+/* The research canvas: Framer's 1440 × 900 board, full width, with pieces you can pick up and move.
+   Everything inside is sized in board widths (cqw), so the board scales as one picture. */
+.tr-canvas {
   position: relative;
   left: 50%;
   width: 100vw;
-  margin-left: -50vw;
-  background: var(--detail-surface);
+  margin: var(--narrative-media-gap) 0 0 -50vw;
+  overflow: hidden;
+  background: #f5f2e4;
 }
 
-.tr-collage .shot-media {
+.tr-canvas__board {
+  position: relative;
   width: min(100%, 1440px);
   margin-inline: auto;
+  container-type: inline-size;
+}
+
+.tr-canvas__piece {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+  cursor: grab;
+  rotate: var(--rot);
+  translate: calc(var(--dx, 0) * 100cqw) calc(var(--dy, 0) * 100cqw);
+  /* A finger moved sideways picks a piece up; moved up or down, it scrolls the page. */
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition: scale 180ms ease, rotate 180ms ease, filter 180ms ease;
+}
+
+.tr-canvas__piece--highlight {
+  mix-blend-mode: hard-light;
+}
+
+.tr-canvas__piece:hover {
+  filter: drop-shadow(0 6px 10px rgb(60 48 20 / 0.12));
+}
+
+.tr-canvas__piece.is-dragging {
+  cursor: grabbing;
+  scale: 1.04;
+  rotate: calc(var(--rot) + 1.5deg);
+  filter: drop-shadow(0 18px 26px rgb(60 48 20 / 0.22));
+}
+
+.tr-canvas__piece:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.tr-canvas__board.is-busy {
+  cursor: grabbing;
+}
+
+.tr-canvas__board.is-tidying .tr-canvas__piece {
+  transition: translate 520ms cubic-bezier(0.2, 0.8, 0.2, 1), scale 180ms ease, rotate 180ms ease;
+}
+
+.tr-canvas__title {
+  position: absolute;
+  top: calc(415 / 900 * 100%);
+  right: 0;
+  left: 0;
+  z-index: 1000;
+  margin: 0;
+  color: #000;
+  text-align: center;
+  pointer-events: none;
+
+  font: italic 500 calc(44 / 1440 * 100cqw) / 0.8 "Newsreader", Georgia, serif;
+}
+
+.tr-canvas__title span {
+  display: block;
+}
+
+.tr-canvas__title span + span {
+  color: #474747;
+  font-weight: 600;
+}
+
+.tr-canvas__reset {
+  position: absolute;
+  right: var(--layout-gutter);
+  bottom: var(--space-4);
+  z-index: 1001;
+  padding: var(--space-2) var(--space-4);
+  border: 1px solid var(--detail-border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--heading-ink);
+  box-shadow: var(--detail-shadow);
+  cursor: pointer;
+
+  font: 500 var(--type-utility, 0.875rem) / 1.2 var(--font-body);
+}
+
+.tr-canvas__reset[hidden] {
+  display: none;
+}
+
+/* On phones the board is wider than the screen, so the pieces stay big enough to pick up. */
+@media (max-width: 40rem) {
+  .tr-canvas__board {
+    width: 165vw;
+    margin-left: -32.5vw;
+  }
 }
 
 .tr-phase {
@@ -148,15 +260,16 @@
 }
 
 .tr-phase__title {
-  margin: 0 0 var(--heading-copy-gap);
+  margin: 0 0 var(--paragraph-gap);
   color: var(--heading-ink);
 
-  font: var(--heading-weight) var(--type-heading) / var(--heading-line-height) var(--font-body);
+  font: var(--font-small-heading);
   letter-spacing: var(--tracking-heading);
 }
 
 .tr-phase__title strong {
-  font-weight: 700;
+  color: var(--ink-soft);
+  font-weight: inherit;
 }
 
 /* ---------- Insights and the guiding philosophy ---------- */
@@ -192,7 +305,7 @@
   border-radius: 0.5rem;
   color: var(--heading-ink);
 
-  font: 600 var(--type-utility) / 1 var(--font-body);
+  font: 600 var(--type-utility) / 1.5 var(--font-body);
 }
 
 .tr-insight__title {
@@ -200,6 +313,7 @@
   color: var(--heading-ink);
 
   font: var(--font-small-heading);
+  letter-spacing: var(--tracking-heading);
 }
 
 .tr-insight__label {
@@ -224,13 +338,25 @@
   }
 }
 
+/* As in Framer: a cream panel (#fde8ca, 952px at 1440, 18px corners) set inside a crumpled-paper frame
+   (995px), wider than the reading column. Title and copy use the shared heading and body styles. */
+/* Centred with margins, not translate: the scroll reveal animates `translate`, which would push the card to the
+   right until the reveal finished. */
 .tr-philosophy {
+  --philosophy-width: min(62.1875rem, calc(100vw - var(--layout-gutter) * 2));
+  width: var(--philosophy-width);
+  margin: var(--narrative-media-gap) 0 0 calc((100% - var(--philosophy-width)) / 2);
+  padding: clamp(0.75rem, 1.5vw, 1.34rem) clamp(0.75rem, 1.5vw, 1.34rem);
+  border-radius: 24px;
+  background: var(--frame) center / 100% 100% no-repeat;
+}
+
+.tr-philosophy__panel {
   display: grid;
   justify-items: center;
-  margin-top: var(--narrative-media-gap);
-  padding: clamp(var(--space-12), 6vw, var(--space-16)) clamp(var(--space-8), 7vw, var(--space-20));
-  border-radius: var(--radius-medium);
-  background: var(--frame) center / 100% 100% no-repeat;
+  padding: clamp(var(--space-8), 3vw, var(--space-10)) clamp(var(--space-5), 3.5vw, 3.125rem);
+  border-radius: 18px;
+  background: #fde8ca;
   text-align: center;
 }
 
@@ -243,11 +369,12 @@
 }
 
 .tr-philosophy__text {
-  max-width: 38rem;
+  max-width: 53.25rem;
   margin: 0;
   color: var(--ink);
 
-  font: var(--font-small-body);
+  font: var(--font-body-copy);
+  letter-spacing: var(--tracking-body);
 }
 
 /* ---------- Design process ---------- */
@@ -275,7 +402,7 @@
 .tr-diagram__end strong {
   color: var(--heading-ink);
 
-  font: 600 var(--type-heading) / 1.15 var(--font-body);
+  font: var(--font-small-heading);
 }
 
 .tr-diagram__end span {
@@ -287,7 +414,7 @@
 .tr-diagram__arrow {
   color: var(--heading-ink);
 
-  font: 300 3rem / 1 var(--font-body);
+  font: var(--font-small-heading);
 }
 
 .tr-diagram__loop {
@@ -352,6 +479,103 @@
   grid-row: 2;
 }
 
+/* Each track's pictures sit in the empty column beside it and stay in view while you read its cards. */
+.tr-reveal {
+  position: relative;
+  align-self: stretch;
+  /* Starts in the paper's top padding, so the pictures are already in place for a track's first card. */
+  margin-top: calc(var(--space-24) * -1);
+  /* ...and runs on below the track, so the last card's pictures stay pinned too. */
+  margin-bottom: -45vh;
+  pointer-events: none;
+}
+
+.tr-reveal--forward {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.tr-reveal--back {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.tr-reveal__frame {
+  /* Room beyond the column: half the gap towards the cards, and everything out to the page edge. */
+  --reach: calc(var(--space-20) / 2);
+  --edge: max(0px, (100vw - 72rem) / 2 - var(--layout-gutter));
+  position: sticky;
+  top: 3vh;
+  width: min(calc(100% + var(--reach) + var(--edge)), calc(94vh * var(--ratio, 0.85)));
+}
+
+/* The first track's pictures grow to the right, the second's to the left. */
+.tr-reveal--forward .tr-reveal__frame {
+  margin-left: calc(var(--reach) * -1);
+}
+
+.tr-reveal--back {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+}
+
+.tr-reveal--back .tr-reveal__frame {
+  flex: none;
+  margin-right: calc(var(--reach) * -1);
+}
+
+.tr-reveal__set {
+  position: absolute;
+  /* A little larger than the box: the pictures may spill into the gap, never onto the cards. */
+  scale: 1.15;
+}
+
+.tr-reveal--forward .tr-reveal__set {
+  transform-origin: 40% 50%;
+}
+
+.tr-reveal--back .tr-reveal__set {
+  transform-origin: 60% 50%;
+}
+
+.tr-reveal__piece {
+  position: absolute;
+  display: block;
+  object-fit: contain;
+  opacity: 0;
+  rotate: calc(var(--rot) - 8deg);
+  scale: 0.72;
+  translate: 0 1.5rem;
+  transition:
+    opacity 220ms ease,
+    rotate 220ms ease,
+    scale 220ms ease,
+    translate 220ms ease;
+}
+
+.tr-reveal__set.is-shown .tr-reveal__piece {
+  opacity: 1;
+  rotate: var(--rot);
+  scale: 1;
+  translate: 0 0;
+  transition:
+    opacity 320ms ease var(--delay),
+    rotate 520ms cubic-bezier(0.2, 0.9, 0.3, 1.15) var(--delay),
+    scale 520ms cubic-bezier(0.2, 0.9, 0.3, 1.15) var(--delay),
+    translate 520ms cubic-bezier(0.2, 0.9, 0.3, 1.15) var(--delay);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tr-reveal__piece,
+  .tr-reveal__set.is-shown .tr-reveal__piece {
+    rotate: var(--rot);
+    scale: 1;
+    translate: 0 0;
+    transition: opacity 200ms ease;
+  }
+}
+
 .tr-track__head {
   display: flex;
   gap: var(--space-6);
@@ -368,20 +592,22 @@
 .tr-track__title {
   margin: 0;
   color: var(--heading-ink);
-  text-transform: uppercase;
 
-  font: 700 var(--type-small-heading) / 1.3 var(--font-body);
+  font: var(--font-small-heading);
+  letter-spacing: var(--tracking-heading);
 }
 
 .tr-track__title em {
-  text-transform: none;
-  font-weight: 400;
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+  letter-spacing: 0;
 }
 
 .tr-track__arrow {
   color: var(--heading-ink);
 
-  font: 300 2rem / 1 var(--font-body);
+  font: var(--font-small-heading);
 }
 
 .tr-track__card {
@@ -390,6 +616,27 @@
   border-radius: var(--radius-medium);
   background: var(--detail-surface);
   box-shadow: var(--detail-shadow);
+  cursor: default;
+  transition: background-color 200ms ease, border-color 200ms ease, translate 260ms ease;
+}
+
+/* The card whose pictures are showing turns Framer's pale yellow and leans towards them. */
+.tr-track__card.is-active {
+  border-color: #efe2b4;
+  background: #faf4de;
+}
+
+.tr-track--forward .tr-track__card.is-active {
+  translate: 0.375rem 0;
+}
+
+.tr-track--back .tr-track__card.is-active {
+  translate: -0.375rem 0;
+}
+
+.tr-track__card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .tr-track__card h4 {
@@ -397,7 +644,7 @@
   color: var(--heading-ink);
 
   font: var(--font-small-heading);
-  font-weight: 500;
+  letter-spacing: var(--tracking-heading);
 }
 
 .tr-track__card p {
@@ -415,6 +662,10 @@
 
   .tr-track--back {
     grid-column: 1;
+  }
+
+  .tr-reveal {
+    display: none;
   }
 }
 
@@ -474,24 +725,46 @@
 
 .tr-strip__row img {
   display: block;
-  height: clamp(20rem, 52vw, 47.5rem);
+  align-self: flex-start;
+  height: calc(clamp(20rem, 52vw, 47.5rem) * var(--scale, 1));
   width: auto;
   object-fit: cover;
 }
 
+/* Pinned flows: the screens fill the viewport's height (about four phones across at 1440) and stay put while the
+   scroll moves them sideways; script.js sets the track's height to the panel plus that distance. */
+.tr-flow.is-pinned .tr-flow__pin {
+  position: sticky;
+  top: 0;
+  display: flex;
+  height: 100vh;
+  height: 100svh;
+  padding: var(--space-8) 0 calc(var(--space-16) + var(--space-6));
+}
+
+.tr-flow.is-pinned .tr-strip {
+  flex: none;
+  width: 100vw;
+  min-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.tr-flow.is-pinned .tr-strip__row {
+  height: 100%;
+  padding-bottom: 0;
+  will-change: transform;
+}
+
+.tr-flow.is-pinned .tr-strip__row img {
+  height: calc(100% * var(--scale, 1));
+}
+
+.tr-flow.is-pinned .tr-flow__track {
+  margin-top: var(--space-6);
+}
+
 /* ---------- Designs: four drifting columns ---------- */
-.tr-designs-section {
-  text-align: center;
-}
-
-.tr-designs__title {
-  margin: 0;
-  color: var(--heading-ink);
-  text-transform: uppercase;
-
-  font: 700 var(--type-heading) / var(--heading-line-height) var(--font-body);
-  letter-spacing: var(--tracking-heading);
-}
 
 .tr-designs {
   position: relative;
@@ -594,19 +867,20 @@
   }
 }
 
-/* ---------- Impact board: notes from testing around one statement ---------- */
+/* ---------- Impact: notes from testing around one statement ----------
+   The same composition as Turbo Hub's and Balance Explorer's impact: content width, fitted to one screen, the
+   eyebrow and italic statement in the middle in their type, and notes that glide in as you reach them. */
 .tr-impact {
-  position: relative;
-  left: 50%;
-  width: 100vw;
-  margin: var(--narrative-media-gap) 0 0 -50vw;
+  margin-top: var(--narrative-media-gap);
 }
 
 .tr-impact__stage {
   position: relative;
-  width: min(100%, 1440px);
-  margin-inline: auto;
+  left: 50%;
+  /* All six notes fit in one screen, as in Turbo Hub and Balance Explorer. */
+  width: min(80rem, calc(100vw - var(--layout-gutter) * 2), calc((100svh - 2rem) * 1440 / 1250));
   aspect-ratio: 1440 / 1250;
+  translate: -50% 0;
 }
 
 .tr-impact__note {
@@ -614,44 +888,69 @@
   height: auto;
 }
 
-.tr-impact__statement {
+.tr-impact.is-animated .tr-impact__note {
+  opacity: 0;
+  translate: var(--from-x) var(--from-y);
+}
+
+.tr-impact.is-animated .tr-impact__note.is-in {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 1150ms cubic-bezier(0.25, 0.8, 0.25, 1) var(--delay),
+    translate 1150ms cubic-bezier(0.25, 0.8, 0.25, 1) var(--delay);
+}
+
+.tr-impact__center {
   position: absolute;
   left: 50%;
-  display: grid;
-  gap: var(--space-3);
-  width: min(58rem, 80%);
+  /* Wide enough for the statement to set in three lines, in the gap between the two rows of notes. */
+  width: 84%;
   text-align: center;
-  transform: translateX(-50%);
+  translate: -50% 0;
 }
 
-.tr-impact__statement .design-question-title {
-  font: var(--heading-weight) clamp(1.5rem, 2.6vw, 2.625rem) / 1.2 var(--font-display);
+.tr-impact__eyebrow {
+  display: block;
+  margin-bottom: var(--space-3);
+  color: var(--ink-soft);
+  text-transform: uppercase;
+
+  font: var(--font-utility);
+}
+
+.tr-impact__statement {
+  margin: 0;
+  color: var(--heading-ink);
+  text-wrap: balance;
+
+  font: var(--font-heading);
   font-style: italic;
-}
-
-.tr-impact__statement .design-question-line {
-  white-space: normal;
+  font-weight: 600;
 }
 
 @media (max-width: 48rem) {
   .tr-impact__stage {
-    aspect-ratio: auto;
+    left: 0;
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: var(--component-gap);
-    padding-inline: var(--layout-gutter);
+    width: 100%;
+    aspect-ratio: auto;
+    translate: none;
   }
 
   .tr-impact__note,
-  .tr-impact__statement {
+  .tr-impact__center {
     position: static;
     width: 100% !important;
-    transform: none;
+    translate: none;
   }
 
-  .tr-impact__statement {
+  .tr-impact__center {
     grid-column: 1 / -1;
     order: -1;
+    margin-bottom: var(--space-4);
   }
 }
 

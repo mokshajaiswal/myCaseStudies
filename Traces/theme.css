@@ -7,8 +7,8 @@
   --surface: #fbfcf8;
   --surface-raised: #fdfefe;
   --ink: #3f4652;
-  --ink-soft: #4e5771;
-  --heading-ink: #333333;
+  --ink-soft: #536076; /* shared with Turbo Hub and Balance Explorer */
+  --heading-ink: #34383f; /* shared with Turbo Hub and Balance Explorer */
   --line: #e6e1cf;
   --accent: #92a0c5; /* the TL;DR's soft periwinkle */
   --accent-strong: #5d6fa3;

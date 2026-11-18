@@ -443,7 +443,7 @@ function createAnnotationBand(content, annotation) {
   const band = createElement("div", "annotation-band");
   band.append(content);
   if (annotation) {
-    const figure = createElement("div", "annotation-figure");
+    const figure = createElement("div", `annotation-figure${annotation.left ? " annotation-figure--left" : ""}`);
     const mark = document.createElement("img");
     mark.className = "annotation-mark";
     mark.src = annotation.src;

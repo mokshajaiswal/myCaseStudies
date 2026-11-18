@@ -96,7 +96,29 @@ const caseStudy = {
       { value: "9", label: "Interviews" },
       { value: "6", label: "Behavioral Themes" },
     ],
-    collage: { src: "assets/research/collage.webp", width: 2880, height: 1790, bare: true, wide: true, alt: "Glimpse of my research work: survey charts, interview notes, coded transcripts, hand-drawn storyboards and sketches, a brainstorm of themes, and a photo of AR testing outdoors." },
+    // The research canvas, as in Framer: every photo, document and piece of tape can be picked up and moved.
+    // Positions are piece centres on Framer's 1440 × 900 board; rot is in degrees.
+    canvas: {
+      label: "Glimpse of my research work: a board of survey charts, interview notes, coded transcripts, storyboards, a brainstorm of themes and a photo of AR testing outdoors. Drag any piece to move it.",
+      title: ["Glimpse of", "my research work"],
+      width: 1440,
+      height: 900,
+      pieces: [
+      { src: "assets/research/canvas/01-photo.webp", kind: "photo", x: 412, y: 625, w: 265, h: 403, rot: 2, alt: "Photo of AR testing outdoors: holding up a phone to find a trace" },
+      { src: "assets/research/canvas/02-tape.webp", kind: "tape", x: 412, y: 480, w: 88, h: 54, rot: 2, alt: "" },
+      { src: "assets/research/canvas/03-doc.webp", kind: "doc", x: 870, y: 181, w: 350, h: 293, rot: -17, alt: "Coded interview transcripts, highlighted by theme" },
+      { src: "assets/research/canvas/04-doc.webp", kind: "doc", x: 169, y: 264, w: 451, h: 457, rot: -28, alt: "Survey charts: how people document memorable experiences and what helps them remember places" },
+      { src: "assets/research/canvas/05-doc.webp", kind: "doc", x: 1173, y: 704, w: 521, h: 524, rot: 22, alt: "Survey charts: demographics, tech comfort and interest in AR" },
+      { src: "assets/research/canvas/06-photo.webp", kind: "photo", x: 1270, y: 286, w: 432, h: 533, rot: -5, alt: "Hand-drawn storyboard: discovering the app, starting Explore mode and finding a trace" },
+      { src: "assets/research/canvas/07-tape.webp", kind: "tape", x: 1266, y: 510, w: 110, h: 94, rot: 29, alt: "" },
+      { src: "assets/research/canvas/08-doc.webp", kind: "doc", x: 523, y: 220, w: 342, h: 346, rot: 24, alt: "Interview notes, step 1: general understanding of each participant" },
+      { src: "assets/research/canvas/09-tape.webp", kind: "tape", x: 660, y: 130, w: 67, h: 70, rot: 24, alt: "" },
+      { src: "assets/research/canvas/10-photo.webp", kind: "photo", x: 121, y: 661, w: 328, h: 400, rot: 9, alt: "Hand-drawn storyboard sketches of the trace screens" },
+      { src: "assets/research/canvas/11-photo.webp", kind: "photo", x: 750, y: 706, w: 325, h: 414, rot: -9, alt: "Brainstorming ideas on themes" },
+      { src: "assets/research/canvas/12-photo.webp", kind: "photo", x: 1012, y: 390, w: 251, h: 293, rot: 22, alt: "Notebook of themes on sticky notes" },
+      { src: "assets/research/canvas/13-highlight.webp", kind: "highlight", x: 780, y: 480, w: 290, h: 127, rot: -6, alt: "" },
+      ],
+    },
   },
   phases: [
     {
@@ -152,16 +174,39 @@ const caseStudy = {
     to: { title: "Real-world testing", note: "Prototype & Spatial Validation" },
     loop: ["Concept", "System", "Reality", "Iteration"],
     paper: "assets/process/paper.webp",
+    // revealSize (0–1) shrinks a card's pictures where filling the whole space makes them too big.
+    // Hovering a card brings in its pictures beside the track, at Framer's positions on the 1440px-wide paper (piece centres).
     tracks: [
       {
         title: "Experience & Interaction Design",
         aside: "(System Thinking)",
         direction: "forward",
         cards: [
-          { title: "Core Experience Model", text: "After exploring a wide range of ideas and testing early concepts, finalized feature set for the traces app was shaped around three corners." },
-          { title: "System Structure & Information Architecture", text: "The experience activates when a user enters a location and scans the space through AR. Memory points appear only within proximity, reinforcing context and discovery through movement." },
-          { title: "Branding & Logo", text: "After multiple iterations, I finalised traces as it implies, leaving and creating various traces of your memories of that location." },
-          { title: "Storyboarding & Persona", text: "I synthesized interview data into personas to bridge behavior and goals. Mapping key moments identified interaction gaps, allowing me to refine AR cues and feedback for intuitive real-world use." },
+          { title: "Core Experience Model", revealSize: 0.8, text: "After exploring a wide range of ideas and testing early concepts, finalized feature set for the traces app was shaped around three corners.", reveal: [
+            { src: "assets/process/hover/1-1.webp", x: 1171, y: 371, w: 268, h: 139, rot: 1 },
+            { src: "assets/process/hover/1-2.webp", x: 870, y: 783, w: 336, h: 336, rot: 7 },
+            { src: "assets/process/hover/1-3.webp", x: 1064, y: 619, w: 330, h: 330, rot: 16 },
+            { src: "assets/process/hover/1-4.webp", x: 883, y: 391, w: 330, h: 330, rot: -6 },
+            { src: "assets/process/hover/1-5.webp", x: 1140, y: 846, w: 208, h: 78, rot: 13 },
+          ] },
+          { title: "System Structure & Information Architecture", revealSize: 0.78, text: "The experience activates when a user enters a location and scans the space through AR. Memory points appear only within proximity, reinforcing context and discovery through movement.", reveal: [
+            { src: "assets/process/hover/2-1.webp", x: 999, y: 676, w: 562, h: 434, rot: 0 },
+            { src: "assets/process/hover/2-2.webp", x: 835, y: 357, w: 196, h: 216, rot: 0 },
+            { src: "assets/process/hover/2-3.webp", x: 1016, y: 331, w: 197, h: 217, rot: 14 },
+            { src: "assets/process/hover/2-4.webp", x: 1190, y: 362, w: 188, h: 207, rot: 24 },
+          ] },
+          { title: "Branding & Logo", text: "After multiple iterations, I finalised traces as it implies, leaving and creating various traces of your memories of that location.", reveal: [
+            { src: "assets/process/hover/3-1.webp", x: 1164, y: 906, w: 325, h: 163, rot: -16 },
+            { src: "assets/process/hover/3-2.webp", x: 1160, y: 535, w: 468, h: 380, rot: 0 },
+            { src: "assets/process/hover/3-3.webp", x: 956, y: 762, w: 628, h: 447, rot: 5 },
+            { src: "assets/process/hover/3-4.webp", x: 941, y: 454, w: 571, h: 488, rot: -10 },
+          ] },
+          { title: "Storyboarding & Persona", text: "I synthesized interview data into personas to bridge behavior and goals. Mapping key moments identified interaction gaps, allowing me to refine AR cues and feedback for intuitive real-world use.", reveal: [
+            { src: "assets/process/hover/4-1.webp", x: 1081, y: 454, w: 368, h: 445, rot: 0 },
+            { src: "assets/process/hover/4-2.webp", x: 900, y: 705, w: 416, h: 441, rot: 0 },
+            { src: "assets/process/hover/4-3.webp", x: 948, y: 360, w: 384, h: 464, rot: 0 },
+            { src: "assets/process/hover/4-4.webp", x: 1082, y: 795, w: 449, h: 462, rot: 0 },
+          ] },
         ],
       },
       {
@@ -169,10 +214,27 @@ const caseStudy = {
         aside: "(real-world testing)",
         direction: "back",
         cards: [
-          { title: "Functional AR Build", text: "I developed a working AR prototype to test how memories could be anchored in real space. This moved the project beyond static UI and into spatial behavior validation." },
-          { title: "Anchor Accuracy & Stability", text: "Testing revealed minor anchor drift and placement inconsistencies. I refined calibration logic and spatial positioning to ensure memories felt fixed and permanent within the environment." },
-          { title: "Scale & Distance", text: "Objects behaved differently depending on proximity and user movement. I adjusted distance-based scaling and visibility rules to maintain clarity without overwhelming the space." },
-          { title: "Environmental Constraints & Interaction Feedback", text: "Outdoor testing revealed light and motion challenges, prompting me to simplify UI overlays and increase contrast for daylight readability. I also refined tap zones and feedback timing to reduce friction for users on the move." },
+          { title: "Functional AR Build", revealSize: 0.86, text: "I developed a working AR prototype to test how memories could be anchored in real space. This moved the project beyond static UI and into spatial behavior validation.", reveal: [
+            { src: "assets/process/hover/5-1.webp", x: 383, y: 1531, w: 484, h: 688, rot: -10 },
+            { src: "assets/process/hover/5-2.webp", x: 582, y: 1534, w: 453, h: 644, rot: 11 },
+            { src: "assets/process/hover/5-3.webp", x: 589, y: 1750, w: 275, h: 142, rot: 0 },
+          ] },
+          { title: "Anchor Accuracy & Stability", text: "Testing revealed minor anchor drift and placement inconsistencies. I refined calibration logic and spatial positioning to ensure memories felt fixed and permanent within the environment.", reveal: [
+            { src: "assets/process/hover/6-1.webp", x: 611, y: 1779, w: 542, h: 769, rot: 6 },
+            { src: "assets/process/hover/6-2.webp", x: 484, y: 1392, w: 313, h: 139, rot: 0 },
+            { src: "assets/process/hover/6-3.webp", x: 395, y: 1752, w: 578, h: 791, rot: -19 },
+          ] },
+          { title: "Scale & Distance", revealSize: 0.76, text: "Objects behaved differently depending on proximity and user movement. I adjusted distance-based scaling and visibility rules to maintain clarity without overwhelming the space.", reveal: [
+            { src: "assets/process/hover/7-1.webp", x: 361, y: 1879, w: 245, h: 159, rot: 0 },
+            { src: "assets/process/hover/7-2.webp", x: 578, y: 1847, w: 272, h: 156, rot: 0 },
+            { src: "assets/process/hover/7-3.webp", x: 575, y: 1558, w: 177, h: 337, rot: 10 },
+            { src: "assets/process/hover/7-4.webp", x: 373, y: 1550, w: 184, h: 358, rot: -6 },
+          ] },
+          { title: "Environmental Constraints & Interaction Feedback", text: "Outdoor testing revealed light and motion challenges, prompting me to simplify UI overlays and increase contrast for daylight readability. I also refined tap zones and feedback timing to reduce friction for users on the move.", reveal: [
+            { src: "assets/process/hover/8-1.webp", x: 416, y: 1867, w: 474, h: 532, rot: -18 },
+            { src: "assets/process/hover/8-2.webp", x: 599, y: 1866, w: 438, h: 523, rot: 10 },
+            { src: "assets/process/hover/8-3.webp", x: 504, y: 1533, w: 704, h: 604, rot: 0 },
+          ] },
         ],
       },
     ],
@@ -191,6 +253,8 @@ const caseStudy = {
   flows: {
     title: "Flows",
     intro: "To define how Traces behaves as a product, I mapped three primary flows centered around location-based interaction and asynchronous sharing.",
+    // `scale` draws a screen shorter than the strip: leaving-3 has no sticky notes under its phones, so at full
+    // height its phones would be bigger than everyone else's.
     items: [
       {
         id: "flow-discovery",
@@ -212,7 +276,7 @@ const caseStudy = {
         screens: [
           { src: "assets/flows/leaving-1.webp", width: 990, height: 775, alt: "Leaving a trace: from the home map into the AR view and the create screen, with sticky notes." },
           { src: "assets/flows/leaving-2.webp", width: 991, height: 775, alt: "Leaving a trace: creating a trace, choosing its title, hashtags and type of content." },
-          { src: "assets/flows/leaving-3.webp", width: 984, height: 607, alt: "Leaving a trace: the last steps of creating a trace." },
+          { src: "assets/flows/leaving-3.webp", width: 984, height: 607, scale: 0.76, alt: "Leaving a trace: the last steps of creating a trace." },
         ],
       },
       {
@@ -259,7 +323,7 @@ const caseStudy = {
     },
   },
   impact: {
-    title: "Impact/Future",
+    title: "Impact & future",
     paragraphs: [
       "The project aimed to encourage people to slow down, wander, and form deeper connections with their surroundings. Testing showed that this idea was both appealing and novel participants described it as “something worth going out for.” However, enthusiasm alone did not translate into a frictionless experience.",
       "Traces succeeded in delivering a functional WebXR-based proof-of-concept with spatial anchoring logic, tested by a diverse group of users.",
@@ -267,7 +331,7 @@ const caseStudy = {
     tags: ["Integration with real environment", "Avoiding Feature Overload", "Anchor Stability"],
     // Photos and quotes from testing around one statement, at their Framer positions in a 1440 × 1250 stage.
     eyebrow: "Tested by a diverse group of users",
-    statement: "It demonstrated that AR could be used not just for novelty, but as a medium for preserving and uncovering personal and collective stories tied to place.",
+    statement: "It showed AR can be more than a novelty: a way to preserve and uncover personal and collective stories of place.",
     statementTop: 535,
     notes: [
       { src: "assets/impact/note-1.webp", x: 62, y: 107, width: 455, height: 416, alt: "Photo from testing: Unlocking the Trace." },
