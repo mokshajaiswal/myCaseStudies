@@ -59,14 +59,12 @@
   padding-top: var(--space-5);
 }
 
-/* A short pink wave above each beat and problem column, in place of a full-width rule. */
-.story-beats--row .story-beat,
-.trio-card {
+/* A short pink wave above each beat, in place of a full-width rule (the problem columns get theirs from the kit's trio). */
+.story-beats--row .story-beat {
   position: relative;
 }
 
-.story-beats--row .story-beat::before,
-.trio-card::before {
+.story-beats--row .story-beat::before {
   position: absolute;
   top: 0;
   left: 0;
@@ -235,51 +233,12 @@
   margin-bottom: 0;
 }
 
-.trio {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: var(--space-10);
-  margin-top: var(--narrative-media-gap);
-  margin-bottom: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.trio-card {
-  display: grid;
-  gap: var(--space-2);
-  align-content: start;
-  padding-top: var(--space-5);
-}
-
-.trio-card h3 {
-  margin: 0;
-  color: var(--heading-ink);
-
-  font: var(--font-small-heading);
-}
-
-.trio-card p {
-  margin: 0;
-  color: var(--ink-soft);
-  text-wrap: pretty;
-
-  font: var(--font-small-body);
-}
-
 .problem .meta-strip {
   margin-top: var(--narrative-media-gap);
 }
 
 .problem .meta-strip dd {
   text-wrap: balance;
-}
-
-@media (max-width: 48rem) {
-  .trio {
-    grid-template-columns: 1fr;
-    gap: var(--space-8);
-  }
 }
 
 /* Other directions I tried: one sentence each, the idea in dark text and why it didn't stay in grey. */
@@ -318,103 +277,6 @@
   color: #6b7385;
 }
 
-/* Screens: each in a plain browser window (a thin border, no shadow) inside the reading column, so text, beats, screens and lists
-   all share the same left and right edges. Captions sit centred under their screen. */
-.window {
-  overflow: hidden;
-  border: 1px solid #dfe2ec;
-  border-radius: 0.75rem;
-  background: #fff;
-}
-
-.window__bar {
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  height: 28px;
-  padding: 0 12px;
-  border-bottom: 1px solid #eceef4;
-  background: #f7f8fb;
-}
-
-.window__bar > span {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #dfe2ec;
-}
-
-/* Six columns: a shot takes half by default, `span` sets 2 or 4, wide takes the row. */
-.shot-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: var(--space-10) var(--space-6);
-  align-items: start;
-  margin-top: var(--narrative-media-gap);
-}
-
-.shot {
-  margin: 0;
-}
-
-.shot-grid > .shot {
-  grid-column: span var(--span, 3);
-}
-
-.shot-grid > .shot--wide {
-  grid-column: 1 / -1;
-}
-
-.shot-media {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-/* Composites arrive with their own rounded corners and shadows on a transparent background. */
-.shot--bare .shot-media {
-  border-radius: 0;
-  background: none;
-  box-shadow: none;
-}
-
-/* Very tall screens sit narrower and centred so they don't take over the page. */
-.shot--narrow.shot--bare .shot-media {
-  width: min(100%, 44rem);
-  margin-inline: auto;
-}
-
-.shot--narrow .window {
-  width: min(100%, 36rem);
-  margin-inline: auto;
-}
-
-.shot .screen-frame {
-  width: 100%;
-  margin: 0;
-}
-
-.shot-caption {
-  margin: var(--space-4) 0 0;
-  color: #6b7385;
-  text-align: center;
-  text-wrap: balance;
-
-  font: var(--font-utility);
-  font-style: italic;
-  font-weight: 400;
-  letter-spacing: var(--tracking-body);
-}
-
-@media (max-width: 48rem) {
-  .shot-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .shot-grid > .shot {
-    grid-column: 1 / -1;
-  }
-}
 
 /* Who it's for: kept minimal. Each team and its question in a two-by-two grid, in the reading column. */
 .persona-grid {

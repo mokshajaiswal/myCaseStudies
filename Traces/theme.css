@@ -1,0 +1,153 @@
+/* Traces theme: colors and artwork layered over case-study-kit/kit.css.
+   Same structure as the other case studies. The page, panels, tags, contact card, ending and flowers
+   are Turbo Hub's cream and pink, as in the Framer version; the hero is the Traces navy, and the
+   headings flower and progress bar take the Traces pink (#e93f7a / #ff69b4). */
+:root {
+  --page: #fffef8;
+  --surface: #fbfcf8;
+  --surface-raised: #fdfefe;
+  --ink: #3f4652;
+  --ink-soft: #4e5771;
+  --heading-ink: #333333;
+  --line: #e6e1cf;
+  --accent: #92a0c5; /* the TL;DR's soft periwinkle */
+  --accent-strong: #5d6fa3;
+  --accent-soft: #eef0f8;
+  --detail-surface: #f8f6ed;
+  --detail-border: #eee5bd;
+  --detail-raised: #fffef8;
+  --detail-shadow:
+    inset -8px -8px 4px rgb(233 225 225 / 0.25),
+    inset 8px 8px 4px rgb(232 225 225 / 0.21);
+  --hero-a: #0c3c82;
+  --hero-b: #071f42;
+  --hero-ink: #ffffff;
+  --hero-ink-soft: rgb(255 255 255 / 0.9);
+  --secondary: #dc4778;
+  --secondary-soft: #fde8ef;
+  --secondary-strong: #c94070;
+  --secondary-glow-rgb: 230 60 116;
+  --secondary-shade-rgb: 122 6 62;
+  --secondary-ink-shadow-rgb: 93 0 42;
+  --ending-wave: #ef3980;
+  --shadow-rgb: 43 73 133;
+  --phone-shadow: drop-shadow(0 24px 30px rgb(43 73 133 / 0.18));
+  --trio-wave: #e93f7a;
+  --traces-pink: #e93f7a;
+  --traces-hot-pink: #ff69b4;
+}
+
+.asset-placeholder--icon,
+.design-question::before {
+  background: url("assets/heading_flower.svg") center / contain no-repeat;
+}
+
+/* Hero, matched to the Framer hero: the same 974 × 478 card (992px with the kit's rim) as IG, on a
+   top-to-bottom navy gradient from #0c3c82 to #071f42 with a 150px bottom radius. A faint Traces mark
+   fills the background, the logo (96px) sits 99px from the top with the title 56px below it, and the
+   three trace icons sit near the bottom edge. */
+.hero {
+  --hero-radius: 150px;
+  width: min(calc(100% - (var(--layout-gutter) * 2)), 62rem);
+  min-height: 478px;
+  padding: 99px var(--layout-gutter) 120px;
+  place-items: start center;
+  background: linear-gradient(180deg, var(--hero-a) 0%, var(--hero-b) 100%);
+}
+
+.hero::before {
+  border-color: rgb(255 255 255 / 0.18);
+}
+
+.hero::after {
+  background: none;
+}
+
+.hero-watermark {
+  position: absolute;
+  z-index: 0;
+  top: -29.7%;
+  left: 9.1%;
+  width: 81.7%;
+  height: auto;
+  pointer-events: none;
+}
+
+.hero .hero-copy {
+  position: relative;
+  z-index: 2;
+  gap: 0;
+  max-width: none;
+}
+
+.hero .hero__illustration {
+  width: 96px;
+  height: 96px;
+  aspect-ratio: auto;
+  margin-bottom: 56px;
+  animation: none;
+}
+
+.hero h1 {
+  max-width: none;
+  color: #fff;
+
+  font: 700 48px / 1.02 var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+.hero p {
+  max-width: 609px;
+  color: rgb(255 255 255 / 0.9);
+  text-wrap: balance;
+
+  font: 400 22px / 1.4 var(--font-body);
+}
+
+.hero-icons {
+  position: absolute;
+  z-index: 2;
+  bottom: 20px;
+  left: 50%;
+  width: 150px;
+  height: auto;
+  transform: translateX(-50%);
+}
+
+@media (max-width: 40rem) {
+  .hero {
+    --hero-radius: 5rem;
+    min-height: 0;
+    padding-top: 64px;
+  }
+
+  .hero .hero__illustration {
+    width: 72px;
+    height: 72px;
+    margin-bottom: 32px;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero p {
+    font-size: 1.125rem;
+  }
+}
+
+/* Scroll progress in the Traces hot pink. */
+.scroll-progress-fill {
+  background: var(--traces-hot-pink);
+}
+
+.scroll-progress-value {
+  color: var(--traces-hot-pink);
+}
+
+/* The section navigation's accent in the Traces pink. */
+.case-navigation {
+  --accent: #d6336e;
+  --accent-strong: #d6336e;
+  --accent-soft: #fde8ef;
+}

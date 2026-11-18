@@ -11,7 +11,7 @@ if OUTPUT == ROOT or ROOT in OUTPUT.parents and OUTPUT != ROOT / "_site":
     raise SystemExit("Use _site or an output directory outside the repository")
 OUTPUT.mkdir(parents=True, exist_ok=True)
 # Local folder -> published folder. Sibling paths such as "../Turbo Hub/" are rewritten to match.
-CASE_STUDIES = {"Turbo Hub": "turbo-hub", "Balance Explorer": "balance-explorer", "case-study-kit": "case-study-kit"}
+CASE_STUDIES = {"Turbo Hub": "turbo-hub", "Balance Explorer": "balance-explorer", "IG": "ig", "Traces": "traces", "case-study-kit": "case-study-kit"}
 tracked = subprocess.check_output(["git", "ls-files", "-z"], cwd=ROOT).decode().split("\0")
 count = 0
 for name in tracked:
@@ -49,7 +49,7 @@ for name in tracked:
     count += 1
 (OUTPUT / ".nojekyll").touch()
 for required in ["index.html", "turbo-hub/index.html", "turbo-hub/app-design-system/tokens.css", "turbo-hub/prototypes/shared/ds.js",
-                 "balance-explorer/index.html", "case-study-kit/kit.css", "case-study-kit/lottie/lottie-light.min.js"]:
+                 "balance-explorer/index.html", "ig/index.html", "traces/index.html", "case-study-kit/kit.css", "case-study-kit/lottie/lottie-light.min.js"]:
     if not (OUTPUT / required).is_file():
         raise SystemExit(f"Missing published entry: {required}")
 print(f"Packaged {count} files into {OUTPUT}")

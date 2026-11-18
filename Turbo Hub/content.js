@@ -499,7 +499,7 @@ const caseStudy = {
     card: {
       variant: "variant-2",
       hoverFlower: "orange",
-      href: "https://mokshadesigns.framer.website/casestudy3",
+      href: "../IG/index.html",
     },
     flowersStill: "assets/closing/flowers-still.svg",
   },

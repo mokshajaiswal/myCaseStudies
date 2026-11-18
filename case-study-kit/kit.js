@@ -314,6 +314,131 @@ function createContactSection(id) {
   return contact;
 }
 
+// Screens and cards first built for Balance Explorer: a loop or still in a plain window with its caption,
+// a grid of them, and three cards in a row.
+const prefersStill = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// Three cards in a row. An item can add a small `label` above its title and a `note` under its description.
+// `variant` "boxed" puts each card in a detail box.
+function createTrio(items, variant) {
+  const list = createElement("ol", `trio${variant ? ` trio--${variant}` : ""}`);
+  items.forEach((item) => {
+    const card = createElement("li", "trio-card");
+    if (item.label) card.append(createElement("p", "trio-card__label", item.label));
+    card.append(
+      createElement("h3", "", item.title),
+      createElement("p", "", item.description),
+    );
+    if (item.note) card.append(createElement("p", "trio-card__note", item.note));
+    list.append(card);
+  });
+  return list;
+}
+
+// A muted loop that plays only while on screen. With reduced motion it waits on its poster, with controls to play it.
+function createLoopVideo(shot, className) {
+  const video = document.createElement("video");
+  const still = prefersStill();
+  video.className = className;
+  if (shot.src) video.poster = shot.src;
+  if (shot.width) video.width = shot.width;
+  if (shot.height) video.height = shot.height;
+  video.muted = true;
+  video.loop = true;
+  video.playsInline = true;
+  video.preload = "metadata";
+  video.controls = still;
+  video.setAttribute("aria-label", shot.alt || shot.caption);
+  const source = document.createElement("source");
+  source.src = shot.video;
+  source.type = "video/mp4";
+  video.append(source);
+  if (!still) {
+    new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) video.play().catch(() => {});
+      else video.pause();
+    }, { threshold: 0.25 }).observe(video);
+  }
+  return video;
+}
+
+function createStillImage(shot, className) {
+  const image = document.createElement("img");
+  image.className = className;
+  image.src = shot.src;
+  image.alt = shot.alt || shot.caption;
+  if (shot.width) image.width = shot.width;
+  if (shot.height) image.height = shot.height;
+  image.loading = "lazy";
+  image.decoding = "async";
+  return image;
+}
+
+// A screen in a plain browser window (a hairline border and a title bar), with its caption centred under it.
+// Composites (`bare`) already carry their own frames, so they sit on the page as they are.
+// Until a shot has a `src` (or `video`), it stays an empty slot.
+function createShot(shot) {
+  const figure = createElement("figure", `shot${shot.wide ? " shot--wide" : ""}${shot.bare ? " shot--bare" : ""}${shot.narrow ? " shot--narrow" : ""}`);
+  if (shot.span) figure.style.setProperty("--span", shot.span);
+  if (shot.src || shot.video) {
+    const media = shot.video ? createLoopVideo(shot, "shot-media") : createStillImage(shot, "shot-media");
+    figure.append(shot.bare ? media : createWindow(media));
+  } else {
+    figure.append(createScreenFrame({ id: shot.id, label: shot.alt || shot.caption }));
+  }
+  // A shot without a caption (only `alt`) sits on its own, for grids that share one caption.
+  if (shot.caption) figure.append(createElement("figcaption", "shot-caption", shot.caption));
+  return figure;
+}
+
+function createWindow(media) {
+  const frame = createElement("div", "window");
+  const bar = createElement("div", "window__bar");
+  bar.setAttribute("aria-hidden", "true");
+  bar.append(createElement("span"), createElement("span"), createElement("span"));
+  frame.append(bar, media);
+  return frame;
+}
+
+function createShotGrid(shots) {
+  const grid = createElement("div", "shot-grid");
+  shots.forEach((shot) => grid.append(createShot(shot)));
+  return grid;
+}
+
+// Big numbers in a row, each with a label and an optional note. `boxed` sits them in a detail box.
+function createStatRow(stats, boxed = false) {
+  const list = createElement("dl", `stat-row${boxed ? " stat-row--boxed detail-box" : ""}`);
+  list.dataset.caseRevealUnit = "";
+  stats.forEach((stat) => {
+    const item = createElement("div", "stat");
+    item.append(createElement("dt", "stat__value", stat.value), createElement("dd", "stat__label", stat.label));
+    if (stat.note) item.append(createElement("dd", "stat__note", stat.note));
+    list.append(item);
+  });
+  return list;
+}
+
+// Pill tags that belong to the copy above them.
+function createTagList(tags) {
+  const list = createElement("ul", "tag-list");
+  list.dataset.caseRevealUnit = "";
+  tags.forEach((tag) => list.append(createElement("li", "", tag)));
+  return list;
+}
+
+// A pull statement in the design-question layout: a small eyebrow and a large italic line or two.
+function createPullStatement({ id, eyebrow, lines }) {
+  const section = createElement("section", "case-section design-question");
+  section.id = id;
+  const title = createElement("h2", "design-question-title");
+  title.id = `${id}-title`;
+  section.setAttribute("aria-labelledby", title.id);
+  lines.forEach((line) => title.append(createElement("span", "design-question-line", line)));
+  section.append(createElement("p", "design-question-eyebrow", eyebrow), title);
+  return section;
+}
+
 function createAnnotationBand(content, annotation) {
   const band = createElement("div", "annotation-band");
   band.append(content);

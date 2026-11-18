@@ -42,3 +42,20 @@ export PATH="/opt/homebrew/opt/rustup/bin:$HOME/.cargo/bin:$PATH"
 rustup default stable
 cargo install --locked cargo-fframes --version 1.2.0
 ```
+
+## Turbo Hub motion explainer (Motion Studio)
+
+`motionStudio/` is a local clone of [Motion Studio](https://github.com/ishantperiwal/motionStudio), a
+GSAP-based studio with a frame-pinned notes editor. It is the tool only and is ignored by this repository.
+Its `project.txt` points at `turbo-hub-film/`, which holds the Turbo Hub films (`scenes/`, `notes/`, `out/`)
+and is tracked here. See `turbo-hub-film/RUN-STUDIO.md`. Start it with `npm --prefix videos/motionStudio run dev`
+and open http://localhost:5173/editor/#turbo-hub-explainer@0. Exports need `ffmpeg` on PATH.
+
+Two scenes: `turbo-hub-explainer` is the sketch animatic; `turbo-hub-film` is the finished film (1208×1388, 4× the
+302×347 card, 23 s, seamless loop). Its phones are the real HTML prototypes, embedded through the `th` link in the
+scene folder (→ `Turbo Hub/`), so its prototypes, design system, avatars, fonts and Figma exports are served with it.
+
+## Turbo Hub card hover video
+
+`turbo-hub-card/` is a separate Remotion project for the 12-second loop that plays on the Turbo Hub
+case study card. It needs only Node. See `turbo-hub-card/README.md`.

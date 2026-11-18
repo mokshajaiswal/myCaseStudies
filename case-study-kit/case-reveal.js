@@ -1,8 +1,9 @@
 /* Optional, reversible editorial entrances; product component internals stay untouched. */
 (() => {
   // Page-owned groups enter together; their controls and internal playback stay intact.
+  // A case study can mark any of its own groups with data-case-reveal-unit to enter the same way.
   const units = [
-    '.info-panel', '.experience-grid', '.outcome-grid', '.persona-explorer',
+    '[data-case-reveal-unit]', '.info-panel', '.experience-grid', '.outcome-grid', '.persona-explorer',
     '.competitive-board-component', '.artifact-stage', '.relationship-map',
     '.family-story__home-figure', '.family-story__figure',
     '.design-tradeoffs__screen', '.annotation-band', '.closing-stage', '.phone-stage', '.case-ending__screens',

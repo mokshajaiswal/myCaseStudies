@@ -1,0 +1,133 @@
+/* IG theme: colors and artwork layered over case-study-kit/kit.css.
+   Same structure as Turbo Hub and Balance Explorer; the colors come from IG's brand red (#e61e1e,
+   with its 700 #8c0707 and 300 #ffdfdf stops) on the white page and slate copy of the Framer version. */
+:root {
+  --page: #ffffff;
+  --surface: #fdf9f9;
+  --surface-raised: #ffffff;
+  --ink: #3f4652;
+  --ink-soft: #4e5771;
+  --heading-ink: #333333;
+  --line: #ecdcdc;
+  --accent: #b55b5b; /* the TL;DR's muted red */
+  --accent-strong: #ad0d0d;
+  --accent-soft: #ffeeee;
+  --detail-surface: #fff0f0;
+  --detail-border: #fbdcdc;
+  --detail-raised: #ffffff;
+  --detail-shadow:
+    inset -8px -8px 4px rgb(233 205 205 / 0.22),
+    inset 8px 8px 4px rgb(232 205 205 / 0.18);
+  --hero-a: #ee8080;
+  --hero-b: #ff0a0a;
+  --hero-ink: #ffffff;
+  --hero-ink-soft: rgb(255 255 255 / 0.92);
+  /* The secondary pink (contact card) stays the same as Turbo Hub and Balance Explorer. */
+  --secondary: #dc4778;
+  --secondary-soft: #fde8ef;
+  --secondary-strong: #c94070;
+  --secondary-glow-rgb: 230 60 116;
+  --secondary-shade-rgb: 122 6 62;
+  --secondary-ink-shadow-rgb: 93 0 42;
+  --ending-wave: #e61e1e;
+  --shadow-rgb: 140 40 40;
+  --phone-shadow: drop-shadow(0 24px 30px rgb(140 40 40 / 0.16));
+  --trio-wave: #e61e1e;
+  --ig-red: #e61e1e;
+  --ig-red-deep: #c0392b;
+}
+
+.asset-placeholder--icon,
+.design-question::before {
+  background: url("assets/heading_flower.svg") center / contain no-repeat;
+}
+
+/* Hero, matched to the Framer hero: a 974 × 478 card (992px with the kit's 9px rim) on a plain
+   top-to-bottom gradient from #eb7c7c to #ff0000, with a 150px bottom radius. The logo (87 × 76) sits
+   73px from the top, the title 32px below it, the summary 4px under the title, and the red palette
+   27px above the bottom edge. Nothing moves on its own, as in Framer. */
+.hero {
+  --hero-radius: 150px;
+  width: min(calc(100% - (var(--layout-gutter) * 2)), 62rem);
+  min-height: 478px;
+  padding: 73px var(--layout-gutter) 104px;
+  place-items: start center;
+  background: linear-gradient(180deg, #eb7c7c 0%, #ff0000 100%);
+}
+
+.hero::before {
+  border-color: rgb(255 255 255 / 0.3);
+}
+
+.hero::after {
+  background: none;
+}
+
+.hero .hero-copy {
+  gap: 0;
+  max-width: none;
+}
+
+.hero .hero__illustration {
+  width: 87px;
+  height: 76px;
+  aspect-ratio: auto;
+  margin-bottom: 32px;
+  animation: none;
+}
+
+.hero h1 {
+  max-width: 11em;
+  margin-bottom: 4px;
+  color: #fff;
+  text-wrap: balance;
+
+  font: 700 48px / 1.02 var(--font-display);
+  letter-spacing: 0.01em;
+}
+
+.hero p {
+  max-width: 609px;
+  color: #fff;
+  text-wrap: wrap;
+
+  font: 400 22px / 1.4 var(--font-body);
+}
+
+@media (max-width: 40rem) {
+  .hero {
+    --hero-radius: 5rem;
+    min-height: 0;
+    padding-top: 56px;
+  }
+
+  .hero .hero__illustration {
+    width: 64px;
+    height: 56px;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 {
+    font-size: 2.25rem;
+  }
+
+  .hero p {
+    font-size: 1.125rem;
+  }
+}
+
+/* Scroll progress in IG red. */
+.scroll-progress-fill {
+  background: var(--ig-red);
+}
+
+.scroll-progress-value {
+  color: var(--ig-red);
+}
+
+/* The section navigation's accent in IG red. */
+.case-navigation {
+  --accent: #c41818;
+  --accent-strong: #c41818;
+  --accent-soft: #ffeeee;
+}

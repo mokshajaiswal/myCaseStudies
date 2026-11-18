@@ -1,0 +1,666 @@
+/* Traces' own section pieces, layered over case-study-kit/kit.css and theme.css.
+   Shared parts keep their kit styles; spacing uses the kit's rhythm: a new group inside a section
+   starts at --subgroup-gap, copy leads into media at --narrative-media-gap, cards sit --component-gap
+   apart, and a heading leads into its copy at --heading-copy-gap. */
+
+/* ---------- Copy helpers ---------- */
+.tr-list {
+  margin: 0 0 var(--paragraph-gap);
+  padding-left: 1.4em;
+}
+
+.tr-list li::marker {
+  color: var(--ink-soft);
+}
+
+.body-copy strong {
+  color: var(--heading-ink);
+  font-weight: 600;
+}
+
+.tr-copy-follow {
+  margin-top: var(--paragraph-gap);
+}
+
+.tr-after-media {
+  margin-top: var(--narrative-media-gap);
+}
+
+.tr-subheading {
+  margin-bottom: var(--heading-copy-gap);
+}
+
+.tr-caps {
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+}
+
+/* Phones from the kit that play a video. */
+.tr-phone-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- What I did: the walkthrough phone beside the flower ---------- */
+.tr-walkthrough {
+  width: min(302px, 70vw);
+  margin-top: var(--narrative-media-gap);
+}
+
+/* ---------- The problem ---------- */
+.tr-problem .trio {
+  margin-top: var(--narrative-media-gap);
+}
+
+.tr-problem .trio-card {
+  text-align: center;
+}
+
+.tr-problem .trio-card::before {
+  display: none;
+}
+
+.tr-sum {
+  margin: var(--component-gap) 0 0;
+  padding: var(--space-8) var(--space-10) var(--space-10);
+}
+
+.tr-sum__title {
+  margin-bottom: var(--space-8);
+  color: var(--heading-ink);
+
+  font: var(--font-utility);
+  letter-spacing: var(--tracking-label);
+}
+
+.tr-sum__title em {
+  color: var(--ink-soft);
+  letter-spacing: 0;
+}
+
+.tr-sum__row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 1fr) auto minmax(0, 0.8fr);
+  gap: var(--space-4);
+  align-items: start;
+  margin: 0;
+}
+
+.tr-sum__row .stat {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.tr-sum__row dd {
+  margin: 0;
+}
+
+.tr-sum__operator {
+  padding-top: 1.1em;
+  color: var(--heading-ink);
+
+  font: var(--font-small-heading);
+}
+
+.tr-sum__result {
+  margin: 0;
+  color: var(--heading-ink);
+
+  font: var(--font-small-body);
+}
+
+@media (max-width: 48rem) {
+  .tr-sum__row {
+    grid-template-columns: 1fr;
+  }
+
+  .tr-sum__operator {
+    padding: 0;
+  }
+}
+
+/* The kit's number rows and their labels, used for the survey sum and the research numbers. */
+.stat__value,
+.stat__label,
+.stat__note {
+  margin: 0;
+}
+
+/* ---------- Validating the idea ---------- */
+.tr-collage {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  background: var(--detail-surface);
+}
+
+.tr-collage .shot-media {
+  width: min(100%, 1440px);
+  margin-inline: auto;
+}
+
+.tr-phase {
+  margin-top: var(--subgroup-gap);
+  scroll-margin-top: var(--space-10);
+}
+
+.tr-phase__title {
+  margin: 0 0 var(--heading-copy-gap);
+  color: var(--heading-ink);
+
+  font: var(--heading-weight) var(--type-heading) / var(--heading-line-height) var(--font-body);
+  letter-spacing: var(--tracking-heading);
+}
+
+.tr-phase__title strong {
+  font-weight: 700;
+}
+
+/* ---------- Insights and the guiding philosophy ---------- */
+.tr-insights {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--component-gap);
+  margin: var(--narrative-media-gap) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tr-insight {
+  position: relative;
+  display: grid;
+  align-content: start;
+  min-height: 17.5rem;
+  padding: var(--space-16) var(--space-10) var(--space-10);
+  border: 1px dashed #c9c4b4;
+  border-radius: var(--radius-medium);
+  background: #fff;
+}
+
+.tr-insight__number {
+  position: absolute;
+  top: var(--space-3);
+  left: var(--space-3);
+  display: grid;
+  width: 1.75rem;
+  height: 1.75rem;
+  place-items: center;
+  border: 1px dashed #c9c4b4;
+  border-radius: 0.5rem;
+  color: var(--heading-ink);
+
+  font: 600 var(--type-utility) / 1 var(--font-body);
+}
+
+.tr-insight__title {
+  margin: 0 0 var(--space-12);
+  color: var(--heading-ink);
+
+  font: var(--font-small-heading);
+}
+
+.tr-insight__label {
+  margin: 0 0 var(--space-2);
+  color: #8a8a8a;
+  text-transform: uppercase;
+
+  font: var(--font-utility);
+  letter-spacing: var(--tracking-label);
+}
+
+.tr-insight__text {
+  margin: 0;
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+}
+
+@media (max-width: 40rem) {
+  .tr-insights {
+    grid-template-columns: 1fr;
+  }
+}
+
+.tr-philosophy {
+  display: grid;
+  justify-items: center;
+  margin-top: var(--narrative-media-gap);
+  padding: clamp(var(--space-12), 6vw, var(--space-16)) clamp(var(--space-8), 7vw, var(--space-20));
+  border-radius: var(--radius-medium);
+  background: var(--frame) center / 100% 100% no-repeat;
+  text-align: center;
+}
+
+.tr-philosophy__title {
+  margin: 0 0 var(--heading-copy-gap);
+  color: var(--heading-ink);
+
+  font: var(--font-heading);
+  letter-spacing: var(--tracking-heading);
+}
+
+.tr-philosophy__text {
+  max-width: 38rem;
+  margin: 0;
+  color: var(--ink);
+
+  font: var(--font-small-body);
+}
+
+/* ---------- Design process ---------- */
+.tr-diagram {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-8);
+  width: min(100%, 36rem);
+  margin: var(--narrative-media-gap) auto 0;
+}
+
+.tr-diagram__ends {
+  display: flex;
+  gap: var(--space-10);
+  align-items: center;
+}
+
+.tr-diagram__end {
+  display: grid;
+  gap: var(--space-2);
+  max-width: 11rem;
+  text-align: center;
+}
+
+.tr-diagram__end strong {
+  color: var(--heading-ink);
+
+  font: 600 var(--type-heading) / 1.15 var(--font-body);
+}
+
+.tr-diagram__end span {
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+}
+
+.tr-diagram__arrow {
+  color: var(--heading-ink);
+
+  font: 300 3rem / 1 var(--font-body);
+}
+
+.tr-diagram__loop {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tr-diagram__step {
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid var(--detail-border);
+  border-radius: 999px;
+  background: var(--detail-surface);
+  color: var(--heading-ink);
+
+  font: var(--font-small-body);
+}
+
+.tr-diagram__step-arrow {
+  color: var(--heading-ink);
+
+  font: var(--font-small-body);
+}
+
+.tr-paper {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin: var(--narrative-media-gap) 0 0 -50vw;
+  padding: var(--space-24) var(--layout-gutter);
+  background: var(--paper) center top / cover, #f6f3ea;
+}
+
+/* System thinking on the left, then real-world testing on the right once the left column ends. */
+.tr-paper__inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: var(--space-20);
+  row-gap: var(--space-24);
+  width: min(100%, 72rem);
+  margin-inline: auto;
+}
+
+.tr-track {
+  display: grid;
+  gap: var(--component-gap);
+  align-content: start;
+}
+
+.tr-track--forward {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.tr-track--back {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.tr-track__head {
+  display: flex;
+  gap: var(--space-6);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-4);
+}
+
+.tr-track--back .tr-track__head {
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+
+.tr-track__title {
+  margin: 0;
+  color: var(--heading-ink);
+  text-transform: uppercase;
+
+  font: 700 var(--type-small-heading) / 1.3 var(--font-body);
+}
+
+.tr-track__title em {
+  text-transform: none;
+  font-weight: 400;
+}
+
+.tr-track__arrow {
+  color: var(--heading-ink);
+
+  font: 300 2rem / 1 var(--font-body);
+}
+
+.tr-track__card {
+  padding: var(--space-6) var(--space-6) var(--space-8);
+  border: 1px solid var(--detail-border);
+  border-radius: var(--radius-medium);
+  background: var(--detail-surface);
+  box-shadow: var(--detail-shadow);
+}
+
+.tr-track__card h4 {
+  margin: 0 0 var(--component-copy-gap);
+  color: var(--heading-ink);
+
+  font: var(--font-small-heading);
+  font-weight: 500;
+}
+
+.tr-track__card p {
+  margin: 0;
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+}
+
+@media (max-width: 48rem) {
+  .tr-paper__inner {
+    grid-template-columns: 1fr;
+    gap: var(--subgroup-gap);
+  }
+
+  .tr-track--back {
+    grid-column: 1;
+  }
+}
+
+/* ---------- Challenges and the initial idea ---------- */
+.tr-idea {
+  margin-top: var(--subgroup-gap);
+}
+
+/* The sketch board (800 × 733 in Framer) with the trial phone overlapping its empty left side. */
+.tr-sketches {
+  position: relative;
+  width: min(100%, 850px);
+  margin: var(--narrative-media-gap) auto 0;
+}
+
+.tr-sketches__board {
+  display: block;
+  width: 94.1%;
+  height: auto;
+  margin-left: 5.9%;
+}
+
+.tr-sketches__phone {
+  position: absolute;
+  top: 4.6%;
+  left: 0;
+  width: 27.9%;
+}
+
+/* ---------- Flows ---------- */
+.tr-flow {
+  margin-top: var(--subgroup-gap);
+  scroll-margin-top: var(--space-10);
+}
+
+.tr-strip {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin: var(--narrative-media-gap) 0 0 -50vw;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+}
+
+.tr-strip:focus-visible {
+  outline: 2px solid var(--traces-pink);
+  outline-offset: -2px;
+}
+
+.tr-strip__row {
+  display: flex;
+  width: max-content;
+  gap: var(--space-4);
+  padding: 0 var(--layout-gutter) var(--space-4) max(var(--layout-gutter), calc((100vw - var(--content-width)) / 2));
+}
+
+.tr-strip__row img {
+  display: block;
+  height: clamp(20rem, 52vw, 47.5rem);
+  width: auto;
+  object-fit: cover;
+}
+
+/* ---------- Designs: four drifting columns ---------- */
+.tr-designs-section {
+  text-align: center;
+}
+
+.tr-designs__title {
+  margin: 0;
+  color: var(--heading-ink);
+  text-transform: uppercase;
+
+  font: 700 var(--type-heading) / var(--heading-line-height) var(--font-body);
+  letter-spacing: var(--tracking-heading);
+}
+
+.tr-designs {
+  position: relative;
+  left: 50%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 17.5rem));
+  justify-content: center;
+  gap: clamp(var(--space-4), 3vw, var(--space-10));
+  width: 100vw;
+  height: clamp(28rem, 50vw, 42rem);
+  margin: var(--narrative-media-gap) 0 0 -50vw;
+  padding-inline: var(--layout-gutter);
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+  mask-image: linear-gradient(transparent, #000 18%, #000 82%, transparent);
+}
+
+.tr-designs__column {
+  overflow: hidden;
+}
+
+.tr-designs__reel {
+  display: grid;
+  transform: translateY(calc(var(--offset) * 50%));
+}
+
+.tr-designs__reel img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tr-designs__reel {
+    animation: tr-designs-drift 43s linear infinite;
+    animation-delay: calc(var(--offset) * 43s);
+  }
+}
+
+@keyframes tr-designs-drift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-50%); }
+}
+
+@media (max-width: 40rem) {
+  .tr-designs {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .tr-designs__column:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+/* ---------- How I presented it ---------- */
+.tr-presentation {
+  width: min(676px, calc(100vw - var(--layout-gutter) * 2));
+  margin-top: var(--narrative-media-gap);
+}
+
+.tr-presentation__video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 30px;
+  background: #111;
+}
+
+.tr-example {
+  margin-top: var(--subgroup-gap);
+}
+
+.tr-example__split {
+  display: grid;
+  grid-template-columns: minmax(0, 15.75rem) minmax(0, 1fr);
+  gap: var(--space-16);
+  align-items: center;
+  width: min(100%, 50rem);
+  margin: var(--narrative-media-gap) auto 0;
+}
+
+.tr-example__scenarios {
+  display: grid;
+  gap: var(--space-6);
+  margin: 0;
+  padding-left: 1.2em;
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+}
+
+@media (max-width: 40rem) {
+  .tr-example__split {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+
+  .tr-example__split > .phone {
+    width: min(15.75rem, 70vw);
+  }
+}
+
+/* ---------- Impact board: notes from testing around one statement ---------- */
+.tr-impact {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin: var(--narrative-media-gap) 0 0 -50vw;
+}
+
+.tr-impact__stage {
+  position: relative;
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  aspect-ratio: 1440 / 1250;
+}
+
+.tr-impact__note {
+  position: absolute;
+  height: auto;
+}
+
+.tr-impact__statement {
+  position: absolute;
+  left: 50%;
+  display: grid;
+  gap: var(--space-3);
+  width: min(58rem, 80%);
+  text-align: center;
+  transform: translateX(-50%);
+}
+
+.tr-impact__statement .design-question-title {
+  font: var(--heading-weight) clamp(1.5rem, 2.6vw, 2.625rem) / 1.2 var(--font-display);
+  font-style: italic;
+}
+
+.tr-impact__statement .design-question-line {
+  white-space: normal;
+}
+
+@media (max-width: 48rem) {
+  .tr-impact__stage {
+    aspect-ratio: auto;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--component-gap);
+    padding-inline: var(--layout-gutter);
+  }
+
+  .tr-impact__note,
+  .tr-impact__statement {
+    position: static;
+    width: 100% !important;
+    transform: none;
+  }
+
+  .tr-impact__statement {
+    grid-column: 1 / -1;
+    order: -1;
+  }
+}
+
+.tr-future {
+  margin-top: var(--subgroup-gap);
+}
+
+/* Stacked tags, one per line, for the next steps. */
+.tag-list--stacked {
+  flex-direction: column;
+  align-items: flex-start;
+}

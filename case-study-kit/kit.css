@@ -1404,3 +1404,274 @@ h4 {
   border-radius: var(--radius-medium);
   box-shadow: 0 1.5rem 3rem rgb(var(--shadow-rgb) / 0.14);
 }
+
+/* Three cards in a row (createTrio), from Balance Explorer's problem section. */
+.trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-10);
+  margin-top: var(--narrative-media-gap);
+  margin-bottom: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.trio-card {
+  display: grid;
+  gap: var(--space-2);
+  align-content: start;
+  padding-top: var(--space-5);
+}
+
+.trio-card h3 {
+  margin: 0;
+  color: var(--heading-ink);
+
+  font: var(--font-small-heading);
+}
+
+.trio-card p {
+  margin: 0;
+  color: var(--ink-soft);
+  text-wrap: pretty;
+
+  font: var(--font-small-body);
+}
+
+.trio-card p.trio-card__label {
+  margin: 0;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+
+  font: var(--font-utility);
+  letter-spacing: var(--tracking-label);
+}
+
+.trio-card p.trio-card__note {
+  margin-top: var(--space-2);
+  color: var(--heading-ink);
+
+  font: var(--font-utility);
+}
+
+@media (max-width: 48rem) {
+  .trio {
+    grid-template-columns: 1fr;
+    gap: var(--space-8);
+  }
+}
+
+/* A short wave above each card, in place of a full-width rule. Case studies set --trio-wave. */
+.trio-card {
+  position: relative;
+}
+
+.trio-card::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 32px;
+  height: 6px;
+  background: var(--trio-wave, #cc3a8c);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='6' viewBox='0 0 32 6'%3E%3Cpath d='M1 3Q3.5.5 6 3t5 0 5 0 5 0 5 0 5 0' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='6' viewBox='0 0 32 6'%3E%3Cpath d='M1 3Q3.5.5 6 3t5 0 5 0 5 0 5 0 5 0' fill='none' stroke='%23000' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E") center / contain no-repeat;
+  content: "";
+}
+
+/* Screens: each in a plain browser window (a thin border, no shadow) inside the reading column, so text, beats, screens and lists
+   all share the same left and right edges. Captions sit centred under their screen. */
+.window {
+  overflow: hidden;
+  border: 1px solid #dfe2ec;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.window__bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  height: 28px;
+  padding: 0 12px;
+  border-bottom: 1px solid #eceef4;
+  background: #f7f8fb;
+}
+
+.window__bar > span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #dfe2ec;
+}
+
+/* Six columns: a shot takes half by default, `span` sets 2 or 4, wide takes the row. */
+.shot-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--space-10) var(--space-6);
+  align-items: start;
+  margin-top: var(--narrative-media-gap);
+}
+
+.shot {
+  margin: 0;
+}
+
+.shot-grid > .shot {
+  grid-column: span var(--span, 3);
+}
+
+.shot-grid > .shot--wide {
+  grid-column: 1 / -1;
+}
+
+.shot-media {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Composites arrive with their own rounded corners and shadows on a transparent background. */
+.shot--bare .shot-media {
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+/* Very tall screens sit narrower and centred so they don't take over the page. */
+.shot--narrow.shot--bare .shot-media {
+  width: min(100%, 44rem);
+  margin-inline: auto;
+}
+
+.shot--narrow .window {
+  width: min(100%, 36rem);
+  margin-inline: auto;
+}
+
+.shot .screen-frame {
+  width: 100%;
+  margin: 0;
+}
+
+.shot-caption {
+  margin: var(--space-4) 0 0;
+  color: #6b7385;
+  text-align: center;
+  text-wrap: balance;
+
+  font: var(--font-utility);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: var(--tracking-body);
+}
+
+@media (max-width: 48rem) {
+  .shot-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shot-grid > .shot {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ---------- Shared since the IG and Traces case studies ---------- */
+
+/* Boxed cards (createTrio(items, "boxed")): each card in a detail box, its wave inside the box. */
+.trio--boxed .trio-card {
+  padding: var(--space-8) var(--space-6) var(--space-6);
+  border: 1px solid var(--detail-border);
+  border-radius: var(--radius-medium);
+  background: var(--detail-surface);
+  box-shadow: var(--detail-shadow);
+}
+
+.trio--boxed .trio-card::before {
+  top: var(--space-4);
+  left: var(--space-6);
+}
+
+
+/* The role strip with four columns (category, role, team, tools); two on smaller screens. */
+.meta-strip--four {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 48rem) {
+  .meta-strip--four {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Number rows (createStatRow): big numbers with a label and an optional note; `boxed` sits them in a detail box. */
+.stat-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--component-gap);
+  margin: var(--narrative-media-gap) 0;
+  text-align: center;
+}
+
+.stat-row--boxed {
+  margin-bottom: 0;
+  padding: var(--space-8) var(--space-10);
+  text-align: left;
+}
+
+.stat {
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
+}
+
+.stat dd {
+  margin: 0;
+}
+
+.stat__value {
+  color: var(--heading-ink);
+
+  font: 600 clamp(30px, 4.1vw, 48px) / 1.1 var(--font-body);
+  letter-spacing: -0.04em;
+}
+
+.stat__label {
+  color: var(--heading-ink);
+
+  font: var(--font-small-body);
+}
+
+.stat__note {
+  color: var(--ink-soft);
+
+  font: 400 var(--type-utility) / 1.5 var(--font-body);
+}
+
+@media (max-width: 40rem) {
+  .stat-row {
+    grid-template-columns: 1fr;
+    text-align: left;
+  }
+}
+
+/* Pill tags (createTagList) that belong to the copy above them. A case study can set --tag-surface and --tag-border. */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  /* The tags belong to the paragraphs above, so they sit at the component gap, not the media gap. */
+  margin: var(--component-gap) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tag-list li {
+  padding: var(--space-3) var(--space-6);
+  border: 1px solid var(--tag-border, #eee5bd);
+  border-radius: 999px;
+  background: var(--tag-surface, #f8f6ed);
+  color: var(--heading-ink);
+
+  font: var(--font-small-body);
+}

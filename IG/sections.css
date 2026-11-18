@@ -1,0 +1,684 @@
+/* IG's own section pieces, layered over case-study-kit/kit.css and theme.css.
+   Shared parts (headings, copy, role strip, timeline, design question, trio, shot grid, info panel,
+   contact, impact and ending) keep their kit styles; only IG's own components are styled here. */
+
+/* ---------- Hero stickers: token and component cards around the title (from the Framer hero) ---------- */
+.hero-stickers {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero .hero-copy {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-sticker {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--w);
+  height: auto;
+  border-radius: var(--r, 14px);
+  transform: translate(-50%, -50%) rotate(var(--turn, 0deg));
+}
+
+/* Centres, widths and turns measured on the Framer hero (974 × 478 inside the rim). */
+.hero-sticker--top-left { --x: 16%; --y: 21%; --w: 17.7%; --turn: -13deg; --r: 16px; }
+.hero-sticker--mid-left { --x: 13.5%; --y: 53.3%; --w: 9.1%; --turn: -14deg; }
+.hero-sticker--top-right { --x: 75.9%; --y: 18.6%; --w: 7.8%; --turn: 13deg; --r: 12px; }
+.hero-sticker--mid-right { --x: 88%; --y: 46%; --w: 19.4%; --turn: 13deg; --r: 7px; }
+
+/* The palette sits on the bottom edge, 27px up, at its own size (293px wide). */
+.hero-sticker--bottom {
+  top: auto;
+  bottom: 27px;
+  width: min(293px, 60%);
+  --r: 6px;
+  transform: translateX(-50%);
+  left: 50%;
+}
+
+/* The stickers would crowd the title on narrow screens, so only the palette strip stays. */
+@media (max-width: 56rem) {
+  .hero-sticker:not(.hero-sticker--bottom) {
+    display: none;
+  }
+}
+
+/* ---------- Shared rhythm ---------- */
+.ig-subheading {
+  margin-bottom: var(--heading-copy-gap);
+}
+
+.reading-column + .reading-column .ig-subheading,
+.body-copy + .ig-subheading {
+  margin-top: var(--subgroup-gap);
+}
+
+.ig-after-media {
+  margin-top: var(--narrative-media-gap);
+}
+
+.ig-lead {
+  color: var(--heading-ink);
+  font-weight: 600;
+}
+
+.ig-list {
+  margin: 0 0 var(--paragraph-gap);
+  padding-left: 1.25em;
+}
+
+.ig-list li::marker {
+  color: var(--ig-red);
+}
+
+/* A full-width band of screens (createScreenBand), matching Framer's #fff1f1 bands with their soft inset
+   shadow, which are the kit's detail surface and shadow. The stage keeps Framer's 1440 × 541 shape. */
+.ig-band {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin: var(--narrative-media-gap) 0 0 -50vw;
+}
+
+.ig-band__stage {
+  position: relative;
+  width: min(100%, 1440px);
+  margin-inline: auto;
+  aspect-ratio: 1440 / 541;
+  overflow: hidden;
+}
+
+.ig-band::before {
+  position: absolute;
+  inset: 0 0 auto;
+  height: calc(min(100vw, 1440px) * 541 / 1440);
+  border-block: 1px solid var(--detail-border);
+  background: var(--detail-surface);
+  box-shadow: var(--detail-shadow);
+  content: "";
+}
+
+.ig-band__screen {
+  position: absolute;
+  display: block;
+  max-width: none;
+  object-fit: cover;
+}
+
+.ig-band > .shot-caption {
+  padding-inline: var(--layout-gutter);
+}
+
+.ig-token-copy {
+  margin-top: var(--subgroup-gap);
+}
+
+/* ---------- Glimpse: the device card (with the flower note), then the tokens board ----------
+   Both boards are 897px wide, as in Framer, and centred on the page. */
+.ig-glimpse {
+  display: grid;
+  width: min(897px, calc(100vw - var(--layout-gutter) * 2));
+  margin: var(--narrative-media-gap) 0 0 calc((100% - min(897px, calc(100vw - var(--layout-gutter) * 2))) / 2);
+  gap: var(--space-10);
+}
+
+.ig-glimpse .shot-grid {
+  margin-top: 0;
+}
+
+.ig-glimpse .shot-media {
+  border-radius: var(--radius-large);
+}
+
+/* Every position below is a share of the 897 × 521 Framer card, so the card scales as one piece. */
+.ig-devices {
+  position: relative;
+  margin: 0;
+  aspect-ratio: 897 / 521;
+}
+
+.ig-devices__frame {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ig-devices__screen {
+  position: absolute;
+  overflow: hidden;
+}
+
+/* Tablet screen: 495 × 371, centred at (358, 272.5), turned −4°, 16px corners. */
+.ig-devices__screen--tablet {
+  left: 12.3%;
+  top: 16.67%;
+  width: 55.18%;
+  height: 71.26%;
+  border-radius: 3.23% / 4.31%;
+  transform: rotate(-4deg);
+}
+
+/* Phone screen: 153 × 332, centred at (686, 302), turned 15°, 22px corners. */
+.ig-devices__screen--phone {
+  left: 67.93%;
+  top: 26.14%;
+  width: 17.1%;
+  height: 63.65%;
+  border-radius: 14.3% / 6.6%;
+  transform: rotate(15deg);
+}
+
+/* The tablet's bezel sits over the phone, as the tablet does in Framer. */
+.ig-devices__bezel {
+  position: absolute;
+  left: 9.25%;
+  top: 10.36%;
+  width: 61.2%;
+  height: 83.69%;
+  pointer-events: none;
+}
+
+.ig-devices__strip {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ig-devices__strip.is-resetting {
+  transition: none;
+}
+
+.ig-devices__strip img {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The side flower (the kit's annotation mark and copy), turned −16° on the card's right edge:
+   centred at (1124, 196.5) of the card, 461px wide. */
+.ig-devices .ig-devices__note {
+  top: 37.7%;
+  right: auto;
+  left: 99.6%;
+  width: 51.4%;
+  transform: translateY(-50%) rotate(-16deg);
+}
+
+.ig-devices__note .annotation-copy {
+  font: 400 16px / 1.4 var(--font-body);
+}
+
+/* Off the right of the page on smaller screens, so it steps aside there. */
+@media (max-width: 64rem) {
+  .ig-devices__note {
+    display: none;
+  }
+}
+
+/* ---------- The brief, quoted ---------- */
+.ig-brief {
+  margin: var(--component-gap) 0;
+}
+
+.ig-brief__title {
+  margin-bottom: var(--space-3);
+  color: var(--ink-soft);
+
+  font: var(--font-body-copy);
+}
+
+.ig-brief__quote {
+  position: relative;
+  margin: 0;
+  padding-left: var(--space-6);
+  border-left: 2px solid var(--ig-red);
+}
+
+.ig-brief__quote p {
+  margin: 0;
+  color: var(--ink-soft);
+
+  font: var(--font-body-copy);
+  font-style: italic;
+}
+
+.ig-timeline {
+  margin-top: var(--space-8);
+}
+
+/* ---------- Audit problem cards ---------- */
+.ig-problem-grid {
+  width: min(var(--wide-content-width), calc(100vw - var(--layout-gutter) * 2));
+  margin-left: calc((100% - min(var(--wide-content-width), calc(100vw - var(--layout-gutter) * 2))) / 2);
+}
+
+.ig-problem-grid .shot-media {
+  border-radius: 30px;
+}
+
+/* ---------- Steps inside "How we approached it" ---------- */
+.ig-step {
+  display: grid;
+  gap: var(--space-1);
+  margin-top: var(--subgroup-gap);
+}
+
+.ig-approach .section-heading + .ig-step {
+  margin-top: 0;
+}
+
+.ig-step__eyebrow {
+  margin: 0;
+  color: var(--ink-soft);
+  text-transform: uppercase;
+
+  font: var(--font-utility);
+  letter-spacing: var(--tracking-label);
+}
+
+.ig-step__title {
+  margin: 0;
+  color: var(--heading-ink);
+
+  font: var(--font-small-heading);
+}
+
+.ig-step__text {
+  margin: var(--space-1) 0 0;
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+}
+
+.ig-step + .trio {
+  margin-top: var(--narrative-media-gap);
+}
+
+/* ---------- Variant bars from the audit ---------- */
+.ig-bars {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-8);
+  align-items: end;
+  margin: var(--narrative-media-gap) 0 0;
+}
+
+.ig-bars__list {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ig-bars__row {
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr) 6.5rem;
+  gap: var(--space-3);
+  align-items: center;
+}
+
+.ig-bars__label {
+  color: var(--ink-soft);
+
+  font: 400 var(--type-utility) / 1.5 var(--font-body);
+}
+
+.ig-bars__track {
+  display: block;
+  height: 1.375rem;
+}
+
+.ig-bars__fill {
+  display: block;
+  width: calc(var(--bar-size) * 100%);
+  height: 100%;
+  border-radius: 0.25rem;
+  background: color-mix(in srgb, var(--ig-red-deep) calc(100% - var(--bar-step) * 15%), #f6d4d4);
+}
+
+.ig-bars__value {
+  color: var(--heading-ink);
+
+  font: var(--font-utility);
+}
+
+.ig-bars__callout {
+  display: grid;
+  min-width: 10rem;
+  padding: var(--space-5) var(--space-6);
+  gap: var(--space-1);
+  justify-items: center;
+  border-radius: var(--radius-small);
+  background: var(--detail-surface);
+  text-align: center;
+}
+
+.ig-bars__callout strong {
+  color: var(--ig-red-deep);
+
+  font: 600 clamp(30px, 4.1vw, 48px) / 1.1 var(--font-body);
+  letter-spacing: -0.04em;
+}
+
+.ig-bars__callout span {
+  max-width: 12ch;
+  color: var(--ink-soft);
+
+  font: 400 var(--type-utility) / 1.5 var(--font-body);
+}
+
+@media (max-width: 48rem) {
+  .ig-bars {
+    grid-template-columns: 1fr;
+  }
+
+  .ig-bars__row {
+    grid-template-columns: 6.5rem minmax(0, 1fr) 5.5rem;
+  }
+
+  .ig-bars__callout {
+    justify-self: start;
+  }
+}
+
+/* ---------- Component collage and fixes ---------- */
+.ig-collage {
+  position: relative;
+  left: 50%;
+  width: 100vw;
+  margin-left: -50vw;
+  background: var(--detail-surface);
+}
+
+.ig-fixes {
+  display: grid;
+  gap: var(--component-gap);
+  margin: var(--narrative-media-gap) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ig-fix {
+  overflow: hidden;
+  border: 1.5px solid #e6e6e6;
+  border-radius: var(--radius-small);
+  background: #fff;
+}
+
+.ig-fix__head {
+  display: flex;
+  gap: var(--space-4);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-4) var(--space-6);
+  background: #f6f6f6;
+}
+
+.ig-fix__title {
+  margin: 0;
+  color: var(--heading-ink);
+
+  font: var(--font-small-heading);
+}
+
+.ig-fix__tag {
+  flex: none;
+  padding: var(--space-1) var(--space-4);
+  border-radius: 999px;
+
+  font: var(--font-utility);
+}
+
+.ig-fix__tag--blue { background: #e6f1fb; color: #0c447c; }
+.ig-fix__tag--amber { background: #fdf0d9; color: #633806; }
+.ig-fix__tag--violet { background: #eeedfe; color: #3c3489; }
+.ig-fix__tag--green { background: #e1f5ee; color: #085041; }
+
+.ig-fix__body {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-10);
+  margin: 0;
+  padding: var(--space-6);
+}
+
+.ig-fix__column {
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
+}
+
+.ig-fix__column dt {
+  color: #6b7385;
+  text-transform: uppercase;
+
+  font: var(--font-utility);
+  letter-spacing: var(--tracking-label);
+}
+
+.ig-fix__column dd {
+  margin: 0;
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+}
+
+.ig-fix__column dd.ig-fix__aside {
+  margin-top: var(--space-3);
+  color: #6b7385;
+  font-style: italic;
+}
+
+.ig-fix__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-top: var(--space-3) !important;
+}
+
+.ig-fix__chips span {
+  padding: 0.125rem var(--space-3);
+  border: 1px solid #c9c4f2;
+  border-radius: 0.375rem;
+  background: #eeedfe;
+  color: #3c3489;
+
+  font: var(--font-utility);
+}
+
+@media (max-width: 40rem) {
+  .ig-fix__body {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+/* ---------- Page redesign ---------- */
+.ig-page-type {
+  margin-top: var(--subgroup-gap);
+  scroll-margin-top: var(--space-10);
+}
+
+
+
+/* ---------- Before / after viewer ---------- */
+.ig-compare {
+  margin-top: var(--subgroup-gap);
+  scroll-margin-top: var(--space-10);
+}
+
+.ig-compare__title {
+  margin: 0 0 var(--component-copy-gap);
+  color: var(--heading-ink);
+
+  font: var(--font-small-heading);
+}
+
+.ig-compare__text {
+  margin: 0;
+  color: var(--ink-soft);
+
+  font: var(--font-small-body);
+}
+
+.ig-viewer {
+  width: min(var(--wide-content-width), calc(100vw - var(--layout-gutter) * 2));
+  margin: var(--narrative-media-gap) 0 0 calc((100% - min(var(--wide-content-width), calc(100vw - var(--layout-gutter) * 2))) / 2);
+  padding: var(--space-6);
+  border: 1px solid var(--detail-border);
+  border-radius: var(--radius-medium);
+  background: var(--detail-surface);
+  box-shadow: 0 1.5rem 3rem rgb(var(--shadow-rgb) / 0.08);
+}
+
+.ig-viewer__tabs {
+  display: flex;
+  width: fit-content;
+  gap: var(--space-2);
+  margin: 0 auto var(--space-5);
+  padding: var(--space-1);
+  border: 1px solid #eadada;
+  border-radius: 999px;
+  background: #fff;
+}
+
+.ig-viewer__tab {
+  padding: var(--space-2) var(--space-5);
+  border: 1px solid #e3e3e3;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--heading-ink);
+  cursor: pointer;
+
+  font: var(--font-utility);
+}
+
+.ig-viewer__tab[aria-selected="true"] {
+  border-color: var(--ig-red);
+  background: var(--ig-red);
+  color: #fff;
+}
+
+.ig-viewer__tab:focus-visible,
+.ig-viewer__frame:focus-visible,
+.ig-viewer__zoom button:focus-visible {
+  outline: 2px solid var(--ig-red);
+  outline-offset: 2px;
+}
+
+.ig-viewer__stage {
+  position: relative;
+  padding-top: var(--space-5);
+  border-top: 1px solid #f0dede;
+}
+
+.ig-viewer__frame {
+  height: min(70vh, 42rem);
+  overflow: auto;
+  overscroll-behavior: contain;
+  border-radius: var(--radius-medium);
+  background: #fff;
+}
+
+.ig-viewer__image {
+  display: block;
+  width: 100%;
+  max-width: none;
+  height: auto;
+}
+
+/* Fit shows the whole screen at once, centred in the frame. */
+.ig-viewer__frame.is-fitted .ig-viewer__image {
+  width: auto;
+  height: 100%;
+  margin-inline: auto;
+}
+
+.ig-viewer__zoom {
+  position: absolute;
+  top: calc(var(--space-5) + var(--space-3));
+  right: var(--space-3);
+  display: flex;
+  gap: var(--space-2);
+  align-items: center;
+  padding: var(--space-1) var(--space-2);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.94);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.12);
+}
+
+.ig-viewer__zoom button {
+  display: grid;
+  min-width: 1.75rem;
+  height: 1.75rem;
+  padding: 0 var(--space-2);
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: #f2f2f2;
+  color: var(--heading-ink);
+  cursor: pointer;
+
+  font: var(--font-utility);
+  line-height: 1;
+}
+
+.ig-viewer__zoom .ig-viewer__zoom-in {
+  background: var(--ig-red);
+  color: #fff;
+}
+
+.ig-viewer__zoom button:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.ig-viewer__zoom-value {
+  min-width: 3rem;
+  text-align: center;
+
+  font: var(--font-utility);
+  line-height: 1;
+}
+
+.ig-viewer__hint {
+  position: absolute;
+  bottom: var(--space-4);
+  left: 50%;
+  margin: 0;
+  padding: var(--space-1) var(--space-4);
+  border-radius: 999px;
+  background: rgb(255 255 255 / 0.94);
+  box-shadow: 0 2px 10px rgb(0 0 0 / 0.1);
+  color: var(--heading-ink);
+  transform: translateX(-50%);
+  white-space: nowrap;
+  pointer-events: none;
+
+  font: var(--font-utility);
+}
+
+@media (max-width: 40rem) {
+  .ig-viewer {
+    padding: var(--space-3);
+  }
+
+  .ig-viewer__tab {
+    padding: var(--space-2) var(--space-3);
+  }
+
+  .ig-viewer__hint {
+    display: none;
+  }
+}
+
+/* Results: the component draws a table from `diagnostics`, which IG leaves empty. */
+#impact-future .impact-future__diagnostics { display: none; }

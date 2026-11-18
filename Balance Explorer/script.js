@@ -1,8 +1,6 @@
 /* Balance Explorer sections. Shared builders come from case-study-kit/kit.js; copy lives in content.js.
    Text sits in one reading column; screens sit straight on the page at the wide width, with no stages or cards. */
 
-const prefersStill = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 function createCopySection(id, title, paragraphs) {
   const section = createElement("section", "case-section");
   section.id = id;
@@ -46,20 +44,6 @@ function createFlowDiagram(steps) {
   return figure;
 }
 
-// Three cards in a row.
-function createTrio(items) {
-  const list = createElement("ol", "trio");
-  items.forEach((item) => {
-    const card = createElement("li", "trio-card");
-    card.append(
-      createElement("h3", "", item.title),
-      createElement("p", "", item.description),
-    );
-    list.append(card);
-  });
-  return list;
-}
-
 // Each team and its question, nothing else.
 function createPersonaQuotes(personas) {
   const list = createElement("ul", "persona-grid");
@@ -83,70 +67,6 @@ function createTried(title, items) {
   });
   block.append(list);
   return block;
-}
-
-// A muted loop that plays only while on screen. With reduced motion it waits on its poster, with controls to play it.
-function createLoopVideo(shot, className) {
-  const video = document.createElement("video");
-  const still = prefersStill();
-  video.className = className;
-  if (shot.src) video.poster = shot.src;
-  if (shot.width) video.width = shot.width;
-  if (shot.height) video.height = shot.height;
-  video.muted = true;
-  video.loop = true;
-  video.playsInline = true;
-  video.preload = "metadata";
-  video.controls = still;
-  video.setAttribute("aria-label", shot.caption);
-  const source = document.createElement("source");
-  source.src = shot.video;
-  source.type = "video/mp4";
-  video.append(source);
-  if (!still) {
-    new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) video.play().catch(() => {});
-      else video.pause();
-    }, { threshold: 0.25 }).observe(video);
-  }
-  return video;
-}
-
-function createStillImage(shot, className) {
-  const image = document.createElement("img");
-  image.className = className;
-  image.src = shot.src;
-  image.alt = shot.caption;
-  if (shot.width) image.width = shot.width;
-  if (shot.height) image.height = shot.height;
-  image.loading = "lazy";
-  image.decoding = "async";
-  return image;
-}
-
-// A screen in a plain browser window (a hairline border and a title bar), with its caption centred under it.
-// Composites (`bare`) already carry their own frames, so they sit on the page as they are.
-// Until a shot has a `src` (or `video`), it stays an empty slot.
-function createShot(shot) {
-  const figure = createElement("figure", `shot${shot.wide ? " shot--wide" : ""}${shot.bare ? " shot--bare" : ""}${shot.narrow ? " shot--narrow" : ""}`);
-  if (shot.span) figure.style.setProperty("--span", shot.span);
-  if (shot.src || shot.video) {
-    const media = shot.video ? createLoopVideo(shot, "shot-media") : createStillImage(shot, "shot-media");
-    figure.append(shot.bare ? media : createWindow(media));
-  } else {
-    figure.append(createScreenFrame({ id: shot.id, label: shot.caption }));
-  }
-  figure.append(createElement("figcaption", "shot-caption", shot.caption));
-  return figure;
-}
-
-function createWindow(media) {
-  const frame = createElement("div", "window");
-  const bar = createElement("div", "window__bar");
-  bar.setAttribute("aria-hidden", "true");
-  bar.append(createElement("span"), createElement("span"), createElement("span"));
-  frame.append(bar, media);
-  return frame;
 }
 
 // The TLDR screen: a still or loop inside a browser window on a soft stage.
@@ -180,12 +100,6 @@ function createDecision(decision) {
   column.append(createBeats(decision.beats, "story-beats--row"));
   section.append(createShotGrid(decision.shots), createTried(decision.triedTitle, decision.tried));
   return section;
-}
-
-function createShotGrid(shots) {
-  const grid = createElement("div", "shot-grid");
-  shots.forEach((shot) => grid.append(createShot(shot)));
-  return grid;
 }
 
 function renderCaseStudy() {

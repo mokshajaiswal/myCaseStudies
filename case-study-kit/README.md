@@ -1,17 +1,17 @@
 # Case study kit
 
-Shared building blocks for the portfolio case studies. Turbo Hub and Balance
-Explorer both load these files; each case study keeps only its own content,
+Shared building blocks for the portfolio case studies. Turbo Hub, Balance
+Explorer, IG and Traces all load these files; each case study keeps only its own content,
 colors, artwork and any sections unique to it.
 
 ## What is shared
 
 | File | Purpose |
 | --- | --- |
-| `kit.css` | Spacing, type and layout tokens, fonts, scroll progress bar, hero, section headings, body copy, metadata strip, info panel, experience and outcome cards, artifact gallery, design question, timeline dialog, phone and screen frames, media slots and contact card. |
-| `kit.js` | Builders for those components, the media-slot API (`CaseStudy.setMedia`), hero scroll depth, scroll progress, contact section, the Learning ending and `startCaseStudy()`. |
+| `kit.css` | Spacing, type and layout tokens, fonts, scroll progress bar, hero, section headings, body copy, metadata strip, info panel, experience and outcome cards, artifact gallery, design question, timeline dialog, phone and screen frames, media slots, contact card, the three-card row (with a `boxed` variant), the screen grid, the four-column role strip (`meta-strip--four`), number rows and pill tags. |
+| `kit.js` | Builders for those components (including `createTrio`, with an optional `label` and `note`, and `createShot` / `createShotGrid`, where a shot without a `caption` uses `alt`), `createStatRow`, `createTagList` and `createPullStatement`, the media-slot API (`CaseStudy.setMedia`), hero scroll depth, scroll progress, contact section, the Learning ending and `startCaseStudy()`. |
 | `case-navigation.js` / `.css` | Floating reading navigation. Sections come from `caseStudy.navigation` (`sections` for the tray, `dial` for `?nav=3`). |
-| `case-reveal.js` / `.css` | Scroll entrances and line reveals; `?reveal=0` turns them off. |
+| `case-reveal.js` / `.css` | Scroll entrances and line reveals; `?reveal=0` turns them off. A case study's own groups opt in with a `data-case-reveal-unit` attribute and enter whole. |
 | `case-ending.css` / `closing-flowers.js` | Learning ending with the side flower, recap card, flower bed animation and wave. |
 | `lottie/` | The vendored lottie-web light player (MIT) used by the flower bed. |
 | `fonts/` | Helix and Larken, the weights the case studies use. |

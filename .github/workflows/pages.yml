@@ -6,6 +6,8 @@ on:
     paths:
       - 'Turbo Hub/**'
       - 'Balance Explorer/**'
+      - 'IG/**'
+      - 'Traces/**'
       - 'case-study-kit/**'
       - 'docs/**'
       - 'scripts/build-pages.py'

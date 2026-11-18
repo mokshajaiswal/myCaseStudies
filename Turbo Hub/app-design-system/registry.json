@@ -3654,7 +3654,7 @@
         "columns": 1
       },
       "dependencies": [],
-      "usage": "TurboCaseStudyCard({variant:\"variant-1\"|\"variant-2\", hoverFlower:\"blue\"|\"purple\"|\"pink\"|\"orange\", href?, ariaLabel?, title?, description?, brand?, categories?, image?, imageAlt?}). Variant 1 preserves the PayZapp portrait-phone card. Variant 2 uses the supplied IG copy and landscape tablet image treatment. The IG image uses the supplied assets/competitive_research/1/ig_image.png within the shared tablet frame. Without href the renderer creates a non-link article; callers supply real navigation destinations. Uses editorial case-study tokens from styles.css, not product-screen typography. hoverFlower defaults to blue and selects an original SVG from assets/casestudy_hover_flower for either layout variant. Motion and text reveal are shared across colours.",
+      "usage": "TurboCaseStudyCard({variant:\"variant-1\"|\"variant-2\", hoverFlower:\"blue\"|\"purple\"|\"pink\"|\"orange\", device?:\"panel\"|\"phone\"|\"tablet\"|\"none\", href?, ariaLabel?, title?, description?, brand?, categories?, image?, imageAlt?, video?}). Kept in step with the portfolio card (moksha-garden CaseStudyCard.astro): Larken title, Hellix body, DM Mono BRAND · CATEGORIES label, and on phones the screen on top in a 4:3 frame. Variant 1 defaults to the portfolio's PayZapp card: device panel, assets/case-cards/payzapp-hover-still.webp with payzapp-hover.mp4 playing on mouse hover or keyboard focus (resumes if re-entered within 30s); pass device:\"phone\" with an image for a phone frame, and video:false for a still. Variant 2 defaults to the portfolio's IG card in a landscape tablet (assets/case-cards/ig-home.webp). External http(s) hrefs open in a new tab; without href the renderer creates a non-link article. hoverFlower selects an SVG from assets/casestudy_hover_flower. Reduced motion keeps the still and a static reveal.",
       "anatomy": {
         "parts": [
           {
@@ -3688,6 +3688,10 @@
           {
             "name": "Landscape tablet frame",
             "selector": ".case-ending__tablet"
+          },
+          {
+            "name": "Hover video",
+            "selector": ".case-ending__video"
           }
         ],
         "spacing": [
@@ -3735,8 +3739,8 @@
           }
         ],
         "ownership": "Card owns visual/device presentation, internal spacing, responsive columns and hover/focus motion. Page owns external placement and surrounding illustrations. Specimen wrappers own captions and comparison spacing.",
-        "behavior": "Up to 720px wide. Variant 1 retains portrait-device clipping; variant 2 centers a landscape image and stacks below 30rem. Text wraps; optional metadata remains noninteractive. Link activation follows caller href with native keyboard semantics. Hover and focus share the flower reveal, mockup lift and cumulative arrow cycle; reduced motion removes movement.",
-        "interactionOwnership": "The link root, when href is supplied, owns navigation and direct hover/focus states. Caller owns destination and content; image, text, metadata and arrows are noninteractive parts. Without href the root is an article, not a keyboard control."
+        "behavior": "Up to 720px wide. Variant 1 retains portrait-device clipping; variant 2 centers a landscape image and stacks below 30rem. Text wraps; optional metadata remains noninteractive. Link activation follows caller href with native keyboard semantics. Hover and focus share the flower reveal, mockup lift and cumulative arrow cycle. With video, mouse/pen hover or keyboard focus-visible plays the muted loop over the visual panel once playback starts; leaving fades it out, pauses and rewinds it to the frame that matches the still mockup. Touch never starts it. Reduced motion removes movement and the video.",
+        "interactionOwnership": "The link root, when href is supplied, owns navigation and direct hover/focus states. Caller owns destination and content; image, hover video, text, metadata and arrows are noninteractive parts; the video is muted, hidden from assistive technology and unfocusable. Without href the root is an article, not a keyboard control."
       }
     }
   ],

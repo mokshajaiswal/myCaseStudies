@@ -6,7 +6,8 @@
 .case-ending__composition { position: relative; z-index: 1; display: grid; justify-items: center; width: 100%; }
 .case-ending__flower { position: absolute; z-index: 1; left: calc(50% - 50vw - 64px); top: 50%; transform: translateY(-50%) rotate(8deg); transform-origin: 15% 85%; width: clamp(288px, 28.8vw, 432px); margin: 0; pointer-events: none; }
 .case-ending__flower-art { display: block; width: 100%; transform: scaleX(-1); }
-.case-ending__flower-text { position: absolute; top: 16%; right: 6.5%; width: 32%; margin: 0; color: #fff; font: 400 clamp(10px, 1vw, 13px)/1.35 var(--font-body); text-align: center; }
+/* The note fills the flower head (x 57–96%, y 5–56% of the flipped art) and centres in it, so longer notes still fit. */
+.case-ending__flower-text { position: absolute; top: 11%; right: 5.7%; display: grid; place-content: center; width: 35%; height: 41%; margin: 0; color: #fff; font: 400 clamp(10px, 1vw, 13px)/1.35 var(--font-body); text-align: center; text-wrap: balance; }
 .case-ending__illustration { --flower-height: clamp(384.054px, 36.805175vw, 640.09px); position: relative; z-index: 0; width: 100vw; margin-left: calc(50% - 50vw); height: var(--flower-height); pointer-events: none; }
 .case-ending__flowers-still, .case-ending__flowers-player { position: absolute; inset: 0; width: 100%; height: 100%; }
 .case-ending__flowers-still { object-fit: fill; }
