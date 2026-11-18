@@ -1,0 +1,4 @@
+out/
+notes/*/
+notes/_go.json
+.DS_Store

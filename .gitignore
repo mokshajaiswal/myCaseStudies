@@ -1,3 +1,6 @@
 .tmp-ds-starter/
 _site/
 videos/motionStudio/
+.DS_Store
+node_modules/
+videos/turbo-hub-film/out/

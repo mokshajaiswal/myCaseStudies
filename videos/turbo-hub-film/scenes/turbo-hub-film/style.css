@@ -1,0 +1,115 @@
+/* 1208x1388: four times the case study card's 302x347. The case study's own type and palette. */
+@font-face { font-family: "Helix"; font-weight: 500; src: url("th/fonts/Helix/Hellix-Medium.woff2") format("woff2"); }
+@font-face { font-family: "Helix"; font-weight: 600; src: url("th/fonts/Helix/Hellix-SemiBold.woff2") format("woff2"); }
+@font-face { font-family: "Helix"; font-weight: 700; src: url("th/fonts/Helix/Hellix-Bold.woff2") format("woff2"); }
+@font-face { font-family: "Larken"; font-weight: 500; src: url("th/fonts/Larken/fonnts.com-Larken_Medium.otf") format("opentype"); }
+@font-face { font-family: "Larken"; font-weight: 700; src: url("th/fonts/Larken/fonnts.com-Larken_Bold.otf") format("opentype"); }
+@font-face { font-family: "Larken"; font-weight: 500; font-style: italic; src: url("th/fonts/Larken/fonnts.com-Larken_Medium_Italic.otf") format("opentype"); }
+
+#stage {
+  --stage-bg: #fffef8;
+  --ink: #34383f; --ink-soft: #536076; --accent: #356cdf; --accent-soft: #e7efff;
+  --hero-a: #2d7be2; --hero-b: #4a57d5; --pink: #dc4778; --purple: #7b6fd8; --teal: #2a9d8f;
+  color: var(--ink);
+  font-family: "Helix", -apple-system, system-ui, sans-serif;
+}
+#bg { inset: 0; overflow: hidden; }
+.bg-base, .bg-aurora, .bg-lattice, .bg-grain, .bg-edge { position: absolute; inset: 0; pointer-events: none; }
+.bg-base { background: linear-gradient(168deg, #fffefb 0%, #faf6ff 50%, #fff7fb 100%); }
+/* One blur over all the blobs: they melt into each other like an aurora */
+.bg-aurora { inset: -200px; filter: blur(70px) saturate(1.1); opacity: .6; }
+.bg-blob { position: absolute; border-radius: 50%; }
+/* A dotted lattice in the card's purple, quiet in the middle and clearer toward the edges */
+.bg-lattice { background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='132'%20height='132'%3E%3Cg%20stroke='%238050be'%20stroke-width='2.2'%20stroke-dasharray='0.1%209'%20stroke-linecap='round'%20opacity='.7'%3E%3Cpath%20d='M0%200%20L132%20132%20M132%200%20L0%20132'/%3E%3C/g%3E%3C/svg%3E"); background-size: 132px 132px; opacity: .55;
+  -webkit-mask-image: radial-gradient(ellipse 62% 55% at 50% 47%, rgb(0 0 0 / .18) 25%, #000 80%); mask-image: radial-gradient(ellipse 62% 55% at 50% 47%, rgb(0 0 0 / .18) 25%, #000 80%); }
+.bg-grain { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .25 0 0 0 0 .4 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-size: 240px 240px; opacity: .08; mix-blend-mode: multiply; }
+/* Edges fade to the card panel's white so the film sits seamlessly inside it */
+.bg-edge { background: radial-gradient(ellipse 80% 74% at 50% 48%, rgb(255 255 255 / 0) 62%, rgb(255 255 255 / .85) 100%); }
+#cam { left: 0; top: 0; width: 2416px; height: 2776px; transform-origin: 0 0; }
+#world { left: 0; top: 0; width: 2416px; height: 2776px; }
+
+/* A phone: real prototype pages, stacked; each draws its own titanium phone */
+.phone-box { position: absolute; width: 520px; height: 1000px; }
+.phone-box iframe { position: absolute; inset: 0; width: 520px; height: 1000px; border: 0; background: transparent; }
+
+/* Family */
+.avatar { position: absolute; border-radius: 50%; background: #fff center / cover no-repeat;
+  box-shadow: 0 0 0 8px #fff, 0 18px 40px rgb(30 50 110 / .18); }
+.chip { position: absolute; display: flex; align-items: center; gap: 14px; padding: 0 30px 0 12px; height: 70px;
+  border-radius: 35px; font: italic 500 38px/1 "Larken"; letter-spacing: -0.5px; white-space: nowrap;
+  box-shadow: 0 10px 26px rgb(30 50 110 / .14); }
+.chip--solid { background: var(--accent); color: #fff; }
+.chip--light { background: #fff; color: var(--accent); }
+.chip--plain { padding: 0 28px; }
+.chip i { width: 44px; height: 44px; border-radius: 50%; background: center / cover no-repeat; box-shadow: 0 0 0 3px #fff; }
+
+/* Limit rings */
+.ring { position: absolute; width: 400px; height: 470px; margin: -200px 0 0 -200px; text-align: center; }
+.ring svg { display: block; width: 400px; height: 400px; overflow: visible; }
+.ring .face { position: absolute; left: 105px; top: 105px; width: 190px; height: 190px; border-radius: 50%; background: center / cover no-repeat; }
+.ring .name { font: italic 500 36px/1 "Larken"; color: var(--ink-soft); margin-top: -6px; }
+.ring .left { font: 700 40px/1.2 "Larken"; color: var(--ink); }
+
+/* Impact slides */
+.slide { position: absolute; width: 820px; height: 700px; margin: -350px 0 0 -410px; border-radius: 56px; color: #fff;
+  display: flex; flex-direction: column; justify-content: center; padding: 0 80px; box-shadow: 0 40px 80px rgb(30 50 110 / .25); }
+.slide b { font: 700 300px/0.9 "Larken"; letter-spacing: -8px; }
+.slide b sup { font-size: 0.42em; vertical-align: 0.95em; letter-spacing: 0; margin-left: 10px; opacity: .85; }
+.slide span { font: 600 50px/1.15 "Helix"; opacity: .92; margin-top: 30px; }
+
+/* Approval burst */
+.burst { position: absolute; width: 300px; height: 300px; margin: -150px 0 0 -150px; }
+.burst svg { width: 100%; height: 100%; overflow: visible; }
+
+/* The canvas of screens: Figma exports in the same titanium phone */
+.column { position: absolute; left: 0; top: 0; width: 2416px; height: 2776px; }
+.tile { position: absolute; width: 422px; height: 871px; margin: -435px 0 0 -211px; border-radius: 16.7% / 8.09%;
+  background: conic-gradient(from 200deg at 50% 50%, #2b2c2f, #8e9197 7%, #3c3d41 16%, #5f6267 30%, #2d2e31 45%, #9da0a6 55%, #3b3c40 68%, #70737a 84%, #2b2c2f);
+  box-shadow: 0 24px 50px rgb(20 30 60 / .25); }
+.tile::before { content: ''; position: absolute; inset: 6px; border-radius: 15.3% / 7.4%; background: #050506; }
+.tile img { position: absolute; inset: 18px; width: 386px; height: 835px; object-fit: cover; object-position: top; border-radius: 52px; }
+
+/* Isometric family */
+.family { position: absolute; transform-style: preserve-3d; }
+.token { position: absolute; display: flex; flex-direction: column; align-items: center; transform-style: preserve-3d; z-index: 6; }
+.token .avatar { position: relative; }
+.shadow { position: absolute; width: 260px; height: 260px; border-radius: 50%; transform-origin: 50% 50%;
+  background: radial-gradient(closest-side, rgb(30 50 110 / .35), rgb(30 50 110 / 0)); }
+.chip { z-index: 7; }
+.chip--inline { position: relative; left: auto !important; top: auto !important; margin-top: 22px; }
+
+/* Touch dot: translucent blue fill, visible outline, faint halo */
+.touch { position: absolute; width: 72px; height: 72px; margin: -36px 0 0 -36px; border-radius: 50%; z-index: 9; pointer-events: none;
+  background: rgb(53 108 223 / .3); border: 3px solid rgb(53 108 223 / .85); box-shadow: 0 0 0 12px rgb(53 108 223 / .12); }
+.touch__ripple { position: absolute; inset: -3px; border-radius: 50%; border: 3px solid rgb(53 108 223 / .6); }
+
+/* The request in flight */
+.notif { position: absolute; display: flex; align-items: center; gap: 18px; padding: 16px 32px 16px 16px; background: #fff;
+  border-radius: 30px; box-shadow: 0 24px 50px rgb(30 50 110 / .22); z-index: 10; white-space: nowrap; }
+.notif__face { width: 76px; height: 76px; border-radius: 50%; }
+.notif__text b { display: block; font: 700 40px/1.05 "Larken"; color: var(--ink); }
+.notif__text span { font: 600 24px/1.3 "Helix"; color: var(--ink-soft); }
+.burst { z-index: 6; }
+
+/* Hub platform: stacked plates read as a solid disc on the isometric floor */
+.plate { position: absolute; border-radius: 50%; background: #b9cbf7; box-shadow: inset 0 0 0 2px rgb(53 108 223 / .25); }
+.plate--top { background: radial-gradient(circle at 50% 45%, #ffffff, #e7efff 62%, #cddcff); box-shadow: inset 0 0 0 4px rgb(53 108 223 / .55), 0 0 0 10px rgb(53 108 223 / .08); }
+
+/* Expressive type: the words of the family shot */
+.floor-word { font: italic 500 150px "Larken"; letter-spacing: 6px; }
+.word { text-align: center; color: var(--accent); white-space: nowrap; }
+.word small { display: block; font: 600 26px/1 "Helix"; letter-spacing: 8px; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 6px; }
+.word em { display: block; font: italic 500 112px/0.95 "Larken"; letter-spacing: -2px;
+  background: linear-gradient(100deg, #2d7be2, #4a57d5); -webkit-background-clip: text; background-clip: text; color: transparent; }
+
+/* Limits: the manager sets each member's limit */
+.limits { position: absolute; }
+.gauge { position: absolute; width: 360px; height: 470px; margin: -180px 0 0 -180px; text-align: center; }
+.gauge svg { display: block; width: 360px; height: 360px; overflow: visible; filter: drop-shadow(0 18px 30px rgb(30 50 110 / .14)); }
+.gauge .face { position: absolute; left: 95px; top: 95px; width: 170px; height: 170px; border-radius: 50%; }
+.gauge .name { font: italic 500 38px/1 "Larken"; color: var(--ink-soft); margin-top: 4px; }
+.gauge .amount { font: 700 52px/1.15 "Larken"; color: var(--ink); letter-spacing: -1px; }
+.gauge .cap { font: 600 18px/1 "Helix"; letter-spacing: 5px; text-transform: uppercase; color: var(--ink-soft); opacity: .8; }
+.word--small { position: absolute; }
+.word--small small { font-size: 22px; letter-spacing: 7px; }
+.word--small em { font-size: 84px; }

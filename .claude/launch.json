@@ -1,0 +1,21 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "motion-studio-turbo-hub",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "videos/motionStudio",
+        "run",
+        "dev"
+      ],
+      "port": 5173
+    },
+    {
+      "name": "case-studies",
+      "url": "http://localhost:8000",
+      "port": 8000
+    }
+  ]
+}

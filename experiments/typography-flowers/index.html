@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5efe4" />
+    <title>Typography Flowers</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="stage" aria-label="Your words, overgrown with vines and flowers"></canvas>
+    <textarea
+      id="input"
+      aria-label="Type to grow"
+      maxlength="160"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="false"
+    ></textarea>
+
+    <header class="title">
+      <span class="name">Typography Flowers</span>
+      <span class="tip">Type anything · Tab changes style · click for a gust</span>
+    </header>
+
+    <nav class="controls" aria-label="Controls">
+      <div class="styles" role="radiogroup" aria-label="Style"></div>
+      <span class="rule" aria-hidden="true"></span>
+      <button type="button" class="icon" data-action="regrow" title="Regrow" aria-label="Regrow">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M15.5 7.5A6 6 0 1 0 16 12" /><path d="M16 3.5v4h-4" /></svg>
+      </button>
+      <button type="button" class="icon" data-action="clear" title="Clear" aria-label="Clear">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 5l10 10M15 5L5 15" /></svg>
+      </button>
+      <button type="button" class="icon" data-action="save" title="Save PNG" aria-label="Save PNG">
+        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 3.5v9M6 9l4 4 4-4M4 16.5h12" /></svg>
+      </button>
+    </nav>
+
+    <script src="js/styles.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/flora.js"></script>
+    <script src="js/garden.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

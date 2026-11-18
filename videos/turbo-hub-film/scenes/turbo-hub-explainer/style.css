@@ -1,0 +1,6 @@
+/* 1208x1388: four times the case study card's 302x347 */
+#stage { --stage-bg: #FAF8F2; color: #2b2b2b; }
+#cam { left: 0; top: 0; width: 2416px; height: 2776px; transform-origin: 0 0; }
+#world { left: 0; top: 0; width: 2416px; height: 2776px; }
+#ui { left: 0; top: 0; width: 1208px; height: 1388px; z-index: 40; }
+.actor svg { display: block; overflow: visible; }
