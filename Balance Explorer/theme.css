@@ -63,8 +63,16 @@
     linear-gradient(90deg, rgb(var(--hero-grid-rgb) / var(--hero-grid-alpha)) 1px, transparent 1px) center / 112px 100%,
     /* A few cells filled in very light white, scattered in a 7 × 5 repeat that lines up with the grid. */
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='784' height='560'%3E%3Cg fill='%23fff' fill-opacity='.32'%3E%3Crect x='113' y='1' width='111' height='111'/%3E%3Crect x='561' y='113' width='111' height='111'/%3E%3Crect x='225' y='337' width='111' height='111'/%3E%3Crect x='673' y='449' width='111' height='111'/%3E%3C/g%3E%3C/svg%3E") center / 784px 560px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 85%);
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 85%);
+  /* Two masks, intersected: the outer one fades the grid at the hero's edges; the inner one clears it from
+     behind the heading and intro so no lines cut through the text. */
+  -webkit-mask-image:
+    radial-gradient(ellipse 52% 30% at 50% 50%, transparent 50%, #000 100%),
+    radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 85%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    radial-gradient(ellipse 52% 30% at 50% 50%, transparent 50%, #000 100%),
+    radial-gradient(ellipse 80% 70% at 50% 45%, #000 30%, transparent 85%);
+  mask-composite: intersect;
 }
 
 .hero h1 {
